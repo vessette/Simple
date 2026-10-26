@@ -5,9 +5,9 @@
     "stories_total": 39,
     "stories_verified": 0,
     "stories_submitted": 0,
-    "stories_in_progress": 0,
-    "stories_not_started": 39,
-    "criteria_total": 5,
+    "stories_in_progress": 38,
+    "stories_not_started": 1,
+    "criteria_total": 55,
     "criteria_passed": 0,
     "points_awarded": 0
   },
@@ -27,15 +27,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every verdict names the payment_status and the latest subscription status; a paid former member is explicitly excluded with the reason."
+        ]
       }
     },
     {
@@ -53,15 +55,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every in-scope or out-of-scope verdict cites the amount match, the time window and the customer-id scope; the agent never says a payment 'should probably' be linked."
+        ]
       }
     },
     {
@@ -79,15 +83,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every finding cites the check that produced it; an unreadable source yields unknown rather than a pass."
+        ]
       }
     },
     {
@@ -105,15 +111,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every comp listed traces to a subscriptions row; the agent states explicitly that comped seats are excluded from revenue, and never proposes a grant as though it were a routine step."
+        ]
       }
     },
     {
@@ -131,15 +139,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "A written duty list exists with at least one named report per duty and a named data source or an explicit 'unsourced' per report. Until it exists this capability stays at R0 and reports its scope as unknown rather than guessing one."
+        ]
       }
     },
     {
@@ -157,15 +167,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every price quoted traces to PLANS (subscriptionService.ts:73-80); the agent refuses to state a price it cannot trace and never uses the 4500 default."
+        ]
       }
     },
     {
@@ -183,15 +195,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every state traces to the enrolment and subscription rows; a person with two rows is reported as one person, and an unowned step is reported as unowned rather than assigned to whoever is handy."
+        ]
       }
     },
     {
@@ -209,15 +223,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Baseline tests pass on fixtures, and a fixture whose fit score cannot be computed is recorded as unknown rather than defaulted to a number."
+        ]
       }
     },
     {
@@ -235,15 +251,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every capability in this matrix names the decision it needs from Roselyn, and no capability claims a confirmed requirement."
+        ]
       }
     },
     {
@@ -261,15 +279,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every answer cites the taxonomy rule it used, and an unmappable lead returns 'cannot place' rather than a guess."
+        ]
       }
     },
     {
@@ -287,15 +307,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "A fixture batch with fewer qualifying prospects than the cap produces the smaller real number: a test asserting padding must fail."
+        ]
       }
     },
     {
@@ -313,15 +335,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every score is traceable to its input components, and an unreachable component yields unknown rather than a passing default."
+        ]
       }
     },
     {
@@ -339,15 +363,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every claim traces to the enrolment, subscription or health sample it came from; the agent reports unknown where no record exists."
+        ]
       }
     },
     {
@@ -365,15 +391,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every claim traces to a gateway read or a stored row; an unverifiable id is reported as unverified rather than as matching."
+        ]
       }
     },
     {
@@ -391,15 +419,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "A written table names all four existing guards and states explicitly which replay shapes remain uncovered."
+        ]
       }
     },
     {
@@ -417,15 +447,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every figure carries its source, and an unavailable source is reported as unavailable with the reason."
+        ]
       }
     },
     {
@@ -443,15 +475,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every figure traces to a named endpoint; the forecast is described as a count projection and never as revenue."
+        ]
       }
     },
     {
@@ -469,15 +503,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "The inventory names every known location including the two stale 4500 constants; a positive control confirms a fabricated location returns no match."
+        ]
       }
     },
     {
@@ -495,15 +531,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Baseline tests pass, and a draft containing an untraceable price or the word 'free' fails a named test."
+        ]
       }
     },
     {
@@ -521,15 +559,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every factual claim traces to a KB entry or a pinned fact; a cost answer always discloses the student-paid Anthropic and API costs; a refund answer states the terms are pending approval. A fabricated price, date or policy in any sampled answer fails the release outright."
+        ]
       }
     },
     {
@@ -547,15 +587,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "A packet containing a discount, a bespoke price, a refund term or the word 'free' fails a named test."
+        ]
       }
     },
     {
@@ -573,15 +615,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every answer cites the ledger row or the approved policy text; where the policy is unapproved the agent says so rather than stating terms, and it never asserts that a refund will be issued."
+        ]
       }
     },
     {
@@ -599,15 +643,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every row cites its source check; excluded members are provably absent; an empty day is reported as empty."
+        ]
       }
     },
     {
@@ -625,15 +671,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every due date is reproducible from current_period_end and the lead-day constants; the agent never claims a reminder was sent without the idempotency record."
+        ]
       }
     },
     {
@@ -651,15 +699,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every figure is reproducible from a named endpoint and filter; the agent reports unavailable rather than zero where a source is missing, and never derives revenue from a price times a count."
+        ]
       }
     },
     {
@@ -677,15 +727,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every verdict cites one of the four rule statements; the agent never asserts a revenue number of its own."
+        ]
       }
     },
     {
@@ -703,15 +755,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "The definition distinguishes paid seats, reserved seats and Explorers, and states the minimum data required before a projection is reported at all."
+        ]
       }
     },
     {
@@ -729,15 +783,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every answer names the scheduled time, the grace threshold and the current status, and no answer asserts a count without the underlying rows."
+        ]
       }
     },
     {
@@ -755,15 +811,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every claim traces to the subscription row or a gateway read; where no schedule id exists the agent says the suspend would be a no-op rather than implying the member is safe from charges."
+        ]
       }
     },
     {
@@ -781,15 +839,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every price and date traces to code or to the member's row; an unknown is reported as unknown rather than computed from an assumption."
+        ]
       }
     },
     {
@@ -807,15 +867,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "No risk figure is produced; the data-quality question about cancellation reasons is answered by measurement, not assumption."
+        ]
       }
     },
     {
@@ -833,15 +895,17 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 1,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Every price quoted traces to an approved source; an unreconciled price copy is reported as unknown rather than quoted."
+        ]
       }
     },
     {
@@ -867,15 +931,19 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 3,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "The plan accounts for every inherited legacy record for this domain, each one kept, merged or retired with a reason.",
+          "The migration is described as replayable: running it twice leaves the same end state, with no duplicated side effects.",
+          "The plan states what happens to a record the migration cannot classify, rather than assuming none exist."
+        ]
       }
     },
     {
@@ -901,15 +969,19 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 3,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "The document compares all five system classes (chatbot, fixed workflow, tool-using agent, agentic system, multi-agent system) and names which one this domain needs.",
+          "The choice cites this domain's own capability count and its human-reserved count, so the argument would change if those numbers changed.",
+          "The document states explicitly which class this domain does NOT need, and what would have to change to justify the next class up."
+        ]
       }
     },
     {
@@ -935,15 +1007,19 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 3,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "All nine anatomy elements are addressed, with none left blank and none dismissed as not applicable without a stated reason.",
+          "Each element names the concrete platform surface, tool or record it maps to, rather than describing the element in general terms.",
+          "Any element that cannot be filled is recorded as a gap with what is missing, rather than omitted."
+        ]
       }
     },
     {
@@ -969,15 +1045,19 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 3,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "The document names the accountable human for this domain and the specific responsibilities proposed to transition to the agent.",
+          "Each transitioning responsibility states what evidence would show the agent is ready to hold it.",
+          "Responsibilities that must stay human are listed separately, each with the reason it is reserved."
+        ]
       }
     },
     {
@@ -1003,15 +1083,19 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 3,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "The interview plan fits 30 minutes, and every question is specific to this domain rather than reusable for any agent.",
+          "A weekly check-in is proposed with a named day, a duration, and the three things it reviews.",
+          "The plan states what to do with each answer, so a completed interview changes the build rather than only recording opinions."
+        ]
       }
     },
     {
@@ -1037,15 +1121,19 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 3,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Exactly three agent tasks are proposed, each with its boundary stated as what the agent must NOT do.",
+          "Each task names the evidence that proves it completed, and that evidence is something other than the task being marked done.",
+          "Each task names the human who approves it wherever approval is required."
+        ]
       }
     },
     {
