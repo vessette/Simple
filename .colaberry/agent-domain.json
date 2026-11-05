@@ -2074,7 +2074,7 @@
         "story_id": "sales.STORY-000",
         "title": "STORY-000 · Build your Command Center",
         "status": "not_started",
-        "verification_state": "not_started",
+        "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
         "criteria_total": 6,
