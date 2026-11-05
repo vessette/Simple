@@ -7,7 +7,7 @@
     "stories_submitted": 0,
     "stories_in_progress": 38,
     "stories_not_started": 1,
-    "criteria_total": 55,
+    "criteria_total": 56,
     "criteria_passed": 0,
     "points_awarded": 0
   },
@@ -1137,28 +1137,32 @@
       }
     },
     {
-      "id": "STORY-000",
-      "release": null,
-      "acceptance_total": 5,
+      "id": "sales.STORY-000",
+      "release": "autonomy:R0",
+      "acceptance_total": 6,
       "criteria": [
         {
-          "text": "Given the Command Center, when it is opened, then every tab is reachable and every card drills down one level.",
+          "text": "Given the Command Center, when it is opened, then all six panels render and each one names the endpoint it read.",
           "passed": false
         },
         {
-          "text": "Given sample mode, when any tab is shown, then the sample data is visibly labelled as sample.",
+          "text": "Given a panel whose endpoint returned nothing, when it renders, then it says so in words and is visibly distinct from a panel that is still loading.",
           "passed": false
         },
         {
-          "text": "Given the Command Center, when any tab renders, then .colaberry/plan.json and .colaberry/progress.json are both committed in this repo and every tab reads its content from them at runtime rather than from hard-coded values.",
+          "text": "Given the autonomy ladder panel, when it renders, then all ten rungs are present with the owner's wording, and each capability's ceiling is marked against the rung it stops at.",
           "passed": false
         },
         {
-          "text": "Given the Command Center, when any tab is shown, then .colaberry/manifest.json is committed in this repo and every tab shows how old that data is and warns when the age exceeds a week.",
+          "text": "Given the autonomy ladder panel, when a capability's authority is shown, then the page shows the effective authority `effectiveAuthority()` returns rather than the level the capability record asks for, and names the `no_tool_grants` rule with the number of capabilities it currently constrains, saying so in words when that number is zero.",
           "passed": false
         },
         {
-          "text": "Trust — no tab shows a number, a connection or a result the project has not actually produced.",
+          "text": "Given the governance panel, when a tool request is shown, then nothing on the page states or implies that filing it granted anything.",
+          "passed": false
+        },
+        {
+          "text": "Trust -- no panel shows a number, a grant, a rung or a result this domain has not actually produced.",
           "passed": false
         }
       ],
@@ -1166,7 +1170,24 @@
       "tests_added": [],
       "notes": null,
       "updated_at": null,
-      "verification": null
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 6,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": null,
+        "outstanding": [
+          "Given the Command Center, when it is opened, then all six panels render and each one names the endpoint it read.",
+          "Given a panel whose endpoint returned nothing, when it renders, then it says so in words and is visibly distinct from a panel that is still loading.",
+          "Given the autonomy ladder panel, when it renders, then all ten rungs are present with the owner's wording, and each capability's ceiling is marked against the rung it stops at.",
+          "Given the autonomy ladder panel, when a capability's authority is shown, then the page shows the effective authority `effectiveAuthority()` returns rather than the level the capability record asks for, and names the `no_tool_grants` rule with the number of capabilities it currently constrains, saying so in words when that number is zero.",
+          "Given the governance panel, when a tool request is shown, then nothing on the page states or implies that filing it granted anything.",
+          "Trust -- no panel shows a number, a grant, a rung or a result this domain has not actually produced."
+        ]
+      }
     }
   ]
 }

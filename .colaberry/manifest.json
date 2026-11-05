@@ -1,39 +1,11 @@
 {
-  "generated_at": "2026-10-26T04:26:27.849Z",
+  "generated_at": "2026-11-05T09:14:58.796Z",
   "plan_version": 1,
   "plan_sha256": "68f70123d241bb94056adc1d08127a51ad2ce3b948af8b3ce1e6b2faa504e30d",
-  "correlation_id": "f89425fc-30c0-41f7-9400-639b40c7950f",
+  "correlation_id": "7ff9f3a3-0839-4efe-b2de-7747cb4e2930",
   "project_id": "d7372aa3-4903-5299-922d-997fa49df97f",
   "truth_revision": null,
   "files": [
-    {
-      "path": ".colaberry/plan.json",
-      "sha256": "340b14561a213fb80df0e15735c78ec4ebed50e6f30ae064a2baee40b5c120bd"
-    },
-    {
-      "path": ".colaberry/profile.json",
-      "sha256": "73b12946258282c8f8321b71122a186b32d873a6225357caddb96582def90f9c"
-    },
-    {
-      "path": ".colaberry/progress.json",
-      "sha256": "a8989943517f78aa14d03895595e224c31be5b071a5e003006b98e3289a75210"
-    },
-    {
-      "path": "CLAUDE.md",
-      "sha256": "f5db216b07b5e97bba465227fa959d1d0a83e31d8c73e2b969f728966d6f0a23"
-    },
-    {
-      "path": "artifacts/INDEX.md",
-      "sha256": "0f5e5fa9d0b2cb0d2147d32246a330765ecbd4cc2ec1227a123b21832af8dc06"
-    },
-    {
-      "path": "artifacts/week-01/project-standards.md",
-      "sha256": "ef102f8eec13ec3684bfb82ab2c61fa29ee08ae6fd355af8372a7097051eba00"
-    },
-    {
-      "path": "docs/DATA_CONTRACT.md",
-      "sha256": "d56e89edcfe36725945d961cf3479b646507d1fa855bba0dcdfff3f8f8a658b0"
-    },
     {
       "path": "docs/REQUIREMENTS.md",
       "sha256": "77ae2cb867104b7bd4b3f9c46b5ce50c430faa3d775fa71879f1794e47277c6c"
@@ -47,8 +19,12 @@
       "sha256": "e5e6cfc6eed582e22a3adefd7d8524aeb25e71c3ec1e4717ba702015318fe039"
     },
     {
-      "path": "docs/stories/STORY-000.md",
-      "sha256": "49cafd4c705d99bcd4e410300c3981a35a7d522bdae0eee1d9fa611a1b847ce9"
+      "path": "docs/DATA_CONTRACT.md",
+      "sha256": "d56e89edcfe36725945d961cf3479b646507d1fa855bba0dcdfff3f8f8a658b0"
+    },
+    {
+      "path": "CLAUDE.md",
+      "sha256": "f5db216b07b5e97bba465227fa959d1d0a83e31d8c73e2b969f728966d6f0a23"
     },
     {
       "path": "docs/stories/sales.CAP.abandoned_checkout_identification.md",
@@ -201,6 +177,30 @@
     {
       "path": "docs/stories/sales.RESEARCH-5-THREE-PROPOSED-TASKS.md",
       "sha256": "60142f53b957436a6da6c6f4adfd182cd8da1f3e604087a6f6ba18197cd93cfd"
+    },
+    {
+      "path": "docs/stories/sales.STORY-000.md",
+      "sha256": "d16ed3f70b1a0b51fea3be4f38f507ba2bf8f49a215401c49b73a4ec62ba30ba"
+    },
+    {
+      "path": ".colaberry/plan.json",
+      "sha256": "340b14561a213fb80df0e15735c78ec4ebed50e6f30ae064a2baee40b5c120bd"
+    },
+    {
+      "path": ".colaberry/progress.json",
+      "sha256": "fd178e33b750f3427f77970d5da9c08cab5831467a4c25ce79264a09f9c1f636"
+    },
+    {
+      "path": ".colaberry/profile.json",
+      "sha256": "73b12946258282c8f8321b71122a186b32d873a6225357caddb96582def90f9c"
+    },
+    {
+      "path": ".colaberry/agent-domain.json",
+      "sha256": "a1bdcd09e2245ed59a52ea351a6d065996255879ade73c1df9df9b49953a9b62"
+    },
+    {
+      "path": "docs/stories/STORY-000.md",
+      "sha256": "ec8f2d3a8696c5ad57921a290a593a704ae75d03ea96eed63e72b484cb379a83"
     }
   ]
 }
