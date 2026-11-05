@@ -15,7 +15,7 @@
   "agent": {
     "exists": true,
     "agent_id": "8409be8a-3e4b-437d-b42d-b46bce6dcb54",
-    "display_name": null,
+    "display_name": "Vick",
     "enabled": false,
     "autonomy_level": "observe",
     "autonomy_level_set_at": "2026-10-18T16:08:12.423Z",
