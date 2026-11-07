@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Command Center</title>
+<style>
+  :root {
+    --bg: #f5f6f8; --panel: #fff; --ink: #1c2430; --muted: #5b6676; --line: #dfe3e8;
+    --accent: #1f4e79; --warn-bg: #fff6e0; --warn: #8a5a00; --err-bg: #fdecec; --err: #9b1c1c;
+    --info-bg: #eaf1f8; --draft: #b45309; --grey: #e9ecef;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { background: var(--accent); color: #fff; padding: 20px 16px; }
+  header h1 { margin: 0; font-size: 22px; }
+  header p { margin: 4px 0 0; opacity: .85; }
+  main { max-width: 1200px; margin: 0 auto; padding: 16px; display: grid; gap: 16px; }
+  form { display: flex; flex-wrap: wrap; gap: 8px; align-items: end; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; }
+  label { display: grid; font-size: 13px; color: var(--muted); flex: 1 1 260px; }
+  input { font: inherit; padding: 6px 8px; border: 1px solid var(--line); border-radius: 4px; }
+  button { font: inherit; padding: 7px 18px; background: var(--accent); color: #fff; border: 0; border-radius: 4px; cursor: pointer; }
+  #status { flex-basis: 100%; margin: 0; font-size: 13px; color: var(--muted); }
+  section { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; min-width: 0; }
+  section > h2 { margin: 0; font-size: 17px; }
+  section > .q { margin: 2px 0 12px; color: var(--muted); font-style: italic; }
+  h3 { font-size: 15px; margin: 16px 0 6px; }
+  .notice { padding: 8px 12px; border-radius: 4px; margin: 6px 0; }
+  .notice.info { background: var(--info-bg); }
+  .notice.warn { background: var(--warn-bg); color: var(--warn); }
+  .notice.error { background: var(--err-bg); color: var(--err); }
+  .missing { color: var(--muted); font-style: italic; }
+  .note { color: var(--muted); font-size: 13px; }
+  .scroll { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .kv th { width: 230px; color: var(--muted); font-weight: 500; }
+  .grid th { background: var(--grey); font-size: 13px; }
+  .badge.draft { color: var(--draft); font-weight: 600; }
+  .human { color: var(--err); }
+  .agent-ladder { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 6px 0; }
+  .agent-ladder li { padding: 6px 12px; border: 1px solid var(--line); border-radius: 4px; background: var(--grey); }
+  .agent-ladder li.current { background: var(--info-bg); border-color: var(--accent); font-weight: 600; }
+  .tag { font-size: 11px; color: var(--accent); font-weight: 600; }
+  .rung { font-size: 12px; text-align: center; }
+  .rung.within_ceiling { background: #e6f2ea; }
+  .rung.ceiling { background: #cfe6d7; font-weight: 600; }
+  .rung.above_ceiling { background: repeating-linear-gradient(45deg, #eee, #eee 4px, #f8f8f8 4px, #f8f8f8 8px); color: var(--muted); }
+  .rung.unreachable_platform { background: var(--err-bg); color: var(--err); }
+  .rung.ceiling_unknown { color: var(--muted); font-style: italic; }
+  .rung.current_release { background: var(--info-bg); font-weight: 600; }
+  .rung.draft_target { border: 2px dashed var(--draft); color: var(--draft); }
+  td details h4 { margin: 8px 0 2px; font-size: 12px; }
+  td details ul { margin: 0; padding-left: 18px; font-size: 12px; }
+  .cap { border-top: 1px solid var(--line); padding: 6px 0; }
+  .cap summary { cursor: pointer; font-weight: 600; }
+  .rung-block { margin-left: 16px; }
+  .rung-block h4 { margin: 10px 0 2px; font-size: 13px; color: var(--accent); }
+  .raw { margin-top: 10px; font-size: 13px; }
+  .raw pre { background: var(--grey); padding: 8px; overflow: auto; max-height: 300px; }
+  .gaps li.platform { color: var(--err); }
+  .gaps li.draft, .gaps li.no_behaviour { color: var(--warn); }
+  .gaps li.unsourced { color: var(--muted); }
+  .rule { border-left: 4px solid var(--accent); }
+  @media (max-width: 600px) { .kv th { width: auto; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Command Center: Sales, Enrollment &amp; Subscriptions</h1>
+  <p>STORY-000. Every figure here comes from a live endpoint, or is labelled as missing.</p>
+</header>
+<main>
+  <form id="connect">
+    <label>API base URL <input id="base" type="url" value="https://enterprise.colaberry.ai" required></label>
+    <label>Bearer token (kept in memory only, never saved) <input id="token" type="password" autocomplete="off"></label>
+    <button type="submit">Connect</button>
+    <p id="status">Not connected.</p>
+  </form>
+
+  <section class="rule">
+    <h2>Rules this page keeps</h2>
+    <ul>
+      <li>Progress is not authority. Finishing a story, elapsed time, a good conversation or a mocked test passing never raises autonomy. A named human promotes, one rung at a time, on evidence.</li>
+      <li>Tool grants are the throttle. With no tools granted, authority above autonomy:R2 is forced back to R2 (<code>no_tool_grants</code>). Effective authority is shown only when sourced from <code>effectiveAuthority()</code>.</li>
+      <li>Draft is not approved. Draft requirements are marked as draft everywhere.</li>
+    </ul>
+  </section>
+
+  <section id="p-agent"><h2>1. Your employee</h2><p class="q">Does it exist, and what is it allowed to do?</p><div class="panel-body"></div></section>
+  <section id="p-caps"><h2>2. Capability inventory</h2><p class="q">What am I actually building?</p><div class="panel-body"></div></section>
+  <section id="p-ladder"><h2>3. The autonomy ladder</h2><p class="q">Where is this going?</p><div class="panel-body"></div></section>
+  <section id="p-behaviour"><h2>4. Per-rung behaviour</h2><p class="q">What does the next rung require of me?</p><div class="panel-body"></div></section>
+  <section id="p-requests"><h2>5. Governance queue</h2><p class="q">What am I waiting on a human for?</p><div class="panel-body"></div></section>
+  <section id="p-gaps"><h2>6. What is not available</h2><p class="q">What would I be lying about?</p><div class="panel-body"></div></section>
+</main>
+<script type="module" src="app.js"></script>
+</body>
+</html>
