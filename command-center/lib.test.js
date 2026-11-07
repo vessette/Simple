@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {
   ENDPOINTS, RUNGS, AGENT_LADDER, agentLadderPosition, rungNumber, findRecords, formatCentral, summarizeAgent, summarizeDomain, listCapabilities,
   rungStatus, behaviourByRung, splitRequests, listGaps, missingStoryFields, summarizeCoverage,
+  noToolGrantsConstraint, PANEL_SOURCES,
 } from './lib.js';
 
 const cap = (over = {}) => listCapabilities([{ capability_id: 'x', implementation_state: 'not_started', ...over }])[0];
@@ -213,6 +214,32 @@ test('gaps: domain counts are stated with their denominator', () => {
   assert.match(texts, /32 of 32 capabilities are draft \(0 confirmed\)/);
   assert.match(texts, /32 of 32 capabilities have an outstanding manager decision/);
   assert.match(texts, /0 of 32 capabilities have complete release coverage/);
+});
+
+test('no_tool_grants: 0 tools and every capability at R0 constrains 0', () => {
+  const caps = listCapabilities(coverageResponse);
+  const r = noToolGrantsConstraint(caps, summarizeAgent(agentResponse()));
+  assert.deepEqual(r, { count: 0, total: 2, basis: 'rule_applied' });
+});
+
+test('no_tool_grants: counts rows asking above R2 when no tools are granted', () => {
+  const caps = listCapabilities([{ capability_id: 'x', release: 'autonomy:R4' }, { capability_id: 'y', release: 'autonomy:R2' }]);
+  assert.equal(noToolGrantsConstraint(caps, summarizeAgent(agentResponse())).count, 1);
+  assert.equal(noToolGrantsConstraint(caps, summarizeAgent(agentResponse({ agent_tools_granted: ['t'] }))).count, 0);
+});
+
+test('no_tool_grants: a returned reason wins; unknown inputs give null', () => {
+  const caps = listCapabilities([{ capability_id: 'x', release: 'autonomy:R0', effective_authority_reason: 'no_tool_grants' }]);
+  assert.deepEqual(noToolGrantsConstraint(caps, null), { count: 1, total: 1, basis: 'returned' });
+  assert.equal(noToolGrantsConstraint(listCapabilities(coverageResponse), null), null);
+  assert.equal(noToolGrantsConstraint([], summarizeAgent(agentResponse())), null);
+});
+
+test('every panel names at least one real endpoint', () => {
+  for (const id of ['p-agent', 'p-caps', 'p-ladder', 'p-behaviour', 'p-requests', 'p-gaps']) {
+    assert.ok(PANEL_SOURCES[id].length > 0);
+    for (const k of PANEL_SOURCES[id]) assert.ok(ENDPOINTS[k].startsWith('/api/admin/'));
+  }
 });
 
 test('capability endpoints are the ownership-checked -mine routes', () => {

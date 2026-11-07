@@ -2,7 +2,7 @@
 // only fetches, calls lib.js, and draws. Data is written with textContent,
 // never innerHTML, so nothing from the API can inject markup.
 import {
-  ENDPOINTS, RUNGS, AGENT_LADDER, NO_LADDER_MAPPING, agentLadderPosition, formatCentral, summarizeAgent, summarizeDomain, listCapabilities, summarizeCoverage, missingStoryFields, PLATFORM_UNREACHABLE,
+  ENDPOINTS, RUNGS, AGENT_LADDER, NO_LADDER_MAPPING, agentLadderPosition, formatCentral, summarizeAgent, summarizeDomain, listCapabilities, summarizeCoverage, missingStoryFields, PLATFORM_UNREACHABLE, PANEL_SOURCES, noToolGrantsConstraint,
   rungStatus, behaviourByRung, splitRequests, listGaps,
 } from './lib.js';
 
@@ -174,6 +174,21 @@ function agentLadder(agent) {
   ];
 }
 
+// The no_tool_grants rule, named, with how many capabilities it holds down now.
+function noToolGrantsNotice(r, agent) {
+  const rule = 'Rule no_tool_grants (effectiveAuthority() in autonomyLadder.ts): while an agent has no tools granted, any capability above autonomy:R2 is held at autonomy:R2. This page shows the authority the platform returns, not the level a record asks for.';
+  if (r === null) return notice('info', `${rule} How many capabilities it constrains cannot be counted: the agent's tool grants or the capability rows are not loaded.`);
+  const how = {
+    returned: 'counted from the reason the platform returned on each row',
+    rule_applied: `the agent has ${agent?.toolCount ?? 0} tools granted, and this counts rows whose current release is above autonomy:R2`,
+    tools_granted: `the agent has ${agent?.toolCount} tools granted, so the rule does not apply`,
+  }[r.basis];
+  const words = r.count === 0
+    ? `It currently constrains none of the ${r.total} capabilities (0 of ${r.total})`
+    : `It currently constrains ${r.count} of ${r.total} capabilities`;
+  return el('div', {}, el('p', {}, rule), el('p', { class: 'notice warn' }, `${words}: ${how}.`));
+}
+
 function renderLadder(agent, caps) {
   const meanings = el('table', { class: 'grid' }, el('tbody', {}, RUNGS.map((r) =>
     el('tr', {}, el('td', {}, r.id), el('td', {}, r.meaning), el('td', { class: `rung ${PLATFORM_UNREACHABLE[r.id] ? 'unreachable_platform' : ''}` },
@@ -181,13 +196,20 @@ function renderLadder(agent, caps) {
   const parts = [...agentLadder(agent), el('h3', {}, 'Capability ladder (autonomy:R0 to R9)'), meanings];
   if (caps === null) parts.push(notice('info', 'Per-capability positions are not drawn: capability records are not loaded.'));
   else if (caps.length) {
-    const head = el('tr', {}, el('th', {}, 'Capability'), ...RUNGS.map((r) => el('th', { title: r.meaning }, `R${r.n}`)));
-    const rows = caps.map((c) => el('tr', {}, el('td', {}, show(c.name)), ...RUNGS.map((r) => {
-      const s = rungStatus(r, c);
-      return el('td', { class: `rung ${s}` }, RUNG_LABEL[s]);
-    })));
+    parts.push(el('h3', {}, 'Effective authority'), noToolGrantsNotice(noToolGrantsConstraint(caps, agent), agent));
+    const head = el('tr', {}, ...['Capability', 'Asks for now (release)', 'Effective authority (returned)', 'Ceiling'].map((h) => el('th', {}, h)),
+      ...RUNGS.map((r) => el('th', { title: r.meaning }, `R${r.n}`)));
+    const rows = caps.map((c) => el('tr', {},
+      el('td', {}, show(c.name)),
+      el('td', {}, show(c.release)),
+      el('td', {}, c.effectiveAuthority ?? el('span', { class: 'missing' }, 'none returned (null)')),
+      el('td', {}, c.maxAutonomy ?? el('span', { class: 'missing' }, 'not recorded')),
+      ...RUNGS.map((r) => {
+        const s = rungStatus(r, c);
+        return el('td', { class: `rung ${s}` }, RUNG_LABEL[s]);
+      })));
     parts.push(el('h3', {}, 'Where each capability is, and where research proposes it go'),
-      el('p', { class: 'note' }, 'A draft target is a proposal, not a ceiling: no ceiling (max_permitted_autonomy) is on record, so no rung is drawn as unreachable except R8.'),
+      el('p', { class: 'note' }, 'Each ceiling would be marked at the rung a capability stops at. No ceiling (max_permitted_autonomy) is recorded for any capability, so each row says "not recorded" and no rung is drawn as unreachable except R8. A draft target is a proposal, not a ceiling.'),
       el('div', { class: 'scroll' }, el('table', { class: 'grid ladder' }, el('thead', {}, head), el('tbody', {}, rows))));
   }
   const reasons = (caps ?? []).filter((c) => c.maxAutonomy);
@@ -222,7 +244,7 @@ function renderRequests(result) {
   const { changes, tools } = splitRequests(result.data);
   const table = (title, list, note) => [el('h3', {}, title), note ? el('p', { class: 'note' }, note) : null,
     list === null ? notice('warn', `No ${title.toLowerCase()} list found in the response shape. See the raw response below.`)
-      : list.length === 0 ? el('p', {}, 'None filed.')
+      : list.length === 0 ? notice('warn', `The endpoint returned an empty list: no ${title.toLowerCase()} have been filed.`)
         : el('div', { class: 'scroll' }, el('table', { class: 'grid' },
           el('thead', {}, el('tr', {}, ...['Request', 'Status', 'Proposed by', 'Decided by', 'Decided at'].map((h) => el('th', {}, h)))),
           el('tbody', {}, list.map((r) => el('tr', {}, ...[r.title, r.status, r.proposedBy, r.decidedBy, r.decidedAt].map((v) => el('td', {}, show(v))))))))];
@@ -252,7 +274,12 @@ async function connect(event) {
   if (!base) return;
   const status = document.getElementById('status');
   status.textContent = 'Fetching…';
-  for (const id of ['p-agent', 'p-caps', 'p-requests']) fill(id, notice('info', 'Fetching…'));
+  // Loading has its own look (dashed, aria-busy) so it is never mistaken for an empty answer.
+  for (const [id, keys] of Object.entries(PANEL_SOURCES)) {
+    const node = notice('loading', `Loading from ${keys.map((k) => ENDPOINTS[k]).join(' and ')}…`);
+    node.setAttribute('aria-busy', 'true');
+    fill(id, node);
+  }
 
   const [agentRes, domainRes, coverageRes, reqRes] = await Promise.all(
     [ENDPOINTS.agent, ENDPOINTS.domain, ENDPOINTS.coverage, ENDPOINTS.requests].map((p) => fetchJson(base, p, token)));
@@ -272,5 +299,12 @@ async function connect(event) {
   status.textContent = failed ? `${4 - failed} of 4 endpoints answered.` : 'All 4 endpoints answered.';
 }
 
+function labelSources() {
+  for (const [id, keys] of Object.entries(PANEL_SOURCES)) {
+    document.querySelector(`#${id} .src`).textContent = `Reads: ${keys.map((k) => `GET ${ENDPOINTS[k]}`).join(' · ')}`;
+  }
+}
+
 document.getElementById('connect').addEventListener('submit', connect);
+labelSources();
 renderDisconnected();
