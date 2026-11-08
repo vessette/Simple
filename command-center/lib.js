@@ -156,6 +156,7 @@ export function listCapabilities(payload) {
     maxAutonomy: pick(c, 'max_permitted_autonomy'),
     ceilingReason: pick(c, 'max_permitted_autonomy_reason', 'ceiling_reason', 'autonomy_ceiling_reason'),
     effectiveAuthority: pick(c, 'effective_authority'),
+    effectiveAuthorityReason: pick(c, 'effective_authority_reason', 'authority_reason'),
     humanDecision: c.human_decision === true,
     approver: pick(c, 'approver'),
     tools: arr(c.tools),
@@ -205,6 +206,34 @@ export function rungStatus(rung, capability) {
   if (rung.n === rungNumber(capability.release)) return 'current_release';
   if (rung.n === rungNumber(capability.targetAutonomy)) return 'draft_target';
   return 'ceiling_unknown';
+}
+
+// Which endpoints each panel reads, so every panel can name its source.
+export const PANEL_SOURCES = {
+  'p-agent': ['agent'],
+  'p-caps': ['domain', 'coverage'],
+  'p-ladder': ['agent', 'coverage'],
+  'p-behaviour': ['coverage'],
+  'p-requests': ['requests'],
+  'p-gaps': ['agent', 'domain', 'coverage'],
+};
+
+/**
+ * The no_tool_grants rule (effectiveAuthority() in autonomyLadder.ts): with no
+ * tools granted, anything above autonomy:R2 is held at R2. If the platform
+ * returns a reason per row, that is counted; otherwise the documented rule is
+ * applied to what each row asks for now (its release). Unknown -> null.
+ */
+export function noToolGrantsConstraint(capabilities, agent) {
+  if (!capabilities || capabilities.length === 0) return null;
+  const total = capabilities.length;
+  if (capabilities.some((c) => c.effectiveAuthorityReason !== null)) {
+    return { count: capabilities.filter((c) => c.effectiveAuthorityReason === 'no_tool_grants').length, total, basis: 'returned' };
+  }
+  if (!agent?.found || agent.toolCount === null) return null;
+  if (agent.toolCount > 0) return { count: 0, total, basis: 'tools_granted' };
+  const above = capabilities.filter((c) => (rungNumber(c.release) ?? -1) > 2).length;
+  return { count: above, total, basis: 'rule_applied' };
 }
 
 /** Panel 4: release_behaviour entries grouped under their rung id. */

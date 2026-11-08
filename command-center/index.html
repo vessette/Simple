@@ -27,6 +27,8 @@
   h3 { font-size: 15px; margin: 16px 0 6px; }
   .notice { padding: 8px 12px; border-radius: 4px; margin: 6px 0; }
   .notice.info { background: var(--info-bg); }
+  .notice.loading { background: transparent; border: 2px dashed var(--line); color: var(--muted); font-style: italic; }
+  .src { margin: 0 0 10px; font: 12px/1.4 ui-monospace, Consolas, monospace; color: var(--muted); overflow-wrap: anywhere; }
   .notice.warn { background: var(--warn-bg); color: var(--warn); }
   .notice.error { background: var(--err-bg); color: var(--err); }
   .missing { color: var(--muted); font-style: italic; }
@@ -87,12 +89,12 @@
     </ul>
   </section>
 
-  <section id="p-agent"><h2>1. Your employee</h2><p class="q">Does it exist, and what is it allowed to do?</p><div class="panel-body"></div></section>
-  <section id="p-caps"><h2>2. Capability inventory</h2><p class="q">What am I actually building?</p><div class="panel-body"></div></section>
-  <section id="p-ladder"><h2>3. The autonomy ladder</h2><p class="q">Where is this going?</p><div class="panel-body"></div></section>
-  <section id="p-behaviour"><h2>4. Per-rung behaviour</h2><p class="q">What does the next rung require of me?</p><div class="panel-body"></div></section>
-  <section id="p-requests"><h2>5. Governance queue</h2><p class="q">What am I waiting on a human for?</p><div class="panel-body"></div></section>
-  <section id="p-gaps"><h2>6. What is not available</h2><p class="q">What would I be lying about?</p><div class="panel-body"></div></section>
+  <section id="p-agent"><h2>1. Your employee</h2><p class="q">Does it exist, and what is it allowed to do?</p><p class="src"></p><div class="panel-body"></div></section>
+  <section id="p-caps"><h2>2. Capability inventory</h2><p class="q">What am I actually building?</p><p class="src"></p><div class="panel-body"></div></section>
+  <section id="p-ladder"><h2>3. The autonomy ladder</h2><p class="q">Where is this going?</p><p class="src"></p><div class="panel-body"></div></section>
+  <section id="p-behaviour"><h2>4. Per-rung behaviour</h2><p class="q">What does the next rung require of me?</p><p class="src"></p><div class="panel-body"></div></section>
+  <section id="p-requests"><h2>5. Governance queue</h2><p class="q">What am I waiting on a human for?</p><p class="src"></p><div class="panel-body"></div></section>
+  <section id="p-gaps"><h2>6. What is not available</h2><p class="q">What would I be lying about?</p><p class="src"></p><div class="panel-body"></div></section>
 </main>
 <script type="module" src="app.js"></script>
 </body>
