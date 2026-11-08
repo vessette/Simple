@@ -1175,9 +1175,9 @@
         "criteria_passed": 0,
         "criteria_total": 6,
         "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
+        "commit_sha": "0f6e8ed3b5a887197f56a2e225dcafc0b126177f",
+        "commit_url": "https://github.com/vessette/Simple/commit/0f6e8ed3b5a887197f56a2e225dcafc0b126177f",
+        "commit_at": "2026-11-07T01:49:18Z",
         "points_awarded": null,
         "outstanding": [
           "Given the Command Center, when it is opened, then all six panels render and each one names the endpoint it read.",

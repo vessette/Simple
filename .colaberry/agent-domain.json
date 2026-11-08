@@ -2079,8 +2079,7 @@
         "criteria_passed": 0,
         "criteria_total": 6,
         "reasons": [
-          "None of the 6 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.STORY-000 and changes a file. Commit your work with a `Story: sales.STORY-000` trailer (or sales.STORY-000 in the subject line) and push."
+          "None of the 6 acceptance criteria are marked as passing yet."
         ],
         "outstanding": [
           "Given the Command Center, when it is opened, then all six panels render and each one names the endpoint it read.",
@@ -2090,7 +2089,7 @@
           "Given the governance panel, when a tool request is shown, then nothing on the page states or implies that filing it granted anything.",
           "Trust -- no panel shows a number, a grant, a rung or a result this domain has not actually produced."
         ],
-        "commit_sha": null
+        "commit_sha": "0f6e8ed3b5a887197f56a2e225dcafc0b126177f"
       }
     ]
   },
