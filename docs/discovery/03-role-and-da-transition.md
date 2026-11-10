@@ -42,6 +42,9 @@ Every claim below cites one of these, or says **unknown**.
 | 7 | Report definitions (what, who receives it, how often, timezone, channel) | `docs/architecture/ai-workforce-management/REPORTING_MAP.md:15` | "Confirmed absent." No object combines these five. |
 | 8 | "DA" in admissions and sales text | `docs/`, `frontend/public/knowledge/`, `backend/src/seeds/` | Every use means the **Data Analytics bootcamp**. Examples: `docs/synthflow-inbound-prompt.md:4,34`; `docs/synthflow-cold-lead-prompt.md:186-217` |
 
+| 9 | Team structure: who owns DA admissions | `docs/training-program-2026-q3/launch-briefs/03-team-roster.md`, `docs/architecture/ai-workforce-management/AI_EMPLOYEE_ROSTER.md`, `backend/src/scripts/assignOrgDepartments20260819.ts`, `backend/src/scripts/lib/launchPmoTeam.js`, `backend/src/seeds/seedDepartments.ts`, `docs/growth-os-reset/CURRENT_STATE_INVENTORY.md` | **None names an owner for DA admissions.** The roles they give Roselyn are listed under [Who owns DA admissions](#who-owns-da-admissions). |
+| 10 | Performance or evaluation criteria for Roselyn's role, or for an agent in it | `docs/training-program-2026-q3/`, `docs/architecture/ai-workforce-management/`, `docs/growth-os-reset/` ("KPI", "success measure", conversion, close or enrollment rate/target/goal) | **None for the role.** "No goal/OKR/KPI model scoped to an individual AI agent's own performance target exists." [P] `docs/architecture/ai-workforce-management/CURRENT_STATE.md:94` |
+
 **Conclusion:** no source in the repository lists Data Analyst duties for sales. This agrees with the warning in the story brief.
 
 ## What "DA" means here
@@ -75,6 +78,20 @@ The DA admissions work recorded in the repository is below. Rows D1 to D5 are se
 - The mockup labels Roselyn "DA Admissions". [P] `docs/admin-knowledge-ops-mockup.html:884`
 
 Whether the work passed to Roselyn, and when, is **unknown**. Ask Ali.
+
+### Who owns DA admissions
+
+The team-structure sources (search 9) describe Roselyn's role in different ways, and none mentions DA admissions:
+
+| Source | What it says about Roselyn |
+|---|---|
+| `03-team-roster.md:19` | "Sales / Admissions human-in-the-loop", not yet provisioned |
+| `launchPmoTeam.js:78` | Role "Admissions & Sales" |
+| `assignOrgDepartments20260819.ts:3-6, 98` | Ali's department breakdown of 2026-08-19 puts her in **Customer Support**, and lists the Sales team as other people |
+| `CURRENT_STATE_INVENTORY.md:289-295` | No brand, queue, capacity, CRM id or calendar id is assigned to her. Other people hold the sales role in the provisioning scripts. |
+| `HUMAN_OWNERSHIP_MAP.md:16` | Accountable human for Sales, Enrollment & Subscriptions; team Customer Support |
+
+So the repository shows Roselyn accountable for this domain, but sitting on the Customer Support team. DA admissions ownership is still **unknown**, and only Ali can settle it.
 
 **What could be automated or enhanced, from the above:**
 - **D2** is the clearest candidate. The agent could draft a reply to each flagged bootcamp email from a short, approved set of bootcamp facts, and a person would send it. That needs those facts written down first: the email agent says it has none.
@@ -141,7 +158,9 @@ Rows 10 and 12 also cover work that isn't Roselyn's (payment processing, and rep
 
 ## Evidence that would show the agent is ready
 
-These are the tests for each responsibility the agent would hold, in whole or in part. **No pass mark is set here.** Roselyn sets each one, because a figure chosen by me would be invented. Each test would run with the agent's output compared to Roselyn's and nothing sent ("shadow mode").
+These are the tests for each responsibility the agent would hold, in whole or in part. **No pass mark is set here.** Roselyn sets each one, because a figure chosen by me would be invented. No existing evaluation criteria could be borrowed either (search 10). The two nearby figures in the repository are not readiness marks:
+- each knowledge-base answer carries a response time of "< 2 hours" (`seedKbData.ts:168`);
+- the Cohort 1 target is 25 students (`16-taiwo-admissions.md:20`). Each test would run with the agent's output compared to Roselyn's and nothing sent ("shadow mode").
 
 | # | The agent holds | Evidence of readiness |
 |---|---|---|
