@@ -179,14 +179,37 @@ That covers two cases:
 | The schedule | Monday to Friday at 14:00 UTC, 9 AM CT (`services/aiOpsScheduler.ts:226`), though the registry still says weekly (`agentRegistrySeed.ts:588`) | Yes |
 | How many it enrolls | 300 per run if the seeded config is in place, 20 if the config is empty (`apolloLeadIntelligenceAgent.ts:102`; `agentRegistrySeed.ts:592-595`) | No |
 
-### How to find out
+### Checks for someone with production access
 
-Someone with production access (Ali or Kes) can answer it with three read-only checks:
-1. Is the `ai_agents` row for `ApolloWeeklyEnrollmentAgent` `enabled`, and what is its `status`?
-2. Is there a `campaigns` row with `type = 'cold_outbound'` and `status = 'active'`?
-3. When is its `last_run_at`, and do its recent `AiAgentActivityLog` rows show enrollments or `no_campaign_found`?
+**A one-page version with read-only queries and answer lines is in [`apollo-production-checks.md`](apollo-production-checks.md).** Send that one.
 
-If 1 and 2 are both yes, it is enrolling leads into cold outbound every weekday with no person approving. Whether to pause it is the step 2 decision below.
+All read-only. They're written down so the request is exact and the answers can be filed here. Ask **Ali or Kes**. "Last 30 days" is a suggestion, so use whatever window Roselyn wants.
+
+**Is it running?**
+
+| # | Check | Where | Why |
+|---|---|---|---|
+| 1 | Its `enabled` flag and `status` | `ai_agents` row for `ApolloWeeklyEnrollmentAgent` | The run gate (`agentControlGate.ts:38-44`) |
+| 2 | Its `last_run_at`, and whether recent `AiAgentActivityLog` rows show enrollments or `no_campaign_found` | `ai_agents`; `AiAgentActivityLog` | Shows it ran, not only that it could |
+| 3 | Is there a campaign with `type = 'cold_outbound'` and `status = 'active'`? | `campaigns` | Without one it does nothing (`apolloLeadIntelligenceAgent.ts:104-120`) |
+
+**What has the campaign actually done?**
+
+| # | Check | Where | Why |
+|---|---|---|---|
+| 4 | How many recommendations are `status = 'approved'` with `reviewed_by` empty, in the last 30 days | `lead_recommendations` | The agent approves with no reviewer: it calls `bulkApproveRecommendations(ids, null)` (`apolloLeadIntelligenceAgent.ts:242`), and `reviewed_by` is stored as null (`services/leadIntelligenceService.ts:271-273`). **These rows are the "no named human" approvals, counted.** |
+| 5 | How many leads were enrolled into that campaign, in the last 30 days | `campaign_leads` (`enrolled_at`, `campaign_id`) | How many people the auto-approval reached |
+| 6 | How many messages that campaign sent, by `channel` (email, SMS, voice), and how many are still queued | `scheduled_emails` (`campaign_id`, `channel`, `status`, `sent_at`) | Whether enrollment turned into real contact, and on which channels |
+| 7 | Whether the send engine `ScheduledActionsProcessor` is `enabled` | `ai_agents` | It does the sending (legacy record 11). If it's off, enrolled leads queue but aren't contacted. |
+| 8 | Whether any enrolled lead's email matches someone already enrolled in a program | `campaign_leads` against `enrollments` | A current student or former member cold-contacted as a prospect. The same mistake nearly happened on a hand-pulled list (`sales.json`, `sales.abandoned_checkout_identification`). |
+
+**Reading the answers:**
+- **1 and 3 both "yes":** it runs every weekday.
+- **Check 4 above zero:** it has approved leads with no person.
+- **Check 6 shows sent messages:** those people were contacted. That is the evidence Roselyn needs for the step 2 decision below.
+
+Not in the repository, and so not checked: whether an unsubscribed lead can be enrolled. Ask that alongside check 8; it is **unknown** here.
+
 
 ---
 
