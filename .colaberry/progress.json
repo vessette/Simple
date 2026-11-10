@@ -215,12 +215,12 @@
       "criteria": [
         {
           "text": "Baseline tests pass on fixtures, and a fixture whose fit score cannot be computed is recorded as unknown rather than defaulted to a number.",
-          "passed": false
+          "passed": true
         }
       ],
       "files_touched": [],
       "tests_added": [],
-      "notes": null,
+      "notes": "autonomy:R1 baseline only: capabilities/icp-fit-scoring/ (node --test capabilities/icp-fit-scoring/fitScoring.test.js, 16 pass). No live Apollo call; capability remains draft and nothing is promoted. Assumption for Roselyn: title and employee count are the minimum inputs for a real score.",
       "updated_at": null,
       "verification": {
         "state": "in_progress",
