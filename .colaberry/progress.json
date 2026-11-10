@@ -915,20 +915,20 @@
       "criteria": [
         {
           "text": "The plan accounts for every inherited legacy record for this domain, each one kept, merged or retired with a reason.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "The migration is described as replayable: running it twice leaves the same end state, with no duplicated side effects.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "The plan states what happens to a record the migration cannot classify, rather than assuming none exist.",
-          "passed": false
+          "passed": true
         }
       ],
       "files_touched": [],
       "tests_added": [],
-      "notes": null,
+      "notes": "Document: docs/migration/legacy-migration-plan.md (all 16 records; 4 unknowns each with a question and answerer; replay rules; unclassifiable-record handling). Nothing switched off or changed. Production state of ApolloWeeklyEnrollmentAgent is unknown; checks for someone with access are in docs/migration/apollo-production-checks.md.",
       "updated_at": null,
       "verification": {
         "state": "in_progress",
