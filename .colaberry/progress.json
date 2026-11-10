@@ -1063,20 +1063,20 @@
       "criteria": [
         {
           "text": "The interview plan fits 30 minutes, and every question is specific to this domain rather than reusable for any agent.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "A weekly check-in is proposed with a named day, a duration, and the three things it reviews.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "The plan states what to do with each answer, so a completed interview changes the build rather than only recording opinions.",
-          "passed": false
+          "passed": true
         }
       ],
       "files_touched": [],
       "tests_added": [],
-      "notes": null,
+      "notes": "Document: docs/discovery/04-manager-interview.md. Agenda only: nothing sent or scheduled by this project; the weekly check-in is a proposal. Answers section is empty until the interview happens.",
       "updated_at": null,
       "verification": {
         "state": "in_progress",
