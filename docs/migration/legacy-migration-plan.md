@@ -157,6 +157,39 @@ That covers two cases:
 
 ---
 
+## Is `ApolloWeeklyEnrollmentAgent` running in production?
+
+**Unknown from the repository.** Here is what the code does settle.
+
+### What does NOT stop it
+
+`executionPolicy.ts` does not apply to this agent.
+- Its eight denied capabilities, including `live_email`, govern **delivery execution runs**: the GitHub Actions jobs that build and ship code (`services/delivery/execution/executionPolicy.ts:1-19`).
+- They are enforced when such a run is planned (`services/delivery/execution/executionOrchestrator.ts:41`).
+- The Apollo agent is a scheduled runtime job. It never imports or calls that module (`services/agents/apolloLeadIntelligenceAgent.ts:1-7`).
+
+**So `live_email` being "default-denied" does not, by itself, stop this agent enrolling leads into an outbound campaign.**
+
+### What does decide whether it runs
+
+| Gate | What the code says | Can I see the production value? |
+|---|---|---|
+| The `enabled` flag on its `ai_agents` row | The run is skipped if `enabled` is false or `status` is `paused` (`services/agents/agentControlGate.ts:38-44`, called from `services/aiOrchestrator.ts:190-195`). The row defaults to **enabled** (`models/AiAgent.ts:423-427`), and its seed entry sets no `enabled` value (`services/agentRegistrySeed.ts:583-597`). | No |
+| An active cold-outbound campaign | With no `cold_outbound` campaign in `active` status, the run records `no_campaign_found` and does nothing (`apolloLeadIntelligenceAgent.ts:104-120`) | No |
+| The schedule | Monday to Friday at 14:00 UTC, 9 AM CT (`services/aiOpsScheduler.ts:226`), though the registry still says weekly (`agentRegistrySeed.ts:588`) | Yes |
+| How many it enrolls | 300 per run if the seeded config is in place, 20 if the config is empty (`apolloLeadIntelligenceAgent.ts:102`; `agentRegistrySeed.ts:592-595`) | No |
+
+### How to find out
+
+Someone with production access (Ali or Kes) can answer it with three read-only checks:
+1. Is the `ai_agents` row for `ApolloWeeklyEnrollmentAgent` `enabled`, and what is its `status`?
+2. Is there a `campaigns` row with `type = 'cold_outbound'` and `status = 'active'`?
+3. When is its `last_run_at`, and do its recent `AiAgentActivityLog` rows show enrollments or `no_campaign_found`?
+
+If 1 and 2 are both yes, it is enrolling leads into cold outbound every weekday with no person approving. Whether to pause it is the step 2 decision below.
+
+---
+
 ## Sequence: what has to be decided first
 
 | Step | Decision | Who | Blocks |
