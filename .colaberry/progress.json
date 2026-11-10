@@ -4,11 +4,11 @@
   "totals": {
     "stories_total": 39,
     "stories_verified": 0,
-    "stories_submitted": 0,
-    "stories_in_progress": 39,
+    "stories_submitted": 1,
+    "stories_in_progress": 38,
     "stories_not_started": 0,
     "criteria_total": 56,
-    "criteria_passed": 0,
+    "criteria_passed": 5,
     "points_awarded": 0
   },
   "stories": [
@@ -1171,8 +1171,8 @@
       "notes": "Criterion 3 left false: no route returns a ceiling (max_permitted_autonomy) for any capability, so the page marks each row 'Ceiling: not recorded' instead of inventing one. All ten rungs are shown in the owner's wording.",
       "updated_at": null,
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "submitted",
+        "criteria_passed": 5,
         "criteria_total": 6,
         "verified_at": null,
         "commit_sha": "0f6e8ed3b5a887197f56a2e225dcafc0b126177f",
@@ -1180,12 +1180,7 @@
         "commit_at": "2026-11-07T01:49:18Z",
         "points_awarded": null,
         "outstanding": [
-          "Given the Command Center, when it is opened, then all six panels render and each one names the endpoint it read.",
-          "Given a panel whose endpoint returned nothing, when it renders, then it says so in words and is visibly distinct from a panel that is still loading.",
-          "Given the autonomy ladder panel, when it renders, then all ten rungs are present with the owner's wording, and each capability's ceiling is marked against the rung it stops at.",
-          "Given the autonomy ladder panel, when a capability's authority is shown, then the page shows the effective authority `effectiveAuthority()` returns rather than the level the capability record asks for, and names the `no_tool_grants` rule with the number of capabilities it currently constrains, saying so in words when that number is zero.",
-          "Given the governance panel, when a tool request is shown, then nothing on the page states or implies that filing it granted anything.",
-          "Trust -- no panel shows a number, a grant, a rung or a result this domain has not actually produced."
+          "Given the autonomy ladder panel, when it renders, then all ten rungs are present with the owner's wording, and each capability's ceiling is marked against the rung it stops at."
         ]
       }
     }
