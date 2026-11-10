@@ -6,7 +6,8 @@
 
 ## Summary
 
-- **The Data Analyst duty list does not exist.** I searched the platform repository for it and found nothing for this domain or any other. The one place "DA" is linked to Roselyn most likely means the *Data Analytics bootcamp*, not a Data Analyst role (see [What "DA" means here](#what-da-means-here)).
+- **The Data Analyst duty list does not exist.** I searched the platform repository for it and found nothing for this domain or any other. The one place "DA" is linked to Roselyn most likely means the *Data Analytics bootcamp*, not a Data Analyst role (see [What "DA" means here](#what-da-means-here)). Cory agrees with that reading, but the requirement's author has not confirmed it.
+- **Data Analytics admissions is already partly handled by AI.** The voice agent Cora tells callers the bootcamp is closed and offers the Accelerator. The email agent acknowledges bootcamp enquiries and hands them to "the admissions team". See [What DA admissions involves](#what-da-admissions-involves).
 - **Roselyn's role as she actually performs it is documented below**, from her own description of her five steps. Twelve responsibilities are classified: 3 stay human, 1 transitions to the agent, and 7 split between Roselyn and the agent. The twelfth, recurring reporting, is not Roselyn's in the sources and is recorded only so it is not mistaken for hers.
 - **Reporting, the work a Data Analyst would normally do, belongs to Taiwo in the sources**, not Roselyn. Whether that is still true is unknown.
 - **What has to be written next:** a short duty list for recurring sales and enrollment reports. An outline and who should write it are at the end.
@@ -41,6 +42,9 @@ Every claim below cites one of these, or says **unknown**.
 | 7 | Report definitions (what, who receives it, how often, timezone, channel) | `docs/architecture/ai-workforce-management/REPORTING_MAP.md:15` | "Confirmed absent." No object combines these five. |
 | 8 | "DA" in admissions and sales text | `docs/`, `frontend/public/knowledge/`, `backend/src/seeds/` | Every use means the **Data Analytics bootcamp**. Examples: `docs/synthflow-inbound-prompt.md:4,34`; `docs/synthflow-cold-lead-prompt.md:186-217` |
 
+| 9 | Team structure: who owns DA admissions | `docs/training-program-2026-q3/launch-briefs/03-team-roster.md`, `docs/architecture/ai-workforce-management/AI_EMPLOYEE_ROSTER.md`, `backend/src/scripts/assignOrgDepartments20260819.ts`, `backend/src/scripts/lib/launchPmoTeam.js`, `backend/src/seeds/seedDepartments.ts`, `docs/growth-os-reset/CURRENT_STATE_INVENTORY.md` | **None names an owner for DA admissions.** The roles they give Roselyn are listed under [Who owns DA admissions](#who-owns-da-admissions). |
+| 10 | Performance or evaluation criteria for Roselyn's role, or for an agent in it | `docs/training-program-2026-q3/`, `docs/architecture/ai-workforce-management/`, `docs/growth-os-reset/` ("KPI", "success measure", conversion, close or enrollment rate/target/goal) | **None for the role.** "No goal/OKR/KPI model scoped to an individual AI agent's own performance target exists." [P] `docs/architecture/ai-workforce-management/CURRENT_STATE.md:94` |
+
 **Conclusion:** no source in the repository lists Data Analyst duties for sales. This agrees with the warning in the story brief.
 
 ## What "DA" means here
@@ -53,7 +57,46 @@ Everywhere else in the admissions and sales material, "DA" means the **Data Anal
 
 Roselyn also said the agents still quote **Data Analytics prices** instead of the AI systems program's. [R]
 
-So "DA Admissions" most likely means *admissions for the Data Analytics bootcamp*, not *a Data Analyst*. **That reading is unconfirmed.** Only the author of the requirement can say which was meant, and that requirement is not in the public repository (search 5). If the requirement meant the Data Analytics bootcamp, the transition being asked about is **away from a closed program**, not from an analyst role.
+So "DA Admissions" most likely means *admissions for the Data Analytics bootcamp*, not *a Data Analyst*. Cory, the platform's assistant, agreed that it "appears to mean" Data Analytics. **That reading is still unconfirmed by the requirement's author.** The requirement is not in the public repository (search 5). If it meant the Data Analytics bootcamp, the transition being asked about is **away from a closed program**, not from an analyst role.
+
+## What DA admissions involves
+
+The Data Analytics bootcamp is **closed to new students**. [P] `docs/synthflow-inbound-prompt.md:34`; `docs/synthflow-cold-lead-prompt.md:188-189`
+
+The DA admissions work recorded in the repository is below. Rows D1 to D5 are separate from the twelve rows in the main table.
+
+| # | Function | Who does it now | Decision | Reason | Source |
+|---|---|---|---|---|---|
+| D1 | Telling a caller the bootcamp is closed and offering the Accelerator instead | **Already AI:** the Cora voice agent | **Transitioned** (on calls) | Scripted in Cora's call prompts. Not checked: whether those prompts are live. | [P] `docs/synthflow-inbound-prompt.md:34, 195`; `docs/synthflow-cold-lead-prompt.md:188-189` |
+| D2 | Answering bootcamp admissions, enrollment and program **emails** | Cora acknowledges and flags each one; "the admissions team" answers within one business day | **Splits** | The email agent is told it has no current bootcamp information and must "not answer the substance". A person answers. **Which person is unknown.** | [P] `backend/src/services/inbox/coraKnowledgeBase.ts:258-261, 285-288` |
+| D3 | Billing, IPBC and account questions from **current** bootcamp students | Taiwo | **Stays human**, and not Roselyn's | Money and account changes. Cora routes these to Taiwo. | [P] `docs/synthflow-inbound-prompt.md:184-190`; `docs/synthflow-cold-lead-prompt.md:210, 217` |
+| D4 | Keeping bootcamp prices and dates out of Accelerator answers | **Already AI:** a guard in the email agent, checked by shadow test cases 8 to 10 | **Transitioned** (for email) | Roselyn reports that agents still show Data Analytics prices [R], so the guard is not covering every agent. Which agent shows them is **unknown**. | [P] `coraKnowledgeBase.ts:258`; `directives/cora-knowledge-base-gaps.md:14` |
+| D5 | Anything else DA admissions did | **Unknown** | **Unknown** | The fuller list is in the "legacy Cora operating sheet", a Google Sheet outside the repository. | [P] `directives/cora-knowledge-base-gaps.md:16` |
+
+**Who owns DA admissions is unclear:**
+- The same directive names **Shveta**, not Roselyn, as the routing owner for "DA admissions". [P] `directives/cora-knowledge-base-gaps.md:16`
+- The mockup labels Roselyn "DA Admissions". [P] `docs/admin-knowledge-ops-mockup.html:884`
+
+Whether the work passed to Roselyn, and when, is **unknown**. Ask Ali.
+
+### Who owns DA admissions
+
+The team-structure sources (search 9) describe Roselyn's role in different ways, and none mentions DA admissions:
+
+| Source | What it says about Roselyn |
+|---|---|
+| `03-team-roster.md:19` | "Sales / Admissions human-in-the-loop", not yet provisioned |
+| `launchPmoTeam.js:78` | Role "Admissions & Sales" |
+| `assignOrgDepartments20260819.ts:3-6, 98` | Ali's department breakdown of 2026-08-19 puts her in **Customer Support**, and lists the Sales team as other people |
+| `CURRENT_STATE_INVENTORY.md:289-295` | No brand, queue, capacity, CRM id or calendar id is assigned to her. Other people hold the sales role in the provisioning scripts. |
+| `HUMAN_OWNERSHIP_MAP.md:16` | Accountable human for Sales, Enrollment & Subscriptions; team Customer Support |
+
+So the repository shows Roselyn accountable for this domain, but sitting on the Customer Support team. DA admissions ownership is still **unknown**, and only Ali can settle it.
+
+**What could be automated or enhanced, from the above:**
+- **D2** is the clearest candidate. The agent could draft a reply to each flagged bootcamp email from a short, approved set of bootcamp facts, and a person would send it. That needs those facts written down first: the email agent says it has none.
+- **D4** needs extending to whichever agent Roselyn has seen quoting the old prices. The guard exists for email only.
+- **D1 and D3** need nothing new: one is already AI, the other stays with Taiwo.
 
 ## Roselyn's role as she performs it
 
@@ -115,7 +158,9 @@ Rows 10 and 12 also cover work that isn't Roselyn's (payment processing, and rep
 
 ## Evidence that would show the agent is ready
 
-These are the tests for each responsibility the agent would hold, in whole or in part. **No pass mark is set here.** Roselyn sets each one, because a figure chosen by me would be invented. Each test would run with the agent's output compared to Roselyn's and nothing sent ("shadow mode").
+These are the tests for each responsibility the agent would hold, in whole or in part. **No pass mark is set here.** Roselyn sets each one, because a figure chosen by me would be invented. No existing evaluation criteria could be borrowed either (search 10). The two nearby figures in the repository are not readiness marks:
+- each knowledge-base answer carries a response time of "< 2 hours" (`seedKbData.ts:168`);
+- the Cohort 1 target is 25 students (`16-taiwo-admissions.md:20`). Each test would run with the agent's output compared to Roselyn's and nothing sent ("shadow mode").
 
 | # | The agent holds | Evidence of readiness |
 |---|---|---|
@@ -177,7 +222,10 @@ Whether these are still produced, and by whom, is **unknown**.
 
 ## Unknowns
 
-- Whether "DA" in the requirement means Data Analyst or Data Analytics.
+- Whether "DA" in the requirement means Data Analyst or Data Analytics. Cory agrees it appears to mean Data Analytics; the author has not confirmed.
+- Who owns DA admissions now: the directive names Shveta, the mockup names Roselyn.
+- Who in "the admissions team" answers the bootcamp emails Cora flags (D2).
+- What is in the legacy Cora operating sheet (D5).
 - Who "Cory" is in Roselyn's notes: Cora (the voice agent), the Cory assistant, or both.
 - Whether checkout is on Stripe or PaySimple today, and whether the CRM is CCPP or GoHighLevel.
 - Whether Taiwo still produces the four reports.
