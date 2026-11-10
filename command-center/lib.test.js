@@ -30,25 +30,32 @@ test('coverage rows map to capabilities using the live field names', () => {
   assert.equal(a.targetAutonomy, 'autonomy:R5');
   assert.equal(a.effectiveAuthority, null);
   assert.equal(a.releaseBehaviour, null, 'absent release_behaviour stays null, not []');
-  assert.equal(a.maxAutonomy, null, 'a target is never read as a ceiling');
+  assert.equal(a.maxAutonomy, 'autonomy:R5', 'the route returns the research ceiling as target_autonomy');
   assert.equal(b.name, 'B');
 });
 
 test('missing story fields and coverage summary are reported', () => {
   assert.deepEqual(missingStoryFields(coverageResponse),
-    ['classification', 'starting_autonomy', 'max_permitted_autonomy', 'human_decision', 'release_behaviour']);
+    ['classification', 'starting_autonomy', 'human_decision', 'release_behaviour']);
   assert.deepEqual(missingStoryFields({ rows: [] }), []);
   assert.equal(summarizeCoverage(coverageResponse).withEffectiveAuthority, 0);
   assert.equal(summarizeCoverage({}), null);
 });
 
-test('rung status without a ceiling: release and draft target marked, nothing unreachable', () => {
+test('rung status from the route: release now, draft ceiling at target_autonomy, above it unreachable', () => {
   const [a] = listCapabilities(coverageResponse);
   const statuses = RUNGS.map((r) => rungStatus(r, a));
   assert.equal(statuses[0], 'current_release');
-  assert.equal(statuses[5], 'draft_target');
+  assert.equal(statuses[3], 'within_ceiling');
+  assert.equal(statuses[5], 'ceiling');
+  assert.equal(statuses[6], 'above_ceiling');
   assert.equal(statuses[8], 'unreachable_platform');
-  assert.ok(!statuses.includes('above_ceiling'));
+});
+
+test('a ceiling of unknown is not drawn as a ceiling', () => {
+  const [c] = listCapabilities([{ capability_id: 'x', target_autonomy: 'unknown', release: 'autonomy:R0' }]);
+  assert.equal(rungStatus(RUNGS[0], c), 'current_release');
+  assert.equal(rungStatus(RUNGS[4], c), 'ceiling_unknown');
 });
 
 test('gaps from live-shaped coverage: missing fields, no tests, no authority, no behaviour', () => {
@@ -57,7 +64,7 @@ test('gaps from live-shaped coverage: missing fields, no tests, no authority, no
   assert.match(texts, /do not carry classification/);
   assert.match(texts, /2 of 2 loaded capabilities have no tests/);
   assert.match(texts, /2 of 2 loaded capabilities returned no effective authority \(null\)/);
-  assert.match(texts, /unconfirmed/, 'null is not presented as a confirmed "none"');
+  assert.match(texts, /no level has been approved/, 'null is stated as nothing approved');
   assert.match(texts, /No capability row carries release_behaviour/);
   assert.doesNotMatch(texts, /Draft, not agreed by anyone: A, B/, 'all-draft is stated once by the domain count');
 });
@@ -227,22 +234,23 @@ test('rung wording comes from releases[]; legacy clusters are ignored', () => {
   assert.equal(domainRungs({}), null);
 });
 
-test('no_tool_grants: 0 tools and every capability at R0 constrains 0', () => {
+test('no_tool_grants: nothing approved means the rule constrains none', () => {
   const caps = listCapabilities(coverageResponse);
   const r = noToolGrantsConstraint(caps, summarizeAgent(agentResponse()));
-  assert.deepEqual(r, { count: 0, total: 2, basis: 'rule_applied' });
+  assert.deepEqual(r, { count: 0, total: 2, basis: 'nothing_approved' });
 });
 
-test('no_tool_grants: counts rows asking above R2 when no tools are granted', () => {
-  const caps = listCapabilities([{ capability_id: 'x', release: 'autonomy:R4' }, { capability_id: 'y', release: 'autonomy:R2' }]);
-  assert.equal(noToolGrantsConstraint(caps, summarizeAgent(agentResponse())).count, 1);
+test('no_tool_grants: approved levels without per-row reasons cannot be counted', () => {
+  const caps = listCapabilities([{ capability_id: 'x', effective_authority: 'autonomy:R2' }, { capability_id: 'y', effective_authority: null }]);
+  assert.equal(noToolGrantsConstraint(caps, summarizeAgent(agentResponse())), null);
   assert.equal(noToolGrantsConstraint(caps, summarizeAgent(agentResponse({ agent_tools_granted: ['t'] }))).count, 0);
 });
 
 test('no_tool_grants: a returned reason wins; unknown inputs give null', () => {
   const caps = listCapabilities([{ capability_id: 'x', release: 'autonomy:R0', effective_authority_reason: 'no_tool_grants' }]);
   assert.deepEqual(noToolGrantsConstraint(caps, null), { count: 1, total: 1, basis: 'returned' });
-  assert.equal(noToolGrantsConstraint(listCapabilities(coverageResponse), null), null);
+  assert.deepEqual(noToolGrantsConstraint(listCapabilities(coverageResponse), null), { count: 0, total: 2, basis: 'nothing_approved' }, 'nothing approved needs no agent data');
+  assert.equal(noToolGrantsConstraint(listCapabilities([{ capability_id: 'x', effective_authority: 'autonomy:R4' }]), null), null);
   assert.equal(noToolGrantsConstraint([], summarizeAgent(agentResponse())), null);
 });
 

@@ -2,7 +2,7 @@
 // only fetches, calls lib.js, and draws. Data is written with textContent,
 // never innerHTML, so nothing from the API can inject markup.
 import {
-  ENDPOINTS, RUNGS, AGENT_LADDER, NO_LADDER_MAPPING, agentLadderPosition, formatCentral, summarizeAgent, summarizeDomain, listCapabilities, summarizeCoverage, missingStoryFields, PLATFORM_UNREACHABLE, PANEL_SOURCES, noToolGrantsConstraint, domainRungs,
+  ENDPOINTS, RUNGS, AGENT_LADDER, NO_LADDER_MAPPING, agentLadderPosition, formatCentral, summarizeAgent, summarizeDomain, listCapabilities, summarizeCoverage, missingStoryFields, PLATFORM_UNREACHABLE, PANEL_SOURCES, noToolGrantsConstraint, domainRungs, rungNumber,
   rungStatus, behaviourByRung, splitRequests, listGaps,
 } from './lib.js';
 
@@ -114,7 +114,7 @@ function capabilityRow(c) {
     el('td', {}, show(c.implementationState)),
     el('td', {}, stateBadge(c.validationState)),
     el('td', {}, show(c.release)),
-    el('td', {}, c.targetAutonomy ? `${c.targetAutonomy} (draft target)` : show(null)),
+    el('td', {}, c.maxAutonomy ? `${c.maxAutonomy} (draft ceiling)` : show(null)),
     // null is ambiguous (not computed vs no authority); say only what was returned.
     el('td', {}, c.effectiveAuthority ?? el('span', { class: 'missing' }, 'none returned (null)')),
     el('td', {}, c.tools === null ? show(null) : `${c.tools.length} needed`),
@@ -141,7 +141,7 @@ function renderCapabilities(caps, domain, coverage, missing, domainRes, coverage
     if (caps.length === 0) parts.push(notice('warn', 'The coverage endpoint answered, but no capability records were recognised in it. See its raw response below.'));
     else {
       parts.push(el('div', { class: 'scroll' }, el('table', { class: 'grid' },
-        el('thead', {}, el('tr', {}, ...['Capability', 'Implementation', 'Requirements', 'Release now', 'Target', 'Effective authority', 'Tools', 'Tests', 'Approver', 'Details']
+        el('thead', {}, el('tr', {}, ...['Capability', 'Implementation', 'Requirements', 'Release now', 'Ceiling (draft)', 'Effective authority', 'Tools', 'Tests', 'Approver', 'Details']
           .map((h) => el('th', {}, h)))),
         el('tbody', {}, caps.map(capabilityRow)))));
     }
@@ -154,10 +154,9 @@ function renderCapabilities(caps, domain, coverage, missing, domainRes, coverage
 const RUNG_LABEL = {
   unreachable_platform: 'unreachable: platform',
   above_ceiling: 'unreachable: above ceiling',
-  ceiling: 'ceiling',
+  ceiling: 'ceiling (draft)',
   within_ceiling: '',
   current_release: 'now',
-  draft_target: 'target (draft)',
   ceiling_unknown: '',
 };
 
@@ -180,7 +179,7 @@ function noToolGrantsNotice(r, agent) {
   if (r === null) return notice('info', `${rule} How many capabilities it constrains cannot be counted: the agent's tool grants or the capability rows are not loaded.`);
   const how = {
     returned: 'counted from the reason the platform returned on each row',
-    rule_applied: `the agent has ${agent?.toolCount ?? 0} tools granted, and this counts rows whose current release is above autonomy:R2`,
+    nothing_approved: 'no capability has an approved level (effective authority is null on every row), and the rule only lowers an approved level',
     tools_granted: `the agent has ${agent?.toolCount} tools granted, so the rule does not apply`,
   }[r.basis];
   const words = r.count === 0
@@ -201,22 +200,25 @@ function renderLadder(agent, caps, rungs = null) {
   if (caps === null) parts.push(notice('info', 'Per-capability positions are not drawn: capability records are not loaded.'));
   else if (caps.length) {
     parts.push(el('h3', {}, 'Effective authority'), noToolGrantsNotice(noToolGrantsConstraint(caps, agent), agent));
-    const head = el('tr', {}, ...['Capability', 'Asks for now (release)', 'Effective authority (returned)', 'Ceiling'].map((h) => el('th', {}, h)),
+    const head = el('tr', {}, ...['Capability', 'Release now', 'Effective authority (returned)', 'Ceiling (draft)'].map((h) => el('th', {}, h)),
       ...rungs.map((r) => el('th', { title: r.meaning }, `R${r.n}`)));
     const rows = caps.map((c) => el('tr', {},
       el('td', {}, show(c.name)),
       el('td', {}, show(c.release)),
       el('td', {}, c.effectiveAuthority ?? el('span', { class: 'missing' }, 'none returned (null)')),
-      el('td', {}, c.maxAutonomy ?? el('span', { class: 'missing' }, 'not recorded')),
+      el('td', {}, rungNumber(c.maxAutonomy) !== null ? c.maxAutonomy : el('span', { class: 'missing' }, 'not recorded')),
       ...rungs.map((r) => {
         const s = rungStatus(r, c);
         return el('td', { class: `rung ${s}` }, RUNG_LABEL[s]);
       })));
     parts.push(el('h3', {}, 'Where each capability is, and where research proposes it go'),
-      el('p', { class: 'note' }, 'Each ceiling would be marked at the rung a capability stops at. No ceiling (max_permitted_autonomy) is recorded for any capability, so each row says "not recorded" and no rung is drawn as unreachable except R8. A draft target is a proposal, not a ceiling.'),
+      el('p', { class: 'note' }, 'Each ceiling is marked at the rung its capability stops at, and rungs above it are unreachable. The ceiling comes from the domain research (the route returns it as target_autonomy) and is a draft: no one has validated it, and it is advisory, never authority. R8 is unreachable on every row by platform fact.'),
       el('div', { class: 'scroll' }, el('table', { class: 'grid ladder' }, el('thead', {}, head), el('tbody', {}, rows))));
   }
-  const reasons = (caps ?? []).filter((c) => c.maxAutonomy);
+  const reasons = (caps ?? []).filter((c) => c.maxAutonomy && c.ceilingReason);
+  if (caps?.some((c) => rungNumber(c.maxAutonomy) !== null) && reasons.length === 0) {
+    parts.push(notice('info', 'Why each ceiling is where it is: not in response. The route returns no reason for any ceiling.'));
+  }
   if (reasons.length) {
     parts.push(el('h3', {}, 'Why each ceiling is where it is'), el('ul', {}, reasons.map((c) =>
       el('li', {}, el('strong', {}, `${show(c.name)} stops at ${c.maxAutonomy}: `),
