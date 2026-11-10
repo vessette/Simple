@@ -168,7 +168,9 @@ export function listCapabilities(payload) {
     release: pick(c, 'release'),
     targetAutonomy: pick(c, 'target_autonomy'),
     startingAutonomy: pick(c, 'starting_autonomy'),
-    maxAutonomy: pick(c, 'max_permitted_autonomy'),
+    // The coverage route returns the research ceiling under the name target_autonomy
+    // (coverageMatrix.ts:146 in the platform repo). It is a draft and advisory only.
+    maxAutonomy: pick(c, 'max_permitted_autonomy', 'target_autonomy'),
     ceilingReason: pick(c, 'max_permitted_autonomy_reason', 'ceiling_reason', 'autonomy_ceiling_reason'),
     effectiveAuthority: pick(c, 'effective_authority'),
     effectiveAuthorityReason: pick(c, 'effective_authority_reason', 'authority_reason'),
@@ -189,7 +191,9 @@ export const STORY_FIELDS = ['classification', 'starting_autonomy', 'max_permitt
 export function missingStoryFields(payload) {
   const rows = findRecords(payload, 'capability_id');
   if (rows.length === 0) return [];
-  return STORY_FIELDS.filter((f) => !rows.some((r) => f in r));
+  // target_autonomy carries max_permitted_autonomy on the coverage route.
+  const has = (r, f) => f in r || (f === 'max_permitted_autonomy' && 'target_autonomy' in r);
+  return STORY_FIELDS.filter((f) => !rows.some((r) => has(r, f)));
 }
 
 /** Coverage summary block: the platform's own headline and counts. */
@@ -211,16 +215,10 @@ export function summarizeCoverage(payload) {
 export function rungStatus(rung, capability) {
   if (PLATFORM_UNREACHABLE[rung.id]) return 'unreachable_platform';
   const ceiling = rungNumber(capability.maxAutonomy);
-  if (ceiling !== null) {
-    if (rung.n > ceiling) return 'above_ceiling';
-    if (rung.n === ceiling) return 'ceiling';
-    return 'within_ceiling';
-  }
-  // No ceiling on record. A draft target is not a ceiling, so nothing above
-  // it is drawn as unreachable; only where it is now and where it aims.
+  if (ceiling !== null && rung.n > ceiling) return 'above_ceiling';
+  if (ceiling !== null && rung.n === ceiling) return 'ceiling';
   if (rung.n === rungNumber(capability.release)) return 'current_release';
-  if (rung.n === rungNumber(capability.targetAutonomy)) return 'draft_target';
-  return 'ceiling_unknown';
+  return ceiling !== null ? 'within_ceiling' : 'ceiling_unknown';
 }
 
 // Which endpoints each panel reads, so every panel can name its source.
@@ -235,9 +233,10 @@ export const PANEL_SOURCES = {
 
 /**
  * The no_tool_grants rule (effectiveAuthority() in autonomyLadder.ts): with no
- * tools granted, anything above autonomy:R2 is held at R2. If the platform
- * returns a reason per row, that is counted; otherwise the documented rule is
- * applied to what each row asks for now (its release). Unknown -> null.
+ * tools granted, an APPROVED level above autonomy:R2 is held at R2. The rule
+ * only lowers an approved level, so with nothing approved (effective_authority
+ * null on every row) it constrains none. If the platform returns a reason per
+ * row, that is counted. Anything else cannot be counted -> null.
  */
 export function noToolGrantsConstraint(capabilities, agent) {
   if (!capabilities || capabilities.length === 0) return null;
@@ -245,10 +244,10 @@ export function noToolGrantsConstraint(capabilities, agent) {
   if (capabilities.some((c) => c.effectiveAuthorityReason !== null)) {
     return { count: capabilities.filter((c) => c.effectiveAuthorityReason === 'no_tool_grants').length, total, basis: 'returned' };
   }
+  if (capabilities.every((c) => c.effectiveAuthority === null)) return { count: 0, total, basis: 'nothing_approved' };
   if (!agent?.found || agent.toolCount === null) return null;
   if (agent.toolCount > 0) return { count: 0, total, basis: 'tools_granted' };
-  const above = capabilities.filter((c) => (rungNumber(c.release) ?? -1) > 2).length;
-  return { count: above, total, basis: 'rule_applied' };
+  return null;
 }
 
 /** Panel 4: release_behaviour entries grouped under their rung id. */
@@ -314,7 +313,7 @@ export function listGaps(capabilities, agent = null, domain = null, missingField
   const noTests = capabilities.filter((c) => Array.isArray(c.tests) && c.tests.length === 0).length;
   if (noTests) gaps.push({ kind: 'no_behaviour', text: `${noTests} of ${n} loaded capabilities have no tests recorded.` });
   const noAuthority = capabilities.filter((c) => c.effectiveAuthority === null).length;
-  if (noAuthority) gaps.push({ kind: 'unsourced', text: `${noAuthority} of ${n} loaded capabilities returned no effective authority (null). Whether null means "none" or "not computed" is unconfirmed. Either way, a target rung is not authority.` });
+  if (noAuthority) gaps.push({ kind: 'unsourced', text: `${noAuthority} of ${n} loaded capabilities returned no effective authority (null): no level has been approved for any of them. The route fills it only from a recorded approval (coverageMatrix.ts:69), and a ceiling is not authority.` });
   if (capabilities.every((c) => c.releaseBehaviour === null)) {
     gaps.push({ kind: 'no_behaviour', text: 'No capability row carries release_behaviour[], so no rung has a defined behaviour or acceptance criteria on this page.' });
   } else {
