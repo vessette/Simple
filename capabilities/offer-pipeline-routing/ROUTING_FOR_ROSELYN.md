@@ -93,6 +93,35 @@ The only safe answer is no. The decision here is to **confirm it**, and to ask s
 | **B. Advisory wins** | The lead is offered the smaller starting step first. | A large deal may start too small. |
 | **C. Neither: list it for her** | She decides each one. | More items in her queue. |
 
-### A build item, not a decision
+## The "routed by" gap: why it's urgent, and what to do now
 
-Questions 1, 4 and 5 can only be enforced once the lead records **who routed it**. That field doesn't exist (`models/Lead.ts`). It goes to whoever owns the lead model.
+### The short version for Roselyn
+
+**Today nobody can route a lead by hand inside the platform, and nothing records who set an offer.** Until that changes, none of her answers to decisions 1, 4 and 5 can be enforced. Meanwhile the re-score keeps running every 6 hours (`offerRoutingAgent.ts:9`), re-classifying leads and enrolling them.
+
+### What the code shows
+
+- **The admin edit route doesn't accept an offer.** `PATCH /api/admin/leads/:id` validates against `updateLeadSchema` (`controllers/adminLeadController.ts:292`), and that schema has no `recommended_offer` (`schemas/leadAdminSchema.ts:3-8`).
+- **Only the scoring code writes the offer.** In `controllers/`, `routes/` and `services/`, the one write is in `offerRouterService.ts:28-33`. So every stored offer today was set by the machine.
+- **Lead edits aren't audited.** An `audit_logs` table exists, with admin user, entity, old values and new values (`models/AuditLog.ts:5-13`). But the lead update path doesn't write to it: `handleAdminUpdateLead` (`adminLeadController.ts:281-311`) calls `updateLead` with no audit entry. So it can't be used to work out who routed a lead either.
+- **If Roselyn routes leads today, she does it outside the platform.** Her CRM is GoHighLevel. Whether those decisions ever reach the platform is **unknown**.
+
+### Interim workarounds (no code change)
+
+1. **Treat every current offer as machine-set.** It's true by the code above. A one-off read-only count of leads by `recommended_offer` gives the baseline. That makes the explainer's "human routing" branch unused for now, and that is accurate.
+2. **Keep Roselyn's own routing decisions out of the platform field, and in one list.** If she overrides an offer, she records it, and the weekly check-in compares that list with the platform's offers. It's manual and it doesn't protect anything automatically. It does make a disagreement visible within a week rather than never.
+3. **Ask whether the re-score should be paused until the field exists.** That's her call with Ali, not a workaround anyone here can apply. It's the only interim step that actually stops offers changing.
+
+### The proper fix (a platform change, for its owners)
+
+The platform already uses the same pattern elsewhere:
+- Agents record **when** and **how** their level was set: `autonomy_level_set_at` and `autonomy_level_source` (`'auto' | 'manual'`) (`models/AiAgent.ts:350-351`).
+- Lead temperature changes are kept in a **history table** with a trigger (`models/LeadTemperatureHistory.ts:17-25`).
+
+For the offer, that would mean:
+1. a source field (`auto` or `manual`) and a set-at time on the lead, **plus who set it**. The agent version records no "who", which the platform itself flags as a gap;
+2. an offer-history row on every change, like the temperature history;
+3. the offer added to `updateLeadSchema`, so a person *can* route a lead, with each edit written to `audit_logs`;
+4. the re-score skipping any lead whose source is `manual`, with a test that pins it.
+
+This is a schema change in the platform repository, so it's a request to its owners, not work for this project. Whoever owns the lead model decides. **Who that is is unknown here**, so ask Ali.
