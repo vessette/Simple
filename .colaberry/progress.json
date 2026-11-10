@@ -1029,20 +1029,20 @@
       "criteria": [
         {
           "text": "The document names the accountable human for this domain and the specific responsibilities proposed to transition to the agent.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Each transitioning responsibility states what evidence would show the agent is ready to hold it.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Responsibilities that must stay human are listed separately, each with the reason it is reserved.",
-          "passed": false
+          "passed": true
         }
       ],
       "files_touched": [],
       "tests_added": [],
-      "notes": null,
+      "notes": "Document: docs/discovery/03-role-and-da-transition.md. Pass marks for each readiness test are left to Roselyn (no evaluation criteria exist in the platform repo, CURRENT_STATE.md:94). Whether 'DA' meant Data Analyst or Data Analytics, and who owns DA admissions, are recorded as unknown pending Ali.",
       "updated_at": null,
       "verification": {
         "state": "in_progress",
