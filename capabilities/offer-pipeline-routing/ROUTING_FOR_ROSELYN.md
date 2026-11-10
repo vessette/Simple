@@ -28,15 +28,71 @@ The capability describes routing as "write a label". On the platform it does mor
 
 ## What Roselyn needs to decide
 
-| # | Question | Why it matters | What it changes |
-|---|---|---|---|
-| 1 | Should routing a lead **only label it**, or also enroll it in a campaign? | Today the label is the outreach (finding 1) | If label only, the R6 pilot is a label queue. If it also enrolls, that is prospect contact, which needs `live_email` (denied by default). |
-| 2 | What makes a lead **warm** rather than cold? Is an advisory session the only signal? | An idea-form lead can land in cold outbound (finding 2), against her rule on chasing cold leads | The warm/cold rule becomes part of the taxonomy and is cited like T1 to T3 |
-| 3 | Should engaging with outreach be allowed to **raise a lead's score or change its offer**? | The score feeds on the outreach it chose (finding 3) | Engagement is removed from the routing score, or kept and labelled |
-| 4 | Once a lead has an offer, may a re-score **change** it? How often? | Offers can change with no person involved, and leads can end up in two campaigns (findings 4 and 5) | A changed offer becomes a proposal for her to accept |
-| 5 | When an offer changes, should the lead **leave the old campaign**? | Nothing removes it today (finding 4) | An explicit move step, with its own approval |
-| 6 | Confirm that an **unsubscribed lead is never re-scored or re-enrolled**, and ask someone to check the send step | The re-score query doesn't exclude them (finding 6) | A filter, and a test that pins it |
-| 7 | What makes a lead an **Accelerator** lead? | It has no rule of its own; it's only the fallback (see the PR) | A T4 rule, or Accelerator stays "cannot place" |
-| 8 | When **enterprise and advisory** both match, which wins, or does the lead stay unrouted? | The platform settles it by order; the explainer says "cannot place" | One sentence in the taxonomy |
+Each decision lists the realistic options, what each one does, and its risk.
 
-Questions 1 and 4 also need a **"routed by" field** on the lead before any answer can be enforced (finding 5). That's a build item, not her decision. It goes to whoever owns the lead model.
+**What is not known:** the effect on engagement or conversion. Nothing in the repository measures how routing changes conversion, so no figure is given. Where a measurement would show it, it is named.
+
+### 1. Should routing only label a lead, or also enroll it?
+
+| Option | What happens | Risk |
+|---|---|---|
+| **A. Label only** | The offer is written; a person decides whether and when to enroll. The routing capability stays reversible and contacts nobody, which is what its R6 ceiling assumes. | Slower first contact, and someone has to work the routed list. Leads can sit labelled but uncontacted. |
+| **B. Label and enroll** (today) | Routing starts outreach at once (`offerRouterService.ts:35-52`). | A wrong label becomes a wrong message to a real person. It's prospect contact, so `live_email` is needed, which is denied by default. An enrolled lead can't be "unrouted" quietly. |
+
+**What would show the effect:** the Apollo checks 5 and 6 (enrollments, and messages sent by channel), rerun per offer. **Unknown today.**
+
+### 2. What makes a lead warm rather than cold?
+
+| Option | What happens | Risk |
+|---|---|---|
+| **A. Advisory session only** (today) | Anyone without one goes to the cold map. Accelerator means `cold_outbound` (`:37-38`, `:14-15`). | An inbound lead who filled in the idea form gets cold outreach, which goes against her rule on chasing cold leads. |
+| **B. Any inbound action counts as warm** (form, idea, maturity check) | Inbound leads get warm campaigns. | A stale or one-off signal keeps someone "warm" for good, unless a time limit is added. |
+| **C. Her own list of warm signals, with a time limit** | Matches how she sorts leads on her calls. | Needs her list. It becomes a rule cited like T1 to T3. |
+
+### 3. Should engaging with outreach be allowed to change a lead's offer?
+
+| Option | What happens | Risk |
+|---|---|---|
+| **A. Yes** (today, 10% of the score) | Opens and clicks can lift a lead into advisory. | The outreach moves the score that chose it: a loop, and opens are a weak signal. |
+| **B. No: routing uses only what the lead told us** | The offer is stable and explainable from the lead's own data. | Real interest shown by replying is ignored, unless replies are handled separately. |
+| **C. Replies count; opens and clicks don't** | Keeps the strongest signal. | Needs a change to the scoring rule, and a test. |
+
+### 4. Once a lead has an offer, may a re-score change it?
+
+| Option | What happens | Risk |
+|---|---|---|
+| **A. Yes, automatically** (today) | The offer follows the data. | Offers change with no person involved, a person's routing is overwritten (finding 5), and leads end up in two campaigns. |
+| **B. Never after the first routing** | Stable, and simple to explain. | A lead who matures stays on the wrong offer until a person notices. |
+| **C. A re-score can only *propose* a change, for her to accept** | Matches the capability's R6 (a supervised queue). | Adds items to her queue. **She can't act on any until she has an admin login.** |
+
+### 5. When an offer changes, should the lead leave the old campaign?
+
+| Option | What happens | Risk |
+|---|---|---|
+| **A. Yes: a move step** | One campaign per lead. | A move is itself an outreach change, so it needs its own approval. |
+| **B. No** (today) | Nothing to build. | Two campaigns sending to the same person at once. |
+
+### 6. Should an unsubscribed lead ever be re-scored or re-enrolled?
+
+The only safe answer is no. The decision here is to **confirm it**, and to ask someone to check whether the send step already blocks them (**unknown**).
+
+**Risk if left as is:** the re-score query includes unsubscribed leads (`offerRoutingAgent.ts:55-62`). If the sender doesn't block them, they could be contacted again.
+
+### 7. What makes a lead an Accelerator lead?
+
+| Option | What happens | Risk |
+|---|---|---|
+| **A. Write a rule** (T4) | Accelerator placements become explainable and testable. | Needs her definition. |
+| **B. Keep it as the fallback** (today) | No work. | Every lead nobody understood gets Accelerator. The explainer will keep answering "cannot place" for those. |
+
+### 8. When enterprise and advisory both match, which wins?
+
+| Option | What happens | Risk |
+|---|---|---|
+| **A. Enterprise wins** (today, by order) | Large organisations go to enterprise. | It's exactly what the capability's exception rules out: picking the larger offer. |
+| **B. Advisory wins** | The lead is offered the smaller starting step first. | A large deal may start too small. |
+| **C. Neither: list it for her** | She decides each one. | More items in her queue. |
+
+### A build item, not a decision
+
+Questions 1, 4 and 5 can only be enforced once the lead records **who routed it**. That field doesn't exist (`models/Lead.ts`). It goes to whoever owns the lead model.
