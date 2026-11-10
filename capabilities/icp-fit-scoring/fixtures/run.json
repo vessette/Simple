@@ -1,0 +1,46 @@
+{
+  "_note": "Synthetic fixtures for the autonomy:R1 baseline. Invented people at example.com; no real person or Apollo record. Shapes follow the Apollo person fields read by leadIntelligenceService.ts.",
+  "campaignId": "camp-fixture-1",
+  "profiles": [
+    { "id": "icp-health", "name": "Healthcare and insurance data leaders", "industries": ["healthcare", "insurance"], "conversion_rate": 0.05 },
+    { "id": "icp-rate-limited", "name": "Profile whose search returns 429", "industries": ["finance"], "conversion_rate": 0.05 },
+    { "id": "icp-upstream-down", "name": "Profile whose search returns 503", "industries": ["finance"], "conversion_rate": 0.05 },
+    { "id": "icp-malformed", "name": "Profile whose search body has no people array", "industries": ["finance"], "conversion_rate": 0.05 },
+    { "id": "icp-overlap", "name": "Second profile that returns a person already found", "industries": ["healthcare"], "conversion_rate": 0.05 }
+  ],
+  "searchResults": {
+    "icp-health": {
+      "status": 200,
+      "people": [
+        { "id": "ap-1", "first_name": "Avery", "last_name": "Fixture", "email": "avery@example.com", "title": "VP of Data",
+          "organization": { "name": "Example Health", "industry": "Healthcare", "estimated_num_employees": 1200, "technology_names": ["Python", "Snowflake"] } },
+        { "id": "ap-2", "first_name": "Blake", "last_name": "Fixture", "email": "blake@example.com", "title": "Analyst",
+          "organization": { "name": "Example Retail", "industry": "Retail", "estimated_num_employees": 30, "technology_names": [] } },
+        { "id": "ap-3", "first_name": "Casey", "last_name": "Fixture", "email": "casey@example.com", "title": "Director of Digital Transformation",
+          "organization": { "name": "Example Insurance", "industry": "Insurance", "technology_names": ["Databricks"] } },
+        { "id": "ap-4", "first_name": "Drew", "last_name": "Fixture", "email": "drew@example.com",
+          "organization": { "name": "Example Clinic", "industry": "Healthcare", "estimated_num_employees": 500, "technology_names": [] } },
+        { "id": "ap-5", "first_name": "Emery", "last_name": "Fixture", "email": "emery@example.com", "title": "Engineering Manager",
+          "organization": { "name": "Example Payer", "industry": "Healthcare", "estimated_num_employees": 150, "technology_names": ["Tableau"] } },
+        { "id": "ap-6", "first_name": "Finley", "last_name": "Fixture", "email": "Existing.Lead@Example.com", "title": "Chief Data Officer",
+          "organization": { "name": "Example Hospital", "industry": "Healthcare", "estimated_num_employees": 3000, "technology_names": ["Python"] } },
+        { "id": "ap-7", "first_name": "Gray", "last_name": "Fixture", "email": "gray@example.com", "title": "Head of Analytics",
+          "organization": { "name": "Example Benefits", "industry": "Insurance", "estimated_num_employees": 800, "technology_names": ["Power BI"] } }
+      ]
+    },
+    "icp-rate-limited": { "status": 429, "error": "Too Many Requests" },
+    "icp-upstream-down": { "status": 503, "error": "Service Unavailable" },
+    "icp-malformed": { "status": 200, "results": [] },
+    "icp-overlap": {
+      "status": 200,
+      "people": [
+        { "id": "ap-1", "first_name": "Avery", "last_name": "Fixture", "email": "avery@example.com", "title": "VP of Data",
+          "organization": { "name": "Example Health", "industry": "Healthcare", "estimated_num_employees": 1200, "technology_names": ["Python", "Snowflake"] } }
+      ]
+    }
+  },
+  "existingLeadEmails": ["existing.lead@example.com"],
+  "existingRecommendations": [
+    { "campaign_id": "camp-fixture-1", "apollo_person_id": "ap-7", "status": "pending" }
+  ]
+}
