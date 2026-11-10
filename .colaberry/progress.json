@@ -1147,7 +1147,7 @@
         },
         {
           "text": "Given the autonomy ladder panel, when it renders, then all ten rungs are present with the owner's wording, and each capability's ceiling is marked against the rung it stops at.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Given the autonomy ladder panel, when a capability's authority is shown, then the page shows the effective authority `effectiveAuthority()` returns rather than the level the capability record asks for, and names the `no_tool_grants` rule with the number of capabilities it currently constrains, saying so in words when that number is zero.",
@@ -1164,7 +1164,7 @@
       ],
       "files_touched": [],
       "tests_added": [],
-      "notes": "Criterion 3 left false: no route returns a ceiling (max_permitted_autonomy) for any capability, so the page marks each row 'Ceiling: not recorded' instead of inventing one. All ten rungs are shown in the owner's wording.",
+      "notes": "Criterion 3: each capability's ceiling is read from the coverage route's target_autonomy, which the route fills from the research max_permitted_autonomy (platform coverageMatrix.ts:146), and marked on the ladder as 'ceiling (draft)' with rungs above it unreachable. Ceilings are research drafts, unvalidated and advisory, never authority. All ten rungs are read from releases[] in the owner's wording.",
       "updated_at": null,
       "verification": {
         "state": "submitted",
