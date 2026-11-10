@@ -2,7 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  ENDPOINTS, RUNGS, AGENT_LADDER, agentLadderPosition, rungNumber, findRecords, formatCentral, summarizeAgent, summarizeDomain, listCapabilities,
+  ENDPOINTS, RUNGS, AGENT_LADDER, domainRungs, agentLadderPosition, rungNumber, findRecords, formatCentral, summarizeAgent, summarizeDomain, listCapabilities,
   rungStatus, behaviourByRung, splitRequests, listGaps, missingStoryFields, summarizeCoverage,
   noToolGrantsConstraint, PANEL_SOURCES,
 } from './lib.js';
@@ -214,6 +214,17 @@ test('gaps: domain counts are stated with their denominator', () => {
   assert.match(texts, /32 of 32 capabilities are draft \(0 confirmed\)/);
   assert.match(texts, /32 of 32 capabilities have an outstanding manager decision/);
   assert.match(texts, /0 of 32 capabilities have complete release coverage/);
+});
+
+test('rung wording comes from releases[]; legacy clusters are ignored', () => {
+  const releases = RUNGS.map((r, i) => ({ cluster: r.id, title: `R${i} · owner text ${i}`, position: i }))
+    .concat([{ cluster: 'r0', title: 'Discovery and validation (superseded by the ladder)', position: 10 }]);
+  const rungs = domainRungs({ releases });
+  assert.equal(rungs.length, 10);
+  assert.equal(rungs[8].meaning, 'R8 · owner text 8');
+  assert.equal(rungs[8].id, 'autonomy:R8');
+  assert.equal(domainRungs({ releases: releases.slice(1) }), null);
+  assert.equal(domainRungs({}), null);
 });
 
 test('no_tool_grants: 0 tools and every capability at R0 constrains 0', () => {

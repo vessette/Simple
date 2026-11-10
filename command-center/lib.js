@@ -27,6 +27,21 @@ export const RUNGS = [
   ['autonomy:R9', 'Demonstrate reliable operation, monitoring, recovery and ownership.'],
 ].map(([id, meaning], n) => ({ id, n, meaning }));
 
+/**
+ * The owner's rung wording as the domain route returns it in releases[].
+ * Only the ten autonomy:R0-R9 clusters; the legacy r0/r1/r2 clusters are
+ * superseded by the ladder and left out. Returns null unless all ten are
+ * present, so the caller falls back to RUNGS (the story brief's copy) and says so.
+ */
+export function domainRungs(payload) {
+  const list = payload && Array.isArray(payload.releases) ? payload.releases : [];
+  const rungs = RUNGS.map((r) => {
+    const rel = list.find((x) => x && x.cluster === r.id && typeof x.title === 'string');
+    return rel ? { ...r, meaning: rel.title } : null;
+  });
+  return rungs.every(Boolean) ? rungs : null;
+}
+
 // Unreachable by platform fact, not by anyone's choice.
 export const PLATFORM_UNREACHABLE = {
   'autonomy:R8': 'Coordinated handoff between two agents does not exist in this platform today.',

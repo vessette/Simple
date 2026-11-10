@@ -2,7 +2,7 @@
 // only fetches, calls lib.js, and draws. Data is written with textContent,
 // never innerHTML, so nothing from the API can inject markup.
 import {
-  ENDPOINTS, RUNGS, AGENT_LADDER, NO_LADDER_MAPPING, agentLadderPosition, formatCentral, summarizeAgent, summarizeDomain, listCapabilities, summarizeCoverage, missingStoryFields, PLATFORM_UNREACHABLE, PANEL_SOURCES, noToolGrantsConstraint,
+  ENDPOINTS, RUNGS, AGENT_LADDER, NO_LADDER_MAPPING, agentLadderPosition, formatCentral, summarizeAgent, summarizeDomain, listCapabilities, summarizeCoverage, missingStoryFields, PLATFORM_UNREACHABLE, PANEL_SOURCES, noToolGrantsConstraint, domainRungs,
   rungStatus, behaviourByRung, splitRequests, listGaps,
 } from './lib.js';
 
@@ -189,22 +189,26 @@ function noToolGrantsNotice(r, agent) {
   return el('div', {}, el('p', {}, rule), el('p', { class: 'notice warn' }, `${words}: ${how}.`));
 }
 
-function renderLadder(agent, caps) {
-  const meanings = el('table', { class: 'grid' }, el('tbody', {}, RUNGS.map((r) =>
+function renderLadder(agent, caps, rungs = null) {
+  const wording = rungs
+    ? el('p', { class: 'note' }, `Rung wording as returned in releases[] by GET ${ENDPOINTS.domain}.`)
+    : el('p', { class: 'note' }, 'Rung wording from the STORY-000 brief: the domain route did not return all ten autonomy releases.');
+  rungs = rungs ?? RUNGS;
+  const meanings = el('table', { class: 'grid' }, el('tbody', {}, rungs.map((r) =>
     el('tr', {}, el('td', {}, r.id), el('td', {}, r.meaning), el('td', { class: `rung ${PLATFORM_UNREACHABLE[r.id] ? 'unreachable_platform' : ''}` },
       PLATFORM_UNREACHABLE[r.id] ?? '')))));
-  const parts = [...agentLadder(agent), el('h3', {}, 'Capability ladder (autonomy:R0 to R9)'), meanings];
+  const parts = [...agentLadder(agent), el('h3', {}, 'Capability ladder (autonomy:R0 to R9)'), wording, meanings];
   if (caps === null) parts.push(notice('info', 'Per-capability positions are not drawn: capability records are not loaded.'));
   else if (caps.length) {
     parts.push(el('h3', {}, 'Effective authority'), noToolGrantsNotice(noToolGrantsConstraint(caps, agent), agent));
     const head = el('tr', {}, ...['Capability', 'Asks for now (release)', 'Effective authority (returned)', 'Ceiling'].map((h) => el('th', {}, h)),
-      ...RUNGS.map((r) => el('th', { title: r.meaning }, `R${r.n}`)));
+      ...rungs.map((r) => el('th', { title: r.meaning }, `R${r.n}`)));
     const rows = caps.map((c) => el('tr', {},
       el('td', {}, show(c.name)),
       el('td', {}, show(c.release)),
       el('td', {}, c.effectiveAuthority ?? el('span', { class: 'missing' }, 'none returned (null)')),
       el('td', {}, c.maxAutonomy ?? el('span', { class: 'missing' }, 'not recorded')),
-      ...RUNGS.map((r) => {
+      ...rungs.map((r) => {
         const s = rungStatus(r, c);
         return el('td', { class: `rung ${s}` }, RUNG_LABEL[s]);
       })));
@@ -291,7 +295,7 @@ async function connect(event) {
   const missing = coverageRes.ok ? missingStoryFields(coverageRes.data) : [];
   renderAgent(agentRes);
   renderCapabilities(caps, domain, coverage, missing, domainRes, coverageRes);
-  renderLadder(agent, caps);
+  renderLadder(agent, caps, domainRes.ok ? domainRungs(domainRes.data) : null);
   renderBehaviour(caps);
   renderRequests(reqRes);
   renderGaps(caps, agent, domain, missing);
