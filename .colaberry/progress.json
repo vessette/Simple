@@ -1101,20 +1101,20 @@
       "criteria": [
         {
           "text": "Exactly three agent tasks are proposed, each with its boundary stated as what the agent must NOT do.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Each task names the evidence that proves it completed, and that evidence is something other than the task being marked done.",
-          "passed": false
+          "passed": true
         },
         {
           "text": "Each task names the human who approves it wherever approval is required.",
-          "passed": false
+          "passed": true
         }
       ],
       "files_touched": [],
       "tests_added": [],
-      "notes": null,
+      "notes": "Document: docs/discovery/05-three-proposed-tasks.md. Three draft capabilities (lead temperature proposals, price-statement audit, abandoned-checkout list); all stay draft. Pass marks and which comes first wait on Roselyn (interview Q1, Q5).",
       "updated_at": null,
       "verification": {
         "state": "in_progress",
