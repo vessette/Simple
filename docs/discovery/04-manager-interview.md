@@ -159,7 +159,7 @@ Ask only whether she wants the login. Granting it is Ali's decision.
 
 **Blocker (wants admin login?):**
 
-**Weekly check-in (day and time agreed?):**
+**Weekly check-in (day and time agreed?):** Wednesday mornings. Arranged with Roselyn outside this project, as reported by Victoria on 2026-11-10. This differs from the Tuesday proposed in section 7.
 
 ---
 
