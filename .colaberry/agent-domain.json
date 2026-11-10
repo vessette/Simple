@@ -387,9 +387,9 @@
     "summary": {
       "stories": 124,
       "checked": 39,
-      "verified": 0,
-      "awaiting_criteria": 38,
-      "outstanding_criteria": 51
+      "verified": 1,
+      "awaiting_criteria": 37,
+      "outstanding_criteria": 48
     },
     "stories": [
       {
@@ -2016,21 +2016,14 @@
       {
         "story_id": "sales.RESEARCH-3-ROLE-AND-DA-TRANSITION",
         "title": "Document Roselyn's role, and which DA responsibilities transition",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 3,
         "criteria_total": 3,
-        "reasons": [
-          "None of the 3 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.RESEARCH-3-ROLE-AND-DA-TRANSITION and changes a file. Commit your work with a `Story: sales.RESEARCH-3-ROLE-AND-DA-TRANSITION` trailer (or sales.RESEARCH-3-ROLE-AND-DA-TRANSITION in the subject line) and push."
-        ],
-        "outstanding": [
-          "The document names the accountable human for this domain and the specific responsibilities proposed to transition to the agent.",
-          "Each transitioning responsibility states what evidence would show the agent is ready to hold it.",
-          "Responsibilities that must stay human are listed separately, each with the reason it is reserved."
-        ],
-        "commit_sha": null
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "8714eb229dfe7d0472b31acdb66270e77aeed7e7"
       },
       {
         "story_id": "sales.RESEARCH-4-MANAGER-INTERVIEW",

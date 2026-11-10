@@ -3,13 +3,13 @@
   "project": "sales",
   "totals": {
     "stories_total": 39,
-    "stories_verified": 0,
+    "stories_verified": 1,
     "stories_submitted": 1,
-    "stories_in_progress": 38,
+    "stories_in_progress": 37,
     "stories_not_started": 0,
     "criteria_total": 56,
-    "criteria_passed": 5,
-    "points_awarded": 0
+    "criteria_passed": 8,
+    "points_awarded": 21
   },
   "stories": [
     {
@@ -1045,19 +1045,15 @@
       "notes": "Document: docs/discovery/03-role-and-da-transition.md. Pass marks for each readiness test are left to Roselyn (no evaluation criteria exist in the platform repo, CURRENT_STATE.md:94). Whether 'DA' meant Data Analyst or Data Analytics, and who owns DA admissions, are recorded as unknown pending Ali.",
       "updated_at": null,
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 3,
         "criteria_total": 3,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "The document names the accountable human for this domain and the specific responsibilities proposed to transition to the agent.",
-          "Each transitioning responsibility states what evidence would show the agent is ready to hold it.",
-          "Responsibilities that must stay human are listed separately, each with the reason it is reserved."
-        ]
+        "verified_at": "2026-11-10T17:30:49.336Z",
+        "commit_sha": "8714eb229dfe7d0472b31acdb66270e77aeed7e7",
+        "commit_url": "https://github.com/vessette/Simple/commit/8714eb229dfe7d0472b31acdb66270e77aeed7e7",
+        "commit_at": "2026-11-10T16:43:52Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
