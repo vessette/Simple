@@ -1,0 +1,25 @@
+{
+  "_note": "Synthetic described leads for the autonomy:R2 explainer. Invented; no real lead. Field names follow the Lead fields read by offerScoringService.ts.",
+  "leads": [
+    { "name": "large org, high ROI, many departments", "title": "CIO", "industry": "Financial Services",
+      "company_size": 2000, "estimated_roi": 750000, "departments_impacted": ["operations", "finance", "hr"],
+      "maturity_score": 20, "engagement_count": 5 },
+    { "name": "mature org with a use case", "company_size": 300, "maturity_score": 70,
+      "idea_input": "Automate claims triage with an LLM agent that drafts the first review" },
+    { "name": "moderate maturity, no use case", "title": "VP Strategy", "industry": "Healthcare",
+      "company_size": 600, "estimated_roi": 200000, "maturity_score": 40, "engagement_count": 3 },
+    { "name": "small team, low maturity", "title": "Analyst", "industry": "Retail",
+      "company_size": 40, "estimated_roi": 0, "maturity_score": 10, "engagement_count": 0 },
+    { "name": "matches enterprise and custom build", "company_size": 2000, "estimated_roi": 600000,
+      "departments_impacted": ["operations", "finance", "it"], "maturity_score": 70,
+      "idea_input": "Build an internal agent that reconciles vendor invoices across systems" },
+    { "name": "matches enterprise and advisory", "title": "CIO", "industry": "Financial Services",
+      "company_size": 2000, "estimated_roi": 750000, "departments_impacted": ["operations", "finance", "hr"],
+      "maturity_score": 50, "engagement_count": 5 },
+    { "name": "use case but no company size", "maturity_score": 70,
+      "idea_input": "Summarise patient intake forms for the front desk team every morning" },
+    { "name": "names an unknown offer", "recommended_offer": "workshop", "company_size": 200 },
+    { "name": "routed by a person", "recommended_offer": "accelerator", "routed_by": "human",
+      "company_size": 300, "maturity_score": 70, "idea_input": "Automate claims triage with an LLM agent that drafts the first review" }
+  ]
+}
