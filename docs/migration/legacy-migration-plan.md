@@ -181,6 +181,8 @@ That covers two cases:
 
 ### Checks for someone with production access
 
+**A one-page version with read-only queries and answer lines is in [`apollo-production-checks.md`](apollo-production-checks.md).** Send that one.
+
 All read-only. They're written down so the request is exact and the answers can be filed here. Ask **Ali or Kes**. "Last 30 days" is a suggestion, so use whatever window Roselyn wants.
 
 **Is it running?**
