@@ -271,12 +271,12 @@
       "criteria": [
         {
           "text": "Every answer cites the taxonomy rule it used, and an unmappable lead returns 'cannot place' rather than a guess.",
-          "passed": false
+          "passed": true
         }
       ],
       "files_touched": [],
       "tests_added": [],
-      "notes": null,
+      "notes": "autonomy:R2 explainer only: capabilities/offer-pipeline-routing/ (node --test capabilities/offer-pipeline-routing/offerTaxonomy.test.js, 14 pass). The taxonomy is the platform's three classifyOffer rules, held as an unapproved draft. Read-only; capability remains draft. Routing findings and decisions for Roselyn in ROUTING_FOR_ROSELYN.md and ROSELYN_ONE_PAGER.md.",
       "updated_at": null,
       "verification": {
         "state": "in_progress",
