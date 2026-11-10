@@ -170,7 +170,7 @@ function agentLadder(agent) {
       ? `The employee's autonomy_level "${agent.autonomyLevel ?? NOT_IN_RESPONSE}" is not on this ladder.`
       : 'No agent loaded, so no position is marked.') : null,
     el('p', { class: 'note' }, NO_LADDER_MAPPING),
-  ];
+  ].filter(Boolean); // the notice slot is null when the employee is on the ladder
 }
 
 // The no_tool_grants rule, named, with how many capabilities it holds down now.
