@@ -1,0 +1,115 @@
+<title>Vick Weekly Update</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a single letter-width sheet. Header and snapshot, then three stacked sections, each a short list a manager can scan in a minute. */
+:root {
+  --bg: #e9eeec; --sheet: #ffffff; --fg: #16201d; --muted: #56635e; --line: #d3dbd8;
+  --accent: #0f6b5c; --accent-soft: #d5ebe5; --warn: #9a5b00; --warn-soft: #fbeccd; --ask: #1f5fa8; --ask-soft: #dce9f8;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e1513; --sheet: #18211e; --fg: #e4ece9; --muted: #9aaaa4; --line: #33413c;
+  --accent: #5cc6ad; --accent-soft: #1d3b34; --warn: #f0b85a; --warn-soft: #3a2c12; --ask: #84b6f0; --ask-soft: #172b44; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e1513; --sheet: #18211e; --fg: #e4ece9; --muted: #9aaaa4; --line: #33413c;
+  --accent: #5cc6ad; --accent-soft: #1d3b34; --warn: #f0b85a; --warn-soft: #3a2c12; --ask: #84b6f0; --ask-soft: #172b44; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 14.5px/1.5 var(--body); }
+.outer { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px 40px; }
+.sheet { max-width: 860px; margin: 0 auto; background: var(--sheet); border: 1px solid var(--line); border-radius: 6px; padding: clamp(20px, 4vw, 44px); display: grid; gap: 26px; }
+h1, h2 { font-family: var(--display); margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(24px, 4.4vw, 32px); line-height: 1.15; }
+h2 { font-size: 19px; display: flex; align-items: baseline; gap: 10px; padding-bottom: 6px; border-bottom: 2px solid var(--accent); }
+h2 .n { font: 500 12px var(--mono); color: var(--accent); }
+p { margin: 0; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--muted); font-size: 13px; margin-top: 6px; }
+.eyebrow { font: 500 11.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.snap { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.snap div { background: var(--accent-soft); border-radius: 4px; padding: 10px 12px; display: grid; gap: 2px; }
+.snap b { font: 600 22px/1.1 var(--display); font-variant-numeric: tabular-nums; }
+.snap span { font-size: 12.5px; color: var(--muted); }
+section { display: grid; gap: 12px; }
+ul.items { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+ul.items li { display: grid; grid-template-columns: 18px 1fr; gap: 8px; }
+ul.items li::before { content: ""; width: 8px; height: 8px; margin-top: 7px; border-radius: 2px; background: var(--accent); }
+ul.items li.c::before { background: var(--warn); }
+ul.items li.x::before { background: var(--ask); }
+ul.items strong { font-weight: 600; }
+.sub { color: var(--muted); }
+.tag { display: inline-block; font: 500 11px/1 var(--mono); padding: 3px 6px; border-radius: 3px; margin-left: 4px; white-space: nowrap; vertical-align: 1px; }
+.tag.ask { color: var(--ask); background: var(--ask-soft); }
+.tag.risk { color: var(--warn); background: var(--warn-soft); }
+h3 { font: 600 14px var(--body); margin: 4px 0 0; }
+.tw { overflow-x: auto; border: 1px solid var(--line); border-radius: 4px; }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 13.5px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font: 500 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--accent-soft); }
+td:first-child { font-weight: 600; white-space: nowrap; }
+.foot { color: var(--muted); font-size: 12.5px; border-top: 1px solid var(--line); padding-top: 12px; }
+@media print { body { background: #fff; } .outer { padding: 0; } .sheet { border: 0; padding: 0; } }
+</style>
+
+<div class="outer"><article class="sheet">
+  <header>
+    <p class="eyebrow">Weekly update · Sales, Enrollment &amp; Subscriptions</p>
+    <h1>Building Vick, the sales agent</h1>
+    <div class="meta"><span>Victoria Spencer-Auber</span><span>Week of 5 to 11 November 2026</span><span>Accountable manager: Roselyn</span></div>
+  </header>
+
+  <div class="snap" aria-label="Snapshot">
+    <div><b>9 of 39</b><span>stories in the plan complete</span></div>
+    <div><b>2 of 32</b><span>of Vick's tasks drafted</span></div>
+    <div><b>0</b><span>tasks switched on or sending anything</span></div>
+    <div><b>3 Dec</b><span>build phase starts</span></div>
+  </div>
+
+  <section aria-labelledby="s1">
+    <h2 id="s1"><span class="n">1</span>What I've done</h2>
+    <ul class="items">
+      <li><span><strong>Research and planning, all six stories complete.</strong> <span class="sub">What kind of system sales needs, how an AI employee is put together, Roselyn's role and which Data Analytics reporting moves to AI, a manager interview plan with a weekly Wednesday check-in, and three proposed starting tasks for Vick.</span></span></li>
+      <li><span><strong>Command Center.</strong> <span class="sub">One page showing all of Vick's planned tasks, the limit on each, and what's still missing, built from the platform's live data.</span></span></li>
+      <li><span><strong>Plan for the 16 old sales agents.</strong> <span class="sub">For each one: keep it, fold it into one of Vick's tasks, retire it, or ask the right owner.</span></span></li>
+      <li><span><strong>First two of Vick's tasks drafted.</strong> <span class="sub">Finding prospects and scoring how well they fit the program, and explaining which offer a lead belongs in (it says "can't place" rather than guessing). Both only suggest, both are tested, and neither is switched on.</span></span></li>
+      <li><span><strong>Caught an old agent that could email strangers with no review.</strong> <span class="sub">The Apollo weekly enrollment agent was set up to approve leads itself and add them to cold email campaigns. Ali confirmed it's switched off.</span></span></li>
+      <li><span><strong>Manager access fixed.</strong> <span class="sub">Roselyn couldn't open Vick's review page. Ali granted access on 10 November, so she can now review and approve Vick's work.</span></span></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="s2">
+    <h2 id="s2"><span class="n">2</span>Challenges</h2>
+    <ul class="items">
+      <li class="c"><span><strong>Lead offers may change with nobody checking.</strong><span class="tag risk">safety</span> <span class="sub">The system can re-score leads every 6 hours, switch their offer, and add them to a second email campaign. People who unsubscribed may be included. I don't yet know whether it's running.</span></span></li>
+      <li class="c"><span><strong>Nothing records who chose a lead's offer.</strong> <span class="sub">So a person's routing choice can't be protected or enforced yet. This needs a platform change, and sales can't file the request against the platform domain itself.</span></span></li>
+      <li class="c"><span><strong>Vick's rules aren't defined yet.</strong> <span class="sub">Pass marks, what makes a lead warm, what always stays with a person, and the correct price and dates all need Roselyn's answers. Until then every task stays a draft.</span></span></li>
+      <li class="c"><span><strong>There's nowhere in the platform for the manager to approve Vick's work.</strong> <span class="sub">A decision queue for Roselyn is one of Vick's planned tasks, and the platform has no code for it yet.</span></span></li>
+    </ul>
+
+    <h3>Where I need input</h3>
+    <div class="tw"><table>
+      <thead><tr><th>From</th><th>What I need</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td>Roselyn</td><td>Should offer re-scoring be paused until a person can override it?</td><td>Stops leads being switched or emailed twice.</td></tr>
+        <tr><td>Roselyn</td><td>Which task Vick learns first, what stays human, pass marks, warm-lead signals, correct price and dates</td><td>Turns drafts into tasks you can approve.</td></tr>
+        <tr><td>Kes</td><td>Is offer re-scoring running, and who files the "who set this offer" change?</td><td>Platform owns the lead record.</td></tr>
+        <tr><td>Ali</td><td>Who files the platform change, and confirm a date (Fri 13 Nov suggested)</td><td>Unblocks the change request.</td></tr>
+        <tr><td>Roselyn &amp; Sohail</td><td>Who owns two old marketing agents</td><td>Closes the last open items in the legacy plan.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section aria-labelledby="s3">
+    <h2 id="s3"><span class="n">3</span>What I plan to do next</h2>
+    <ul class="items">
+      <li class="x"><span><strong>Record Roselyn's answers from the check-in and confirm them with her.</strong> <span class="sub">Then update the role write-up, the three tasks and the routing notes to match.</span></span></li>
+      <li class="x"><span><strong>Send Kes the change request</strong> <span class="sub">for recording who sets a lead's offer, with Roselyn's pause decision if she makes one.</span></span></li>
+      <li class="x"><span><strong>Draft Vick's next tasks, in the order Roselyn chooses.</strong> <span class="sub">My suggestion: keep each lead's stage and temperature current, catch missed strategy calls, follow enrollments through to an active seat, then find people who stopped at checkout.</span></span></li>
+      <li class="x"><span><strong>Keep everything as drafts.</strong> <span class="sub">Nothing sends a message or switches on until the accountable manager has reviewed it.</span></span></li>
+    </ul>
+  </section>
+
+  <p class="foot">Progress counts the acceptance criteria ticked in the project repository on 11 November 2026. Full roadmap: claude.ai/artifact/WJVmkmePmD63YZ4KFhyxRF</p>
+</article></div>
