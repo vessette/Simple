@@ -6,6 +6,9 @@
 
 Citations are to `ColaberryIntern/ColaberryEnterprise_AI_LeadershipAccelerator` at commit `949fe19`. Paths starting `services/` are under `backend/src/`. Each task is one of this domain's 32 draft capabilities in `services/agentDomain/capabilities/sales.json`. None is invented.
 
+
+> **Update, 2026-11-10 (from Ali):** Roselyn was never missing an admin login. She holds the management role `revenue`; what she lacked was the `agents` section grant, which carries the per-agent dashboard and the review page. The platform's own diagnostic (`manager_has_no_admin_login`) reported the wrong cause. **She has the grant now**, and needs to sign out and back in once. Statements below that she "can't log in" or "can't reach" the page reflect that diagnostic and are no longer current.
+
 ---
 
 ## The three, and why these three
@@ -204,7 +207,7 @@ It produces the list of people who started a checkout and didn't pay, excluding 
 
 | Blocker | Affects | Source |
 |---|---|---|
-| Roselyn has no admin login, so she can't approve anything in the platform | All three | `agentDomainRegistry.ts:82-84`, `:188-189` |
+| ~~Roselyn has no admin login~~ Resolved 2026-11-10: she was missing the `agents` section grant, now given | All three | `agentDomainRegistry.ts:82-84`, `:188-189` |
 | Vick has 0 tools, and most of the tools needed don't exist | All three | `/agent-domains-mine`; `agentToolCapabilities.ts` |
 | No sales-routed `escalate_to_human`; today it creates a curriculum ticket | All three | `agentToolCapabilities.ts:88-94` |
 | No pass marks or windows set | All three | `04-manager-interview.md`, Q5 |

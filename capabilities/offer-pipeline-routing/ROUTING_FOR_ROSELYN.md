@@ -63,7 +63,7 @@ Each decision lists the realistic options, what each one does, and its risk.
 |---|---|---|
 | **A. Yes, automatically** (today) | The offer follows the data. | Offers change with no person involved, a person's routing is overwritten (finding 5), and leads end up in two campaigns. |
 | **B. Never after the first routing** | Stable, and simple to explain. | A lead who matures stays on the wrong offer until a person notices. |
-| **C. A re-score can only *propose* a change, for her to accept** | Matches the capability's R6 (a supervised queue). | Adds items to her queue. **She can't act on any until she has an admin login.** |
+| **C. A re-score can only *propose* a change, for her to accept** | Matches the capability's R6 (a supervised queue). | Adds items to her queue. (Her access was fixed on 2026-11-10.) |
 
 ### 5. When an offer changes, should the lead leave the old campaign?
 
@@ -124,4 +124,6 @@ For the offer, that would mean:
 3. the offer added to `updateLeadSchema`, so a person *can* route a lead, with each edit written to `audit_logs`;
 4. the re-score skipping any lead whose source is `manual`, with a test that pins it.
 
-This is a schema change in the platform repository, so it's a request to its owners, not work for this project. Whoever owns the lead model decides. **Who that is is unknown here**, so ask Ali.
+This is a schema change in the platform repository, so it's a request to its owners, not work for this project.
+
+**Owner (from Ali, 2026-11-10):** the platform domain. Kes Delele is the accountable manager and Quincy Ninying the builder. Ali asked for it to be filed as a change request against the platform domain, as the smallest change that makes the choice attributable. Note: the change-request route accepts requests only against a domain the filer owns (`services/agentDomain/agentChangeRequestService.ts:328-329`, `DomainNotYoursError`), so a sales builder filing against platform may be refused.

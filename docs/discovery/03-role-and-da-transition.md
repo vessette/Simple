@@ -4,6 +4,11 @@
 **Accountable human:** Roselyn (`roselen@colaberry.com`)
 **Prepared by:** Victoria Spencer-Auber · **Status:** draft for Roselyn's review. Nothing here is approved, and no agent has been changed.
 
+
+> **Update, 2026-11-10 (from Ali):** Roselyn was never missing an admin login. She holds the management role `revenue`; what she lacked was the `agents` section grant, which carries the per-agent dashboard and the review page. The platform's own diagnostic (`manager_has_no_admin_login`) reported the wrong cause. **She has the grant now**, and needs to sign out and back in once. Statements below that she "can't log in" or "can't reach" the page reflect that diagnostic and are no longer current.
+
+> **Update, 2026-11-10 (from Ali):** "DA" means **the Data Analytics bootcamp, the program, not a Data Analyst role.** The reading in [What "DA" means here](#what-da-means-here) is confirmed.
+
 ## Summary
 
 - **The Data Analyst duty list does not exist.** I searched the platform repository for it and found nothing for this domain or any other. The one place "DA" is linked to Roselyn most likely means the *Data Analytics bootcamp*, not a Data Analyst role (see [What "DA" means here](#what-da-means-here)). Cory agrees with that reading, but the requirement's author has not confirmed it.
@@ -77,7 +82,7 @@ The DA admissions work recorded in the repository is below. Rows D1 to D5 are se
 - The same directive names **Shveta**, not Roselyn, as the routing owner for "DA admissions". [P] `directives/cora-knowledge-base-gaps.md:16`
 - The mockup labels Roselyn "DA Admissions". [P] `docs/admin-knowledge-ops-mockup.html:884`
 
-Whether the work passed to Roselyn, and when, is **unknown**. Ask Ali.
+Whether the work passed to Roselyn, and when, is **unknown**. (Asked of Ali; not yet answered.)
 
 ### Who owns DA admissions
 
@@ -222,7 +227,7 @@ Whether these are still produced, and by whom, is **unknown**.
 
 ## Unknowns
 
-- Whether "DA" in the requirement means Data Analyst or Data Analytics. Cory agrees it appears to mean Data Analytics; the author has not confirmed.
+- ~~Whether "DA" means Data Analyst or Data Analytics.~~ **Answered by Ali, 2026-11-10: the Data Analytics bootcamp.**
 - Who owns DA admissions now: the directive names Shveta, the mockup names Roselyn.
 - Who in "the admissions team" answers the bootcamp emails Cora flags (D2).
 - What is in the legacy Cora operating sheet (D5).

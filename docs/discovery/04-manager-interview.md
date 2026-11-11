@@ -22,7 +22,7 @@ Those answers are recorded in `docs/discovery/03-role-and-da-transition.md`. Pla
 | 3 | What stays human forever | 6 | Q3, Q4 |
 | 4 | What "good" looks like, in numbers | 8 | Q5, Q6, Q7 |
 | 5 | What gets switched off immediately | 4 | Q8 |
-| 6 | Blocker to raise: Roselyn can't reach the agent | 2 | none |
+| 6 | Access: fixed 2026-11-10, confirm it works | 2 | none |
 | 7 | The proposed weekly check-in | 2 | none |
 | | **Total** | **30** | 8 questions |
 
@@ -84,6 +84,8 @@ Examples to prompt with:
 Source: an agent is stopped by setting it to not enabled (`models/AiAgent.ts:331`). Roselyn can't do that herself today (section 6).
 
 ## 6. Blocker to raise: Roselyn can't reach the agent (2 minutes)
+
+**Update, 2026-11-10:** fixed. Ali gave her the `agents` section grant. In the meeting, ask her to sign out and back in once, then check she can open Vick's page. The text below is the original blocker, kept for the record.
 
 **Raise this; don't try to fix it in the meeting.**
 
@@ -157,7 +159,7 @@ Ask only whether she wants the login. Granting it is Ali's decision.
 
 **Q8 (switch-off triggers):**
 
-**Blocker (wants admin login?):**
+**Access (can she open Vick's page after signing out and in?):**
 
 **Weekly check-in (day and time agreed?):** Wednesday mornings. Arranged with Roselyn outside this project, as reported by Victoria on 2026-11-10. This differs from the Tuesday proposed in section 7.
 

@@ -12,6 +12,9 @@
 - **The window is the last 30 days.** Change it if Roselyn asks for a different one.
 - The table and column names come from the platform's models at commit `949fe19`. If one doesn't match the live database, note it and skip that check.
 
+
+> **Answered, 2026-11-10 (Ali):** the agent is **not running**. It's switched off in the governance table (`cron_schedule_configs`), and every weekday the scheduler logs `SKIP ... (disabled in governance DB)`. Checks 4 to 8 aren't needed while it stays off. **Run all nine before anyone switches it on.** Also fix the schedule label first: `0 14 * * 1-5` is 8 AM CST in standard time, not the 9 AM CT the label says.
+
 ---
 
 ## Is it running?
