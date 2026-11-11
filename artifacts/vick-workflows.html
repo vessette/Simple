@@ -1,0 +1,253 @@
+<title>Vick Workflows</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: three workflows stacked as chapters. A swimlane for the business process, a gated ladder for how a capability earns autonomy, and a pipeline for how the work is built and shipped. */
+:root {
+  --bg: #f2f5f4; --surface: #ffffff; --sunk: #e7ecea; --line: #d2dad7;
+  --fg: #15201c; --muted: #56645f; --accent: #0f6b5c; --accent-soft: #d4eae4;
+  --agent: #0f6b5c; --agent-bg: #d4eae4; --human: #7a3e9d; --human-bg: #efe2f6;
+  --sys: #1f5fa8; --sys-bg: #dbe8f7; --cust: #995a00; --cust-bg: #fbebcb;
+  --gate: #a3292d; --gate-bg: #f7dede; --done: #1d7a46;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1614; --surface: #18211e; --sunk: #212b28; --line: #33413c;
+  --fg: #e4ece9; --muted: #9aaaa4; --accent: #5cc6ad; --accent-soft: #1c3a33;
+  --agent: #5cc6ad; --agent-bg: #1c3a33; --human: #cfa3ea; --human-bg: #33213f;
+  --sys: #84b6f0; --sys-bg: #172b44; --cust: #f0b85a; --cust-bg: #3a2c12;
+  --gate: #f08c8f; --gate-bg: #3d1b1d; --done: #6fd39a; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f1614; --surface: #18211e; --sunk: #212b28; --line: #33413c;
+  --fg: #e4ece9; --muted: #9aaaa4; --accent: #5cc6ad; --accent-soft: #1c3a33;
+  --agent: #5cc6ad; --agent-bg: #1c3a33; --human: #cfa3ea; --human-bg: #33213f;
+  --sys: #84b6f0; --sys-bg: #172b44; --cust: #f0b85a; --cust-bg: #3a2c12;
+  --gate: #f08c8f; --gate-bg: #3d1b1d; --done: #6fd39a; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--body); }
+a { color: var(--accent); text-underline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; line-height: 1.15; }
+h1 { font-size: clamp(30px, 5.5vw, 48px); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: clamp(22px, 3vw, 28px); font-weight: 700; }
+h3 { font-size: 15px; font-weight: 700; }
+p { margin: 0; }
+code { font: 12.5px var(--mono); background: var(--sunk); padding: 1px 5px; border-radius: 3px; }
+.eyebrow { font: 500 12px/1 var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--accent); }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 32px 64px; display: grid; gap: 56px; }
+header { display: grid; gap: 14px; }
+header .lede { font-size: 17px; color: var(--muted); max-width: 70ch; }
+.jump { display: flex; flex-wrap: wrap; gap: 10px; }
+.jump a { display: grid; gap: 2px; padding: 10px 14px; border: 1px solid var(--line); background: var(--surface); border-radius: 6px; text-decoration: none; color: var(--fg); min-width: 200px; flex: 1 1 200px; }
+.jump a b { font: 700 15px var(--display); }
+.jump a span { font-size: 13px; color: var(--muted); }
+.jump a:hover { border-color: var(--accent); }
+section.chapter { display: grid; gap: 18px; scroll-margin-top: 16px; }
+.chapter-head { display: grid; gap: 6px; border-top: 2px solid var(--fg); padding-top: 12px; }
+.chapter-head p.muted { max-width: 72ch; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12.5px; color: var(--muted); }
+.legend span { display: inline-flex; gap: 6px; align-items: center; }
+.legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+
+/* swimlane */
+.lanes { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+.sl { min-width: 980px; display: grid; grid-template-columns: 150px repeat(4, minmax(0, 1fr)); }
+.sl > div { padding: 10px 12px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); min-width: 0; }
+.sl > div:nth-child(5n) { border-right: 0; }
+.sl .lh { position: sticky; top: 0; font: 500 11.5px var(--mono); letter-spacing: .07em; text-transform: uppercase; background: var(--sunk); display: flex; align-items: center; gap: 8px; }
+.sl .lh i { width: 10px; height: 10px; border-radius: 50%; }
+.sl .step { display: grid; gap: 2px; align-content: start; }
+.sl .step b { font: 700 14px/1.25 var(--display); }
+.sl .step span { font: 500 11px var(--mono); color: var(--muted); }
+.sl .last { border-bottom: 0; }
+.act { border-radius: 5px; padding: 8px 10px; font-size: 13px; line-height: 1.4; display: grid; gap: 4px; border: 1px solid transparent; }
+.act.cust { background: var(--cust-bg); }
+.act.agent { background: var(--agent-bg); }
+.act.human { background: var(--human-bg); }
+.act.sys { background: var(--sys-bg); }
+.act.gate { border: 1.5px solid var(--gate); }
+.act .g { font: 600 10.5px var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--gate); }
+.cell { display: grid; gap: 6px; align-content: start; }
+
+/* promotion */
+.climb { overflow-x: auto; }
+.climb-row { min-width: 980px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; align-items: stretch; }
+.rung { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 12px; display: grid; gap: 8px; align-content: start; margin-right: 26px; position: relative; }
+.rung:last-child { margin-right: 0; }
+.rung::after { content: ""; position: absolute; right: -22px; top: 26px; border: 9px solid transparent; border-left: 12px solid var(--gate); }
+.rung:last-child::after { display: none; }
+.rung .lvl { display: flex; justify-content: space-between; align-items: baseline; }
+.rung .lvl code { background: var(--accent); color: var(--surface); font-weight: 500; padding: 3px 7px; }
+.rung .lvl span { font: 500 11px var(--mono); color: var(--muted); }
+.rung h3 { font-size: 14.5px; }
+.rung p { font-size: 13px; }
+.rung .gate { border-top: 1px dashed var(--gate); padding-top: 8px; display: grid; gap: 3px; font-size: 12.5px; }
+.rung .gate b { font: 600 10.5px var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--gate); }
+.rung.now { box-shadow: 0 0 0 2px var(--accent); }
+.rung.top { background: var(--sunk); }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 14px; align-items: start; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; display: grid; gap: 8px; min-width: 0; }
+.card ul { margin: 0; padding-left: 18px; display: grid; gap: 5px; font-size: 14px; }
+.card.stop { border-color: var(--gate); }
+.card.stop h3 { color: var(--gate); }
+
+/* pipeline */
+.pipe { overflow-x: auto; }
+.pipe ol { list-style: none; margin: 0; padding: 0; min-width: 1060px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; counter-reset: p; }
+.pipe li { counter-increment: p; background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--accent); border-radius: 6px; padding: 12px; display: grid; gap: 7px; align-content: start; position: relative; }
+.pipe li::before { content: counter(p); font: 600 12px var(--mono); color: var(--accent); }
+.pipe li h3 { font-size: 14.5px; }
+.pipe li p { font-size: 13px; }
+.pipe li .who { font: 500 10.5px var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.pipe li .out { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 6px; }
+.pipe li.human { border-top-color: var(--human); }
+.pipe li.human::before { color: var(--human); }
+.auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; border: 1px dashed var(--line); border-radius: 8px; overflow: hidden; }
+.auto div { padding: 12px 14px; display: grid; gap: 4px; border-right: 1px dashed var(--line); background: var(--surface); }
+.auto div:last-child { border-right: 0; }
+.auto b { font: 700 14px var(--display); }
+.auto span { font-size: 13px; color: var(--muted); }
+.auto em { font: normal 500 10.5px var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--sys); }
+footer { border-top: 1px solid var(--line); padding-top: 14px; color: var(--muted); font-size: 13px; display: grid; gap: 4px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Workflows · Sales, Enrollment &amp; Subscriptions</p>
+    <h1>How Vick works, grows and gets built</h1>
+    <p class="lede">Three workflows behind Vick, the AI sales agent. The first follows a lead through the business and shows exactly where the agent helps and where a person decides. The second shows how a capability earns more autonomy. The third shows how each piece of work moves from a story to a verified, published change.</p>
+    <nav class="jump" aria-label="Workflows">
+      <a href="#business"><b>1. The sales journey</b><span>Lead to renewal, with every human gate</span></a>
+      <a href="#promotion"><b>2. Earning autonomy</b><span>R0 to R6, one approved rung at a time</span></a>
+      <a href="#delivery"><b>3. Building the work</b><span>Story to merged, ticked and published</span></a>
+    </nav>
+  </header>
+
+  <section class="chapter" id="business">
+    <div class="chapter-head"><p class="eyebrow">Workflow 1</p><h2>The sales journey, with Vick in it</h2>
+      <p class="muted">Eight stages from a new lead to a renewing member. Read across a row to see who does what at that stage. Outlined boxes are gates: nothing passes them without a person.</p></div>
+    <div class="legend"><span><i style="background:var(--cust-bg)"></i>Prospect or member</span><span><i style="background:var(--agent-bg)"></i>Vick (prepares, explains, flags)</span><span><i style="background:var(--human-bg)"></i>Sales team or manager (decides, sends)</span><span><i style="background:var(--sys-bg)"></i>Platform and payment systems</span><span><i style="border:1.5px solid var(--gate)"></i>Human gate</span></div>
+    <div class="lanes"><div class="sl" id="swimlane"></div></div>
+  </section>
+
+  <section class="chapter" id="promotion">
+    <div class="chapter-head"><p class="eyebrow">Workflow 2</p><h2>How a capability earns autonomy</h2>
+      <p class="muted">Each capability climbs on its own, never the agent as a whole. Every arrow is a gate: the accountable sales manager approves the next rung, on evidence, and only that rung. Every capability is at R0 today. R3 is folded into R4 here, and R7 to R9 are beyond what any sales capability is allowed.</p></div>
+    <div class="climb"><div class="climb-row" id="climb"></div></div>
+    <div class="cols">
+      <div class="card"><h3>What never counts as evidence</h3>
+        <ul><li>A story being marked complete</li><li>Time passing without incident</li><li>A good conversation or a demo</li><li>A test that passes only against mocks</li></ul></div>
+      <div class="card"><h3>What the platform enforces anyway</h3>
+        <ul><li>No tools granted: anything above R2 is forced back to R2</li><li>Production needs a separately approved pilot, never approval alone</li><li>One capability's level never raises another's</li><li>Sending messages is denied to every agent by default</li></ul></div>
+      <div class="card stop"><h3>When it steps back down</h3>
+        <ul><li>A result disagrees with the manager's own decision beyond the agreed rate</li><li>A figure is reported that can't be traced to its source</li><li>Anyone is contacted, charged or refunded without a person</li><li>The manager asks, for any reason</li></ul></div>
+    </div>
+  </section>
+
+  <section class="chapter" id="delivery">
+    <div class="chapter-head"><p class="eyebrow">Workflow 3</p><h2>How each piece of work gets built</h2>
+      <p class="muted">The same seven steps for every story, from the course plan to a verified change. Purple steps are done by a person; the rest are done with Claude Code and checked by tests.</p></div>
+    <div class="pipe"><ol id="pipe"></ol></div>
+    <h3>Running in the background</h3>
+    <div class="auto">
+      <div><em>Every change</em><b>Session log</b><span>Each change is recorded with its date, what changed and the evidence, in the same pull request.</span></div>
+      <div><em>Every finished task</em><b>Living pages</b><span>The roadmap, capability map and weekly one-pager are republished so they match the work.</span></div>
+      <div><em>Weekdays, 8 AM Central</em><b>Scheduled refresh</b><span>A cloud job recounts progress and updates the one-pager's figures, committing only when something changed.</span></div>
+      <div><em>On every push</em><b>Publish to Pages</b><span>A GitHub Actions workflow publishes the one-pager, and nothing else, to GitHub Pages.</span></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built from the capability specifications and project process in <a href="https://github.com/vessette/Simple" target="_blank" rel="noopener">github.com/vessette/Simple</a>. People are referred to by role. Ceilings and rungs are drafts until the accountable manager reviews them.</p>
+    <p>Updated 11 November 2026.</p>
+  </footer>
+</div>
+
+<script>
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const el = id => document.getElementById(id);
+
+// Swimlane rows: [stage, capability note, prospect, vick, team, systems]; each cell is a list of [text, gate?]
+const LANES = [["cust", "Prospect or member", "var(--cust)"], ["agent", "Vick", "var(--agent)"], ["human", "Sales team or manager", "var(--human)"], ["sys", "Platform and payments", "var(--sys)"]];
+const ROWS = [
+  ["Find", "Discovery and fit scoring",
+    [["Fills in a form, books a call, or fits the target customer profile"]],
+    [["Scores program fit and ROI; a failed lookup writes nothing"], ["Explains which offer the lead fits, or says it can't place it"]],
+    [["Accepts or rejects each recommendation", 1]],
+    [["Stores the lead and its source"]]],
+  ["Engage", "Outreach and answers",
+    [["Receives a message from a person"]],
+    [["Prepares an outreach batch and drafts, from approved material only"], ["Answers a rep's questions with cited prices and dates"]],
+    [["Approves the batch, then sends the messages", 1]],
+    [["Sending is denied to the agent by default"]]],
+  ["Strategy call", "Missed-call recovery",
+    [["Attends or misses the call"]],
+    [["Spots a no-show within 15 minutes and lists it for follow-up"]],
+    [["Runs the call; contacts anyone who missed it", 1]],
+    [["Calendar and booking records"]]],
+  ["Agree to enroll", "Checkout links",
+    [["Agrees to join a class"]],
+    [["Explains the checkout steps and current prices from one source"]],
+    [["Issues the payment link: a financial commitment", 1]],
+    [["Creates a pending enrollment to reconcile later"]]],
+  ["Pay", "Payment and seat",
+    [["Pays on the hosted payment page"]],
+    [["Flags identity mismatches, missed payment notices and abandoned checkouts"], ["Lists stalled enrollments, each with an owner"]],
+    [["Fixes mismatches and follows up stalled enrollments", 1]],
+    [["Confirms payment, grants exactly one seat and portal access"]]],
+  ["Active member", "Billing health",
+    [["Attends the program"]],
+    [["Watches for duplicate charges, lapses and expiring cards, and reports them daily"]],
+    [["Decides every charge, refund, free seat or schedule change", 1]],
+    [["Runs the recurring billing schedule"]]],
+  ["Renew or leave", "Renewals and retention",
+    [["Renews, lapses or cancels"]],
+    [["Builds the daily renewal worklist and flags likely lapses, with reasons"]],
+    [["Contacts members; approves every cancellation", 1]],
+    [["Sends renewal reminders through the existing scheduled job"]]],
+  ["Measure", "Reporting",
+    [[""]],
+    [["Drafts revenue and pipeline reports, citing the source of every figure; unavailable is never shown as zero"]],
+    [["Reads and approves before anything is published", 1]],
+    [["Payment, subscription and pipeline records"]]],
+];
+(() => {
+  let h = `<div class="lh">Stage</div>` + LANES.map(([, l, c]) => `<div class="lh"><i style="background:${c}"></i>${esc(l)}</div>`).join("");
+  ROWS.forEach(([stage, note, ...cells], r) => {
+    const last = r === ROWS.length - 1 ? " last" : "";
+    h += `<div class="step${last}"><b>${esc(stage)}</b><span>${esc(note)}</span></div>`;
+    h += cells.map((items, i) => `<div class="cell${last}">${items.filter(([t]) => t).map(([t, g]) =>
+      `<div class="act ${LANES[i][0]}${g ? " gate" : ""}">${g ? '<span class="g">Human gate</span>' : ""}${esc(t)}</div>`).join("")}</div>`).join("");
+  });
+  el("swimlane").innerHTML = h;
+})();
+
+// Promotion rungs: [level, title, what it does, gate to pass, current?]
+const CLIMB = [
+  ["R0", "Specified", "Workflow, risks, human decisions and evidence written down and reviewed.", "Manager signs off the spec and the pass mark", true],
+  ["R1", "Testable", "Isolated development with fixtures and baseline tests, no live data.", "Tests pass on fixtures, including failure paths"],
+  ["R2", "Answers", "Explains and answers from approved knowledge and records only.", "Answers checked against the manager's own"],
+  ["R4", "Sandbox tasks", "Carries out stateful, multi-step work in a sandbox and verifies it.", "Sandbox runs repeatable, idempotent, no side effects"],
+  ["R5", "Shadow mode", "Runs alongside the manager and is scored against her real decisions.", "Agreement meets the manager's pass mark"],
+  ["R6", "Supervised pilot", "A separately approved production pilot, watched and reversible.", "Highest any sales capability may go"],
+];
+el("climb").innerHTML = CLIMB.map(([lvl, t, d, g, now], i) => `<div class="rung${now ? " now" : ""}${i === CLIMB.length - 1 ? " top" : ""}">
+  <div class="lvl"><code>${lvl}</code><span>${now ? "all 32 today" : ""}</span></div><h3>${esc(t)}</h3><p class="muted">${esc(d)}</p>
+  <div class="gate"><b>${i === CLIMB.length - 1 ? "Ceiling" : "Gate to next rung"}</b><span>${esc(g)}</span></div></div>`).join("");
+
+// Delivery pipeline: [title, who, what, output, human?]
+const PIPE = [
+  ["Story", "Course plan", "A capability or research story with its acceptance criteria.", "Story prompt"],
+  ["Build", "Claude Code", "Read the spec, write the code and tests on a new branch.", "Branch, code, fixtures"],
+  ["Break and harden", "Claude Code", "Force rate limits, server errors, bad input and repeats; fix each with a test.", "Failure-path tests"],
+  ["Pull request", "GitHub", "Open a pull request listing what changed and what was broken and fixed.", "Pull request, session log entry"],
+  ["Review and merge", "Architect", "Read the change, check the tests pass, merge to main.", "Merged commit", true],
+  ["Tick criteria", "Claude Code", "Confirm the merge holds the work, then mark only criteria that truly pass.", "progress.json commit naming the story"],
+  ["Verify", "Course platform", "The platform reads the pushed commit and verifies the story.", "Verified story"],
+];
+el("pipe").innerHTML = PIPE.map(([t, who, d, out, human]) => `<li class="${human ? "human" : ""}"><span class="who">${esc(who)}</span><h3>${esc(t)}</h3><p>${esc(d)}</p><span class="out">${esc(out)}</span></li>`).join("");
+</script>
