@@ -1,12 +1,18 @@
-# Publishes only artifacts/vick-weekly-update.html to GitHub Pages, as the site's index page.
-# Nothing else in the repository goes on the site.
-name: Publish weekly update
+# Publishes the project's four public pages to GitHub Pages, and nothing else:
+#   /                     artifacts/vick-weekly-update.html
+#   /roadmap.html         artifacts/vick-project-roadmap.html
+#   /capability-map.html  artifacts/vick-capability-map.html
+#   /workflows.html       artifacts/vick-workflows.html
+name: Publish project pages
 
 on:
   push:
     branches: [main]
     paths:
       - artifacts/vick-weekly-update.html
+      - artifacts/vick-project-roadmap.html
+      - artifacts/vick-capability-map.html
+      - artifacts/vick-workflows.html
       - .github/workflows/publish-weekly-update.yml
   workflow_dispatch:
 
@@ -28,16 +34,25 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      # The file is a page body written for claude.ai, which adds the document head.
-      # Add the same head here so it renders the same on its own.
-      - name: Build the one-page site
+      # Each file is a page body written for claude.ai, which adds the document head.
+      # Add the same head here so it renders the same on its own. A missing source fails the build.
+      - name: Build the site
         run: |
+          set -euo pipefail
           mkdir -p _site
-          {
-            printf '<!doctype html>\n<html lang="en">\n<meta charset="utf-8">\n'
-            printf '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
-            cat artifacts/vick-weekly-update.html
-          } > _site/index.html
+          page() {
+            test -f "artifacts/$1"
+            {
+              printf '<!doctype html>\n<html lang="en">\n<meta charset="utf-8">\n'
+              printf '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+              cat "artifacts/$1"
+            } > "_site/$2"
+          }
+          page vick-weekly-update.html   index.html
+          page vick-project-roadmap.html roadmap.html
+          page vick-capability-map.html  capability-map.html
+          page vick-workflows.html       workflows.html
+          ls -l _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
