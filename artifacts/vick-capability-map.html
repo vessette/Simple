@@ -1,0 +1,266 @@
+<title>Vick Capability Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the customer lifecycle runs left to right as five columns of capability tiles, with the human-held money decisions and the manager's control as a foundation band underneath. Selecting a tile opens its spec below the map. */
+:root {
+  --bg: #f2f5f4; --surface: #ffffff; --sunk: #e7ecea; --line: #d2dad7;
+  --fg: #15201c; --muted: #56645f; --accent: #0f6b5c; --accent-soft: #d4eae4; --accent-mid: #8cc7b8;
+  --done: #1d7a46; --done-bg: #dbefe2; --active: #995a00; --active-bg: #fbebcb;
+  --next: #1f5fa8; --next-bg: #dbe8f7; --later: #65706c; --later-bg: #e5e9e7;
+  --risk: #a3292d; --risk-bg: #f7dede; --human: #7a3e9d; --human-bg: #efe2f6;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1614; --surface: #18211e; --sunk: #212b28; --line: #33413c;
+  --fg: #e4ece9; --muted: #9aaaa4; --accent: #5cc6ad; --accent-soft: #1c3a33; --accent-mid: #2f7566;
+  --done: #6fd39a; --done-bg: #173326; --active: #f0b85a; --active-bg: #3a2c12;
+  --next: #84b6f0; --next-bg: #172b44; --later: #a3aeaa; --later-bg: #262f2c;
+  --risk: #f08c8f; --risk-bg: #3d1b1d; --human: #cfa3ea; --human-bg: #33213f; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f1614; --surface: #18211e; --sunk: #212b28; --line: #33413c;
+  --fg: #e4ece9; --muted: #9aaaa4; --accent: #5cc6ad; --accent-soft: #1c3a33; --accent-mid: #2f7566;
+  --done: #6fd39a; --done-bg: #173326; --active: #f0b85a; --active-bg: #3a2c12;
+  --next: #84b6f0; --next-bg: #172b44; --later: #a3aeaa; --later-bg: #262f2c;
+  --risk: #f08c8f; --risk-bg: #3d1b1d; --human: #cfa3ea; --human-bg: #33213f; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font: 15px/1.55 var(--body); }
+a { color: var(--accent); text-underline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--display); margin: 0; text-wrap: balance; line-height: 1.15; }
+h1 { font-size: clamp(30px, 5.5vw, 48px); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: 22px; font-weight: 700; }
+p { margin: 0; }
+code { font: 12.5px var(--mono); }
+.eyebrow { font: 500 12px/1 var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--accent); }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+.wrap { max-width: 1320px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 32px 64px; display: grid; gap: 28px; }
+
+header { display: grid; gap: 14px; }
+header .lede { font-size: 17px; color: var(--muted); max-width: 70ch; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px; }
+.fact { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 10px 14px; display: grid; gap: 2px; min-width: 130px; }
+.fact b { font: 700 24px/1 var(--display); font-variant-numeric: tabular-nums; }
+.fact span { font-size: 12.5px; color: var(--muted); }
+
+.controls { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--surface); flex-wrap: wrap; }
+.seg button { font: 500 13px var(--body); padding: 8px 12px; background: none; border: 0; color: var(--fg); cursor: pointer; border-right: 1px solid var(--line); }
+.seg button:last-child { border-right: 0; }
+.seg button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+
+/* map */
+.mapbox { overflow-x: auto; }
+.map { min-width: 1040px; display: grid; gap: 12px; }
+.flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.stage { display: grid; gap: 8px; align-content: start; }
+.stage-head { position: relative; padding: 10px 22px 10px 12px; background: var(--fg); color: var(--bg); clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); }
+.stage:not(:first-child) .stage-head { padding-left: 22px; clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%, 12px 50%); }
+.stage-head b { display: block; font: 700 15px/1.2 var(--display); }
+.stage-head span { font: 500 11px var(--mono); opacity: .8; }
+.base { display: grid; grid-template-columns: 3fr 2fr; gap: 12px; }
+.band { border: 1.5px dashed var(--line); border-radius: 8px; padding: 10px; display: grid; gap: 8px; align-content: start; }
+.band-head { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.band-head b { font: 700 15px var(--display); }
+.band-head span { font-size: 12px; color: var(--muted); }
+.band .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+
+.tile { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 7px; padding: 10px 11px 9px; border-radius: 6px; background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--tc, var(--line)); transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease; }
+.tile:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgb(0 0 0 / .08); }
+.tile:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tile[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--fg); }
+.tile.dim { opacity: .35; }
+.tile.rel { box-shadow: 0 0 0 2px var(--next); }
+.tile .tt { font-weight: 600; font-size: 13.5px; line-height: 1.3; }
+.tile .row { display: flex; justify-content: space-between; align-items: center; gap: 6px; font: 500 11px var(--mono); color: var(--muted); }
+.flag { color: var(--human); font: 600 10.5px var(--mono); letter-spacing: .04em; }
+.rungs { display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px; }
+.rungs i { height: 6px; border-radius: 1px; background: var(--sunk); }
+.rungs i.in { background: var(--accent-mid); }
+.rungs i.first { background: var(--accent); }
+.rungs i.x { background: repeating-linear-gradient(45deg, var(--risk-bg) 0 2px, var(--sunk) 2px 4px); }
+@media (prefers-reduced-motion: reduce) { .tile { transition: none; } .tile:hover { transform: none; } }
+
+/* detail */
+.detail { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 20px; display: grid; gap: 16px; scroll-margin-top: 12px; }
+.detail-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: start; }
+.detail-head h2 { max-width: 40ch; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 5px; font: 500 11.5px/1 var(--mono); padding: 5px 8px; border-radius: 4px; white-space: nowrap; background: var(--sunk); color: var(--fg); }
+.c-done { color: var(--done); background: var(--done-bg); }
+.c-next { color: var(--next); background: var(--next-bg); }
+.c-later { color: var(--later); background: var(--later-bg); }
+.c-human { color: var(--human); background: var(--human-bg); }
+.c-risk { color: var(--risk); background: var(--risk-bg); }
+.c-active { color: var(--active); background: var(--active-bg); }
+.dgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px 28px; }
+.dgrid section { display: grid; gap: 6px; align-content: start; min-width: 0; }
+.dgrid h3 { font: 500 11.5px/1.2 var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.ladder { display: grid; gap: 3px; }
+.ladder div { display: grid; grid-template-columns: 34px 1fr; gap: 8px; align-items: center; font-size: 12.5px; padding: 3px 6px; border-radius: 3px; }
+.ladder div code { font-weight: 500; }
+.ladder .in { background: var(--accent-soft); }
+.ladder .first { background: var(--accent); color: var(--surface); }
+.ladder .out { color: var(--muted); }
+.ladder .x { color: var(--muted); text-decoration: line-through; }
+.links { display: flex; flex-wrap: wrap; gap: 6px; }
+.links button { font: 500 12.5px var(--body); padding: 5px 9px; border-radius: 4px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); cursor: pointer; }
+.links button:hover { border-color: var(--accent); }
+.tools { display: flex; flex-wrap: wrap; gap: 5px; }
+.tools code { background: var(--sunk); padding: 3px 6px; border-radius: 3px; }
+
+.notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.note { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; display: grid; gap: 6px; font-size: 14px; }
+.note b { font-family: var(--display); font-size: 15px; }
+footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); padding-top: 14px; display: grid; gap: 4px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Capability map · Sales, Enrollment &amp; Subscriptions</p>
+    <h1>Vick Capability Map</h1>
+    <p class="lede">Every capability planned for Vick, the AI sales agent, laid out along the customer's journey from first contact to renewal. Each tile shows its status, its autonomy ceiling and whether the decision always stays with a person. Select a tile to see its full specification.</p>
+    <div class="facts" id="facts"></div>
+  </header>
+
+  <div class="controls">
+    <div class="seg" role="group" aria-label="Colour tiles by" id="views"></div>
+    <div class="legend" id="legend" aria-live="polite"></div>
+  </div>
+
+  <div class="mapbox">
+    <div class="map" id="map">
+      <div class="flow" id="flow"></div>
+      <div class="base" id="base"></div>
+    </div>
+  </div>
+  <p class="small muted">Under each title, ten small bars are the autonomy ladder, R0 to R9. The dark bar marks the first-release rung, lighter bars run up to the ceiling, and the hatched bar is R8, which the platform can't reach. Every capability sits at R0 today.</p>
+
+  <article class="detail" id="detail" aria-live="polite"></article>
+
+  <div class="notes">
+    <div class="note"><b>Why a ceiling, not a target</b><p class="muted">The research sets the highest rung each capability could ever reach. It's a limit, and it stays a draft until the sales manager reviews it. A capability climbs one rung at a time, approved on evidence.</p></div>
+    <div class="note"><b>Why so many stop below R7</b><p class="muted">Anything that sends a message, moves money or overwrites a person's judgement stays human. The agent prepares, explains and flags; a person sends, charges and decides.</p></div>
+    <div class="note"><b>Why the manager queue comes first</b><p class="muted">Every promotion needs the manager to see and approve the agent's work. Until the decision queue exists in the platform, every other capability stays a draft.</p></div>
+  </div>
+
+  <footer>
+    <p id="updated"></p>
+    <p>Specifications come from the capability stories in the project repository (<a href="https://github.com/vessette/Simple" target="_blank" rel="noopener">github.com/vessette/Simple</a>). Ceilings are drafts. People are referred to by role.</p>
+  </footer>
+</div>
+
+<script>
+const CAPS = [{"id": "icp_prospect_discovery_and_fit_scoring", "theme": "find", "title": "Prospect discovery and fit scoring", "ready": "implemented", "ceil": 5, "state": "done", "path": "capabilities/icp-fit-scoring/", "outcome": "A reviewable queue of sourced prospects, each carrying a program-fit score and an ROI estimate, so selling time goes to the best-fit names instead of to sourcing.", "first": 1, "firstb": "Scoring runs against committed prospect-data fixtures in an isolated dev database; no live data-provider call.", "why": "Sourcing and scoring write no money and contact nobody, so shadow mode against the human's own accept/reject decisions is the honest ceiling. R6 and above would turn the recommendation into an action, and the approval step is the control that kept the legacy agent safe.", "human": false, "tools": ["scan_prospect_fit_against_icp", "query_lead_conversion_metrics", "escalate_to_human"], "deps": []}, {"id": "offer_pipeline_routing", "theme": "find", "title": "Offer pipeline routing", "ready": "implemented", "ceil": 6, "state": "done", "path": "capabilities/offer-pipeline-routing/", "outcome": "Every inbound lead lands in the right offer pipeline (accelerator, advisory, custom build, enterprise) so no enquiry sits unrouted and the offer discussed is the right one.", "first": 2, "firstb": "The agent explains, from the approved offer taxonomy, which pipeline a described lead belongs to and why.", "why": "A routing label is reversible, moves no money and reaches no prospect, so a separately approved supervised production pilot is defensible. It stops at R6 because overwriting a human's manual routing is an authorized-action-class question the manager has not been asked.", "human": false, "tools": ["evaluate_offer_pipeline_fit", "query_enrollment_funnel_state", "escalate_to_human"], "deps": []}, {"id": "pipeline_stage_and_lead_temperature_stewardship", "theme": "find", "title": "Lead stage and temperature", "ready": "implemented", "ceil": 6, "state": "next", "path": null, "outcome": "The pipeline reflects reality: every lead sits at the stage it is actually at, with a temperature and a history, so the forecast is about the business rather than about stale rows.", "first": 2, "firstb": "The agent explains where a named lead sits, what its temperature is based on, and what the pipeline stats say.", "why": "Stage and temperature are reversible CRM state that moves no money and reaches no prospect, so a supervised production pilot of proposing moves is defensible. It stops at R6 because writing a stage change without review can silently overwrite a human's judgement about a live deal.", "human": false, "tools": ["query_lead_conversion_metrics", "query_enrollment_funnel_state", "assess_enrollment_completion_risk", "escalate_to_human"], "deps": []}, {"id": "strategy_call_no_show_detection_and_recovery", "theme": "find", "title": "Missed strategy calls", "ready": "implemented", "ceil": 4, "state": "next", "path": null, "outcome": "A prospect who misses a strategy call is detected within fifteen minutes and placed on a recovery path, rather than quietly falling out of the pipeline.", "first": 2, "firstb": "The agent explains which calls qualify as no-shows and why, from the approved rule.", "why": "Detection is harmless, but the legacy behaviour ends in enrolling a real person into an outbound recovery sequence, which is prospect contact requiring live_email. The agent is therefore capped at stateful sandbox work and the contact stays human.", "human": false, "tools": ["detect_strategy_call_no_show", "query_enrollment_funnel_state", "escalate_to_human"], "deps": []}, {"id": "abandoned_checkout_identification", "theme": "find", "title": "Abandoned checkouts", "ready": "implemented", "ceil": 6, "state": "next", "path": null, "outcome": "The people who started paying and stopped can be found and called, without mistaking a free Explorer signup or a former member for a live prospect.", "first": 2, "firstb": "The agent explains why a named person is or is not an abandoned checkout.", "why": "Identifying the list is read-only. Contacting anyone on it is prospect contact needing live_email, which is default-denied, so the pilot ceiling applies to producing the list and never to working it.", "human": false, "tools": ["detect_abandoned_checkout", "query_enrollment_funnel_state", "escalate_to_human"], "deps": ["app_originated_payment_reconciliation"]}, {"id": "seat_capacity_and_cohort_fill_forecast", "theme": "find", "title": "Seat and class-fill forecast", "ready": "absent", "ceil": 6, "state": "later", "path": null, "outcome": "the manager knows how many real seats are left in each cohort and whether it will fill, so the seat-scarcity claim made to prospects is true when it is made.", "first": 0, "firstb": "The definition of a real remaining seat, the treatment of invoice reservations and Explorers, and the projection basis are written down and reviewed.", "why": "Counting seats is read-only, and a supervised production pilot of the count and the disagreement flag is defensible. It stops below R7 because changing max_seats or a published scarcity claim is a commercial decision, and because an overstated seat claim made to a prospect is a representation risk.", "human": false, "tools": ["query_cohort_seat_capacity", "query_enrollment_funnel_state", "escalate_to_human"], "deps": ["abandoned_checkout_identification"]}, {"id": "prospect_outreach_draft_for_human_send", "theme": "engage", "title": "Outreach drafts for a person to send", "ready": "absent", "ceil": 4, "state": "later", "path": null, "outcome": "the manager and Ali get ready-to-review outreach and sales material on demand, and the send stays a human act, which is the cadence the business already runs on.", "first": 1, "firstb": "Drafting runs against committed prospect fixtures in an isolated dev environment, with no send path linked.", "why": "A draft is a document, but this domain is recorded as the highest external-side-effect risk in the fleet, and the cadence that protects it is that a human sends. live_email is default-denied, so the agent is capped at stateful sandbox drafting; human_decision stays true because a draft states prices and therefore makes a financial representation.", "human": true, "tools": ["propose_prospect_outreach_draft", "read_approved_sales_knowledge", "read_plan_catalog", "escalate_to_human"], "deps": ["prospect_question_answering_from_approved_kb"]}, {"id": "outbound_batch_preparation_for_approval", "theme": "engage", "title": "Outreach batches for approval", "ready": "partial", "ceil": 4, "state": "later", "path": null, "outcome": "The cold-outbound batch arrives as a reviewable packet with a named approver, instead of high-scoring prospects being auto-approved and enrolled with nobody looking.", "first": 1, "firstb": "Packet assembly runs against committed fixtures in an isolated dev database.", "why": "The packet is a document, but what it authorizes is prospect contact, which needs live_email. The legacy agent auto-approved high-scoring recommendations with no named approver, so capping at stateful sandbox work is what keeps the approval gate real rather than nominal.", "human": false, "tools": ["propose_outbound_batch_for_approval", "query_enrollment_funnel_state", "escalate_to_human"], "deps": ["icp_prospect_discovery_and_fit_scoring"]}, {"id": "outbound_sequence_health_watch", "theme": "engage", "title": "Outreach sequence health", "ready": "partial", "ceil": 6, "state": "later", "path": null, "outcome": "A broken or stalled outbound sequence is found and reported with a proposed repair, so the sales pipeline does not silently stop moving while still looking healthy.", "first": 2, "firstb": "The agent answers, from the approved health rules, why a named sequence scores as it does.", "why": "Detection and reporting are read-only, so a supervised production pilot of the watch is defensible. It stops short of R7 because the legacy agents' auto-retry, auto-heal and auto-resolve are exactly the action classes nobody has authorized, and because of the standing rule that a watchdog which can act can cause the incident it was built to catch.", "human": false, "tools": ["detect_stalled_outbound_sequence", "create_tickets", "escalate_to_human"], "deps": []}, {"id": "prospect_question_answering_from_approved_kb", "theme": "engage", "title": "Answers from approved material", "ready": "implemented", "ceil": 5, "state": "later", "path": null, "outcome": "A sales rep live with a prospect gets an accurate, grounded answer on price, enrolment, seats, schedule and scholarships in seconds, and never invents a price, a date or a policy.", "first": 2, "firstb": "The agent answers a rep's question grounded only in the approved KB and the pinned facts.", "why": "Answering from approved knowledge is the textbook R2 capability, and because this surface is rep-facing rather than prospect-facing a shadow-mode comparison against the manager's own answers is reachable. It stops at R5 because every answer states a price, and a price stated to a rep is repeated to a prospect: the human decision flag is set for that reason even though no money moves in this capability.", "human": true, "tools": ["read_approved_sales_knowledge", "read_plan_catalog", "escalate_to_human"], "deps": []}, {"id": "quote_and_offer_packet_preparation", "theme": "engage", "title": "Quotes and offer packets", "ready": "absent", "ceil": 4, "state": "later", "path": null, "outcome": "A prospect or employer gets a clear, consistent offer packet quickly, assembled from approved plans and terms, with the price set and sent by a human.", "first": 1, "firstb": "Packet assembly runs against fixtures in an isolated dev environment, quoting only the plan catalogue.", "why": "Assembling a packet writes no money, but an offer is a price representation, so human_decision is true and the ceiling stops at sandbox work. A production pilot would mean the agent's packet reaching a buyer, which is both a price commitment and prospect contact.", "human": true, "tools": ["propose_quote_packet", "read_plan_catalog", "read_approved_sales_knowledge", "escalate_to_human"], "deps": ["prospect_question_answering_from_approved_kb", "team_license_and_sponsored_seat_administration"]}, {"id": "price_statement_consistency_audit", "theme": "engage", "title": "Price consistency audit", "ready": "absent", "ceil": 6, "state": "later", "path": null, "outcome": "Every surface that states a price states the same price, so a prospect is never quoted a number the business does not charge.", "first": 0, "firstb": "The inventory of price-stating surfaces and the live-versus-archive rule are written down and reviewed.", "why": "The audit only reads and reports, so a supervised production pilot is defensible and immediately useful. Changing a price is explicitly forbidden to the agent, so R7 is prohibited: the audit reports drift and a human decides which number is right.", "human": false, "tools": ["detect_price_statement_drift", "read_plan_catalog", "create_tickets", "escalate_to_human"], "deps": ["revenue_definition_integrity_guard"]}, {"id": "enrollment_completion_follow_through", "theme": "enroll", "title": "Enrollment follow-through", "ready": "partial", "ceil": 5, "state": "next", "path": null, "outcome": "Nobody who intended to enrol is lost between starting a checkout and holding an active seat; each stalled enrolment is owned, visible and chased by a named person.", "first": 2, "firstb": "The agent states, for a named person, which step of enrolment they are stuck at and what the next action is.", "why": "Assembling and maintaining the follow-through list is read-only, and shadow mode against the manager's own judgement of who is genuinely stuck is reachable once she can see the list. The contact itself needs live_email and stays human, so nothing above R5 applies.", "human": false, "tools": ["assess_enrollment_completion_risk", "query_enrollment_funnel_state", "detect_abandoned_checkout", "create_tickets", "escalate_to_human"], "deps": ["abandoned_checkout_identification", "payment_confirmation_and_seat_grant"]}, {"id": "enrollment_checkout_link_issuance", "theme": "enroll", "title": "Checkout and payment links", "ready": "implemented", "ceil": 4, "state": "later", "path": null, "outcome": "A named prospect receives a working payment link for a specific open cohort, and a pending enrolment row exists so the seat and the payment can later be reconciled to that person.", "first": 2, "firstb": "The agent explains the checkout flow, the current plan prices from the single source of truth, and what a given enrolment's payment state means.", "why": "Issuing a payment link creates a payable charge against a named person, which is a financial commitment. R5 shadow mode would require a reference stream of real link issuances to compare against and none exists as an approved reference outcome; R6 and above is a production money action and is prohibited. The agent may describe and verify the flow in a sandbox and never issue a production link.", "human": true, "tools": ["read_plan_catalog", "query_cohort_seat_capacity", "query_enrollment_funnel_state", "escalate_to_human"], "deps": ["payment_confirmation_and_seat_grant"]}, {"id": "payment_confirmation_and_seat_grant", "theme": "enroll", "title": "Payment confirmation and seat grant", "ready": "implemented", "ceil": 5, "state": "later", "path": null, "outcome": "When a payment settles, the right person is marked paid, gets portal access, consumes exactly one seat, and is placed on the class-readiness path, with no double counting on a replay.", "first": 2, "firstb": "The agent explains, for a named person, what their payment and seat state is and which webhook path produced it.", "why": "This capability records money and grants paid entitlement; it is the authoritative write for revenue. The agent may observe and, in shadow mode, state what the confirmation outcome should have been and compare it to what the deterministic handler did, because that reference stream exists. It may never perform the write: production_database is default-denied and a wrong confirmation grants or denies a paid seat.", "human": true, "tools": ["query_subscription_ledger", "query_enrollment_funnel_state", "detect_payment_webhook_replay_gap", "escalate_to_human"], "deps": []}, {"id": "payment_handoff_integrity", "theme": "enroll", "title": "Payment handoff integrity", "ready": "partial", "ceil": 6, "state": "later", "path": null, "outcome": "The person who agreed to buy is the person the charge lands on, and the schedule that bills them draws against a payment method that actually exists.", "first": 2, "firstb": "The agent explains, for a named subscription, which customer id was stored, which the charge landed on, and whether the billing account resolves.", "why": "Detecting an identity mismatch is read-only and is exactly the check that catches students left unlinked. A supervised production pilot of the detection is defensible; correcting a mismatch touches who gets billed, so it stays a human decision and R7 is prohibited.", "human": false, "tools": ["flag_payment_handoff_anomaly", "query_subscription_ledger", "create_tickets", "escalate_to_human"], "deps": ["app_originated_payment_reconciliation"]}, {"id": "app_originated_payment_reconciliation", "theme": "enroll", "title": "Missed-payment reconciliation", "ready": "implemented", "ceil": 5, "state": "later", "path": null, "outcome": "A student whose payment settled but whose webhook never arrived is linked to their payment and activated, while bootcamp and manual charges on the shared gateway can never leak into our revenue.", "first": 2, "firstb": "The agent explains why a named payment is or is not in scope, naming the origin guard that decided it.", "why": "Reconciliation marks people paid and activates subscriptions, so the write is a human decision. Shadow mode is the ceiling and is genuinely available here because dryRun gives an approved reference stream: the agent can state what it would link and be compared against the deterministic reconciler's own dry run.", "human": true, "tools": ["monitor_payment_reconciliation_backlog", "query_subscription_ledger", "detect_payment_webhook_replay_gap", "escalate_to_human"], "deps": ["subscription_checkout_and_plan_activation"]}, {"id": "payment_webhook_replay_dedup_watch", "theme": "enroll", "title": "Duplicate payment notice watch", "ready": "absent", "ceil": 6, "state": "later", "path": null, "outcome": "A replayed or duplicated payment notification cannot quietly advance a billing period or grant a second seat, and the absence of a delivery-level dedup store stops being invisible.", "first": 0, "firstb": "The replay surface is documented: each path, its dedup key, and what that key does and does not cover.", "why": "The watch reads and reports only. A supervised production pilot is defensible because the thing it watches is already happening whether or not anyone is looking. Adding a dedup store is a schema change that goes through review, so R7 is prohibited.", "human": false, "tools": ["detect_payment_webhook_replay_gap", "query_subscription_ledger", "create_tickets", "escalate_to_human"], "deps": []}, {"id": "subscription_checkout_and_plan_activation", "theme": "enroll", "title": "Membership checkout and activation", "ready": "implemented", "ceil": 4, "state": "later", "path": null, "outcome": "A member can start the annual or monthly plan, have any account credit applied to the first charge, and be activated into the paid cohort when the payment settles.", "first": 2, "firstb": "The agent answers plan, price, credit and billing-date questions from PLANS and the member's own subscription row.", "why": "Starting a checkout creates a charge and activation mutates subscription state and billing dates. Both are financial actions reserved to a human. Sandbox verification is the ceiling; a production pilot of either would be the agent charging a customer.", "human": true, "tools": ["read_plan_catalog", "query_subscription_ledger", "query_account_credit_ledger", "escalate_to_human"], "deps": ["payment_confirmation_and_seat_grant"]}, {"id": "team_license_and_sponsored_seat_administration", "theme": "enroll", "title": "Team licenses and sponsored seats", "ready": "implemented", "ceil": 4, "state": "later", "path": null, "outcome": "An employer can buy a block of reassignable seats, their people can redeem one each, and the sponsor can see who used what, without a seat being redeemed twice.", "first": 2, "firstb": "The agent explains the team-license tiers, how redemption works, and the state of a named sponsor's seat block.", "why": "A redemption allocates prepaid paid entitlement to a named person, and pricing a team license sets a price. Both are financial decisions. Sandbox verification of the idempotency and over-allocation guards is the ceiling; allocation and pricing in production stay human.", "human": true, "tools": ["query_cohort_seat_capacity", "query_enrollment_funnel_state", "escalate_to_human"], "deps": []}, {"id": "renewal_reminder_lifecycle", "theme": "retain", "title": "Renewal reminders", "ready": "implemented", "ceil": 4, "state": "later", "path": null, "outcome": "A member knows before they are charged and after a lapse, on a fixed cadence, exactly once per period and per reminder kind.", "first": 2, "firstb": "The agent states who is due which reminder kind and when, in Central time.", "why": "The reminder tells a customer money is about to be taken, which makes the copy and the timing a financial communication. It reaches a real customer, so it needs live_email and is default-denied to the agent. The agent may compute who is due and verify idempotency in a sandbox; the send stays with the existing deterministic job.", "human": false, "tools": ["identify_renewal_followup_candidates", "query_subscription_ledger", "escalate_to_human"], "deps": []}, {"id": "renewal_and_revenue_follow_through_worklist", "theme": "retain", "title": "Renewal and revenue worklist", "ready": "partial", "ceil": 5, "state": "later", "path": null, "outcome": "the manager starts each day with a short, ordered list of members whose money needs attention, renewals due, past due, lapsed, cards expiring, rather than reading five dashboards.", "first": 2, "firstb": "The agent answers which members need renewal attention today and why.", "why": "Building the worklist reads money data and writes none. Shadow mode against the manager's own daily list is reachable. Every row's action is a contact or a charge, both of which stay human, so nothing above R5 applies.", "human": false, "tools": ["identify_renewal_followup_candidates", "query_subscription_ledger", "monitor_billing_health", "escalate_to_human"], "deps": ["billing_health_watch", "revenue_and_subscription_reporting"]}, {"id": "subscription_churn_and_renewal_risk_analysis", "theme": "retain", "title": "Churn and renewal risk", "ready": "absent", "ceil": 5, "state": "later", "path": null, "outcome": "The members most likely to lapse are known before they lapse, with the reason, so retention effort goes where it changes the outcome.", "first": 0, "firstb": "The risk definition, the drivers, the exclusions and the minimum population are written down and reviewed.", "why": "Analysis is read-only and shadow mode against actual lapses is a genuine reference stream: the agent's risk list can be scored against who actually lapsed. It stops at R5 because the action implied by every row is a contact or a retention offer, both human decisions.", "human": false, "tools": ["analyze_subscription_churn", "detect_renewal_risk", "query_subscription_analytics", "escalate_to_human"], "deps": ["revenue_and_subscription_reporting", "renewal_and_revenue_follow_through_worklist"]}, {"id": "billing_health_watch", "theme": "retain", "title": "Billing health watch", "ready": "implemented", "ceil": 6, "state": "later", "path": null, "outcome": "Billing problems that quietly cost money or quietly overcharge a member are surfaced daily to a human, by a watchdog that cannot itself charge or cancel anything.", "first": 2, "firstb": "The agent explains each finding, its severity and what a human would have to do about it.", "why": "The existing implementation is read-only by explicit design, so a supervised production pilot of the watch is the natural ceiling. R7 is prohibited because the only actions a finding implies are charging, cancelling or changing a schedule, all of which are human decisions.", "human": false, "tools": ["monitor_billing_health", "query_subscription_ledger", "create_tickets", "escalate_to_human"], "deps": []}, {"id": "revenue_and_subscription_reporting", "theme": "measure", "title": "Revenue and subscription reporting", "ready": "implemented", "ceil": 6, "state": "later", "path": null, "outcome": "the manager and Ali can see what was actually collected, what recurs, which plans people are on and who needs attention, from one place, with every figure traceable.", "first": 2, "firstb": "The agent answers revenue, MRR, plan-mix and tenure questions from the existing endpoints, citing the source of every figure.", "why": "Reporting is read-only and moves no money, so a separately approved supervised production pilot of report drafting is defensible. It stops below R7 because no reporting figure may be published without a human reading it, and because a fabricated revenue figure is the single most damaging output this domain can produce.", "human": false, "tools": ["query_revenue_payments_feed", "query_subscription_analytics", "query_refund_ledger", "query_account_credit_ledger", "generate_revenue_report_draft"], "deps": []}, {"id": "revenue_definition_integrity_guard", "theme": "measure", "title": "Revenue definition guard", "ready": "partial", "ceil": 6, "state": "later", "path": null, "outcome": "No surface in the business reports revenue that was not collected through an app-originated checkout, so nobody ever plans against a figure that was multiplied into existence.", "first": 2, "firstb": "The agent states, for any revenue figure it is shown, whether it meets the app-originated-collected rule and which citation says so.", "why": "The guard only reads and reports, so a supervised production pilot is defensible and valuable. It stops below R7 because fixing a violation is a code change that goes through review, and because the agent must never be the thing that decides a revenue definition.", "human": false, "tools": ["detect_revenue_definition_violation", "query_revenue_payments_feed", "create_tickets", "escalate_to_human"], "deps": ["revenue_and_subscription_reporting"]}, {"id": "pipeline_digest_for_manager", "theme": "measure", "title": "Pipeline digest for the manager", "ready": "partial", "ceil": 6, "state": "later", "path": null, "outcome": "the manager opens one recurring digest and knows the state of her pipeline, her enrolments and what needs her today, without assembling it from six admin screens.", "first": 2, "firstb": "On request the agent answers pipeline-state questions from the same sources the digest would use.", "why": "The digest reports money but moves none, so a supervised production pilot is reasonable once the unavailable-not-zero rule is proven. It stops below R7 because changing recipients or cadence is a manager decision and the send goes through the existing deterministic sender, not the agent.", "human": false, "tools": ["generate_pipeline_digest", "query_enrollment_funnel_state", "query_subscription_analytics", "read_attachments"], "deps": ["revenue_and_subscription_reporting"]}, {"id": "da_revenue_reporting_transition", "theme": "measure", "title": "Analyst reporting transition", "ready": "unknown", "ceil": 0, "state": "later", "path": null, "outcome": "The recurring revenue, enrolment and pipeline reporting a human analyst does by hand becomes a drafted, traceable report, once anyone writes down what that work actually is.", "first": 0, "firstb": "Interview the manager, enumerate each recurring analyst report with its recipient, cadence, timezone and channel, and record which duties are candidates for drafting.", "why": "The scope of this capability is unknown, and an autonomy ceiling over an undefined scope would be a fabrication. R0, defining the workflow and the human decisions, is the only honest level until the duty list exists. This is deliberately the lowest ceiling in the matrix.", "human": false, "tools": ["escalate_to_human", "read_attachments"], "deps": ["revenue_and_subscription_reporting"]}, {"id": "refund_and_void_issuance", "theme": "money", "title": "Refunds and voids", "ready": "implemented", "ceil": 2, "state": "later", "path": null, "outcome": "A customer who is owed money back gets it, once, with a ledger row and the granted account credit voided, and no refund can exceed what was collected.", "first": 2, "firstb": "The agent answers refund-ledger and refund-policy questions from approved knowledge, and may draft a recommendation for a human to accept or reject.", "why": "A refund moves money out and is irreversible. This is the hardest stop in the domain: the agent may answer questions about the refund ledger and the stated policy and, at most, hand a human a recommendation to consider. It never touches the refund path, not even in a sandbox, because the refund policy itself is recorded as drafted and pending approval and exercising an unapproved policy is not a sandbox detail.", "human": true, "tools": ["query_refund_ledger", "propose_refund_recommendation", "escalate_to_human"], "deps": []}, {"id": "subscription_cancellation_and_schedule_suspension", "theme": "money", "title": "Cancellations and stopping charges", "ready": "implemented", "ceil": 2, "state": "later", "path": null, "outcome": "A member who cancels stops being charged, their recurring schedule is actually suspended at the gateway, and the cancellation reason is recorded.", "first": 2, "firstb": "The agent explains a named member's subscription state, whether a gateway schedule exists, and what the recorded cancellation reason is.", "why": "Cancelling alters subscription state and stops a charge; getting it half-done either keeps charging a cancelled member or stops charging an active one. It is a human decision, and because the cancellation terms are not yet approved the agent is held to answering questions only.", "human": true, "tools": ["query_subscription_ledger", "escalate_to_human"], "deps": []}, {"id": "comped_seat_grant_and_revocation", "theme": "money", "title": "Free (comped) seats", "ready": "implemented", "ceil": 2, "state": "later", "path": null, "outcome": "Staff, partners and agreed exceptions get full program access at no charge, on a plan that never lapses on its own and is revoked explicitly.", "first": 2, "firstb": "The agent reports who currently holds a comped seat, since when, and whether they are excluded from the paying-member counts.", "why": "A comp sets the price to zero for a named person, which is a discount, and discounting is explicitly forbidden to an agent. The agent may report who holds a comp and why; granting or revoking stays a human decision.", "human": true, "tools": ["query_subscription_ledger", "escalate_to_human"], "deps": []}, {"id": "manager_decision_queue_for_sales_actions", "theme": "control", "title": "Manager decision queue", "ready": "absent", "ceil": 2, "state": "later", "path": null, "outcome": "the manager can see, decide and record every financial and outreach decision her agent prepares; without this, every other capability in this domain is stalled at draft.", "first": 0, "firstb": "The workflow, the decision types, the required evidence per decision and the rollback conditions are written down and reviewed; nothing is built.", "why": "This is the control on which every other capability's promotion depends, so the agent's role in it is to present and record, never to decide. It cannot exceed answering questions about the queue's contents, and it is blocked outright until the manager has a surface.", "human": true, "tools": ["escalate_to_human", "create_tickets"], "deps": []}];
+const UPDATED = "Updated 11 November 2026";
+const GH = "https://github.com/vessette/Simple/blob/main/";
+const STAGES = [
+  ["find", "Find", "Leads and pipeline"], ["engage", "Engage", "Outreach and answers"], ["enroll", "Enroll and pay", "Checkout to active seat"],
+  ["retain", "Retain", "Renewals and billing"], ["measure", "Measure", "Revenue and reporting"],
+];
+const BANDS = [
+  ["money", "Money decisions that stay human", "Capped at R2: a person decides every case"],
+  ["control", "Manager control", "Every other capability's promotion depends on this"],
+];
+const RUNGS = ["Define the workflow, requirements, risks and human decisions", "Prepare isolated development, fixtures and baseline tests",
+  "Answer questions using approved knowledge and records", "Perform approved, user-initiated sandbox tool operations",
+  "Execute and verify stateful, multi-step sandbox tasks", "Evaluate in shadow mode against approved reference outcomes",
+  "Conduct a separately approved, supervised production pilot", "Automate only explicitly authorised action classes within limits",
+  "Coordinate authorised handoffs with other agents (not available)", "Demonstrate reliable operation, monitoring, recovery and ownership"];
+const STATE = { done: ["Built (draft)", "c-done"], next: ["Up next", "c-next"], later: ["Planned", "c-later"] };
+const READY = { implemented: ["Platform code exists", "c-done"], partial: ["Partly in the platform", "c-active"], absent: ["Not in the platform", "c-risk"], unknown: ["Scope unknown", "c-risk"] };
+
+const VIEWS = {
+  status: { label: "Status", color: c => ({ done: "var(--done)", next: "var(--next)", later: "var(--later)" })[c.state],
+    legend: [["var(--done)", "Built (draft)"], ["var(--next)", "Up next"], ["var(--later)", "Planned"]] },
+  ceiling: { label: "Ceiling", color: c => c.ceil >= 6 ? "var(--accent)" : c.ceil >= 4 ? "var(--accent-mid)" : c.ceil >= 2 ? "var(--active)" : "var(--risk)",
+    legend: [["var(--accent)", "R6 pilot"], ["var(--accent-mid)", "R4 to R5 sandbox or shadow"], ["var(--active)", "R2 answers only"], ["var(--risk)", "R0 define only"]] },
+  ready: { label: "Platform readiness", color: c => ({ implemented: "var(--done)", partial: "var(--active)", absent: "var(--risk)", unknown: "var(--later)" })[c.ready],
+    legend: [["var(--done)", "Exists"], ["var(--active)", "Partial"], ["var(--risk)", "Absent"], ["var(--later)", "Unknown"]] },
+  human: { label: "Human decision", color: c => c.human ? "var(--human)" : "var(--line)",
+    legend: [["var(--human)", "Always a person's decision"], ["var(--line)", "Agent may act within its ceiling"]] },
+};
+
+const esc = s => String(s ?? "").replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+const el = id => document.getElementById(id);
+const byId = Object.fromEntries(CAPS.map(c => [c.id, c]));
+const neededBy = id => CAPS.filter(c => c.deps.includes(id));
+
+let view = "status", selected = "pipeline_stage_and_lead_temperature_stewardship";
+try { view = localStorage.getItem("vcm-view") || "status"; if (!VIEWS[view]) view = "status"; } catch (e) { view = "status"; }
+try { const h = location.hash.slice(1); if (byId[h]) selected = h; } catch (e) { /* no hash */ }
+
+el("updated").textContent = UPDATED;
+const n = f => CAPS.filter(f).length;
+el("facts").innerHTML = [
+  [CAPS.length, "capabilities"], [n(c => c.state === "done"), "built as drafts"], [n(c => c.human), "always a person's decision"],
+  [n(c => c.ready === "implemented"), "with platform code today"], [n(c => c.ceil >= 6), "could reach a supervised pilot"], [0, "approved above R0"],
+].map(([b, s]) => `<div class="fact"><b>${b}</b><span>${s}</span></div>`).join("");
+
+function rungBar(c) {
+  return `<div class="rungs" aria-hidden="true">${RUNGS.map((_, i) => `<i class="${i === 8 ? "x" : i === c.first ? "first" : i <= c.ceil ? "in" : ""}"></i>`).join("")}</div>`;
+}
+function tile(c) {
+  return `<button type="button" class="tile" id="t-${c.id}" data-id="${c.id}" aria-pressed="${c.id === selected}" style="--tc:${VIEWS[view].color(c)}">
+    <span class="tt">${esc(c.title)}</span>${rungBar(c)}
+    <span class="row"><span>R${c.first} → R${c.ceil}</span>${c.human ? '<span class="flag">HUMAN</span>' : `<span>${esc(STATE[c.state][0])}</span>`}</span></button>`;
+}
+function renderMap() {
+  el("views").innerHTML = Object.entries(VIEWS).map(([k, v]) => `<button type="button" id="v-${k}" data-v="${k}" aria-pressed="${k === view}">${v.label}</button>`).join("");
+  el("legend").innerHTML = VIEWS[view].legend.map(([col, l]) => `<span><i style="background:${col}"></i>${esc(l)}</span>`).join("");
+  el("flow").innerHTML = STAGES.map(([k, name, sub]) => {
+    const cs = CAPS.filter(c => c.theme === k);
+    return `<div class="stage"><div class="stage-head"><b>${name}</b><span>${esc(sub)} · ${cs.length}</span></div>${cs.map(tile).join("")}</div>`;
+  }).join("");
+  el("base").innerHTML = BANDS.map(([k, name, sub]) => {
+    const cs = CAPS.filter(c => c.theme === k);
+    return `<div class="band"><div class="band-head"><b>${name}</b><span>${esc(sub)}</span></div><div class="tiles">${cs.map(tile).join("")}</div></div>`;
+  }).join("");
+  const sel = byId[selected], rel = new Set([...sel.deps, ...neededBy(sel.id).map(c => c.id)]);
+  document.querySelectorAll(".tile").forEach(t => {
+    if (rel.has(t.dataset.id)) t.classList.add("rel");
+    t.addEventListener("click", () => select(t.dataset.id, true));
+  });
+  el("views").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+    view = b.dataset.v;
+    try { localStorage.setItem("vcm-view", view); } catch (e) { /* per-viewer convenience only */ }
+    renderMap();
+  }));
+}
+function renderDetail() {
+  const c = byId[selected], deps = c.deps.map(id => byId[id]), users = neededBy(c.id);
+  const ladder = RUNGS.map((d, i) => {
+    const cls = i === 8 ? "x" : i === c.first ? "first" : i <= c.ceil ? "in" : "out";
+    return `<div class="${cls}"><code>R${i}</code><span>${esc(d)}${i === c.first ? " · first release" : i === c.ceil ? " · ceiling" : ""}</span></div>`;
+  }).reverse().join("");
+  const linkBtns = list => list.length ? `<div class="links">${list.map(d => `<button type="button" data-go="${d.id}">${esc(d.title)}</button>`).join("")}</div>` : '<p class="small muted">None</p>';
+  el("detail").innerHTML = `
+    <div class="detail-head"><div style="display:grid;gap:6px"><p class="eyebrow">${esc(STAGES.concat(BANDS).find(s => s[0] === c.theme)[1])}</p><h2>${esc(c.title)}</h2></div>
+      <div class="chips"><span class="chip ${STATE[c.state][1]}">${STATE[c.state][0]}</span><span class="chip ${READY[c.ready][1]}">${READY[c.ready][0]}</span>${c.human ? '<span class="chip c-human">Always a person\'s decision</span>' : ""}<span class="chip">Ceiling autonomy:R${c.ceil}</span></div></div>
+    <p style="max-width:72ch;font-size:16px">${esc(c.outcome)}</p>
+    <div class="dgrid">
+      <section><h3>First release, R${c.first}</h3><p>${esc(c.firstb)}</p>
+        <h3 style="margin-top:10px">Why the ceiling is R${c.ceil}</h3><p class="muted">${esc(c.why)}</p></section>
+      <section><h3>Autonomy ladder</h3><div class="ladder">${ladder}</div></section>
+      <section><h3>Tools it needs</h3><div class="tools">${c.tools.map(t => `<code>${esc(t)}</code>`).join("")}</div>
+        <h3 style="margin-top:10px">Depends on</h3>${linkBtns(deps)}
+        <h3 style="margin-top:10px">Needed by</h3>${linkBtns(users)}
+        ${c.path ? `<h3 style="margin-top:10px">Code</h3><p><a href="${GH}${c.path}" target="_blank" rel="noopener">${esc(c.path)}</a></p>` : ""}
+        <p class="small muted" style="margin-top:10px"><code>sales.${esc(c.id)}</code></p></section>
+    </div>`;
+  el("detail").querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => select(b.dataset.go, false)));
+}
+function select(id, fromMap) {
+  selected = id;
+  renderMap(); renderDetail();
+  if (!fromMap) { const t = el("t-" + id); if (t) t.focus({ preventScroll: false }); }
+  else { el("detail").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); }
+}
+renderMap(); renderDetail();
+</script>
