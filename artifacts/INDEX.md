@@ -7,5 +7,6 @@ week by week. Each row links to the artifact in this repo.
 |---|---|---|---|---|
 | Week 1 | Build Your First Claude Code Project — project-standards.md | [`project-standards.md`](./week-01/project-standards.md) | Sales, Enrollment & Subscriptions | 14 KB |
 | Ongoing | Weekly update for senior managers (Roselyn, Kes, Quincy, Ali) | [`vick-weekly-update.html`](./vick-weekly-update.html) (source) · [view the page](https://vessette.github.io/Simple/) | Sales, Enrollment & Subscriptions | 10 KB |
+| Ongoing | Capability map: all 32 planned capabilities along the customer journey, with ceilings, human decisions and dependencies | [`vick-capability-map.html`](./vick-capability-map.html) (source) · [view the page](https://claude.ai/artifact/53N4gxLVd3YBzTJbjsqyYB) | Sales, Enrollment & Subscriptions | 49 KB |
 
-2 artifacts.
+3 artifacts.
