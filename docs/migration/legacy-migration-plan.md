@@ -159,6 +159,12 @@ That covers two cases:
 
 ## Is `ApolloWeeklyEnrollmentAgent` running in production?
 
+**Answered by Ali, 2026-11-10: no.** It is scheduled (`0 14 * * 1-5`, 20 leads a day) and `APOLLO_ENABLED` is true in production, but the scheduler checks the governance table `cron_schedule_configs` before running any job (`services/aiOpsScheduler.ts:624-631`, `:714`). Every weekday it logs `SKIP Daily cold lead enrollment ... (disabled in governance DB)` instead. Ali checked the running container. No leads are being approved and no cold outreach is going out. That switch couldn't be seen from the repository.
+
+**One correction for the day it is switched on:** the label says 9 AM CT, but `0 14 * * 1-5` is 14:00 UTC, which is **8 AM CST** in standard time. The label was written during daylight time.
+
+What follows is the original analysis.
+
 **Unknown from the repository.** Here is what the code does settle.
 
 ### What does NOT stop it
@@ -217,8 +223,8 @@ Not in the repository, and so not checked: whether an unsubscribed lead can be e
 
 | Step | Decision | Who | Blocks |
 |---|---|---|---|
-| 1 | Roselyn gets an admin login | Ali | Every confirmation below. She can't approve anything in the platform today (`services/agentDomain/agentDomainRegistry.ts:188-189`). |
-| 2 | **Should `ApolloWeeklyEnrollmentAgent` keep auto-enrolling leads into cold outbound in the meantime?** | Roselyn, with Ali | Nothing else, but it's live behaviour with no human approver. Whether it is running in production is **unknown** from the repository. |
+| 1 | ~~Roselyn gets an admin login~~ **Done 2026-11-10:** the `agents` section grant, given by Ali | Ali | Every confirmation below. She can't approve anything in the platform today (`services/agentDomain/agentDomainRegistry.ts:188-189`). |
+| 2 | **Answered 2026-11-10: it is not running.** It is switched off in the governance table, so the question becomes whether it should ever be switched on, and on what terms. | Roselyn, with Ali | Nothing else, but it's live behaviour with no human approver. Whether it is running in production is **unknown** from the repository. |
 | 3 | Confirm the retirement of `ContentOptimizationAgent` | Roselyn | Removal of its schedule and registry entries |
 | 4 | Answer the four ownership questions | Roselyn and Sohail; Ali; Kes | The 4 unknown rows |
 | 5 | Build the migration ledger | A developer | Any step that changes a row |

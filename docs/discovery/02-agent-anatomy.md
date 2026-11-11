@@ -10,6 +10,9 @@ All platform citations refer to the public repository
 Live figures come from `GET /api/admin/agent-domains-mine` and `/agent-domains-mine/sales/coverage`,
 read in November 2026.
 
+
+> **Update, 2026-11-10 (from Ali):** Roselyn was never missing an admin login. She holds the management role `revenue`; what she lacked was the `agents` section grant, which carries the per-agent dashboard and the review page. The platform's own diagnostic (`manager_has_no_admin_login`) reported the wrong cause. **She has the grant now**, and needs to sign out and back in once. Statements below that she "can't log in" or "can't reach" the page reflect that diagnostic and are no longer current.
+
 ---
 
 ## Headline: 2 of the 9 elements are unknown
@@ -19,7 +22,7 @@ read in November 2026.
 | 1. Reasoning | **Unknown** |
 | 2. Memory | **Unknown** |
 | 3. Inputs | Draft only |
-| 4. Communication | Exists, but Roselyn can't reach it |
+| 4. Communication | Exists; Roselyn's access fixed 2026-11-10 (see update) |
 | 5. Tools | Missing |
 | 6. Procedures | Draft only |
 | 7. Coordination | Missing: does not exist in the platform |
@@ -185,7 +188,7 @@ How anyone knows the agent is working.
 
 ## Gaps, in the order they block
 
-1. **Roselyn's admin login.** Without it there's no Talk thread (communication) and no approval of a charter, memory or tool.
+1. ~~Roselyn's admin login.~~ **Resolved 2026-11-10:** the missing piece was the `agents` section grant, now given. Before that, there's no Talk thread (communication) and no approval of a charter, memory or tool.
 2. **One approved price and program sheet.** Without it, any input that quotes a price is wrong.
 3. **Vick's role charter.** Without it, reasoning, procedures and the sales-specific safeguards have nothing to stand on.
 4. **The first tool grant.** Until one is granted, everything stays at R2 or below.
