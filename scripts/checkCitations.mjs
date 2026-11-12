@@ -17,6 +17,10 @@
 // against. "ok then, moved now" is drift; "moved or missing at both" was never right.
 //
 // Usage: node scripts/checkCitations.mjs <platform repo> <capability json path> <then> <now> [out.md]
+//          [--sample N --seed S [--dump review.json]] [--rank N]
+//   --sample draws a seeded, stratified random sample of the unlabelled citations for a hand
+//   review (an estimate); --dump writes each one's context and cited lines for that review.
+//   --rank lists the unlabelled citations to fix first, by consequence (not an estimate).
 // Failure modes handled: a path missing at a commit is reported as no_file (checked against
 // ls-tree before any read); a bad repo path or commit fails fast with the git error. Not handled: citations that use
 // another format (e.g. "line 33 of x.ts"), which are simply not found.
@@ -24,9 +28,19 @@
 import { execFileSync } from 'node:child_process';
 import { writeFileSync } from 'node:fs';
 import { CITE, checkSource, classify } from './citationMatch.mjs';
+import { sample, rank } from './citationSample.mjs';
 
-const [repo, capPath, thenRef, nowRef, out] = process.argv.slice(2);
-if (!repo || !capPath || !thenRef || !nowRef) {
+const argv = process.argv.slice(2);
+const flag = (name) => {
+  const i = argv.indexOf(name);
+  if (i < 0) return null;
+  const [, v] = argv.splice(i, 2);
+  return v;
+};
+const sampleN = flag('--sample'), seed = flag('--seed'), dump = flag('--dump'), rankN = flag('--rank');
+const [repo, capPath, thenRef, nowRef, out] = argv;
+const badNum = (v) => v !== null && !/^\d+$/.test(v);
+if (!repo || !capPath || !thenRef || !nowRef || badNum(sampleN) || badNum(seed) || badNum(rankN) || (sampleN !== null && seed === null)) {
   console.error('Usage: node scripts/checkCitations.mjs <platform repo> <capability json path> <then> <now> [out.md]');
   process.exit(2);
 }
@@ -59,12 +73,18 @@ const doc = JSON.parse(git('show', `${nowRef}:${capPath}`));
 const rows = [];
 for (const cap of doc.capabilities) {
   const seen = new Set();
-  for (const m of JSON.stringify(cap).matchAll(CITE)) {
-    const [text, path, s, e, label] = m;
-    if (seen.has(text)) continue;
-    seen.add(text);
-    const start = Number(s), end = e ? Number(e) : null;
-    rows.push({ cap: cap.capability_id, text, then: check(thenRef, path, start, end, label), now: check(nowRef, path, start, end, label) });
+  // Walk field by field so each citation knows where it is used (evidence, blocker, acceptance).
+  for (const [field, value] of Object.entries(cap)) {
+    const body = JSON.stringify(value);
+    for (const m of body.matchAll(CITE)) {
+      const [text, path, s, e, label] = m;
+      if (seen.has(text)) continue;
+      seen.add(text);
+      const start = Number(s), end = e ? Number(e) : null;
+      const context = body.slice(Math.max(0, m.index - 220), m.index + text.length + 120);
+      rows.push({ cap: cap.capability_id, field, path, start, end, text, context,
+        then: check(thenRef, path, start, end, label), now: check(nowRef, path, start, end, label) });
+    }
   }
 }
 
@@ -110,5 +130,37 @@ const md = [
   '',
 ].join('\n');
 
-if (out) writeFileSync(out, md);
+const unlabelled = rows.filter((r) => r.class === 'unverifiable');
+const cell = (s) => String(s).replace(/\|/g, '\\|');
+const extra = [];
+let drawn = [];
+if (sampleN !== null) {
+  drawn = sample(unlabelled, Number(sampleN), Number(seed));
+  extra.push(
+    `## Random sample for hand review (estimate)`, '',
+    `${drawn.length} of the ${unlabelled.length} unlabelled citations, drawn with seed ${seed}, spread across capabilities in proportion to how many each has. Rerun with the same seed to get the same list. Results are recorded in the review file, not here.`, '',
+    '| # | Capability | Field | Citation |', '|---|---|---|---|',
+    ...drawn.map((r, i) => `| ${i + 1} | ${r.cap} | ${r.field} | \`${cell(r.text)}\` |`), '');
+}
+if (rankN !== null) {
+  const driftedFiles = new Set(rows.filter((r) => ['drifted', 'never right', 'wrong now'].includes(r.class)).map((r) => r.path));
+  const capsById = Object.fromEntries(doc.capabilities.map((c) => [c.capability_id, c]));
+  const ranked = rank(unlabelled, capsById, driftedFiles).slice(0, Number(rankN));
+  extra.push(
+    `## Fix-first list (by consequence, not an estimate)`, '',
+    'Score: moves money +3, reports only +1; human decision +1; used as a blocker or in release behaviour +2, as supporting evidence +1; in a file where a labelled citation already drifted +2. This list leans toward risky citations on purpose, so it must not be used to estimate an error rate.', '',
+    '| Score | Capability | Field | Citation |', '|---|---|---|---|',
+    ...ranked.map((r) => `| ${r.score} | ${r.cap} | ${r.field} | \`${cell(r.text)}\` |`), '');
+}
+const report = extra.length ? `${md}\n${extra.join('\n')}` : md;
+if (out) writeFileSync(out, report);
+if (dump) {
+  const nowLines = (r) => {
+    const src = lines(nowRef, r.path);
+    if (!src) return null;
+    const lo = Math.max(0, r.start - 4), hi = Math.min(src.length, Math.min((r.end ?? r.start), r.start + 14) + 3);
+    return src.slice(lo, hi).map((l, i) => `${lo + i + 1}: ${l.slice(0, 180)}`);
+  };
+  writeFileSync(dump, JSON.stringify(drawn.map((r, i) => ({ n: i + 1, cap: r.cap, field: r.field, text: r.text, context: r.context, cited: nowLines(r) })), null, 1));
+}
 console.log(order.map((k) => `${k}: ${count(k)}`).join(' · '), `· total ${rows.length}`);

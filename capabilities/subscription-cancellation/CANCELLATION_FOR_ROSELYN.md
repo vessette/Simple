@@ -53,7 +53,9 @@ Read from the platform code at commit `109820a`. This is what the code does, not
    - **3** were never right. By hand, one of these is a false alarm (`marketingMetrics.ts:169-174` is inside the ROAS entry), which leaves the `Subscription.ts:85` citation, copied into two capabilities.
    - **1** cites a file created after the research date and is wrong now.
 
-   Two of the drifted ones say `PRICE_PER_ENROLLMENT` is "still live", and it has since been removed. The other **256** citations give only a line, with no name, so the script can't tell what they meant. This story's `participantRoutes.ts:437` is one of them, and it's wrong. Those are a blind spot, so the counts above are a floor, not a total.
+   Two of the drifted ones say `PRICE_PER_ENROLLMENT` is "still live", and it has since been removed. The other **256** citations give only a line, with no name, so the script can't tell what they meant. This story's `participantRoutes.ts:437` is one of them, and it's wrong.
+
+   **I hand-checked a random sample of 50 of those 256** ([`docs/discovery/07-citation-sample-review.md`](../../docs/discovery/07-citation-sample-review.md)). 19 were wrong. That puts about 100 of the 256 wrong, somewhere between 80 and 127. Most of it is two citations repeated in nearly every capability: `agentDomainRegistry.ts:158-170` and `mgmtRoles.ts:54`, 63 rows between them. Fixing those two strings is the single biggest step.
 
 8. **What works as the spec says:**
    - A reason is required; an empty one is refused with a 400 (`participantController.ts:159-160`).
