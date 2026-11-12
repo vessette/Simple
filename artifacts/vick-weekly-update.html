@@ -61,8 +61,8 @@ td:first-child { font-weight: 600; white-space: nowrap; }
   </header>
 
   <div class="snap" aria-label="Snapshot">
-    <div><b>12 of 39</b><span>stories in the plan complete</span></div>
-    <div><b>5 of 32</b><span>of Vick's tasks drafted</span></div>
+    <div><b>13 of 39</b><span>stories in the plan complete</span></div>
+    <div><b>6 of 32</b><span>of Vick's tasks drafted</span></div>
     <div><b>0</b><span>tasks switched on or sending anything</span></div>
     <div><b>3 Dec</b><span>build phase starts</span></div>
   </div>
@@ -77,6 +77,7 @@ td:first-child { font-weight: 600; white-space: nowrap; }
       <li><span><strong>Third task drafted: missed strategy calls.</strong> <span class="sub">Vick explains which calls count as missed, always naming the scheduled time, the waiting time used and the call's status. It changes nothing and contacts nobody. 14 tests pass.</span></span></li>
       <li><span><strong>Fourth task drafted: outbound sequence health.</strong> <span class="sub">Vick explains each sequence's health score part by part, flags stalled sequences and proposes fixes without carrying them out. If any part can't be checked, the score is unknown. 12 tests pass.</span></span></li>
       <li><span><strong>Fifth task drafted: outreach batches for approval.</strong> <span class="sub">Vick builds one packet for a named approver from sample data. It removes unsubscribed and suppressed people first, reports the real number instead of padding to a target, and never approves itself. 11 tests pass.</span></span></li>
+      <li><span><strong>Sixth task drafted: Roselyn's pipeline digest.</strong> <span class="sub">Vick answers six pipeline questions, naming the source of every figure. A failed source shows as unavailable with the reason, never as zero, and the digest goes out at most once a day. 12 tests pass.</span></span></li>
       <li><span><strong>Caught an old agent that could email strangers with no review.</strong> <span class="sub">The Apollo weekly enrollment agent was set up to approve leads itself and add them to cold email campaigns. Ali confirmed it's switched off.</span></span></li>
       <li><span><strong>Manager access fixed.</strong> <span class="sub">Roselyn couldn't open Vick's review page. Ali granted access on 10 November, so she can now review and approve Vick's work.</span></span></li>
       <li><span><strong>Platform change request sent to Kes.</strong> <span class="sub">Asked for a record of who sets a lead's offer, shared three related findings from the code, and asked whether offer re-scoring is running.</span></span></li>
@@ -92,6 +93,7 @@ td:first-child { font-weight: 600; white-space: nowrap; }
       <li class="c"><span><strong>The platform disagrees on when a call counts as missed.</strong> <span class="sub">The goal says 15 minutes, the spec says 30 minutes, and the code that runs waits 2 hours. Vick won't pick one until Roselyn does.</span></span></li>
       <li class="c"><span><strong>Two older agents may be acting without approval.</strong> <span class="sub">They retry failed emails and mark week-old errors as resolved automatically. A sequence that has stopped sending also scores 100. Whether these agents run is unknown.</span></span></li>
       <li class="c"><span><strong>Expired approval requests are approved automatically.</strong> <span class="sub">A platform job approves any pending request once its expiry passes. Vick's packets carry no expiry, but the platform rule needs changing before outreach approvals go through it.</span></span></li>
+      <li class="c"><span><strong>The platform's digest is fragile.</strong> <span class="sub">If one source fails, no digest goes out at all; it can send twice; and it follows the server's clock, so a 7 AM digest may arrive at 1 AM Central.</span></span></li>
       <li class="c"><span><strong>There's nowhere in the platform for the manager to approve Vick's work.</strong> <span class="sub">A decision queue for Roselyn is one of Vick's planned tasks, and the platform has no code for it yet.</span></span></li>
     </ul>
 
@@ -104,7 +106,7 @@ td:first-child { font-weight: 600; white-space: nowrap; }
         <tr><td>Roselyn</td><td>Which task Vick learns first, what stays human, pass marks, warm-lead signals, correct price and dates</td><td>Turns drafts into tasks you can approve.</td></tr>
         <tr><td>Kes</td><td>Is offer re-scoring running, and who files the "who set this offer" change?</td><td>Platform owns the lead record.</td></tr>
         <tr><td>Ali</td><td>Who files the platform change, and confirm a date (Fri 13 Nov suggested)</td><td>Unblocks the change request.</td></tr>
-        <tr><td>Ali or Kes</td><td>Are the campaign repair agents running, who owns sequence health, and can expired outreach approvals become rejections instead of approvals?</td><td>Stops unapproved resends and approvals, and settles ownership.</td></tr>
+        <tr><td>Ali or Kes</td><td>Are the campaign repair agents running, who owns sequence health, can expired outreach approvals become rejections, and can the digest run on Central time and send per source?</td><td>Stops unapproved resends and approvals, settles ownership, and makes the digest reliable.</td></tr>
         <tr><td>Roselyn &amp; Sohail</td><td>Who owns two old marketing agents</td><td>Closes the last open items in the legacy plan.</td></tr>
       </tbody>
     </table></div>
