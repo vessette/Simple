@@ -1,0 +1,47 @@
+{
+  "_note": "Fictional members and records for tests. Gateway reads stand in for a lookup a person ran (GET /v4/recurringpayment/{id}).",
+  "members": {
+    "active_on_schedule": { "name": "Member A",
+      "subscriptions": [
+        { "plan": "monthly", "status": "active", "paysimple_schedule_id": "SCH-41", "current_period_end": "2026-12-01T16:00:00Z", "canceled_at": null, "cancel_reason": null, "created_at": "2026-09-01T15:00:00Z" }
+      ],
+      "gatewayRead": { "schedule_id": "SCH-41", "ScheduleStatus": "Active", "read_at": "2026-11-11T20:00:00Z" } },
+    "cancelled_clean": { "name": "Member B",
+      "subscriptions": [
+        { "plan": "monthly", "status": "canceled", "paysimple_schedule_id": null, "current_period_end": "2026-11-30T16:00:00Z", "canceled_at": "2026-11-02T01:30:00Z", "cancel_reason": "Changing roles; no time this quarter", "created_at": "2026-08-30T15:00:00Z" }
+      ],
+      "gatewayRead": null },
+    "active_manual": { "name": "Member C",
+      "subscriptions": [
+        { "plan": "annual", "status": "active", "paysimple_schedule_id": null, "current_period_end": "2027-03-15T15:00:00Z", "canceled_at": null, "cancel_reason": null, "created_at": "2026-03-15T15:00:00Z" }
+      ],
+      "gatewayRead": null },
+    "cancelled_schedule_live": { "name": "Member D",
+      "subscriptions": [
+        { "plan": "monthly", "status": "canceled", "paysimple_schedule_id": "SCH-77", "current_period_end": "2026-11-20T16:00:00Z", "canceled_at": "2026-10-25T18:00:00Z", "cancel_reason": "Too expensive", "created_at": "2026-07-20T15:00:00Z" }
+      ],
+      "gatewayRead": { "schedule_id": "SCH-77", "ScheduleStatus": "Active", "read_at": "2026-11-11T20:00:00Z" } },
+    "past_due": { "name": "Member E",
+      "subscriptions": [
+        { "plan": "monthly", "status": "past_due", "paysimple_schedule_id": "SCH-88", "current_period_end": "2026-11-05T16:00:00Z", "canceled_at": null, "cancel_reason": "scheduled payment failed: card declined", "created_at": "2026-06-05T15:00:00Z" }
+      ],
+      "gatewayRead": null },
+    "suspended_book_live": { "name": "Member F",
+      "subscriptions": [
+        { "plan": "monthly", "status": "active", "paysimple_schedule_id": "SCH-90", "current_period_end": "2026-12-09T16:00:00Z", "canceled_at": null, "cancel_reason": null, "created_at": "2026-09-09T15:00:00Z" }
+      ],
+      "gatewayRead": { "schedule_id": "SCH-90", "ScheduleStatus": "Suspended", "read_at": "2026-11-11T20:00:00Z" } },
+    "comp_revoked": { "name": "Member G",
+      "subscriptions": [
+        { "plan": "comp", "status": "canceled", "paysimple_schedule_id": null, "current_period_end": "2027-01-01T06:00:00Z", "canceled_at": "2026-11-03T17:00:00Z", "cancel_reason": "comp_revoked", "created_at": "2026-10-01T15:00:00Z" }
+      ],
+      "gatewayRead": null },
+    "older_active_newer_failed": { "name": "Member H",
+      "subscriptions": [
+        { "plan": "annual", "status": "failed", "paysimple_schedule_id": null, "current_period_end": null, "canceled_at": null, "cancel_reason": null, "created_at": "2026-11-01T15:00:00Z" },
+        { "plan": "monthly", "status": "active", "paysimple_schedule_id": "SCH-12", "current_period_end": "2026-11-28T16:00:00Z", "canceled_at": null, "cancel_reason": null, "created_at": "2026-06-28T15:00:00Z" }
+      ],
+      "gatewayRead": null },
+    "nobody": { "name": "Member I", "subscriptions": [], "gatewayRead": null }
+  }
+}
