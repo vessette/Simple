@@ -299,13 +299,21 @@
       "criteria": [
         {
           "text": "A fixture batch with fewer qualifying prospects than the cap produces the smaller real number: a test asserting padding must fail.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/outbound-batch-approval/batchPacket.js",
+        "capabilities/outbound-batch-approval/batchPacket.test.js",
+        "capabilities/outbound-batch-approval/fixtures/recommendations.json",
+        "capabilities/outbound-batch-approval/BATCH_FOR_ROSELYN.md"
+      ],
+      "tests_added": [
+        "capabilities/outbound-batch-approval/batchPacket.test.js: fewer qualifying prospects than the cap gives the smaller real number, never a padded batch",
+        "capabilities/outbound-batch-approval/batchPacket.test.js: a test asserting padding fails against the real packet"
+      ],
+      "notes": "Criterion verified by named tests (11 pass), merged in PR #30 at 9abe2db; a padding mutation fails 5 tests. R1 fixtures only: no database, enrolment or send. Packets carry no expiry; the platform auto-approves expired approval requests (approvalRequestTimeoutJob.ts).",
+      "updated_at": "2026-11-12T01:29:44.339Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
