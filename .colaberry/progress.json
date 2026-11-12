@@ -775,13 +775,21 @@
       "criteria": [
         {
           "text": "Every answer names the scheduled time, the grace threshold and the current status, and no answer asserts a count without the underlying rows.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/strategy-call-no-show/noShow.js",
+        "capabilities/strategy-call-no-show/noShow.test.js",
+        "capabilities/strategy-call-no-show/fixtures/calls.json",
+        "capabilities/strategy-call-no-show/NO_SHOW_FOR_ROSELYN.md"
+      ],
+      "tests_added": [
+        "capabilities/strategy-call-no-show/noShow.test.js: every answer names the scheduled time, the grace threshold and the current status",
+        "capabilities/strategy-call-no-show/noShow.test.js: counts are derived from the rows returned with them"
+      ],
+      "notes": "Criterion verified by named tests (14 pass, merged in PR #26 at 4786eea). R2 explainer only: marks, cancels and contacts nothing. Grace threshold unsettled (30 min spec vs 2 h running code), so no default; awaiting the sales manager.",
+      "updated_at": "2026-11-12T01:10:46.664Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
