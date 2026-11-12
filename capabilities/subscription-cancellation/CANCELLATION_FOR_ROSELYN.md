@@ -47,6 +47,14 @@ Read from the platform code at commit `109820a`. This is what the code does, not
 
    The Git history shows this isn't only drift. At `ccbd870`, the earliest platform commit that carries these citations, the cancel function started at `:642`, so that one was close and has moved since. The route (`:437`) and the column (`:85`) were wrong even then. Whatever writes these citations doesn't check them.
 
+   **The same problem appears across the sales capabilities.** I checked all 359 citations in the capability file with [`scripts/checkCitations.mjs`](../../scripts/checkCitations.mjs). The full list is in [`docs/discovery/06-citation-check-sales.md`](../../docs/discovery/06-citation-check-sales.md). Of the 100 citations that name what they point at:
+   - **78** are correct.
+   - **18** have drifted: right on 2026-10-09, wrong now.
+   - **3** were never right. By hand, one of these is a false alarm (`marketingMetrics.ts:169-174` is inside the ROAS entry), which leaves the `Subscription.ts:85` citation, copied into two capabilities.
+   - **1** cites a file created after the research date and is wrong now.
+
+   Two of the drifted ones say `PRICE_PER_ENROLLMENT` is "still live", and it has since been removed. The other **256** citations give only a line, with no name, so the script can't tell what they meant. This story's `participantRoutes.ts:437` is one of them, and it's wrong. Those are a blind spot, so the counts above are a floor, not a total.
+
 8. **What works as the spec says:**
    - A reason is required; an empty one is refused with a 400 (`participantController.ts:159-160`).
    - The route needs the member to be logged in (`participantRoutes.ts:461`).
