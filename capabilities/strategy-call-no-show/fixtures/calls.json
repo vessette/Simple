@@ -1,0 +1,16 @@
+{
+  "_note": "Fictional strategy-call rows for tests. No real people. now is 3:00 PM CST on 2026-11-11.",
+  "now": "2026-11-11T21:00:00Z",
+  "calls": [
+    { "id": 1, "lead_id": 101, "scheduled_at": "2026-11-11T20:00:00Z", "status": "scheduled" },
+    { "id": 2, "lead_id": 102, "scheduled_at": "2026-11-11T18:00:00Z", "status": "scheduled" },
+    { "id": 3, "lead_id": 103, "scheduled_at": "2026-11-11T20:45:00Z", "status": "scheduled" },
+    { "id": 4, "lead_id": 104, "scheduled_at": "2026-11-11T22:00:00Z", "status": "scheduled" },
+    { "id": 5, "lead_id": 105, "scheduled_at": "2026-11-11T17:00:00Z", "status": "completed" },
+    { "id": 6, "lead_id": 106, "scheduled_at": "2026-11-11T16:00:00Z", "status": "no_show" },
+    { "id": 7, "lead_id": 107, "scheduled_at": "2026-11-11T19:00:00Z", "status": "cancelled" },
+    { "id": 8, "lead_id": null, "scheduled_at": "2026-11-11T17:30:00Z", "status": "scheduled" },
+    { "id": 9, "lead_id": 109, "scheduled_at": "2026-11-11T18:30:00Z", "status": "scheduled", "recovery_queued": true },
+    { "id": 10, "lead_id": 110, "scheduled_at": "2026-11-11T14:00:00", "status": "scheduled" }
+  ]
+}
