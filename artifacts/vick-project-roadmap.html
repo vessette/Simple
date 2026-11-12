@@ -492,7 +492,7 @@ const CAPS = [
   ["renewal_reminder_lifecycle", "renew", "Renewal reminders and autopay notice", "Once per period and per reminder kind.", "implemented", 4, [0,1], "later"],
   ["renewal_and_revenue_follow_through_worklist", "renew", "Daily renewals and revenue worklist", "Renewals due, past due, lapsed and expiring, in order.", "partial", 5, [0,1], "later"],
   ["subscription_churn_and_renewal_risk_analysis", "renew", "Churn and renewal-risk analysis", "Members most likely to lapse, with the reason.", "absent", 5, [0,1], "later"],
-  ["revenue_and_subscription_reporting", "report", "Revenue and subscription reporting", "Collected revenue, MRR, ARR, plan mix and tenure, all traceable.", "implemented", 6, [0,1], "later"],
+  ["revenue_and_subscription_reporting", "report", "Revenue and subscription reporting", "Answers revenue, MRR, plan-mix and tenure questions from the revenue endpoints, naming the endpoint, field and filter of every figure; unavailable, never zero, when a source is missing; never revenue from a price times a count.", "implemented", 6, [1,1], "done", "capabilities/revenue-reporting/"],
   ["revenue_definition_integrity_guard", "report", "Revenue definition guard", "Only revenue collected through the app's checkout counts.", "partial", 6, [0,1], "later"],
   ["da_revenue_reporting_transition", "report", "Take over analyst reporting", "Blocked until the current manual work is written down.", "unknown", 0, [0,1], "later"],
   ["pipeline_digest_for_manager", "report", "Pipeline digest for the manager", "Answers pipeline questions with every figure's source; unavailable is never shown as zero.", "partial", 6, [1,1], "done", "capabilities/pipeline-digest/"],
@@ -528,6 +528,7 @@ const SETUP = [
   ["Cancellation state explainer", "For a named member, explains their subscription, whether a payment schedule exists and what the gateway reads, and the recorded cancellation reason with who wrote it. With no schedule it says a cancel would stop nothing at the gateway, never that the member is safe from charges.", "12 tests", [1,1], "capabilities/subscription-cancellation/"],
   ["Free seat report", "Lists every active and revoked free seat from its subscription record, with the holder, start date and how the revenue page counts them. Says free seats are excluded from revenue, flags the people for whom that does not hold, and refuses any line that presents a grant as routine.", "10 tests", [1,1], "capabilities/comped-seat/"],
   ["Missed-webhook payment scope explainer", "For one payment, gives the reconciler's verdict (in scope, out of scope or unknown), the guard that decided it, and three cited checks: amount, time window and customer id. Flags payments the job counts as collected that the agreed rule does not, and refuses hedged wording.", "12 tests", [1,1], "capabilities/app-payment-reconcile/"],
+  ["Revenue answers", "Reads each figure from the endpoint that serves it and gives the endpoint, field and filter, so anyone can reproduce it. Missing or broken sources are unavailable with the reason; net revenue is unavailable as the platform says; projections are refused as revenue.", "10 tests", [1,1], "capabilities/revenue-reporting/"],
   ["Code-reference check of the sales specs", "A read-only checker for every code reference in the 32 capability specs, at the date they were researched and today, plus a seeded random sample of 50 references checked by hand.", "17 tests", null, "docs/discovery/06-citation-check-sales.md"],
   ["Weekly one-pager", "Status page for senior managers, published to GitHub Pages and refreshed every weekday by a scheduled job.", "Live page", null, "artifacts/vick-weekly-update.html"],
   ["Capability map", "Interactive map of all 32 capabilities along the customer journey, with ceilings, human decisions, tools and dependencies.", "Built from 32 specs", null, "artifacts/vick-capability-map.html"],
@@ -555,6 +556,7 @@ const DECISIONS = [
   ["F14", "A cancellation with no payment schedule reports success and says nothing about it; past-due members can't cancel; and the cancellation reason field also holds system notes.", "Correct for manual billing, but nobody is told the gateway was never touched. The explainer calls it a no-op and names who wrote each reason. Three questions put to the sales manager and program lead.", "active"],
   ["F16", "Granting a free seat marks the enrollment paid, so free seats pass the paying-member filter; a free seat given to someone already paying, or one that was revoked, can be counted the wrong way on the revenue page; and the audit log records who granted a seat and when, but no reason.", "The report flags each person this affects. Four questions put to the sales manager and program lead, and a proposal drafted: require a reason and write a named audit entry for every grant and revoke.", "active"],
   ["F17", "The missed-webhook payment job counts Authorized as collected; its shared-customer exclusion covers only one of its two match paths; candidates with no open checkout are counted on every run though they can never match; and its time window depends on a payment date format not confirmed in production.", "The explainer flags each case on the payment it applies to. Six questions put to the program lead and platform owner; the paid rule part is already in the platform builder's spec.", "active"],
+  ["F18", "The payments feed serves a 'net' figure while the platform marks net revenue unavailable; 'collected' holds one recorded amount per member, so renewals add nothing; the dashboard and the feed count different credits though the feed says they reconcile exactly; and no revenue endpoint takes a date range.", "Vick reports net revenue as unavailable, names the feed figure 'collected less refunds' and says what collected leaves out. Four questions put to the program lead, platform owner and sales manager.", "active"],
   ["F15", "Many code references in the capability specs point at the wrong place.", "21 of the 100 that name their target are wrong; a hand-checked sample puts about 99 of the other 256 wrong (80 to 127). Two references repeated across nearly every spec are 63 of those. A note for the program lead and platform owner is drafted.", "active"],
   ["P1", "Offer routing labels a lead only; it doesn't start outreach.", "Slower first contact, but nobody receives the wrong offer.", "next"],
   ["P2", "Pause re-scoring until a person can override an offer.", "Stops silent switching while the provenance fix is built.", "next"],
@@ -614,6 +616,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-12", "Revenue answers built: every figure read from its endpoint with the field and filter that reproduce it, unavailable rather than zero, and net revenue reported unavailable as the platform defines it. Fourteenth capability built as a draft."],
   ["2026-11-12", "Missed-webhook payment explainer built: for one payment, the job's verdict and the guard that decided it, with the amount, window and customer-id checks cited every time. Thirteenth capability built as a draft; six questions raised."],
   ["2026-11-12", "Reviewed the platform audit log for free seats: it shows which admin and when, but not why or who approved, and nobody accountable can read it. Four more fixes added to the proposal, the smallest being to tell the admin when a grant fails."],
   ["2026-11-12", "Free seats: the audit log already records who granted a seat and when, but not why (an earlier note said neither). Proposal drafted: require a reason and write a named audit entry with every grant and revoke."],
@@ -652,9 +655,9 @@ const storiesTotal = 7 + CAPS.length;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["37/56", "acceptance criteria passed", 37 / 56],
-  ["205", "automated tests, all passing", 1],
-  ["46", "pull requests merged", 1],
+  ["38/56", "acceptance criteria passed", 38 / 56],
+  ["215", "automated tests, all passing", 1],
+  ["47", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 
