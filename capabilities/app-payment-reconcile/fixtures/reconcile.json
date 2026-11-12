@@ -1,0 +1,32 @@
+{
+  "note": "Synthetic rows shaped like the reconciler's inputs at platform commit 109820a. No real people or payments.",
+  "candidates": [
+    { "enrollment_id": "e-a", "name": "Person A", "email": "a@example.com", "cids": ["111"],
+      "checkouts": [{ "subscription_id": "s-a", "started_at": "2026-10-01T15:00:00Z", "amount_cents": 19900, "charge_cents": 19900 }] },
+    { "enrollment_id": "e-b", "name": "Person B", "email": "b@example.com", "cids": ["222"],
+      "checkouts": [{ "subscription_id": "s-b", "started_at": "2026-10-02T18:00:00Z", "amount_cents": 19900, "charge_cents": 14900 }] },
+    { "enrollment_id": "e-c", "name": "Person C", "email": "c@example.com", "cids": ["333"],
+      "checkouts": [{ "subscription_id": "s-c", "started_at": "2026-10-03T14:00:00Z", "amount_cents": 178800, "charge_cents": 178800 }] }
+  ],
+  "claims": [
+    { "enrollment_id": "e-a", "cid": "111" },
+    { "enrollment_id": "e-b", "cid": "222" },
+    { "enrollment_id": "e-c", "cid": "333" },
+    { "enrollment_id": "e-z", "cid": "333" }
+  ],
+  "linked": ["400"],
+  "payments": {
+    "pathA":        { "Id": 501, "Status": "Settled",    "Amount": 199,  "CustomerId": 111, "PaymentDate": "2026-10-01T15:20:00Z" },
+    "pathA_wrong_amount": { "Id": 502, "Status": "Settled", "Amount": 250, "CustomerId": 111, "PaymentDate": "2026-10-01T15:20:00Z" },
+    "pathA_late":   { "Id": 503, "Status": "Settled",    "Amount": 199,  "CustomerId": 111, "PaymentDate": "2026-10-03T15:20:00Z" },
+    "bootcamp":     { "Id": 504, "Status": "Settled",    "Amount": 4000, "CustomerId": 999, "PaymentDate": "2026-10-01T16:00:00Z" },
+    "pathB":        { "Id": 505, "Status": "Posted",     "Amount": 149,  "CustomerId": 777, "PaymentDate": "2026-10-02T18:04:00Z" },
+    "shared":       { "Id": 506, "Status": "Settled",    "Amount": 1788, "CustomerId": 333, "PaymentDate": "2026-10-03T14:30:00Z" },
+    "authorized":   { "Id": 507, "Status": "Authorized", "Amount": 199,  "CustomerId": 111, "PaymentDate": "2026-10-01T15:05:00Z" },
+    "deposit":      { "Id": 508, "Status": "Settled",    "Amount": 50,   "CustomerId": 111, "PaymentDate": "2026-10-01T15:05:00Z" },
+    "returned":     { "Id": 509, "Status": "Returned",   "Amount": 199,  "CustomerId": 111, "PaymentDate": "2026-10-01T15:05:00Z" },
+    "already":      { "Id": 400, "Status": "Settled",    "Amount": 199,  "CustomerId": 111, "PaymentDate": "2026-10-01T15:05:00Z" },
+    "date_only":    { "Id": 510, "Status": "Settled",    "Amount": 199,  "CustomerId": 111, "PaymentDate": "2026-10-01" },
+    "early":        { "Id": 511, "Status": "Settled",    "Amount": 199,  "CustomerId": 111, "PaymentDate": "2026-05-20T15:05:00Z" }
+  }
+}
