@@ -1,0 +1,18 @@
+{
+  "note": "Synthetic rows shaped like the subscriptions and enrollments tables at platform commit 109820a. No real people.",
+  "subscriptions": [
+    { "id": "s-a1", "enrollment_id": "e-a", "plan": "comp", "status": "active", "amount_cents": 0, "payment_ref": "COMP-e-a-1", "started_at": "2026-09-01T15:00:00Z", "created_at": "2026-09-01T15:00:00Z", "current_period_end": "2036-08-30T15:00:00Z", "canceled_at": null, "cancel_reason": null },
+    { "id": "s-b1", "enrollment_id": "e-b", "plan": "comp", "status": "active", "amount_cents": 0, "payment_ref": "COMP-e-b-1", "started_at": "2026-08-10T15:00:00Z", "created_at": "2026-08-10T15:00:00Z", "current_period_end": "2036-08-08T15:00:00Z", "canceled_at": null, "cancel_reason": null },
+    { "id": "s-c0", "enrollment_id": "e-c", "plan": "annual", "status": "active", "amount_cents": 178800, "payment_ref": "SUB-e-c-0", "started_at": "2026-06-01T15:00:00Z", "created_at": "2026-06-01T15:00:00Z", "current_period_end": "2027-06-01T15:00:00Z", "canceled_at": null, "cancel_reason": null },
+    { "id": "s-c1", "enrollment_id": "e-c", "plan": "comp", "status": "active", "amount_cents": 0, "payment_ref": "COMP-e-c-1", "started_at": "2026-10-01T15:00:00Z", "created_at": "2026-10-01T15:00:00Z", "current_period_end": "2036-09-29T15:00:00Z", "canceled_at": null, "cancel_reason": null },
+    { "id": "s-d1", "enrollment_id": "e-d", "plan": "comp", "status": "canceled", "amount_cents": 0, "payment_ref": "COMP-e-d-1", "started_at": "2026-07-01T15:00:00Z", "created_at": "2026-07-01T15:00:00Z", "current_period_end": "2036-06-29T15:00:00Z", "canceled_at": "2026-10-20T20:00:00Z", "cancel_reason": "comp_revoked" },
+    { "id": "s-f0", "enrollment_id": "e-f", "plan": "monthly", "status": "active", "amount_cents": 19900, "payment_ref": "SUB-e-f-0", "started_at": "2026-10-05T15:00:00Z", "created_at": "2026-10-05T15:00:00Z", "current_period_end": "2026-11-04T15:00:00Z", "canceled_at": null, "cancel_reason": null }
+  ],
+  "enrolments": {
+    "e-a": { "name": "Person A", "payment_status": "paid", "status": "active", "is_staff": false },
+    "e-b": { "name": "Person B", "payment_status": "paid", "status": "active", "is_staff": true },
+    "e-c": { "name": "Person C", "payment_status": "paid", "status": "active", "is_staff": false },
+    "e-d": { "name": "Person D", "payment_status": "paid", "status": "active", "is_staff": false },
+    "e-f": { "name": "Person F", "payment_status": "paid", "status": "active", "is_staff": false }
+  }
+}

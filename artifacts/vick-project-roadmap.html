@@ -451,7 +451,7 @@ footer { border-top: 1px solid var(--line); padding-top: 16px; color: var(--mute
 </div>
 
 <script>
-const UPDATED = "Updated 11 November 2026";
+const UPDATED = "Updated 12 November 2026";
 const TODAY = "2026-11-11";
 const GH = "https://github.com/vessette/Simple/blob/main/";
 
@@ -487,7 +487,7 @@ const CAPS = [
   ["team_license_and_sponsored_seat_administration", "enroll", "Team licenses and sponsored seats", "Employer seat blocks, each redeemed once.", "implemented", 4, [0,1], "later"],
   ["refund_and_void_issuance", "money", "Refunds and voids", "Answers refund-ledger and policy questions from the ledger rows and the policy text; states no unapproved terms and never says a refund will happen.", "implemented", 2, [1,1], "done", "capabilities/refund-and-void/"],
   ["subscription_cancellation_and_schedule_suspension", "money", "Cancel subscriptions and stop charges", "Explains a member's subscription, payment schedule and recorded cancellation reason, each from its record; never says a member won't be charged.", "implemented", 2, [1,1], "done", "capabilities/subscription-cancellation/"],
-  ["comped_seat_grant_and_revocation", "money", "Grant and remove free seats", "Revoked explicitly, never lapses on its own.", "implemented", 2, [0,1], "later"],
+  ["comped_seat_grant_and_revocation", "money", "Grant and remove free seats", "Lists who holds a free seat and since when, each from its subscription record, and says free seats are excluded from revenue; never proposes granting one.", "implemented", 2, [1,1], "done", "capabilities/comped-seat/"],
   ["billing_health_watch", "money", "Billing health watch", "Duplicates, lapses and expiring cards, reported daily.", "implemented", 6, [0,1], "later"],
   ["renewal_reminder_lifecycle", "renew", "Renewal reminders and autopay notice", "Once per period and per reminder kind.", "implemented", 4, [0,1], "later"],
   ["renewal_and_revenue_follow_through_worklist", "renew", "Daily renewals and revenue worklist", "Renewals due, past due, lapsed and expiring, in order.", "partial", 5, [0,1], "later"],
@@ -526,6 +526,7 @@ const SETUP = [
   ["Payment and seat state explainer", "For a named person, explains payment, portal access, seat and which payment-notice path produced them, each traced to its record; flags records that don't fit together. Applies the agreed rule for 'paid' (settled or posted only) to a payment-provider read, and sorts paid enrollments and active memberships by name for the pre-flight check.", "15 tests", [1,1], "capabilities/payment-confirmation/"],
   ["Refund ledger and policy answers", "Describes each refund row for a payment and cites it, says the refund terms are unapproved rather than quoting any, sends refund requests to a person, and drafts recommendations that carry no decision.", "10 tests", [1,1], "capabilities/refund-and-void/"],
   ["Cancellation state explainer", "For a named member, explains their subscription, whether a payment schedule exists and what the gateway reads, and the recorded cancellation reason with who wrote it. With no schedule it says a cancel would stop nothing at the gateway, never that the member is safe from charges.", "12 tests", [1,1], "capabilities/subscription-cancellation/"],
+  ["Free seat report", "Lists every active and revoked free seat from its subscription record, with the holder, start date and how the revenue page counts them. Says free seats are excluded from revenue, flags the people for whom that does not hold, and refuses any line that presents a grant as routine.", "10 tests", [1,1], "capabilities/comped-seat/"],
   ["Code-reference check of the sales specs", "A read-only checker for every code reference in the 32 capability specs, at the date they were researched and today, plus a seeded random sample of 50 references checked by hand.", "17 tests", null, "docs/discovery/06-citation-check-sales.md"],
   ["Weekly one-pager", "Status page for senior managers, published to GitHub Pages and refreshed every weekday by a scheduled job.", "Live page", null, "artifacts/vick-weekly-update.html"],
   ["Capability map", "Interactive map of all 32 capabilities along the customer journey, with ceilings, human decisions, tools and dependencies.", "Built from 32 specs", null, "artifacts/vick-capability-map.html"],
@@ -551,6 +552,7 @@ const DECISIONS = [
   ["F12", "The payment webhook marks people paid without checking the payment settled, and a returned payment never frees the seat or removes access.", "The 30-minute job that would mark returned payments failed isn't running, so they stay in revenue too. Decided 12 Nov: only Settled or Posted counts as paid, and a reversal drops the student to the free preview tier with their login kept; the seat count comes from paid enrollments. The platform decides 'paid' in five places today, none settled-only. The platform fix must record a waiting payment and re-check it until it settles, or a real payer stays locked out.", "active"],
   ["F13", "No refund policy is approved, and the platform holds three conflicting versions of the terms, one labelled approved. A refund also leaves paid access and the seat in place.", "Vick quotes no terms. Asked admissions operations and the program lead on 11 November which version is final and what a refund should change.", "active"],
   ["F14", "A cancellation with no payment schedule reports success and says nothing about it; past-due members can't cancel; and the cancellation reason field also holds system notes.", "Correct for manual billing, but nobody is told the gateway was never touched. The explainer calls it a no-op and names who wrote each reason. Three questions put to the sales manager and program lead.", "active"],
+  ["F16", "Granting a free seat marks the enrollment paid, so free seats pass the paying-member filter; a free seat given to someone already paying, or one that was revoked, can be counted the wrong way on the revenue page; and nothing records who granted a seat or why.", "The report flags each person this affects. Four questions put to the sales manager and program lead, including what should happen when someone already paying is given a free seat.", "active"],
   ["F15", "Many code references in the capability specs point at the wrong place.", "21 of the 100 that name their target are wrong; a hand-checked sample puts about 99 of the other 256 wrong (80 to 127). Two references repeated across nearly every spec are 63 of those. A note for the program lead and platform owner is drafted.", "active"],
   ["P1", "Offer routing labels a lead only; it doesn't start outreach.", "Slower first contact, but nobody receives the wrong offer.", "next"],
   ["P2", "Pause re-scoring until a person can override an offer.", "Stops silent switching while the provenance fix is built.", "next"],
@@ -610,6 +612,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-12", "Free seat report built: who holds a free seat and since when, from the record, with free seats stated as excluded from revenue. Twelfth capability built as a draft; four questions for the sales manager and program lead."],
   ["2026-11-12", "Platform builder's spec draft reviewed: 'paid' is decided in five places, a reversal drops the student to the free preview tier, and Vick's pre-flight list now covers memberships."],
   ["2026-11-12", "Vick now uses the agreed definition of 'paid' in one place, and can produce the pre-flight list of who would lose access, by name, from read-only payment lookups."],
   ["2026-11-12", "Program lead's answers recorded: only settled payments count, a reversal removes access, the 30-minute payment job is off, the $4,500 route is retired, and re-scoring runs. The checkout explainer no longer says a paid enrollment's payment settled."],
@@ -644,9 +647,9 @@ const storiesTotal = 7 + CAPS.length;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["35/56", "acceptance criteria passed", 35 / 56],
-  ["183", "automated tests, all passing", 1],
-  ["42", "pull requests merged", 1],
+  ["36/56", "acceptance criteria passed", 36 / 56],
+  ["193", "automated tests, all passing", 1],
+  ["45", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 
