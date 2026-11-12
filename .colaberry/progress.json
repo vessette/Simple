@@ -861,13 +861,28 @@
       "criteria": [
         {
           "text": "Every claim traces to the subscription row or a gateway read; where no schedule id exists the agent says the suspend would be a no-op rather than implying the member is safe from charges.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/subscription-cancellation/cancellationState.js",
+        "capabilities/subscription-cancellation/cancellationState.test.js",
+        "capabilities/subscription-cancellation/fixtures/members.json",
+        "capabilities/subscription-cancellation/CANCELLATION_FOR_ROSELYN.md",
+        "docs/stories/sales.CAP.subscription_cancellation_and_schedule_suspension.md",
+        "scripts/checkCitations.mjs",
+        "scripts/citationMatch.mjs",
+        "scripts/citationSample.mjs",
+        "docs/discovery/06-citation-check-sales.md",
+        "docs/discovery/07-citation-sample-review.md"
+      ],
+      "tests_added": [
+        "capabilities/subscription-cancellation/cancellationState.test.js: every claim traces to the subscription row or a gateway read",
+        "capabilities/subscription-cancellation/cancellationState.test.js: no schedule id: the suspend is called a no-op, never an all-clear",
+        "capabilities/subscription-cancellation/cancellationState.test.js: the all-clear guard refuses lines that say the member is clear of charges"
+      ],
+      "notes": "R2, human decision at every level: explains subscription state, the schedule id on the row, a person-supplied gateway read, and the recorded cancel reason with its writer; every claim names the subscription row or gateway read; with no schedule id the suspend is called a no-op and a guard refuses any all-clear line; terms unapproved (salesHubCoryController.ts:33), so none stated. 12 tests pass on main after PR #42 (merge fd4c800). The story's cited lines are wrong at 109820a; see the brief, finding 7.",
+      "updated_at": "2026-11-12T04:47:59.886Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
