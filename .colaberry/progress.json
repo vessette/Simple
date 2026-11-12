@@ -872,13 +872,22 @@
       "criteria": [
         {
           "text": "Every price and date traces to code or to the member's row; an unknown is reported as unknown rather than computed from an assumption.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/subscription-checkout/memberAnswers.js",
+        "capabilities/subscription-checkout/memberAnswers.test.js",
+        "capabilities/subscription-checkout/fixtures/members.json",
+        "capabilities/subscription-checkout/SUBSCRIPTION_FOR_ROSELYN.md"
+      ],
+      "tests_added": [
+        "capabilities/subscription-checkout/memberAnswers.test.js: every price and date traces to code or to the member's row",
+        "capabilities/subscription-checkout/memberAnswers.test.js: missing dates are unknown, never worked out from other dates",
+        "capabilities/subscription-checkout/memberAnswers.test.js: an unrecognised plan is unknown, not assumed to be monthly"
+      ],
+      "notes": "Criterion verified by named tests (11 pass), merged in PR #36 at ef3788d. Human decision at every level: answers only. The spec's class-start billing anchor is stale; since 2026-10-30 it is the payment day.",
+      "updated_at": "2026-11-12T01:55:11.028Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
