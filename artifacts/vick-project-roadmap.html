@@ -495,7 +495,7 @@ const CAPS = [
   ["revenue_and_subscription_reporting", "report", "Revenue and subscription reporting", "Collected revenue, MRR, ARR, plan mix and tenure, all traceable.", "implemented", 6, [0,1], "later"],
   ["revenue_definition_integrity_guard", "report", "Revenue definition guard", "Only revenue collected through the app's checkout counts.", "partial", 6, [0,1], "later"],
   ["da_revenue_reporting_transition", "report", "Take over analyst reporting", "Blocked until the current manual work is written down.", "unknown", 0, [0,1], "later"],
-  ["pipeline_digest_for_manager", "report", "Pipeline digest for the manager", "One recurring summary instead of six admin screens.", "partial", 6, [0,1], "later"],
+  ["pipeline_digest_for_manager", "report", "Pipeline digest for the manager", "Answers pipeline questions with every figure's source; unavailable is never shown as zero.", "partial", 6, [1,1], "done", "capabilities/pipeline-digest/"],
   ["manager_decision_queue_for_sales_actions", "control", "Manager decision queue", "Where the manager approves what the agent prepares. Every other capability depends on it.", "absent", 2, [0,1], "later"],
 ];
 
@@ -520,6 +520,7 @@ const SETUP = [
   ["Missed strategy call explainer", "Explains which calls count as no-shows, naming the scheduled time, grace threshold and status; counts always come with their rows. No default threshold while the rule is unsettled.", "14 tests", [1,1], "capabilities/strategy-call-no-show/"],
   ["Outbound sequence health explainer", "Explains each sequence's health score part by part, names credit given without data, flags stalls and proposes unexecuted repairs; unknown when a part can't be checked.", "12 tests", [1,1], "capabilities/outbound-sequence-health/"],
   ["Outbound batch approval packet", "Builds one approval packet from fixtures for a named approver: excludes unsubscribed, suppressed and duplicate prospects first, reports the real number instead of padding, and never expires into approval.", "11 tests", [1,1], "capabilities/outbound-batch-approval/"],
+  ["Pipeline digest answers and composer", "Answers six pipeline questions with each figure's source, marks failed sources unavailable with the reason, and composes one digest per Central date and recipient for the existing sender.", "12 tests", [1,1], "capabilities/pipeline-digest/"],
   ["Weekly one-pager", "Status page for senior managers, published to GitHub Pages and refreshed every weekday by a scheduled job.", "Live page", null, "artifacts/vick-weekly-update.html"],
   ["Capability map", "Interactive map of all 32 capabilities along the customer journey, with ceilings, human decisions, tools and dependencies.", "Built from 32 specs", null, "artifacts/vick-capability-map.html"],
   ["Workflows", "The sales journey with its human gates, how a capability earns autonomy, and how each piece of work is built.", "8 human gates mapped", null, "artifacts/vick-workflows.html"],
@@ -538,6 +539,7 @@ const DECISIONS = [
   ["F6", "A sequence that has stopped sending scores 100 and shows as healthy.", "The platform gives full points to any part with no data. The explainer keeps the number but names every part credited without evidence.", "active"],
   ["F7", "Two legacy agents retry failed emails and mark week-old errors resolved with no approval.", "Nobody has authorised these actions. Whether they run is unknown; asked the program lead or platform owner to check.", "active"],
   ["F8", "The platform auto-approves any pending approval request once its expiry passes, every 15 minutes.", "An outbound packet filed with an expiry would be approved with nobody looking. Packets carry no expiry; raised with the program lead or platform owner.", "active"],
+  ["F9", "The platform digest fails completely when one source fails, can send twice, and follows the server clock instead of Central time.", "The composer reports each source on its own and keys on the Central date. Two small platform fixes proposed to the program lead or platform owner.", "active"],
   ["P1", "Offer routing labels a lead only; it doesn't start outreach.", "Slower first contact, but nobody receives the wrong offer.", "next"],
   ["P2", "Pause re-scoring until a person can override an offer.", "Stops silent switching while the provenance fix is built.", "next"],
   ["D4", "Publish only the one-pager to GitHub Pages, through a dedicated workflow.", "Keeps the site to one page even though the repository is public.", "done"],
@@ -574,7 +576,7 @@ const NEXT = [
 const WAIT = [
   ["Sales manager", "Pass marks, warm-lead signals, pause decision."],
   ["Platform owner", "Change request sent 11 Nov: record who sets a lead's offer. Also asked whether re-scoring runs and who files it."],
-  ["Program lead", "Who files platform changes; confirm a date; are the campaign repair agents running?"],
+  ["Program lead", "Who files platform changes; confirm a date; are the campaign repair agents running? Two digest fixes."],
   ["Sales and marketing managers", "Owners for two legacy jobs."],
 ];
 
@@ -588,6 +590,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-11", "Pipeline digest answers and composer merged and its criterion passed; sixth capability built as a draft."],
   ["2026-11-11", "Outbound batch approval packet merged and its criterion passed; fifth capability built as a draft."],
   ["2026-11-11", "Outbound sequence health explainer merged and its criterion passed; fourth capability built as a draft."],
   ["2026-11-11", "Missed strategy call explainer merged and its criterion passed; third capability built as a draft."],
@@ -608,9 +611,9 @@ const storiesTotal = 7 + CAPS.length;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["29/56", "acceptance criteria passed", 29 / 56],
-  ["95", "automated tests, all passing", 1],
-  ["30", "pull requests merged", 1],
+  ["30/56", "acceptance criteria passed", 30 / 56],
+  ["107", "automated tests, all passing", 1],
+  ["32", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 
