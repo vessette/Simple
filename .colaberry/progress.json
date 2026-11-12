@@ -648,13 +648,22 @@
       "criteria": [
         {
           "text": "Every answer cites the ledger row or the approved policy text; where the policy is unapproved the agent says so rather than stating terms, and it never asserts that a refund will be issued.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/refund-and-void/refundAnswers.js",
+        "capabilities/refund-and-void/refundAnswers.test.js",
+        "capabilities/refund-and-void/fixtures/ledger.json",
+        "capabilities/refund-and-void/REFUND_FOR_ROSELYN.md"
+      ],
+      "tests_added": [
+        "capabilities/refund-and-void/refundAnswers.test.js: every answer cites a ledger row, the ledger query, or the policy text",
+        "capabilities/refund-and-void/refundAnswers.test.js: the unapproved policy is said to be unapproved, and no terms are stated",
+        "capabilities/refund-and-void/refundAnswers.test.js: no answer asserts that a refund will be issued"
+      ],
+      "notes": "R2, human decision at every level: answers from refund ledger rows and the policy text only; the terms are unapproved (salesHubCoryController.ts:33), so none are stated; refund requests go to a person; recommendations carry no decision. 10 tests pass on main after PR #40 (merge 802f35d).",
+      "updated_at": "2026-11-12T03:47:51.210Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
