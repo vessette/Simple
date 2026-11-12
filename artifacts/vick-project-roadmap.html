@@ -479,7 +479,7 @@ const CAPS = [
   ["price_statement_consistency_audit", "outreach", "Check every stated price agrees", "Reports each place a price disagrees with the approved one.", "absent", 6, [0,1], "later"],
   ["enrollment_completion_follow_through", "enroll", "Follow enrollments through to a seat", "Nobody who agreed to enroll is lost before their seat is active.", "partial", 5, [0,1], "next"],
   ["enrollment_checkout_link_issuance", "enroll", "Issue checkout and payment links", "Explains checkout and quotes prices only from the price list; never issues a link.", "implemented", 4, [1,1], "done", "capabilities/enrollment-checkout/"],
-  ["payment_confirmation_and_seat_grant", "enroll", "Confirm payment and grant the seat", "Exactly one seat, no double count on a replay.", "implemented", 5, [0,1], "later"],
+  ["payment_confirmation_and_seat_grant", "enroll", "Confirm payment and grant the seat", "Explains a person's payment, seat and payment path, each from its record; unknown when no record exists.", "implemented", 5, [1,1], "done", "capabilities/payment-confirmation/"],
   ["payment_handoff_integrity", "enroll", "Keep the payment handoff intact", "The person who agreed to buy is the person charged.", "partial", 6, [0,1], "later"],
   ["app_originated_payment_reconciliation", "enroll", "Reconcile payments the app missed", "Links a settled payment whose notice never arrived.", "implemented", 5, [0,1], "later"],
   ["payment_webhook_replay_dedup_watch", "enroll", "Watch for duplicate payment notices", "A replay can't grant a second seat or skip a billing period.", "absent", 6, [0,1], "later"],
@@ -523,6 +523,7 @@ const SETUP = [
   ["Pipeline digest answers and composer", "Answers six pipeline questions with each figure's source, marks failed sources unavailable with the reason, and composes one digest per Central date and recipient for the existing sender.", "12 tests", [1,1], "capabilities/pipeline-digest/"],
   ["Checkout and price explainer", "Quotes plan prices only from the platform's price list, refuses any it can't trace (including the retired $4,500), and explains the checkout steps and payment states. Never issues a link.", "10 tests", [1,1], "capabilities/enrollment-checkout/"],
   ["Membership plan and billing answers", "Answers a member's plan, price, credit and billing-date questions from the price list and their own record, each with its source; missing dates are unknown, never worked out.", "11 tests", [1,1], "capabilities/subscription-checkout/"],
+  ["Payment and seat state explainer", "For a named person, explains payment, portal access, seat and which payment-notice path produced them, each traced to its record; flags records that don't fit together.", "9 tests", [1,1], "capabilities/payment-confirmation/"],
   ["Weekly one-pager", "Status page for senior managers, published to GitHub Pages and refreshed every weekday by a scheduled job.", "Live page", null, "artifacts/vick-weekly-update.html"],
   ["Capability map", "Interactive map of all 32 capabilities along the customer journey, with ceilings, human decisions, tools and dependencies.", "Built from 32 specs", null, "artifacts/vick-capability-map.html"],
   ["Workflows", "The sales journey with its human gates, how a capability earns autonomy, and how each piece of work is built.", "8 human gates mapped", null, "artifacts/vick-workflows.html"],
@@ -544,6 +545,7 @@ const DECISIONS = [
   ["F9", "The platform digest fails completely when one source fails, can send twice, and follows the server clock instead of Central time.", "The composer reports each source on its own and keys on the Central date. Two small platform fixes proposed to the program lead or platform owner.", "active"],
   ["F10", "The live checkout route creates payment links at the retired $4,500 price.", "It passes no amount, so a $4,500 default applies; test mode hides it. Whether anyone received one is unknown; raised for a read-only check.", "active"],
   ["F11", "The spec describes an old billing rule, and an unrecognised plan is charged as monthly.", "Since 30 October 2026 billing starts on the payment day, not the class start. The answers explain the current rule and report an unrecognised plan as unknown.", "active"],
+  ["F12", "The payment webhook marks people paid without checking the payment settled, and a returned payment changes nothing.", "Only Settled or Posted should grant a seat, as the platform's own reconciliation already assumes. A change request with five checks was drafted for the platform owners.", "active"],
   ["P1", "Offer routing labels a lead only; it doesn't start outreach.", "Slower first contact, but nobody receives the wrong offer.", "next"],
   ["P2", "Pause re-scoring until a person can override an offer.", "Stops silent switching while the provenance fix is built.", "next"],
   ["D4", "Publish only the one-pager to GitHub Pages, through a dedicated workflow.", "Keeps the site to one page even though the repository is public.", "done"],
@@ -557,6 +559,7 @@ const RISKS = [
   ["Legacy campaign agents acting without approval", "Medium: emails resent or errors hidden", "Asked whether they run; propose pausing retries and auto-resolve if they do", "Program lead, platform owner", "active"],
   ["Approval requests auto-approve on expiry", "High: outreach approved with nobody looking", "Packets carry no expiry; propose expiring outbound requests into rejected instead", "Program lead, platform owner", "active"],
   ["Checkout route issues wrong-priced links", "High: a prospect charged $4,500 instead of $149 to $199 a month", "Read-only check for $4,500 links; pass the plan price or switch the route off", "Program lead, platform owner", "active"],
+  ["Unsettled or reversed payments keep paid access", "High: seats and revenue overstated; access without payment", "Change request: check status before marking paid, flag reversals for a person", "Platform owner, platform builder", "active"],
   ["Legacy jobs with no owner", "Low: stale automation keeps running", "Each has one named question and a named person to answer it", "Sales and marketing managers", "active"],
   ["Plan dates compress into the build window", "Medium: 30 capabilities in 7 weeks", "Build the three proposed tasks first; demo the strongest end-to-end path", "Architect", "next"],
 ];
@@ -571,6 +574,7 @@ const RACI = [
 ];
 
 const NOW = [
+  ["Payment change request to the platform owners", "Drafted: check a payment has settled before marking anyone paid, and flag reversals."],
   ["Weekly check-in with the sales manager", "Pause decision, first task, pass marks, cold-lead rule, what stays human, price and dates."],
 ];
 const NEXT = [
@@ -581,7 +585,7 @@ const NEXT = [
 const WAIT = [
   ["Sales manager", "Pass marks, warm-lead signals, pause decision."],
   ["Platform owner", "Change request sent 11 Nov: record who sets a lead's offer. Also asked whether re-scoring runs and who files it."],
-  ["Program lead", "Who files platform changes; confirm a date; are the campaign repair agents running? Two digest fixes. Any $4,500 checkout links? Unrecognised plans charged as monthly?"],
+  ["Program lead", "Who files platform changes; confirm a date; are the campaign repair agents running? Two digest fixes. Any $4,500 checkout links? Unrecognised plans charged as monthly? Payment status check before marking paid."],
   ["Sales and marketing managers", "Owners for two legacy jobs."],
 ];
 
@@ -595,6 +599,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-11", "Payment and seat state explainer merged and its criterion passed; ninth capability built as a draft. Payment change request drafted."],
   ["2026-11-11", "Membership plan and billing answers merged and its criterion passed; eighth capability built as a draft."],
   ["2026-11-11", "Checkout and price explainer merged and its criterion passed; seventh capability built as a draft."],
   ["2026-11-11", "Pipeline digest answers and composer merged and its criterion passed; sixth capability built as a draft."],
@@ -618,9 +623,9 @@ const storiesTotal = 7 + CAPS.length;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["32/56", "acceptance criteria passed", 32 / 56],
-  ["128", "automated tests, all passing", 1],
-  ["36", "pull requests merged", 1],
+  ["33/56", "acceptance criteria passed", 33 / 56],
+  ["137", "automated tests, all passing", 1],
+  ["38", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 
