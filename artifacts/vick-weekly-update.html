@@ -61,8 +61,8 @@ td:first-child { font-weight: 600; white-space: nowrap; }
   </header>
 
   <div class="snap" aria-label="Snapshot">
-    <div><b>9 of 39</b><span>stories in the plan complete</span></div>
-    <div><b>2 of 32</b><span>of Vick's tasks drafted</span></div>
+    <div><b>10 of 39</b><span>stories in the plan complete</span></div>
+    <div><b>3 of 32</b><span>of Vick's tasks drafted</span></div>
     <div><b>0</b><span>tasks switched on or sending anything</span></div>
     <div><b>3 Dec</b><span>build phase starts</span></div>
   </div>
@@ -74,6 +74,7 @@ td:first-child { font-weight: 600; white-space: nowrap; }
       <li><span><strong>Command Center.</strong> <span class="sub">One page showing all of Vick's planned tasks, the limit on each, and what's still missing, built from the platform's live data.</span></span></li>
       <li><span><strong>Plan for the 16 old sales agents.</strong> <span class="sub">For each one: keep it, fold it into one of Vick's tasks, retire it, or ask the right owner.</span></span></li>
       <li><span><strong>First two of Vick's tasks drafted.</strong> <span class="sub">Finding prospects and scoring how well they fit the program, and explaining which offer a lead belongs in (it says "can't place" rather than guessing). Both only suggest, both are tested, and neither is switched on.</span></span></li>
+      <li><span><strong>Third task drafted: missed strategy calls.</strong> <span class="sub">Vick explains which calls count as missed, always naming the scheduled time, the waiting time used and the call's status. It changes nothing and contacts nobody. 14 tests pass.</span></span></li>
       <li><span><strong>Caught an old agent that could email strangers with no review.</strong> <span class="sub">The Apollo weekly enrollment agent was set up to approve leads itself and add them to cold email campaigns. Ali confirmed it's switched off.</span></span></li>
       <li><span><strong>Manager access fixed.</strong> <span class="sub">Roselyn couldn't open Vick's review page. Ali granted access on 10 November, so she can now review and approve Vick's work.</span></span></li>
       <li><span><strong>Platform change request sent to Kes.</strong> <span class="sub">Asked for a record of who sets a lead's offer, shared three related findings from the code, and asked whether offer re-scoring is running.</span></span></li>
@@ -86,6 +87,7 @@ td:first-child { font-weight: 600; white-space: nowrap; }
       <li class="c"><span><strong>Lead offers may change with nobody checking.</strong><span class="tag risk">safety</span> <span class="sub">The system can re-score leads every 6 hours, switch their offer, and add them to a second email campaign. People who unsubscribed may be included. I don't yet know whether it's running.</span></span></li>
       <li class="c"><span><strong>Nothing records who chose a lead's offer.</strong> <span class="sub">So a person's routing choice can't be protected or enforced yet. This needs a platform change, and sales can't file the request against the platform domain itself.</span></span></li>
       <li class="c"><span><strong>Vick's rules aren't defined yet.</strong> <span class="sub">Pass marks, what makes a lead warm, what always stays with a person, and the correct price and dates all need Roselyn's answers. Until then every task stays a draft.</span></span></li>
+      <li class="c"><span><strong>The platform disagrees on when a call counts as missed.</strong> <span class="sub">The goal says 15 minutes, the spec says 30 minutes, and the code that runs waits 2 hours. Vick won't pick one until Roselyn does.</span></span></li>
       <li class="c"><span><strong>There's nowhere in the platform for the manager to approve Vick's work.</strong> <span class="sub">A decision queue for Roselyn is one of Vick's planned tasks, and the platform has no code for it yet.</span></span></li>
     </ul>
 
@@ -94,6 +96,7 @@ td:first-child { font-weight: 600; white-space: nowrap; }
       <thead><tr><th>From</th><th>What I need</th><th>Why it matters</th></tr></thead>
       <tbody>
         <tr><td>Roselyn</td><td>Should offer re-scoring be paused until a person can override it?</td><td>Stops leads being switched or emailed twice.</td></tr>
+        <tr><td>Roselyn</td><td>How long after its start does a call count as missed: 30 minutes or 2 hours?</td><td>Sets when recovery starts for a missed call.</td></tr>
         <tr><td>Roselyn</td><td>Which task Vick learns first, what stays human, pass marks, warm-lead signals, correct price and dates</td><td>Turns drafts into tasks you can approve.</td></tr>
         <tr><td>Kes</td><td>Is offer re-scoring running, and who files the "who set this offer" change?</td><td>Platform owns the lead record.</td></tr>
         <tr><td>Ali</td><td>Who files the platform change, and confirm a date (Fri 13 Nov suggested)</td><td>Unblocks the change request.</td></tr>
@@ -107,7 +110,7 @@ td:first-child { font-weight: 600; white-space: nowrap; }
     <ul class="items">
       <li class="x"><span><strong>Record Roselyn's answers from the check-in and confirm them with her.</strong> <span class="sub">Then update the role write-up, the three tasks and the routing notes to match.</span></span></li>
       <li class="x"><span><strong>Follow up with Kes on the change request</strong> <span class="sub">for recording who sets a lead's offer, and pass on Roselyn's pause decision if she makes one.</span></span></li>
-      <li class="x"><span><strong>Draft Vick's next tasks, in the order Roselyn chooses.</strong> <span class="sub">My suggestion: keep each lead's stage and temperature current, catch missed strategy calls, follow enrollments through to an active seat, then find people who stopped at checkout.</span></span></li>
+      <li class="x"><span><strong>Draft Vick's next tasks, in the order Roselyn chooses.</strong> <span class="sub">My suggestion: keep each lead's stage and temperature current, follow enrollments through to an active seat, then find people who stopped at checkout.</span></span></li>
       <li class="x"><span><strong>Keep everything as drafts.</strong> <span class="sub">Nothing sends a message or switches on until the accountable manager has reviewed it.</span></span></li>
     </ul>
   </section>
