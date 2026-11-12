@@ -1,0 +1,25 @@
+{
+  "_note": "Fictional prospect recommendations for tests. No real people; every address is at example.com.",
+  "threshold": 50,
+  "cap": 20,
+  "approver": "Roselyn",
+  "sequence": "Cold outbound: AI Leadership Accelerator",
+  "suppressed": ["blocked@example.com"],
+  "in_other_packets": ["held@example.com"],
+  "recommendations": [
+    { "id": "r1", "email": "ada@example.com", "name": "Ada K.", "company": "Northwind", "fit_score": 92, "status": "pending" },
+    { "id": "r2", "email": "ben@example.com", "name": "Ben L.", "company": "Contoso", "fit_score": 81, "status": "pending" },
+    { "id": "r3", "email": "cy@example.com", "name": "Cy M.", "company": "Fabrikam", "fit_score": 77, "status": "pending" },
+    { "id": "r4", "email": "di@example.com", "name": "Di N.", "company": "Tailspin", "fit_score": 65, "status": "pending" },
+    { "id": "r5", "email": "ed@example.com", "name": "Ed O.", "company": "Litware", "fit_score": 58, "status": "pending" },
+    { "id": "r6", "email": "fay@example.com", "name": "Fay P.", "company": "Proseware", "fit_score": 50, "status": "pending" },
+    { "id": "r7", "email": "gus@example.com", "name": "Gus Q.", "company": "Adatum", "fit_score": 71, "status": "pending" },
+    { "id": "r8", "email": "Ada@Example.com", "name": "Ada K.", "company": "Northwind", "fit_score": 60, "status": "pending" },
+    { "id": "r9", "email": "hal@example.com", "name": "Hal R.", "company": "Woodgrove", "fit_score": 49, "status": "pending" },
+    { "id": "r10", "email": "ivy@example.com", "name": "Ivy S.", "company": "Coho", "fit_score": 88, "status": "pending", "unsubscribed": true },
+    { "id": "r11", "email": "blocked@example.com", "name": "Jo T.", "company": "Fourth Coffee", "fit_score": 90, "status": "pending" },
+    { "id": "r12", "email": "held@example.com", "name": "Kai U.", "company": "Wingtip", "fit_score": 84, "status": "pending" },
+    { "id": "r13", "email": "lee@example.com", "name": "Lee V.", "company": "Margie's", "fit_score": 95, "status": "approved" },
+    { "id": "r14", "email": "mo@example.com", "name": "Mo W.", "company": "Lucerne", "fit_score": null, "status": "pending" }
+  ]
+}
