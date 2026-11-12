@@ -103,13 +103,32 @@
       "criteria": [
         {
           "text": "Every comp listed traces to a subscriptions row; the agent states explicitly that comped seats are excluded from revenue, and never proposes a grant as though it were a routine step.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/comped-seat/compState.js",
+        "capabilities/comped-seat/compState.test.js",
+        "capabilities/comped-seat/fixtures/comps.json",
+        "capabilities/comped-seat/COMPS_FOR_ROSELYN.md",
+        "capabilities/comped-seat/COMP_DECISION_FLOW.md",
+        "capabilities/comped-seat/COMP_AUDIT_PROPOSAL.md",
+        "capabilities/comped-seat/AUDIT_LOG_REVIEW.md",
+        "capabilities/comped-seat/COMP_RECOMMENDATION.md",
+        "capabilities/comped-seat/ACCESS_FOR_ROSELYN.md"
+      ],
+      "tests_added": [
+        "capabilities/comped-seat/compState.test.js: every comp listed traces to a subscriptions row",
+        "capabilities/comped-seat/compState.test.js: a comp with no row id is not listed, and the report says so",
+        "capabilities/comped-seat/compState.test.js: the report states explicitly that comped seats are excluded from revenue",
+        "capabilities/comped-seat/compState.test.js: never proposes a grant as a routine step",
+        "capabilities/comped-seat/compState.test.js: a comp alongside an active paid plan: the revenue effect is flagged and the rule left to people",
+        "capabilities/comped-seat/compState.test.js: a revoked comp: access kept by design, and still counted as Free Access on the revenue page",
+        "capabilities/comped-seat/compState.test.js: failure paths: unreadable rows, a missing enrolment, a comp with a charge, a comp on an unpaid enrolment",
+        "capabilities/comped-seat/compState.test.js: idempotent and read-only: same answer twice, rows untouched"
+      ],
+      "notes": "R2 report only: lists active and revoked comps from subscriptions rows a person passes in (Vick cannot reach production). 10 tests, 10/10 mutants killed. Found at platform 109820a: a comp grant marks the enrolment paid, so comps pass the paying-member filter and are kept out of MRR only by the row the revenue page picks; a revoked comp can still count as Free Access; no reason is recorded (the admin audit log records who and when; corrected from an earlier draft that said neither). The comp-plus-paid rule is still open with Roselyn and Ali. See capabilities/comped-seat/COMPS_FOR_ROSELYN.md.",
+      "updated_at": "2026-11-12T23:09:35.072Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
