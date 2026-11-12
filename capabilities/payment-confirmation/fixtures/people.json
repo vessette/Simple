@@ -1,0 +1,24 @@
+{
+  "_note": "Fictional people and records for tests. now = 2026-11-11T20:00:00Z.",
+  "now": 1794427200000,
+  "samples": [
+    { "at": 1794426000000, "outcome": "accepted" },
+    { "at": 1794426600000, "outcome": "rejected_signature" },
+    { "at": 1794423000000, "outcome": "accepted" }
+  ],
+  "people": {
+    "paid_enrolment": { "name": "Person A",
+      "enrolment": { "payment_status": "paid", "portal_enabled": true, "cohort_id": "cohort-jan", "paysimple_external_id": "CB-1001-1794000000000", "paysimple_payment_id": 55501, "amount_paid": 199 },
+      "subscriptions": [] },
+    "member_on_schedule": { "name": "Person B",
+      "enrolment": { "payment_status": "paid", "portal_enabled": true, "cohort_id": "cohort-jan", "paysimple_external_id": null, "paysimple_payment_id": 55502, "amount_paid": 1788 },
+      "subscriptions": [ { "plan": "annual", "status": "active", "payment_ref": "SUB-77-1794000000000", "paysimple_schedule_id": "SCH-9", "current_period_end": "2027-10-30T16:00:00Z" } ] },
+    "pending": { "name": "Person C",
+      "enrolment": { "payment_status": "pending", "portal_enabled": false, "cohort_id": "cohort-jan", "paysimple_external_id": "CB-1003-1794000000000", "paysimple_payment_id": null, "amount_paid": null },
+      "subscriptions": [] },
+    "paid_by_hand": { "name": "Person D",
+      "enrolment": { "payment_status": "paid", "portal_enabled": false, "cohort_id": "cohort-jan", "paysimple_external_id": null, "paysimple_payment_id": null, "amount_paid": null },
+      "subscriptions": [] },
+    "nobody": { "name": "Person E", "enrolment": null, "subscriptions": [] }
+  }
+}
