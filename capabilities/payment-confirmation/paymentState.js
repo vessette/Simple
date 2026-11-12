@@ -120,7 +120,7 @@ function ruleFlags(e, read) {
   if (e?.payment_status !== 'paid' || !read || String(read.payment_id) !== String(e.paysimple_payment_id)) return [];
   const g = classifyStatus(read.status);
   if (g === 'waiting') return [`Marked paid, but the payment provider reads the payment as ${read.status}. Under the rule agreed on ${PAID_RULE.decided} that does not count as paid yet.`];
-  if (g === 'reversed' || g === 'failed') return [`Marked paid, but the payment provider reads the payment as ${read.status}. Under the rule agreed on ${PAID_RULE.decided}, access is removed and the seat freed. A person does that; Vick changes nothing.`];
+  if (g === 'reversed' || g === 'failed') return [`Marked paid, but the payment provider reads the payment as ${read.status}. Under the agreed rule this does not count as paid: ${PAID_RULE.reversal} A person does that; Vick changes nothing.`];
   return [];
 }
 
@@ -144,23 +144,33 @@ export function explainPerson({ name, enrolment, subscriptions, samples, now, ga
 
 /**
  * The pre-flight list for the settled-only rule, by name, from read-only lookups of each
- * paid enrolment's payment. Sorts every paid enrolment into one group, so none is lost:
- *   reversed: would lose access (returned, voided, refunded, charged back, failed)
- *   waiting:  would lose access under the new rule (only Authorized or Pending)
+ * paid record's payment. Covers class enrolments marked paid AND active memberships (SUB-
+ * payments, whose id is on the subscription row), and sorts every one into one group:
+ *   reversed: would lose paid status (returned, voided, refunded, charged back, failed)
+ *   waiting:  would lose paid status under the new rule (only Authorized or Pending)
  *   keeps:    Settled or Posted
  *   unknown:  no payment id, no lookup, a failed lookup, or a status the rule doesn't cover
  * The sync's dry run cannot stand in for this: it returns counts, not names, and counts
  * Authorized as paid (paymentSyncService.ts:31-33, :45-53).
+ *
+ * The lookups are real customers' names and payments. They are passed in at run time and
+ * never written to this repo or any other.
  */
-export function preflightList({ enrolments, reads }) {
+export function preflightList({ enrolments, memberships, reads }) {
   if (!Array.isArray(enrolments)) throw new RangeError('enrolments must be a list.');
+  if (memberships !== undefined && !Array.isArray(memberships)) throw new RangeError('memberships must be a list when given.');
   const byId = new Map((Array.isArray(reads) ? reads : []).map((r) => [String(r.payment_id), r]));
   const out = { reversed: [], waiting: [], keeps: [], unknown: [] };
-  for (const { name, enrolment } of enrolments) {
-    if (enrolment?.payment_status !== 'paid') continue;
-    const id = has(enrolment.paysimple_payment_id) ? String(enrolment.paysimple_payment_id) : null;
+  const records = [
+    ...enrolments.filter((x) => x.enrolment?.payment_status === 'paid')
+      .map((x) => ({ name: x.name, kind: 'enrolment', paymentId: x.enrolment.paysimple_payment_id })),
+    ...(memberships ?? []).filter((x) => x.subscription?.status === 'active')
+      .map((x) => ({ name: x.name, kind: 'membership', paymentId: x.subscription.paysimple_payment_id })),
+  ];
+  for (const { name, kind, paymentId } of records) {
+    const id = has(paymentId) ? String(paymentId) : null;
     const read = id ? byId.get(id) : undefined;
-    const row = { name, payment_id: id, status: read?.status ?? null };
+    const row = { name, kind, payment_id: id, status: read?.status ?? null };
     if (!id) { out.unknown.push({ ...row, reason: 'no payment id recorded' }); continue; }
     if (!read || read.error) { out.unknown.push({ ...row, reason: read?.error ? `lookup failed: ${read.error}` : 'not looked up' }); continue; }
     const g = classifyStatus(read.status);

@@ -98,8 +98,9 @@ test('the paid rule: settled or posted only, any case, and an unknown status is 
   assert.equal(countsAsPaid('posted'), true);
   assert.equal(countsAsPaid('authorized'), false, 'Authorized does not count, though the sync says it does');
   assert.equal(countsAsPaid('Pending'), false);
-  for (const s of ['Returned', 'ReturnedNSF', 'Reversed', 'Refunded', 'ChargeBack', 'Voided']) assert.equal(classifyStatus(s), 'reversed', s);
-  assert.equal(classifyStatus('Declined'), 'failed');
+  for (const s of ['Returned', 'ReturnedNSF', 'Reversed', 'Refunded', 'ChargeBack']) assert.equal(classifyStatus(s), 'reversed', s);
+  // As in the platform builder's spec: Failed, Declined and Voided are marked failed.
+  for (const s of ['Failed', 'Declined', 'Voided']) assert.equal(classifyStatus(s), 'failed', s);
   assert.equal(countsAsPaid('Captured'), null);
   assert.equal(countsAsPaid(undefined), null);
   assert.equal(PAID_RULE.decided, '2026-11-12');
@@ -122,7 +123,25 @@ test('a gateway read applies the rule, cites the read, and flags disagreement fo
   assert.match(get(auth, 'counts_as_paid')[0].value, /^no: .*authorized, which has not settled/);
   assert.match(auth.flags[0], /Marked paid, but .* authorized\. .* does not count as paid yet/);
   const back = run('paid_enrolment', pay('Returned'));
-  assert.match(back.flags[0], /access is removed and the seat freed\. A person does that; Vick changes nothing\./);
+  assert.match(back.flags[0], /drops to Week 0, the free preview tier, and keeps their login\. .*no seat is freed by hand\. A person does that; Vick changes nothing\./);
+  assert.doesNotMatch(back.flags[0], /seat freed|access is removed/, 'superseded wording');
+});
+
+test('pre-flight list covers memberships (SUB- payments) as well as class enrolments', () => {
+  const p = preflightList({
+    enrolments: [{ name: 'Person P', enrolment: { payment_status: 'paid', paysimple_payment_id: 1 } }],
+    memberships: [
+      { name: 'Person M', subscription: { status: 'active', paysimple_payment_id: 8 } },
+      { name: 'Person N', subscription: { status: 'active', paysimple_payment_id: null } },
+      { name: 'Person O', subscription: { status: 'cancelled', paysimple_payment_id: 9 } },
+    ],
+    reads: [{ payment_id: 1, status: 'Settled' }, { payment_id: 8, status: 'Pending' }, { payment_id: 9, status: 'Returned' }],
+  });
+  assert.deepEqual(p.waiting, [{ name: 'Person M', kind: 'membership', payment_id: '8', status: 'Pending' }]);
+  assert.deepEqual(p.keeps.map((r) => [r.name, r.kind]), [['Person P', 'enrolment']]);
+  assert.deepEqual(p.unknown.map((r) => [r.name, r.kind, r.reason]), [['Person N', 'membership', 'no payment id recorded']]);
+  assert.equal(p.reversed.length, 0, 'a cancelled membership is not a paid record');
+  assert.throws(() => preflightList({ enrolments: [], memberships: 'x' }), RangeError);
 });
 
 test('failure paths: a read for another payment, or an uncovered status, stays unknown', () => {

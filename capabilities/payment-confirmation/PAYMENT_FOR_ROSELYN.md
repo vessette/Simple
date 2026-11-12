@@ -26,20 +26,22 @@ It also flags records that don't fit together, for a person to look at:
 - **Marked paid with no payment id.** That means it wasn't marked paid by a payment notice.
 - **A membership is active but the enrollment isn't marked paid.**
 
-**One definition of paid** (added 2026-11-12). Vick uses the rule Ali decided, not any of the platform's three: only `Settled` or `Posted` counts. It lives in one place, [`paidRule.js`](paidRule.js). The enrollment record doesn't store the payment's own status, so:
+**One definition of paid** (added 2026-11-12). Vick uses the rule Ali decided, not any of the five the platform uses today (see Quincy's spec draft below): only `Settled` or `Posted` counts. It lives in one place, [`paidRule.js`](paidRule.js). The enrollment record doesn't store the payment's own status, so:
 - **Without a read from the payment provider**, Vick says whether the payment counts as paid is **unknown**, and names the payment id to look up.
-- **With a read of that same payment**, it answers yes or no and cites the read. It flags a person when the record says paid but the read says `Authorized` (not paid yet under the rule) or a reversal (access to be removed and the seat freed, by a person).
+- **With a read of that same payment**, it answers yes or no and cites the read. It flags a person when the record says paid but the read says `Authorized` (not paid yet under the rule) or a reversal or failure (the student drops to Week 0, the free preview tier, and keeps their login; a person does that).
 - **A read for a different payment, or a status the rule doesn't cover**, stays unknown.
 
-**The pre-flight list.** Given the read-only lookups of each paid enrollment's payment, Vick sorts every paid enrollment by name into one of four groups:
-- **reversed:** would lose access;
-- **only authorised:** would lose access under the new rule;
-- **keeps access:** settled or posted;
+**The pre-flight list.** It covers class enrollments marked paid and active memberships (`SUB-` payments, whose id is on the membership row; added 2026-11-12 after Quincy's review). Given the read-only lookups of each one's payment, Vick sorts every one by name into one of four groups:
+- **reversed or failed:** would lose paid status;
+- **only authorised or pending:** would lose paid status under the new rule;
+- **keeps:** settled or posted;
 - **unknown:** no payment id, no lookup, a failed lookup, or an uncovered status.
 
-No enrollment is dropped. It writes nothing.
+None is dropped. It writes nothing.
 
-Code: [`paymentState.js`](paymentState.js) and [`paidRule.js`](paidRule.js), with 14 tests in [`paymentState.test.js`](paymentState.test.js).
+**The lookup results stay out of every repo.** They're real customers' names and payments, so Vick takes them as input when someone runs it and never saves them. This repo holds only fictional test people.
+
+Code: [`paymentState.js`](paymentState.js) and [`paidRule.js`](paidRule.js), with 15 tests in [`paymentState.test.js`](paymentState.test.js).
 
 ## What I found in the platform
 
@@ -100,6 +102,34 @@ Ali told Kes and Quincy not to use the 30-minute job's dry run to list who would
 - **Who runs the lookups:** Quincy, together with Ali. They need the live payment credentials, which exist only in the production container, so nobody runs them alone.
 - **Seat figures:** check them with a left join from classes to enrollments that counts `payment_status = 'paid'` and compares it with `seats_taken`.
 
+## Quincy's spec draft (2026-11-12)
+
+Quincy drafted the platform change from the code. Nothing is built or switched on until Ali approves.
+
+**The rule:**
+- Only `Settled` or `Posted` counts as paid.
+- `Authorized` and `Pending` are recorded and re-checked until they settle or fail.
+- `Failed`, `Declined` and `Voided` are marked failed, and never override paid.
+- A reversal on a paid student drops them to Week 0 and keeps their login.
+- The seat count comes from paid enrollments, with no subtraction.
+
+**The platform decides "paid" in five places, not three.** None of them uses Settled or Posted only. I checked each at `109820a`:
+
+| # | Where | What it counts as paid |
+|---|---|---|
+| 1 | The payment-notice handler | Any status (`webhookController.ts:118-121`) |
+| 2 | The 30-minute sync | Includes `Authorized` (`paymentSyncService.ts:31-33`) |
+| 3 | The 20-minute app reconcile | The same, through the sync's `isCollected` (`appPaymentReconcileService.ts:96`, `:330`) |
+| 4 | The reconciliation sweep | `Authorized` for a customer who's already linked (`paymentReconciliationService.ts:38`, `:275`) |
+| 5 | Membership renewals | `authorized` and `pending` as success (`subscriptionScheduleService.ts:275`) |
+
+**His review of Vick:** same rule, nothing lost, nothing changed, so it can sort the lookups by name. He raised three things, all fixed on 2026-11-12:
+- the reversal wording now matches the later decision;
+- the five places are listed;
+- memberships are now in the list.
+
+**One of his questions is already answered.** He asks whether the 20-minute app reconcile is on in production. Ali's Step 0 used it as the control: `AppPaymentReconcile` prints its "scheduled" line in the production logs. So it's on, and today it counts `Authorized` as paid.
+
 ## What needs a decision
 
 | # | Question | Who | Options |
@@ -115,7 +145,7 @@ Ali told Kes and Quincy not to use the 30-minute job's dry run to list who would
 
 **Date:** 2026-11-12 (answers 1 and 2 from Ali, by email to the platform owners)
 
-**1. Returned payments:** Remove access when a payment is reversed on someone already paid, and free the seat with it. Ali: if Roselyn wants a review step before removal, she should say so and he'll change it. **Roselyn to confirm.**
+**1. Returned payments:** A reversal on a paid student drops them to Week 0, the free preview tier, and leaves their login alone. There's no seat to free: the seat count comes from paid enrollments. This is Ali's later decision, as set out in Quincy's spec draft of 2026-11-12. It replaces Ali's first answer, "remove access and free the seat". Ali: if Roselyn wants a review step first, she should say so and he'll change it. **Roselyn to confirm.**
 
 **2. Payment status:** `Settled` and `Posted` only. `Authorized` doesn't open access or take a seat. All three paths should follow the same rule; the 30-minute job stays off until they do.
 
