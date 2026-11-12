@@ -545,7 +545,7 @@ const DECISIONS = [
   ["F9", "The platform digest fails completely when one source fails, can send twice, and follows the server clock instead of Central time.", "The composer reports each source on its own and keys on the Central date. Two small platform fixes proposed to the program lead or platform owner.", "active"],
   ["F10", "The live checkout route creates payment links at the retired $4,500 price.", "It passes no amount, so a $4,500 default applies; test mode hides it. Whether anyone received one is unknown; raised for a read-only check.", "active"],
   ["F11", "The spec describes an old billing rule, and an unrecognised plan is charged as monthly.", "Since 30 October 2026 billing starts on the payment day, not the class start. The answers explain the current rule and report an unrecognised plan as unknown.", "active"],
-  ["F12", "The payment webhook marks people paid without checking the payment settled, and a returned payment changes nothing.", "Only Settled or Posted should grant a seat, as the platform's own reconciliation already assumes. A change request with five checks was drafted for the platform owners.", "active"],
+  ["F12", "The payment webhook marks people paid without checking the payment settled, and a returned payment changes nothing.", "Only Settled or Posted should grant a seat, as the platform's own reconciliation already assumes. A change request with five checks was sent to the platform owners on 11 November.", "active"],
   ["P1", "Offer routing labels a lead only; it doesn't start outreach.", "Slower first contact, but nobody receives the wrong offer.", "next"],
   ["P2", "Pause re-scoring until a person can override an offer.", "Stops silent switching while the provenance fix is built.", "next"],
   ["D4", "Publish only the one-pager to GitHub Pages, through a dedicated workflow.", "Keeps the site to one page even though the repository is public.", "done"],
@@ -574,7 +574,6 @@ const RACI = [
 ];
 
 const NOW = [
-  ["Payment change request to the platform owners", "Drafted: check a payment has settled before marking anyone paid, and flag reversals."],
   ["Weekly check-in with the sales manager", "Pause decision, first task, pass marks, cold-lead rule, what stays human, price and dates."],
 ];
 const NEXT = [
@@ -585,6 +584,7 @@ const NEXT = [
 const WAIT = [
   ["Sales manager", "Pass marks, warm-lead signals, pause decision."],
   ["Platform owner", "Change request sent 11 Nov: record who sets a lead's offer. Also asked whether re-scoring runs and who files it."],
+  ["Platform owner and builder", "Change request sent 11 Nov: only settled payments grant access and a seat; reversals and failed membership payments reach a person."],
   ["Program lead", "Who files platform changes; confirm a date; are the campaign repair agents running? Two digest fixes. Any $4,500 checkout links? Unrecognised plans charged as monthly? Payment status check before marking paid."],
   ["Sales and marketing managers", "Owners for two legacy jobs."],
 ];
@@ -599,6 +599,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-11", "Payment change request sent to the platform owner and builder."],
   ["2026-11-11", "Payment and seat state explainer merged and its criterion passed; ninth capability built as a draft. Payment change request drafted."],
   ["2026-11-11", "Membership plan and billing answers merged and its criterion passed; eighth capability built as a draft."],
   ["2026-11-11", "Checkout and price explainer merged and its criterion passed; seventh capability built as a draft."],
