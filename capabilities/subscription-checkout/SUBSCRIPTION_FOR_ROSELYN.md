@@ -31,7 +31,7 @@ Read from the platform code at commit `109820a`. This is what the code allows, n
 
 4. **What works as the spec says:**
    - The free admin plan can't reach a checkout (`subscriptionService.ts:338-341`).
-   - Checkout refuses when billing isn't set up (`:343`).
+   - Checkout refuses when billing isn't set up (`:344`).
    - Confirming the same payment twice changes nothing the second time (`:434`).
    - A stored payment customer that belongs to someone else is ignored rather than charged (`:296-330`).
 
