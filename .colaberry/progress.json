@@ -455,13 +455,21 @@
       "criteria": [
         {
           "text": "Every figure carries its source, and an unavailable source is reported as unavailable with the reason.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/pipeline-digest/pipelineDigest.js",
+        "capabilities/pipeline-digest/pipelineDigest.test.js",
+        "capabilities/pipeline-digest/fixtures/sources.json",
+        "capabilities/pipeline-digest/DIGEST_FOR_ROSELYN.md"
+      ],
+      "tests_added": [
+        "capabilities/pipeline-digest/pipelineDigest.test.js: every figure carries its source",
+        "capabilities/pipeline-digest/pipelineDigest.test.js: an unavailable source is reported as unavailable with the reason, never as 0"
+      ],
+      "notes": "Criterion verified by named tests (12 pass), merged in PR #32 at 0c5fa49. R2: answers and composes only; the existing sender delivers. One digest per (Central date, recipient).",
+      "updated_at": "2026-11-12T01:37:02.039Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
