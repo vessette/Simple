@@ -69,7 +69,14 @@ test('payment states are explained, and an unknown state is refused', () => {
     assert.equal(e.source, 'Enrollment.ts:203-204');
   }
   assert.equal(explainPaymentState('refunded').refused, true);
-  assert.match(PAYMENT_STATES.pending, /not held until payment settles/);
+  assert.match(PAYMENT_STATES.pending, /not held until the enrolment is marked paid/);
+});
+
+test('paid never claims the money settled: the record does not store that', () => {
+  // The notice handler marks paid on Authorized too, and no table keeps the status.
+  assert.doesNotMatch(PAYMENT_STATES.paid, /^Payment settled|has settled\./);
+  assert.match(PAYMENT_STATES.paid, /unknown from this record/);
+  assert.doesNotMatch(PAYMENT_STATES.failed, /Nothing was collected/);
 });
 
 test('the checkout flow says nothing is charged until the person pays', () => {

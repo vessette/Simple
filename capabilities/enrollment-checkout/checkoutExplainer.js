@@ -59,10 +59,12 @@ export function checkAmount(amount, catalog) {
 
 /** What an enrolment's payment_status means (Enrollment.ts:203-204). */
 export const PAYMENT_STATES = Object.freeze({
-  pending: 'A payment link was issued and nothing has been paid yet. The seat is not held until payment settles.',
+  pending: 'A payment link was issued and nothing has been paid yet. The seat is not held until the enrolment is marked paid.',
   pending_invoice: 'An invoice was requested instead of a card payment. Nothing has been paid yet.',
-  paid: 'Payment settled and was linked to this enrolment. The seat and portal access follow from that.',
-  failed: 'The payment attempt failed. Nothing was collected.',
+  // Not "settled": the payment-notice handler marks paid on any status, Authorized
+  // included, and no table stores the payment's own status (Ali's Step 0, 2026-11-12).
+  paid: 'Marked paid and linked to this enrolment. The seat and portal access follow from that. The record does not store the payment\'s own status, so whether it had settled, rather than only been authorised, is unknown from this record.',
+  failed: 'A payment failure was recorded for this enrolment. The record does not say whether any money moved.',
 });
 
 export function explainPaymentState(status) {

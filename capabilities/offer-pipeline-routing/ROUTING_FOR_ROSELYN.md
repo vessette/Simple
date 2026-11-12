@@ -99,6 +99,8 @@ The only safe answer is no. The decision here is to **confirm it**, and to ask s
 
 **Today nobody can route a lead by hand inside the platform, and nothing records who set an offer.** Until that changes, none of her answers to decisions 1, 4 and 5 can be enforced. Meanwhile the re-score keeps running every 6 hours (`offerRoutingAgent.ts:9`), re-classifying leads and enrolling them.
 
+**Confirmed running in production (Ali, 2026-11-12).** The AI Ops scheduler loads it at boot as "Offer routing and classification", every 6 hours at half past, and `OfferRoutingAgent` is enabled. Don't use the `agent_runs` table to check it: it holds two rows in total, from August, for an unrelated agent, so it isn't the run log for these jobs. Still open with Ali: who owns the advisory, custom build and enterprise offers; whether setting an offer by hand records the label only, without enrolling the lead (Ali agrees with Kes that it should); whether a lead may deliberately be in more than one campaign; and whether the re-score changes offers or only proposes them.
+
 ### What the code shows
 
 - **The admin edit route doesn't accept an offer.** `PATCH /api/admin/leads/:id` validates against `updateLeadSchema` (`controllers/adminLeadController.ts:292`), and that schema has no `recommended_offer` (`schemas/leadAdminSchema.ts:3-8`).

@@ -32,7 +32,7 @@ Code: [`paymentState.js`](paymentState.js), with 9 tests in [`paymentState.test.
 
 Read from the platform code at commit `109820a`. This is what the code allows, not a record of what has happened.
 
-1. **A returned payment doesn't free the seat or remove access.** When a payment is returned (reversed), the payment-notice handler logs it, but only a failed payment updates the enrollment (`webhookController.ts:168-176`). A separate job does catch it later, if it's switched on (see the correction below): every 30 minutes it re-reads each recorded payment and marks returned, voided, refunded and charged-back ones as failed, which takes them out of revenue. That job doesn't change portal access, the seat or the member tier. So the person keeps their access and their seat either way.
+1. **A returned payment doesn't free the seat or remove access.** When a payment is returned (reversed), the payment-notice handler logs it, but only a failed payment updates the enrollment (`webhookController.ts:168-176`). A separate 30-minute job could catch it, but **it isn't running in production** (Ali, 2026-11-12; see Step 0 below). So today a returned, voided, refunded or charged-back payment is never marked failed: the person keeps access and their seat, and the payment stays in revenue. Even when that job runs, it doesn't change portal access, the seat or the member tier.
 
 2. **The payment's own status isn't checked.** The notice includes the payment's status. The handler reads it (`webhookController.ts:67`) but marks the person paid whatever it says (`:118-121`).
 
@@ -56,11 +56,23 @@ Kes reviewed the change request I sent on 11 November. Each point below was then
 
 | What I said | What's right | Where |
 |---|---|---|
-| A returned payment changes nothing. | A 30-minute job (`PaySimplePaymentSync`) re-reads each recorded payment. It marks returned, voided, refunded and charged-back ones as failed, which takes them out of revenue. It doesn't touch portal access, the seat or the tier. It only runs when `PAYSIMPLE_SYNC_ENABLED=true`, and whether that's on in production is **unknown**. | `paymentSyncService.ts:31-36`, `:232-256`; `schedulerService.ts:2229-2241`; `env.ts:39` |
+| A returned payment changes nothing. | A 30-minute job (`PaySimplePaymentSync`) re-reads each recorded payment. It marks returned, voided, refunded and charged-back ones as failed, which takes them out of revenue. It doesn't touch portal access, the seat or the tier. It only runs when `PAYSIMPLE_SYNC_ENABLED=true`. **Update, 2026-11-12: it's off in production** (Step 0 below), so this correction is reversed: nothing marks returned payments failed, and the revenue concern stands in full. | `paymentSyncService.ts:31-36`, `:232-256`; `schedulerService.ts:2229-2241`; `env.ts:39` |
 | The amount floor is $50. | The floor is **$100**. $50 is the Open House seat-hold deposit that the floor exists to screen out. | `paymentReconciliationService.ts:40-64` |
 | Settled-only matches the rule the platform already uses. | The platform has **three** rules. The payment-notice handler accepts any status. The 30-minute job counts `Authorized` as paid. The reconciliation job accepts only `Settled` or `Posted`. A settled-only webhook follows the third and conflicts with the second. | `webhookController.ts:67`, `:118-121`; `paymentSyncService.ts:31-33`; `paymentReconciliationService.ts:37` |
 
 **A risk in the fix I proposed.** I said to leave an `Authorized` payment pending. If that also means the payment id isn't recorded on the enrollment, nothing would ever promote it. The 30-minute job only reads enrollments that already have a payment id (`paymentSyncService.ts:110-121`). A customer who really paid could stay locked out. So the fix has to record the payment id even while the enrollment waits. It also needs one agreed rule for when `Authorized` counts as paid, used in all three places.
+
+**Ali's decision makes this the core of the fix.** `Authorized` doesn't count as paid (answer 2 below), and the 30-minute job isn't running. So the platform change itself has to build the promotion path. It records the payment while the enrollment waits, then re-checks the payment until it settles or fails. Without that, someone whose card is only authorised is locked out for good, not for a day.
+
+## Step 0 results (from Ali, 2026-11-12)
+
+Read-only checks Ali ran in production.
+
+- **Is the 30-minute job on? No.** `PAYSIMPLE_SYNC_ENABLED` isn't set in the backend container, so `PaySimplePaymentSync` never schedules. As a control, its sibling job `AppPaymentReconcile` logs that it's scheduled, and this one logs nothing. Ali is leaving it off until all three rules agree, because it counts `Authorized` as paid.
+- **What status do real payment notices carry?** Both `Authorized` and `Posted` have arrived since the last restart. The sample is small, so it shows the `Authorized` case is live, not how common it is.
+- **How many paid enrollments have a payment that isn't Settled or Posted?** This can't be answered from the database. No table stores the payment provider's status: the notice handler reads it, logs it, and drops it before marking the enrollment paid. Only a few dozen paid enrollments have a payment id recorded, so checking each one with the payment provider is a small job. Ali suggests doing that before the fix, to learn whether this has actually happened.
+
+**What this means for Vick.** Because no record stores the payment's own status, Vick can't tell whether a paid enrollment's money settled. It says "paid" means *marked paid*, and that whether the payment settled is unknown from the record. (The checkout explainer said "Payment settled" until 2026-11-12. That's now corrected and pinned by a test.)
 
 ## What needs a decision
 
@@ -75,12 +87,12 @@ Kes reviewed the change request I sent on 11 November. Each point below was then
 
 *Fill in with the date.*
 
-**Date:**
+**Date:** 2026-11-12 (answers 1 and 2 from Ali, by email to the platform owners)
 
-**1. Returned payments:**
+**1. Returned payments:** Remove access when a payment is reversed on someone already paid, and free the seat with it. Ali: if Roselyn wants a review step before removal, she should say so and he'll change it. **Roselyn to confirm.**
 
-**2. Payment status:**
+**2. Payment status:** `Settled` and `Posted` only. `Authorized` doesn't open access or take a seat. All three paths should follow the same rule; the 30-minute job stays off until they do.
 
-**3. Failed membership payments:**
+**3. Failed membership payments:** Open. Part of the platform change, which Ali hasn't approved yet.
 
-**4. Handled notices:**
+**4. Handled notices:** Open. Same as 3.
