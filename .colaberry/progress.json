@@ -47,13 +47,31 @@
       "criteria": [
         {
           "text": "Every in-scope or out-of-scope verdict cites the amount match, the time window and the customer-id scope; the agent never says a payment 'should probably' be linked.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/app-payment-reconcile/scopeExplainer.js",
+        "capabilities/app-payment-reconcile/scopeExplainer.test.js",
+        "capabilities/app-payment-reconcile/fixtures/reconcile.json",
+        "capabilities/app-payment-reconcile/RECONCILE_FOR_ROSELYN.md"
+      ],
+      "tests_added": [
+        "capabilities/app-payment-reconcile/scopeExplainer.test.js: every verdict cites the amount match, the time window and the customer-id scope",
+        "capabilities/app-payment-reconcile/scopeExplainer.test.js: path A: our customer id, an amount we asked for, inside the window",
+        "capabilities/app-payment-reconcile/scopeExplainer.test.js: our customer id alone is not enough: wrong amount, or outside the window, is out",
+        "capabilities/app-payment-reconcile/scopeExplainer.test.js: a bootcamp or manual charge with no matching checkout never comes into scope",
+        "capabilities/app-payment-reconcile/scopeExplainer.test.js: path B: the hosted page made its own customer, so amount, window and payer email decide",
+        "capabilities/app-payment-reconcile/scopeExplainer.test.js: a shared customer id fails closed for path A, and the path B gap is flagged",
+        "capabilities/app-payment-reconcile/scopeExplainer.test.js: the reconciler counts Authorized as collected; Vick says the agreed rule does not",
+        "capabilities/app-payment-reconcile/scopeExplainer.test.js: early exits name their guard: status, the $100 floor, already linked, the reconcile start",
+        "capabilities/app-payment-reconcile/scopeExplainer.test.js: a date with no time of day leaves the window unknown, never guessed",
+        "capabilities/app-payment-reconcile/scopeExplainer.test.js: never says a payment should probably be linked",
+        "capabilities/app-payment-reconcile/scopeExplainer.test.js: failure paths: missing payment, unreadable candidates, no amount, no candidates, no linked list",
+        "capabilities/app-payment-reconcile/scopeExplainer.test.js: idempotent and read-only: same answer twice, inputs untouched"
+      ],
+      "notes": "R2 explainer only: for one payment a person passes in, the reconciler verdict (in_scope, out_of_scope, unknown), the guard that decided it, and the amount, time-window and customer-id checks, each with a file:line at platform 109820a. Unknown, never guessed, where a read is missing or the date has no time. 12 tests, 12/12 mutants killed. Found: Authorized counted as collected (one of the five paid places); path B ignores the shared-customer exclusion; no-open-checkout candidates counted every run; dry run omits activations; production PaymentDate format unconfirmed; a failed final write likely not retried (from reading). See capabilities/app-payment-reconcile/RECONCILE_FOR_ROSELYN.md.",
+      "updated_at": "2026-11-12T23:17:10.304Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,

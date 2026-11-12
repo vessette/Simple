@@ -62,7 +62,7 @@ td:first-child { font-weight: 600; white-space: nowrap; }
 
   <div class="snap" aria-label="Snapshot">
     <div><b>18 of 39</b><span>stories in the plan complete</span></div>
-    <div><b>12 of 32</b><span>of Vick's tasks drafted</span></div>
+    <div><b>13 of 32</b><span>of Vick's tasks drafted</span></div>
     <div><b>0</b><span>tasks switched on or sending anything</span></div>
     <div><b>3 Dec</b><span>build phase starts</span></div>
   </div>
@@ -84,6 +84,7 @@ td:first-child { font-weight: 600; white-space: nowrap; }
       <li><span><strong>Tenth task drafted: refunds and voids.</strong> <span class="sub">Vick answers refund questions from the refund records, naming each one. The refund terms aren't approved yet, so it says so and quotes none. Any refund request goes to a person. 10 tests.</span></span></li>
       <li><span><strong>Eleventh task drafted: cancellations.</strong> <span class="sub">For a named member, Vick explains their subscription, whether a payment schedule exists, and the recorded cancellation reason. If there's no schedule, it says a cancel would stop nothing at the payment provider, and never tells anyone they won't be charged. 12 tests pass.</span></span></li>
       <li><span><strong>Twelfth task drafted: free seats.</strong> <span class="sub">Vick lists who holds a free seat and since when, each from its record, and says free seats are excluded from revenue. It never suggests giving someone a free seat; that stays a decision for Roselyn and Ali. 10 tests pass.</span></span></li>
+      <li><span><strong>Thirteenth task drafted: payments that missed their webhook.</strong> <span class="sub">For one payment, Vick says whether the job that heals missed payments would claim it, which check decided, and cites the amount, time and customer checks every time. It never says a payment should be linked. 12 tests pass.</span></span></li>
       <li><span><strong>Checked every code reference in Vick's task specs.</strong> <span class="sub">Built a checker for all 359 references and hand-checked a random sample of 50 of the ones it can't check. About a third point at the wrong place, mostly because the code moved. Two references repeated in nearly every spec account for most of it.</span></span></li>
       <li><span><strong>Caught an old agent that could email strangers with no review.</strong> <span class="sub">The Apollo weekly enrollment agent was set up to approve leads itself and add them to cold email campaigns. Ali confirmed it's switched off.</span></span></li>
       <li><span><strong>Manager access fixed.</strong> <span class="sub">Roselyn couldn't open Vick's review page. Ali granted access on 10 November, so she can now review and approve Vick's work.</span></span></li>
@@ -111,6 +112,7 @@ td:first-child { font-weight: 600; white-space: nowrap; }
       <li class="c"><span><strong>No refund terms are approved, and the platform has three versions.</strong> <span class="sub">One is labelled approved, so another agent could quote it. A refund also leaves paid access and the seat in place. Taiwo and Ali were asked on 11 November which version is final.</span></span></li>
       <li class="c"><span><strong>A cancellation with no payment schedule reports success silently.</strong> <span class="sub">That's right for someone who pays by hand, but nobody is told the payment provider was never touched. Members who are past due also can't cancel from the portal.</span></span></li>
       <li class="c"><span><strong>A free seat can be counted the wrong way in revenue.</strong> <span class="sub">Granting one marks the person as paid. If they were already paying, or the seat was later taken back, the revenue page can count them wrongly. The audit log shows who granted a seat and when, but nobody is asked why.</span></span></li>
+      <li class="c"><span><strong>The missed-payment job has gaps of its own.</strong> <span class="sub">It counts authorised payments as collected, its check against shared customer records covers only one of its two match paths, and its time window depends on a date format nobody has confirmed in production.</span></span></li>
       <li class="c"><span><strong>Many code references in the task specs point at the wrong place.</strong> <span class="sub">Anyone checking Vick's evidence would be sent to the wrong code. A note with the results is ready for Ali and Kes.</span></span></li>
       <li class="c"><span><strong>There's nowhere in the platform for the manager to approve Vick's work.</strong> <span class="sub">A decision queue for Roselyn is one of Vick's planned tasks, and the platform has no code for it yet.</span></span></li>
     </ul>
@@ -129,6 +131,7 @@ td:first-child { font-weight: 600; white-space: nowrap; }
         <tr><td>Taiwo</td><td>Which of three versions of the refund terms is final, and who signs it off</td><td>Vick quotes no refund terms until one is confirmed.</td></tr>
         <tr><td>Roselyn</td><td>When a cancellation stops nothing at the payment provider, who should be told? Should past-due members be able to cancel?</td><td>So no member keeps paying after they asked to stop.</td></tr>
         <tr><td>Roselyn &amp; Ali</td><td>What should happen when someone already paying is given a free seat? Should every grant require a reason, logged with who gave it?</td><td>So free seats never hide real revenue.</td></tr>
+        <tr><td>Ali &amp; Kes</td><td>Six questions on the missed-payment job: the paid rule, shared customer records, uncountable candidates, the dry run, the date format, a retry that may not happen</td><td>So the job that marks people paid only claims money that is ours.</td></tr>
         <tr><td>Ali or Kes</td><td>Fix the code references in the sales specs, starting with the two repeated ones, and add a check</td><td>So evidence for Vick's tasks points at the right code.</td></tr>
         <tr><td>Kes or a platform engineer</td><td>A blind second check of the 50 sampled references</td><td>Confirms the estimate before it's relied on.</td></tr>
         <tr><td>Roselyn &amp; Sohail</td><td>Who owns two old marketing agents</td><td>Closes the last open items in the legacy plan.</td></tr>
