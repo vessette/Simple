@@ -113,7 +113,8 @@
         "capabilities/comped-seat/COMPS_FOR_ROSELYN.md",
         "capabilities/comped-seat/COMP_DECISION_FLOW.md",
         "capabilities/comped-seat/COMP_AUDIT_PROPOSAL.md",
-        "capabilities/comped-seat/AUDIT_LOG_REVIEW.md"
+        "capabilities/comped-seat/AUDIT_LOG_REVIEW.md",
+        "capabilities/comped-seat/COMP_RECOMMENDATION.md"
       ],
       "tests_added": [
         "capabilities/comped-seat/compState.test.js: every comp listed traces to a subscriptions row",
@@ -126,7 +127,7 @@
         "capabilities/comped-seat/compState.test.js: idempotent and read-only: same answer twice, rows untouched"
       ],
       "notes": "R2 report only: lists active and revoked comps from subscriptions rows a person passes in (Vick cannot reach production). 10 tests, 10/10 mutants killed. Found at platform 109820a: a comp grant marks the enrolment paid, so comps pass the paying-member filter and are kept out of MRR only by the row the revenue page picks; a revoked comp can still count as Free Access; no reason is recorded (the admin audit log records who and when; corrected from an earlier draft that said neither). The comp-plus-paid rule is still open with Roselyn and Ali. See capabilities/comped-seat/COMPS_FOR_ROSELYN.md.",
-      "updated_at": "2026-11-12T23:04:11.045Z",
+      "updated_at": "2026-11-12T23:06:34.625Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,

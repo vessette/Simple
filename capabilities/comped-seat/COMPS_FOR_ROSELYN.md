@@ -61,6 +61,8 @@ Read from the platform code at commit `109820a`. This is what the code does, not
 
 ## What needs a decision
 
+**Short version for a decision:** [COMP_RECOMMENDATION.md](COMP_RECOMMENDATION.md).
+
 The grant and revoke flow, with these decisions marked where they fall and the data points to record for each seat, is in [COMP_DECISION_FLOW.md](COMP_DECISION_FLOW.md).
 
 | # | Question | Who | Options |
