@@ -1,0 +1,28 @@
+{
+  "_note": "Fictional outbound sequences for tests. No real campaigns or people.",
+  "sequences": [
+    { "id": "healthy", "name": "Healthy sequence", "channels": { "email": "ok", "ai": "ok" },
+      "sent_24h": 40, "failed_24h": 0, "ai_attempted_24h": 40, "ai_failed_24h": 0,
+      "outcomes_7d": { "sent": 150, "opened": 30, "clicked": 10, "replied": 6, "bounced": 4 },
+      "unresolved_errors": 0, "active_leads": 120, "pending_actions": 80 },
+    { "id": "silent", "name": "Stopped sending", "channels": { "email": "ok", "ai": "ok" },
+      "sent_24h": 0, "failed_24h": 0, "ai_attempted_24h": 0, "ai_failed_24h": 0,
+      "outcomes_7d": { "sent": 2, "opened": 0, "clicked": 0, "replied": 0, "bounced": 0 },
+      "unresolved_errors": 0, "active_leads": 85, "pending_actions": 0 },
+    { "id": "sms-lost", "name": "SMS not checkable", "channels": { "email": "ok", "sms": "unreachable", "ai": "ok" },
+      "sent_24h": 30, "failed_24h": 2, "ai_attempted_24h": 30, "ai_failed_24h": 1,
+      "outcomes_7d": { "sent": 80, "opened": 12, "clicked": 3, "replied": 2, "bounced": 1 },
+      "unresolved_errors": 1, "active_leads": 40, "pending_actions": 25 },
+    { "id": "outage", "name": "Email provider outage", "channels": { "email": "outage", "ai": "ok" },
+      "sent_24h": 5, "failed_24h": 15, "ai_attempted_24h": 20, "ai_failed_24h": 0,
+      "outcomes_7d": { "sent": 60, "opened": 6, "clicked": 1, "replied": 1, "bounced": 2 },
+      "unresolved_errors": 15, "active_leads": 50, "pending_actions": 30 },
+    { "id": "misconfigured", "name": "Voice not configured", "channels": { "email": "ok", "voice": "not_configured", "ai": "ok" },
+      "sent_24h": 18, "failed_24h": 6, "ai_attempted_24h": 24, "ai_failed_24h": 6,
+      "outcomes_7d": { "sent": 40, "opened": 4, "clicked": 0, "replied": 0, "bounced": 1 },
+      "unresolved_errors": 3, "active_leads": 20, "pending_actions": 10 },
+    { "id": "lookup-failed", "name": "Engagement lookup failed", "channels": { "email": "ok", "ai": "ok" },
+      "sent_24h": 10, "failed_24h": 0, "ai_attempted_24h": 10, "ai_failed_24h": 0,
+      "outcomes_7d": null, "unresolved_errors": 0, "active_leads": null, "pending_actions": 5 }
+  ]
+}
