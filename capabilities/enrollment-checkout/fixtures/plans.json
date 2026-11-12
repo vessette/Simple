@@ -1,0 +1,14 @@
+{
+  "_note": "Snapshot of the platform's PLANS at ColaberryEnterprise_AI_LeadershipAccelerator @ 109820a. Rates from membershipPrice.ts:44-49; plans built in subscriptionService.ts:78-85. Refresh this file, never edit a number by hand.",
+  "source": "PLANS (subscriptionService.ts:78-85), rates from MEMBERSHIP_PRICE (membershipPrice.ts:44-49) @ 109820a",
+  "annual_term_months": 12,
+  "plans": {
+    "annual": { "label": "Annual", "per_month": 149, "cadence": "year", "price": 1788, "self_serve": true },
+    "monthly": { "label": "Monthly", "per_month": 199, "cadence": "month", "price": 199, "self_serve": true },
+    "comp": { "label": "Free Access", "per_month": 0, "cadence": "year", "price": 0, "self_serve": false }
+  },
+  "not_the_price": [
+    { "value": 4500, "why": "the retired per-participant offer; no enrollment has ever paid it" },
+    { "value": 1700, "why": "a planning figure that was never in the system; the annual charge is 1788" }
+  ]
+}
