@@ -1,0 +1,19 @@
+{
+  "_note": "Fictional source results for tests. No real figures or people.",
+  "all_ok": {
+    "pipeline": { "ok": true, "as_of": "2026-11-12T13:00:00Z", "data": { "new": 42, "contacted": 18, "qualified": 9, "enrolled": 4 } },
+    "leads": { "ok": true, "as_of": "2026-11-12T13:00:00Z", "data": { "total": 310, "thisMonth": 27, "highIntent": 6 } },
+    "enrollments": { "ok": true, "as_of": "2026-11-12T13:00:00Z", "data": { "totalEnrollments": 38, "paidEnrollments": 31, "pendingInvoice": 3, "seatsRemaining": 7 } },
+    "needs_attention": { "ok": true, "as_of": "2026-11-12T13:00:00Z", "data": { "rows": [] } },
+    "appointments": { "ok": true, "as_of": "2026-11-12T13:00:00Z", "data": { "rows": [ { "title": "Strategy call", "scheduled_at": "2026-11-13T16:00:00Z" } ] } },
+    "revenue": { "ok": true, "as_of": "2026-11-12T13:00:00Z", "data": { "collected": 4470 } }
+  },
+  "partial": {
+    "pipeline": { "ok": true, "as_of": "2026-11-12T13:00:00Z", "data": { "new": 42, "contacted": 18, "qualified": 0, "enrolled": 4 } },
+    "leads": { "ok": true, "as_of": "2026-11-12T13:00:00Z", "data": { "total": 310, "thisMonth": null, "highIntent": 6 } },
+    "enrollments": { "ok": false, "reason": "Timed out after 10 seconds." },
+    "needs_attention": { "ok": true, "as_of": "2026-11-12T13:00:00Z", "data": { "rows": [ { "member": "Member A", "issue": "card expires before renewal" }, { "member": "Member B", "issue": "past due 4 days" } ] } },
+    "appointments": { "ok": false, "reason": "Calendar service returned 503." },
+    "revenue": { "ok": false, "reason": "Collected revenue is registered as unavailable: the payment source is identified but not yet wired." }
+  }
+}
