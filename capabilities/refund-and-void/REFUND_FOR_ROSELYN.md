@@ -51,7 +51,7 @@ Read from the platform code at commit `109820a`. This is what the code allows, n
 
 ## Before this can be validated
 
-- **You have no admin login,** so you can't reach the review or approval surface for this capability.
+- **Your access.** Ali gave you access to Vick's review page on 10 November (the story's note that you had no login predates that). The refunds page itself needs full admin rights; whether your access covers it is unconfirmed.
 - **The agent can't read the payment gateway or the production database** (both are denied by default). For the platform-rule part of a recommendation, a person has to run the lookup on the refunds page and pass the result in. Without it, the draft says the payment is unknown.
 
 ## Refund policy trail
@@ -63,6 +63,7 @@ How the search for the approved terms has gone, so nobody repeats a step. Add a 
 | 2026-11-11 | Read the platform code and documents for refund terms | Three versions found (finding 6); none confirmed | Ask the owner of the finalized-agreement task |
 | 2026-11-11 | Checked the finalized-agreement task (due 2026-06-19) | Not checked yet: the agent has no access to the task tracker | Admissions operations or the approver checks it |
 | 2026-11-11 | Note sent to admissions operations, approver copied: which version is the policy, and was the task completed? | Sent; awaiting a reply | Record the reply here; follow up if none by 2026-11-16 |
+| 2026-11-11 | Questions sent to the approver, including what a refund should change and the refund ledger result | Sent; awaiting a reply | Record the answers under decisions 2, 3 and 5 |
 
 ## What needs a decision
 
@@ -72,7 +73,7 @@ How the search for the approved terms has gone, so nobody repeats a step. Add a 
 | 2 | Should a refund remove access and free the seat? | Roselyn, with Ali | Remove both · flag for a person · leave as is (today) |
 | 3 | Should a refund that moved money always be recorded as succeeded? | Ali or Kes | Record the gateway result first, and the credit void separately |
 | 4 | When spent credit can't be recovered, who's told? | Roselyn, with finance | Flag it on the refund · leave as is |
-| 5 | Can you get an admin login to review this? | Ali | Yes · review another way |
+| 5 | Does your 10 November access cover the refunds page? | Ali | Yes · no, review another way |
 
 ## Your answers
 
@@ -88,4 +89,4 @@ How the search for the approved terms has gone, so nobody repeats a step. Add a 
 
 **4. Spent credit:**
 
-**5. Admin login:**
+**5. Refunds page access:**
