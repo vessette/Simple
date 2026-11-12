@@ -380,13 +380,21 @@
       "criteria": [
         {
           "text": "Every claim traces to the enrolment, subscription or health sample it came from; the agent reports unknown where no record exists.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/payment-confirmation/paymentState.js",
+        "capabilities/payment-confirmation/paymentState.test.js",
+        "capabilities/payment-confirmation/fixtures/people.json",
+        "capabilities/payment-confirmation/PAYMENT_FOR_ROSELYN.md"
+      ],
+      "tests_added": [
+        "capabilities/payment-confirmation/paymentState.test.js: every claim traces to the enrolment, subscription or health sample it came from",
+        "capabilities/payment-confirmation/paymentState.test.js: unknown where no record exists"
+      ],
+      "notes": "Criterion verified by named tests (9 pass), merged in PR #38 at d230ee8. Human decision at every level: explains only. Findings for the platform owners: returned payments change nothing; payment status not checked before marking paid; SUB- failures not recorded; check-then-increment not atomic.",
+      "updated_at": "2026-11-12T02:07:43.829Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
