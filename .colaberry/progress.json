@@ -793,7 +793,8 @@
         "capabilities/revenue-reporting/revenueAnswers.test.js",
         "capabilities/revenue-reporting/fixtures/responses.json",
         "capabilities/revenue-reporting/REVENUE_FOR_ROSELYN.md",
-        "capabilities/revenue-reporting/DEFINITIONS.md"
+        "capabilities/revenue-reporting/DEFINITIONS.md",
+        "capabilities/revenue-reporting/REVENUE_INSTANCES.md"
       ],
       "tests_added": [
         "capabilities/revenue-reporting/revenueAnswers.test.js: every figure is reproducible from a named endpoint, field and filter",
@@ -808,7 +809,7 @@
         "capabilities/revenue-reporting/revenueAnswers.test.js: idempotent and read-only: same answer twice, responses untouched"
       ],
       "notes": "R2 answers only: each figure read unchanged from the revenue endpoint response a person passes in, with endpoint, field and filter. Unavailable with a reason, never zero, for a missing or broken source. Net revenue reported unavailable per the platform metric registry; the feed figure named collected less refunds. Projections refused as revenue. 10 tests; 10 of 11 mutants killed, the 11th equivalent. Found at 109820a: two meanings of net; collected is one recorded amount per enrolment; dashboard and feed count different credits; no date-range filter; refund ledger may be incomplete; brief scope description and analytics citations out of date. See capabilities/revenue-reporting/REVENUE_FOR_ROSELYN.md.",
-      "updated_at": "2026-11-12T23:35:36.347Z",
+      "updated_at": "2026-11-12T23:39:22.676Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,

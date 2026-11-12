@@ -1,6 +1,6 @@
 # "Net revenue", "net" and "collected": what each one means today
 
-**Project note.** It sets out the current definitions and calculations side by side, so it's clear where the confusion comes from. Everything is read from the platform code at commit `109820a`, and nothing has been measured in production. The decisions this leads to are in [REVENUE_FOR_ROSELYN.md](REVENUE_FOR_ROSELYN.md).
+**Project note.** It sets out the current definitions and calculations side by side, so it's clear where the confusion comes from. Everything is read from the platform code at commit `109820a`, and nothing has been measured in production. The decisions this leads to are in [REVENUE_FOR_ROSELYN.md](REVENUE_FOR_ROSELYN.md). Every other figure called "revenue", including the projections, is compared in [REVENUE_INSTANCES.md](REVENUE_INSTANCES.md).
 
 ## The three terms
 
