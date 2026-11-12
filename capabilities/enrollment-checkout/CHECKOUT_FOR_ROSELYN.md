@@ -23,12 +23,13 @@ Read from the platform code at commit `109820a`. This is what the code allows, n
 1. **The live checkout route issues links for $4,500.** `POST /api/create-invoice` is switched on (`server.ts:252`, `enrollmentRoutes.ts:14`). Its handler creates the invoice **without passing a price** (`enrollmentController.ts:62-68`), so the default of $4,500 applies (`paysimpleService.ts:404`). The platform's own price module lists $4,500 as **not the price** (`membershipPrice.ts:79-82`).
    - In test mode the amount is forced to $0.01 (`paysimpleService.ts:250`), so testing wouldn't show the problem.
    - I found no page on the website that calls this route, so **whether anyone has used it is unknown.** Ali or Kes can check for enrollments with a $4,500 link.
+   - **Closed, 2026-11-12 (Ali):** the route is retired. It now answers 410 and logs the caller. Nobody was ever charged $4,500: none of the enrollments that went through the payment-link path were at that amount, and the last use was on 21 July 2026.
 
 2. **The customer we store is often not the one charged.** The hosted payment page creates its own customer record when the person pays (`appPaymentReconcileService.ts:22-28`). That's why payments sometimes can't be matched to their enrollment, and why the reconciliation capability exists.
 
 3. **A link can exist with no enrollment.** The payment link is created first and the pending enrollment second (`enrollmentController.ts:62-76`). If recording the enrollment fails, the person still has a working payment link, but nothing to match their payment to. The reverse case is handled correctly: if the payment provider fails, no enrollment is created.
 
-4. **Nothing holds the seat.** The class is checked for space (`enrollmentService.ts`, `validateCohortAvailability`), but nothing reserves a seat until payment settles. Two people can both get a link for the last seat.
+4. **Nothing holds the seat.** The class is checked for space (`enrollmentService.ts`, `validateCohortAvailability`), but nothing reserves a seat until the enrollment is marked paid. Two people can both get a link for the last seat.
 
 ## What needs a decision
 
@@ -43,11 +44,11 @@ Read from the platform code at commit `109820a`. This is what the code allows, n
 
 *Fill in with the date.*
 
-**Date:**
+**Date:** 2026-11-12 (answers 1 and 2 from Ali)
 
-**1. Route:**
+**1. Route:** Switched off. It now answers 410 and logs anything that still calls it.
 
-**2. $4,500 links:**
+**2. $4,500 links:** None. No enrollment from the payment-link path was at $4,500, and the ones that paid were at $199.
 
 **3. Link without enrollment:**
 

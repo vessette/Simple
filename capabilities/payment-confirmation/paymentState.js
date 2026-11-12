@@ -11,9 +11,12 @@
 // Paths follow the platform's handlePaySimpleWebhook() (ColaberryEnterprise_AI_
 // LeadershipAccelerator @ 109820a, backend/src/controllers/webhookController.ts:61-185).
 
+import { PAID_RULE, classifyStatus } from './paidRule.js';
+
 const ENROLMENT = 'enrolment row';
 const SUBSCRIPTION = 'subscription row';
 const HEALTH = 'webhook health samples';
+const GATEWAY = 'gateway read';
 const PAYMENT_STATES = ['paid', 'pending', 'pending_invoice', 'failed'];
 
 /** The webhook path that handles a given external id. */
@@ -89,6 +92,38 @@ export function healthClaims(samples, now) {
   ];
 }
 
+const GROUP_WORDS = {
+  settled: (s) => `yes: the payment provider reads it as ${s}`,
+  waiting: (s) => `no: the payment provider reads it as ${s}, which has not settled`,
+  reversed: (s) => `no: the payment provider reads it as ${s}, a reversal`,
+  failed: (s) => `no: the payment provider reads it as ${s}`,
+};
+
+/**
+ * Whether the payment counts as paid under the decided rule. The enrolment row does not
+ * store the provider's status (webhookController.ts:67 reads it and drops it), so this is
+ * known only from a gateway read of the same payment id.
+ */
+function ruleClaim(e, read) {
+  const name = 'counts_as_paid';
+  const id = has(e?.paysimple_payment_id) ? String(e.paysimple_payment_id) : null;
+  if (!id) return unknown(name, 'No payment id is recorded on the enrolment, so there is no payment to look up.');
+  if (!read) return unknown(name, `The enrolment record does not store the payment's own status. Whether payment ${id} counts as paid needs a read from the payment provider. ${PAID_RULE.text}`);
+  if (String(read.payment_id) !== id) return unknown(name, `The gateway read is for payment ${read.payment_id}, not ${id}, so it cannot answer for this enrolment.`);
+  const g = classifyStatus(read.status);
+  if (g === 'unknown') return unknown(name, `The payment provider reads payment ${id} as "${read.status}", which is not a status the rule covers.`);
+  return claim(name, GROUP_WORDS[g](read.status), GATEWAY, 'status');
+}
+
+/** Where the record and the decided rule disagree, for a person to act on. Vick changes nothing. */
+function ruleFlags(e, read) {
+  if (e?.payment_status !== 'paid' || !read || String(read.payment_id) !== String(e.paysimple_payment_id)) return [];
+  const g = classifyStatus(read.status);
+  if (g === 'waiting') return [`Marked paid, but the payment provider reads the payment as ${read.status}. Under the rule agreed on ${PAID_RULE.decided} that does not count as paid yet.`];
+  if (g === 'reversed' || g === 'failed') return [`Marked paid, but the payment provider reads the payment as ${read.status}. Under the rule agreed on ${PAID_RULE.decided}, access is removed and the seat freed. A person does that; Vick changes nothing.`];
+  return [];
+}
+
 /** Things in the records that do not fit together, for a person to look at. */
 function flags(e, subs) {
   const out = [];
@@ -99,9 +134,40 @@ function flags(e, subs) {
 }
 
 /** Payment and seat state for one named person, every claim traced to a record. */
-export function explainPerson({ name, enrolment, subscriptions, samples, now }) {
+export function explainPerson({ name, enrolment, subscriptions, samples, now, gatewayRead }) {
   if (typeof name !== 'string' || !name.trim()) throw new RangeError('A named person is required.');
   if (!Number.isFinite(now)) throw new RangeError('now (milliseconds) is required.');
-  const claims = [...enrolmentClaims(enrolment), pathClaim(enrolment, subscriptions), ...subscriptionClaims(subscriptions), ...healthClaims(samples, now)];
-  return { person: name.trim(), claims, flags: flags(enrolment, subscriptions), unknown_count: claims.filter((c) => c.status === 'unknown').length };
+  const claims = [...enrolmentClaims(enrolment), ruleClaim(enrolment, gatewayRead), pathClaim(enrolment, subscriptions), ...subscriptionClaims(subscriptions), ...healthClaims(samples, now)];
+  const allFlags = [...flags(enrolment, subscriptions), ...ruleFlags(enrolment, gatewayRead)];
+  return { person: name.trim(), claims, flags: allFlags, unknown_count: claims.filter((c) => c.status === 'unknown').length };
+}
+
+/**
+ * The pre-flight list for the settled-only rule, by name, from read-only lookups of each
+ * paid enrolment's payment. Sorts every paid enrolment into one group, so none is lost:
+ *   reversed: would lose access (returned, voided, refunded, charged back, failed)
+ *   waiting:  would lose access under the new rule (only Authorized or Pending)
+ *   keeps:    Settled or Posted
+ *   unknown:  no payment id, no lookup, a failed lookup, or a status the rule doesn't cover
+ * The sync's dry run cannot stand in for this: it returns counts, not names, and counts
+ * Authorized as paid (paymentSyncService.ts:31-33, :45-53).
+ */
+export function preflightList({ enrolments, reads }) {
+  if (!Array.isArray(enrolments)) throw new RangeError('enrolments must be a list.');
+  const byId = new Map((Array.isArray(reads) ? reads : []).map((r) => [String(r.payment_id), r]));
+  const out = { reversed: [], waiting: [], keeps: [], unknown: [] };
+  for (const { name, enrolment } of enrolments) {
+    if (enrolment?.payment_status !== 'paid') continue;
+    const id = has(enrolment.paysimple_payment_id) ? String(enrolment.paysimple_payment_id) : null;
+    const read = id ? byId.get(id) : undefined;
+    const row = { name, payment_id: id, status: read?.status ?? null };
+    if (!id) { out.unknown.push({ ...row, reason: 'no payment id recorded' }); continue; }
+    if (!read || read.error) { out.unknown.push({ ...row, reason: read?.error ? `lookup failed: ${read.error}` : 'not looked up' }); continue; }
+    const g = classifyStatus(read.status);
+    if (g === 'settled') out.keeps.push(row);
+    else if (g === 'waiting') out.waiting.push(row);
+    else if (g === 'reversed' || g === 'failed') out.reversed.push(row);
+    else out.unknown.push({ ...row, reason: `status "${read.status}" is not covered by the rule` });
+  }
+  return { rule: PAID_RULE.text, ...out };
 }

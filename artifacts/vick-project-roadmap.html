@@ -523,7 +523,7 @@ const SETUP = [
   ["Pipeline digest answers and composer", "Answers six pipeline questions with each figure's source, marks failed sources unavailable with the reason, and composes one digest per Central date and recipient for the existing sender.", "12 tests", [1,1], "capabilities/pipeline-digest/"],
   ["Checkout and price explainer", "Quotes plan prices only from the platform's price list, refuses any it can't trace (including the retired $4,500), and explains the checkout steps and payment states. Never issues a link.", "10 tests", [1,1], "capabilities/enrollment-checkout/"],
   ["Membership plan and billing answers", "Answers a member's plan, price, credit and billing-date questions from the price list and their own record, each with its source; missing dates are unknown, never worked out.", "11 tests", [1,1], "capabilities/subscription-checkout/"],
-  ["Payment and seat state explainer", "For a named person, explains payment, portal access, seat and which payment-notice path produced them, each traced to its record; flags records that don't fit together.", "9 tests", [1,1], "capabilities/payment-confirmation/"],
+  ["Payment and seat state explainer", "For a named person, explains payment, portal access, seat and which payment-notice path produced them, each traced to its record; flags records that don't fit together. Applies the agreed rule for 'paid' (settled or posted only) to a payment-provider read, and sorts paid enrollments by name for the pre-flight check.", "14 tests", [1,1], "capabilities/payment-confirmation/"],
   ["Refund ledger and policy answers", "Describes each refund row for a payment and cites it, says the refund terms are unapproved rather than quoting any, sends refund requests to a person, and drafts recommendations that carry no decision.", "10 tests", [1,1], "capabilities/refund-and-void/"],
   ["Cancellation state explainer", "For a named member, explains their subscription, whether a payment schedule exists and what the gateway reads, and the recorded cancellation reason with who wrote it. With no schedule it says a cancel would stop nothing at the gateway, never that the member is safe from charges.", "12 tests", [1,1], "capabilities/subscription-cancellation/"],
   ["Code-reference check of the sales specs", "A read-only checker for every code reference in the 32 capability specs, at the date they were researched and today, plus a seeded random sample of 50 references checked by hand.", "17 tests", null, "docs/discovery/06-citation-check-sales.md"],
@@ -538,7 +538,7 @@ const DECISIONS = [
   ["D2", "The routing explainer says \"can't place\" instead of defaulting to an offer.", "The platform's own rules default silently; a guess presented as a decision misleads the manager.", "done"],
   ["D3", "Missing data is unknown, never a pass or fail.", "A missing job title or company size used to score as zero, which quietly ranked people lower.", "done"],
   ["F1", "A legacy job could approve leads and add them to cold email with no reviewer.", "Confirmed switched off by the program lead. Superseded by a capability that prepares batches for approval.", "done"],
-  ["F2", "Lead offers may be re-scored every 6 hours, switching offer and adding a second campaign.", "Unknown whether it runs. Asked the manager whether to pause it and the platform owner whether it runs.", "active"],
+  ["F2", "Lead offers may be re-scored every 6 hours, switching offer and adding a second campaign.", "Confirmed running in production (12 Nov). Asked the manager whether to pause it.", "active"],
   ["F3", "Nothing records who chose a lead's offer.", "A person's routing can't be protected. Raised as a change request to the platform owners.", "active"],
   ["F4", "The manager couldn't open the agent's review page.", "Missing access grant, fixed by the program lead on 10 November.", "done"],
   ["F5", "The platform disagrees with itself on when a call counts as missed: 15 minutes, 30 minutes or 2 hours.", "The running code waits 2 hours. The explainer names its rule in every answer and has no default until the manager chooses.", "active"],
@@ -546,9 +546,9 @@ const DECISIONS = [
   ["F7", "Two legacy agents retry failed emails and mark week-old errors resolved with no approval.", "Nobody has authorised these actions. Whether they run is unknown; asked the program lead or platform owner to check.", "active"],
   ["F8", "The platform auto-approves any pending approval request once its expiry passes, every 15 minutes.", "An outbound packet filed with an expiry would be approved with nobody looking. Packets carry no expiry; raised with the program lead or platform owner.", "active"],
   ["F9", "The platform digest fails completely when one source fails, can send twice, and follows the server clock instead of Central time.", "The composer reports each source on its own and keys on the Central date. Two small platform fixes proposed to the program lead or platform owner.", "active"],
-  ["F10", "The live checkout route creates payment links at the retired $4,500 price.", "It passes no amount, so a $4,500 default applies; test mode hides it. Whether anyone received one is unknown; raised for a read-only check.", "active"],
+  ["F10", "The live checkout route creates payment links at the retired $4,500 price.", "Closed 12 Nov: the route is retired and answers 410. Nobody was ever charged $4,500.", "done"],
   ["F11", "The spec describes an old billing rule, and an unrecognised plan is charged as monthly.", "Since 30 October 2026 billing starts on the payment day, not the class start. The answers explain the current rule and report an unrecognised plan as unknown.", "active"],
-  ["F12", "The payment webhook marks people paid without checking the payment settled, and a returned payment changes nothing.", "Only Settled or Posted should grant a seat, as the platform's own reconciliation already assumes. A change request with five checks was sent to the platform owners on 11 November.", "active"],
+  ["F12", "The payment webhook marks people paid without checking the payment settled, and a returned payment never frees the seat or removes access.", "The 30-minute job that would mark returned payments failed isn't running, so they stay in revenue too. Decided 12 Nov: only Settled or Posted counts as paid, and a reversal removes access and frees the seat. The platform fix must record a waiting payment and re-check it until it settles, or a real payer stays locked out.", "active"],
   ["F13", "No refund policy is approved, and the platform holds three conflicting versions of the terms, one labelled approved. A refund also leaves paid access and the seat in place.", "Vick quotes no terms. Asked admissions operations and the program lead on 11 November which version is final and what a refund should change.", "active"],
   ["F14", "A cancellation with no payment schedule reports success and says nothing about it; past-due members can't cancel; and the cancellation reason field also holds system notes.", "Correct for manual billing, but nobody is told the gateway was never touched. The explainer calls it a no-op and names who wrote each reason. Three questions put to the sales manager and program lead.", "active"],
   ["F15", "Many code references in the capability specs point at the wrong place.", "21 of the 100 that name their target are wrong; a hand-checked sample puts about 99 of the other 256 wrong (80 to 127). Two references repeated across nearly every spec are 63 of those. A note for the program lead and platform owner is drafted.", "active"],
@@ -564,8 +564,8 @@ const RISKS = [
   ["Sales can't file changes against the platform domain", "Medium: fixes stall", "Asked the program lead and platform owner who files", "Program lead", "active"],
   ["Legacy campaign agents acting without approval", "Medium: emails resent or errors hidden", "Asked whether they run; propose pausing retries and auto-resolve if they do", "Program lead, platform owner", "active"],
   ["Approval requests auto-approve on expiry", "High: outreach approved with nobody looking", "Packets carry no expiry; propose expiring outbound requests into rejected instead", "Program lead, platform owner", "active"],
-  ["Checkout route issues wrong-priced links", "High: a prospect charged $4,500 instead of $149 to $199 a month", "Read-only check for $4,500 links; pass the plan price or switch the route off", "Program lead, platform owner", "active"],
-  ["Unsettled or reversed payments keep paid access", "High: seats and revenue overstated; access without payment", "Change request: check status before marking paid, flag reversals for a person", "Platform owner, platform builder", "active"],
+  ["Checkout route issues wrong-priced links", "High: a prospect charged $4,500 instead of $149 to $199 a month", "Route retired 12 Nov; no one was charged $4,500", "Program lead, platform owner", "closed"],
+  ["Unsettled or reversed payments keep paid access", "High: seats and revenue overstated; access without payment", "Rule decided 12 Nov (settled only; reversal removes access). Fix awaiting approval: record and re-check waiting payments, one rule on all three paths", "Platform owner, platform builder", "active"],
   ["Conflicting refund terms on the platform", "High: a customer quoted terms nobody approved", "Vick states no terms; asked which version is final and who signs it off", "Program lead, admissions operations", "active"],
   ["Capability specs cite the wrong code", "Medium: reviewers judging evidence are sent to the wrong place", "Checker and sample review published; corrections listed per spec; a second reviewer to confirm the sample", "Program lead, platform owner", "active"],
   ["Legacy jobs with no owner", "Low: stale automation keeps running", "Each has one named question and a named person to answer it", "Sales and marketing managers", "active"],
@@ -593,8 +593,8 @@ const NEXT = [
 ];
 const WAIT = [
   ["Sales manager", "Pass marks, warm-lead signals, pause decision."],
-  ["Platform owner", "Change request sent 11 Nov: record who sets a lead's offer. Also asked whether re-scoring runs and who files it."],
-  ["Platform owner and builder", "Change request sent 11 Nov: only settled payments grant access and a seat; reversals and failed membership payments reach a person."],
+  ["Platform owner", "Change request sent 11 Nov: record who sets a lead's offer, and who files it. Re-scoring confirmed running."],
+  ["Platform owner and builder", "Payment fix: rule decided 12 Nov; approval of the fix and its priority still with the program lead. Failed membership payments and handled notices still open."],
   ["Program lead", "Fourteen questions sent 11 Nov: any $4,500 checkout links, expired approvals, who approves outbound batches, access after a returned payment or a refund, repair agents, digest fixes, unrecognised plans, credit alerts, the refund ledger. Still open: who files platform changes, and a date."],
   ["Admissions operations", "Asked 11 Nov which of three versions of the refund terms is final; program lead copied."],
   ["Sales and marketing managers", "Owners for two legacy jobs."],
@@ -610,6 +610,9 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-12", "Vick now uses the agreed definition of 'paid' in one place, and can produce the pre-flight list of who would lose access, by name, from read-only payment lookups."],
+  ["2026-11-12", "Program lead's answers recorded: only settled payments count, a reversal removes access, the 30-minute payment job is off, the $4,500 route is retired, and re-scoring runs. The checkout explainer no longer says a paid enrollment's payment settled."],
+  ["2026-11-12", "Payment brief corrected after the platform owner's review: a 30-minute job already catches returned payments for revenue, the amount floor is $100, and the platform has three rules for 'paid', not one."],
   ["2026-11-11", "Every code reference in the 32 capability specs checked; a sample of 50 unlabelled references reviewed by hand."],
   ["2026-11-11", "Cancellation state explainer merged and its criterion passed; eleventh capability built as a draft."],
   ["2026-11-11", "Refund ledger and policy answers merged and its criterion passed; tenth capability built as a draft."],
@@ -641,7 +644,7 @@ el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
   ["35/56", "acceptance criteria passed", 35 / 56],
-  ["176", "automated tests, all passing", 1],
+  ["182", "automated tests, all passing", 1],
   ["42", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
@@ -752,7 +755,7 @@ const DSTATE = { done: ["Settled", "s-done"], active: ["Open", "s-active"], next
 el("decision-rows").innerHTML = DECISIONS.map(([id, t, w, s]) =>
   `<tr><td class="num">${id}</td><td class="t">${esc(t)}</td><td class="why">${esc(w)}</td><td><span class="chip ${DSTATE[s][1]}">${DSTATE[s][0]}</span></td></tr>`).join("");
 
-const RSTATE = { active: ["Open", "s-risk"], next: ["Watching", "s-next"] };
+const RSTATE = { active: ["Open", "s-risk"], next: ["Watching", "s-next"], closed: ["Closed", "s-done"] };
 el("risk-rows").innerHTML = RISKS.map(([r, i, m, o, s]) =>
   `<tr><td class="t">${esc(r)}</td><td class="why">${esc(i)}</td><td class="why">${esc(m)}</td><td class="small">${esc(o)}</td><td><span class="chip ${RSTATE[s][1]}">${RSTATE[s][0]}</span></td></tr>`).join("");
 
