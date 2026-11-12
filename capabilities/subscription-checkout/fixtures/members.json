@@ -1,0 +1,22 @@
+{
+  "_note": "Fictional member rows and credit rows for tests. No real people.",
+  "rows": {
+    "active_annual": { "plan": "annual", "status": "active", "amount_cents": 178800, "applied_credit_cents": 5000,
+      "started_at": "2026-10-30T16:00:00Z", "current_period_end": "2027-10-30T16:00:00Z" },
+    "pending_monthly": { "plan": "monthly", "status": "pending", "amount_cents": 19900, "applied_credit_cents": 0,
+      "started_at": null, "current_period_end": null },
+    "legacy_price": { "plan": "monthly", "status": "active", "amount_cents": 14900, "applied_credit_cents": 0,
+      "started_at": "2026-06-01T15:00:00Z", "current_period_end": "2026-12-01T16:00:00Z" },
+    "unknown_plan": { "plan": "quarterly", "status": "active", "amount_cents": 50000,
+      "started_at": "2026-09-01T15:00:00Z", "current_period_end": "2026-12-01T16:00:00Z" },
+    "zoneless": { "plan": "monthly", "status": "active", "amount_cents": 19900,
+      "started_at": "2026-11-01T10:00:00", "current_period_end": null }
+  },
+  "credits": {
+    "open_house": [ { "id": "c1", "amount_cents": 5000, "reason": "open_house_deposit" } ],
+    "scholarship": [ { "id": "c2", "amount_cents": 89400, "reason": "open_house_scholarship_annual" },
+                     { "id": "c3", "amount_cents": 5000, "reason": "open_house_deposit" } ],
+    "too_big": [ { "id": "c4", "amount_cents": 19900, "reason": "goodwill" }, { "id": "c5", "amount_cents": 2500, "reason": "goodwill" } ],
+    "broken": [ { "id": "c6", "amount_cents": "50", "reason": "open_house_deposit" } ]
+  }
+}
