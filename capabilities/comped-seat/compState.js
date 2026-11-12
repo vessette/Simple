@@ -29,7 +29,7 @@ export const REVENUE_STATEMENT = Object.freeze({
   caveat: 'That holds for the subscription row the revenue page picks for each person. Granting a comp marks the enrolment paid (subscriptionService.ts:596-602), so a comp passes the paying-member filter itself (subscriptionAnalyticsService.ts:216); it is kept out of revenue only by the row picked. The flags below name each person for whom that pick goes another way.',
 });
 
-const UNRECORDED = 'The platform records no reason and no granting admin for a comp: grantFreeAccess takes only an enrolment id (subscriptionService.ts:645), and the subscriptions table has no column for either (Subscription.ts:46-61).';
+const UNRECORDED = 'No reason is recorded for a comp anywhere. The subscriptions row records no reason and no grantor (subscriptionService.ts:645, Subscription.ts:46-61). The admin audit log records each grant request with an admin id and a time, but no reason, because the grant asks for none (auditMiddleware.ts:77-84, adminRoutes.ts:164).';
 
 // Wording that would present a grant or revoke as a routine step. No output may contain
 // one. Mentioning that a grant is a person's decision is fine; recommending one is not.
@@ -146,7 +146,7 @@ export function escalation(request) {
     request: request.trim(),
     lines: assertNoRoutineGrant([
       'A comp sets this person\'s price to zero, which is a discount. That is a person\'s decision at every level; the agent does not grant, revoke or recommend one.',
-      'An admin grants or revokes from /admin/accelerator or /admin/community-members. The platform does not record who granted a comp or why, so the decision and its reason have to be written down somewhere a person will keep.',
+      'An admin grants or revokes from /admin/accelerator or /admin/community-members. The audit log records which admin and when, but no reason, so the decision and its reason have to be written down somewhere a person will keep.',
       REVENUE_STATEMENT.text,
     ]),
   };

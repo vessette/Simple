@@ -10,7 +10,7 @@ From the subscriptions rows a person reads and passes in, Vick lists:
 
 - **Every active comp and every revoked one,** each with the subscription row it came from. A comp with no row id isn't listed; Vick says how many were left out and why.
 - **Who holds it** (from their enrolment row) and **since when** (the row's start date, in Central time). For a revoked comp, when it was revoked.
-- **Why it was granted:** always unknown. The platform doesn't record a reason or the admin who granted it (finding 3).
+- **Why it was granted:** always unknown. No reason is recorded anywhere (finding 3).
 - **How the revenue page counts that person:** excluded as Free Access, excluded as Staff, or (in the cases in finding 2) counted another way.
 
 Every report opens with the same statement: **comped seats are excluded from revenue.** A comp is $0, and the revenue page counts it under Free Access (or Staff, for a team member), never in MRR, ARR or active subscribers (`subscriptionAnalyticsService.ts:297-305`, `:405-410`). The statement comes with its condition. Where a person's records break that condition, Vick flags them by name.
@@ -33,7 +33,7 @@ Read from the platform code at commit `109820a`. This is what the code does, not
    - **A comp alongside a paid plan.** Granting a comp to someone with an active annual or monthly plan leaves both rows active. The renewal clean-up skips comp rows on purpose (`subscriptionService.ts:479`, `:492`). The revenue page then reads the newer row. If that's the comp, the person's paid plan drops out of MRR. If it's the paid row, the comp isn't counted as Free Access. The grant also overwrites the enrolment's amount paid with $0 (`:602`). This is the case the story says needs a named rule. Vick flags each person it applies to.
    - **A revoked comp.** Revoking marks the comp row cancelled but leaves its 10-year period end. The enrolment stays paid, so the person keeps access, and that's by design (`subscriptionService.ts:678-681`). But with no active row, the revenue page falls back to the row with a period end, which is the revoked comp. **So a revoked comp can still be counted as a Free Access seat** (`subscriptionAnalyticsService.ts:188-197`). The admin roster's Free Access label reads only active comps (`subscriptionService.ts:693-702`). The two pages can disagree about the same person. Vick flags it.
 
-3. **Nobody is recorded as having granted a comp, or why.** Both grant routes check for an admin login (`acceleratorRoutes.ts:91`, `communityMemberRoutes.ts:61`). Neither passes the admin's identity on. `grantFreeAccess` takes only an enrolment id (`subscriptionService.ts:645`), and the subscriptions table has no column for a reason or a grantor (`Subscription.ts:46-61`). The story lists "the granting admin's identity" as an input. Today it goes nowhere.
+3. **Who granted a comp is logged, but not why. (Corrected: an earlier draft said neither was recorded.)** Every admin write, including both grant and revoke routes, passes through the admin audit log (`adminRoutes.ts:164`, `:264`, `:400`). Each successful request writes a row to `audit_logs`: an admin id, the time, the IP address and the request body (`auditMiddleware.ts:56-92`). But the grant asks for no reason, so the body is empty. The row also says `create` or `delete` on `enrollments`, not "free seat granted" or "revoked". The admin id column holds an `admin_users` id for a full admin but an enrolment id for a staff login (`authMiddleware.ts:18-24`). And a failed log write is only printed to the console, while the grant goes ahead (`:85-87`). The subscriptions row itself records neither the grantor nor a reason (`subscriptionService.ts:645`, `Subscription.ts:46-61`). A proposal to close this is in [COMP_AUDIT_PROPOSAL.md](COMP_AUDIT_PROPOSAL.md).
 
 4. **Whether a comp takes a cohort seat:** not checked. The grant doesn't change the `seats_taken` counter. I didn't trace whether anything else counts comps against capacity.
 
@@ -66,7 +66,7 @@ The grant and revoke flow, with these decisions marked where they fall and the d
 | # | Question | Who | Options |
 |---|---|---|---|
 | 1 | Someone already paying is given a comp. What happens to the paid plan? | Roselyn, with Ali | Refuse the grant while a paid plan is active · cancel the paid plan's renewals first · allow both, but report the person once as paying · leave as is (today) |
-| 2 | Should a grant record who granted it and why? | Ali or Kes | Add both to the grant · log them outside the row · leave as is |
+| 2 | Should a grant require a reason and write a named audit entry? (Proposal: [COMP_AUDIT_PROPOSAL.md](COMP_AUDIT_PROPOSAL.md)) | Ali or Kes | Adopt the proposal · require a reason only · leave as is (who and when are logged today; why is not) |
 | 3 | Should a revoked comp stop counting as a Free Access seat on the revenue page? | Ali or Kes | Yes, read only active comps · leave as is |
 | 4 | Should comps be kept out of the "paid" counts, including the payment pre-flight list? | Ali, with Quincy | Mark comps separately · leave as is, and Vick lists them apart |
 

@@ -21,7 +21,7 @@ flowchart TD
     E -->|Declined| X[Record the decline and tell the requester]
     E -->|Approved| F[Admin grants it in<br/>/admin/accelerator or<br/>/admin/community-members]
     F --> G[Platform: $0 comp row, ~10 years,<br/>enrolment marked paid, access on]
-    G --> H[GAP: who granted it and why<br/>are not stored. Decision 2]
+    G --> H[Audit log: admin id and time.<br/>GAP: no reason asked for. Decision 2]
     H --> V[Vick reports the seat, never grants one]
 ```
 
@@ -32,7 +32,7 @@ What the platform does when an admin grants a seat:
 
 What it does **not** do:
 - Ask for approval: any admin login can grant a seat (`acceleratorRoutes.ts:91`).
-- Record who granted the seat or why.
+- Ask why. The admin audit log records which admin made the request and when, but not a reason (`auditMiddleware.ts:77-84`).
 - Check whether the person is already on a paid plan.
 
 ## Revoking a free seat
@@ -62,16 +62,16 @@ The platform already keeps some of these fields; the rest would have to be added
 | Reason, in a sentence | Why this person, so it can be reviewed later | No |
 | Requested by | Who asked | No |
 | Approved by, and when | Shows the decision was made by a person | No |
-| Granted by (the admin who clicked) | Accountability for the change | No: the route checks for an admin login but doesn't pass the admin on |
+| Granted by (the admin who clicked) | Accountability for the change | Yes, in `audit_logs`: an admin id and a time. But the entry reads as `create` on `enrollments`, and for a staff login the id is an enrolment id |
 | Paid plan held at the time of the grant (plan and row) | Decision 1, and so a grant can't quietly hide revenue | No: only visible by comparing rows afterwards |
 | Review date (*proposed*) | A seat never lapses on its own, so someone has to look at it again | No |
-| Revoked by, when, and why | The same accountability on the way out | Partly: the date and a fixed `comp_revoked` reason only |
+| Revoked by, when, and why | The same accountability on the way out | Partly: who and when are in `audit_logs` (as `delete` on `enrollments`); the subscription row has the date and a fixed `comp_revoked` reason |
 | Whether access was also removed | Revoking doesn't remove access | No: it's a separate step with nothing linking the two |
 
 ## Gaps this outline shows
 
 1. **No approval step.** Any admin can grant a seat. The story says the decision belongs to a person, but the platform doesn't say which person.
-2. **No record of who granted a seat or why.** This is decision 2. Until it's settled, Vick reports "why" as unknown for every seat.
+2. **No reason is recorded.** Who granted a seat and when are in the audit log, but nobody is asked why. This is decision 2, and [COMP_AUDIT_PROPOSAL.md](COMP_AUDIT_PROPOSAL.md) proposes a fix. Until then, Vick reports "why" as unknown for every seat.
 3. **No rule for someone who is already paying.** This is decision 1, and it's the one that can take real revenue off the revenue page.
 4. **Revocation is split across two steps.** The seat comes off in one, access in another, and nothing ties them together. Decision 3 covers how the revenue page counts it in the meantime.
 5. **No review date.** A seat runs for about ten years unless someone remembers to revoke it.

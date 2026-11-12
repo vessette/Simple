@@ -53,7 +53,7 @@ test('happy path: holder, since when, and why is unknown because nothing records
   assert.equal(get(a, 'holder').value, 'Person A');
   assert.equal(get(a, 'since').value, 'Sep 1, 2026, CDT');
   assert.equal(get(a, 'why').status, 'unknown');
-  assert.match(get(a, 'why').reason, /no reason and no granting admin/);
+  assert.match(get(a, 'why').reason, /No reason is recorded for a comp anywhere.*audit log records each grant request with an admin id and a time/);
   assert.deepEqual(a.flags, []);
 });
 
@@ -105,7 +105,7 @@ test('never proposes a grant as a routine step', () => {
   const e = escalation('Can we comp Person F?');
   assert.equal(e.to, DECIDERS);
   assert.match(e.lines[0], /person's decision at every level; the agent does not grant, revoke or recommend one/);
-  assert.match(e.lines[1], /does not record who granted a comp or why/);
+  assert.match(e.lines[1], /audit log records which admin and when, but no reason/);
 });
 
 test('failure paths: unreadable rows, a missing enrolment, a comp with a charge, a comp on an unpaid enrolment', () => {
