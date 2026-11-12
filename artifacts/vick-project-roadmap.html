@@ -548,7 +548,7 @@ const DECISIONS = [
   ["F9", "The platform digest fails completely when one source fails, can send twice, and follows the server clock instead of Central time.", "The composer reports each source on its own and keys on the Central date. Two small platform fixes proposed to the program lead or platform owner.", "active"],
   ["F10", "The live checkout route creates payment links at the retired $4,500 price.", "It passes no amount, so a $4,500 default applies; test mode hides it. Whether anyone received one is unknown; raised for a read-only check.", "active"],
   ["F11", "The spec describes an old billing rule, and an unrecognised plan is charged as monthly.", "Since 30 October 2026 billing starts on the payment day, not the class start. The answers explain the current rule and report an unrecognised plan as unknown.", "active"],
-  ["F12", "The payment webhook marks people paid without checking the payment settled, and a returned payment changes nothing.", "Only Settled or Posted should grant a seat, as the platform's own reconciliation already assumes. A change request with five checks was sent to the platform owners on 11 November.", "active"],
+  ["F12", "The payment webhook marks people paid without checking the payment settled, and a returned payment never frees the seat or removes access.", "A separate 30-minute job, if it's switched on, marks returned payments failed and takes them out of revenue, but leaves access and the seat. The platform uses three different rules for what counts as paid. The change request sent on 11 November was corrected on 12 November after the platform owner's review: one rule for all three, and a waiting payment must still be recorded so it can be promoted.", "active"],
   ["F13", "No refund policy is approved, and the platform holds three conflicting versions of the terms, one labelled approved. A refund also leaves paid access and the seat in place.", "Vick quotes no terms. Asked admissions operations and the program lead on 11 November which version is final and what a refund should change.", "active"],
   ["F14", "A cancellation with no payment schedule reports success and says nothing about it; past-due members can't cancel; and the cancellation reason field also holds system notes.", "Correct for manual billing, but nobody is told the gateway was never touched. The explainer calls it a no-op and names who wrote each reason. Three questions put to the sales manager and program lead.", "active"],
   ["F15", "Many code references in the capability specs point at the wrong place.", "21 of the 100 that name their target are wrong; a hand-checked sample puts about 99 of the other 256 wrong (80 to 127). Two references repeated across nearly every spec are 63 of those. A note for the program lead and platform owner is drafted.", "active"],
@@ -565,7 +565,7 @@ const RISKS = [
   ["Legacy campaign agents acting without approval", "Medium: emails resent or errors hidden", "Asked whether they run; propose pausing retries and auto-resolve if they do", "Program lead, platform owner", "active"],
   ["Approval requests auto-approve on expiry", "High: outreach approved with nobody looking", "Packets carry no expiry; propose expiring outbound requests into rejected instead", "Program lead, platform owner", "active"],
   ["Checkout route issues wrong-priced links", "High: a prospect charged $4,500 instead of $149 to $199 a month", "Read-only check for $4,500 links; pass the plan price or switch the route off", "Program lead, platform owner", "active"],
-  ["Unsettled or reversed payments keep paid access", "High: seats and revenue overstated; access without payment", "Change request: check status before marking paid, flag reversals for a person", "Platform owner, platform builder", "active"],
+  ["Unsettled or reversed payments keep paid access", "High: seats and revenue overstated; access without payment", "Change request, corrected 12 Nov: one rule for what counts as paid, record waiting payments, flag reversals for a person", "Platform owner, platform builder", "active"],
   ["Conflicting refund terms on the platform", "High: a customer quoted terms nobody approved", "Vick states no terms; asked which version is final and who signs it off", "Program lead, admissions operations", "active"],
   ["Capability specs cite the wrong code", "Medium: reviewers judging evidence are sent to the wrong place", "Checker and sample review published; corrections listed per spec; a second reviewer to confirm the sample", "Program lead, platform owner", "active"],
   ["Legacy jobs with no owner", "Low: stale automation keeps running", "Each has one named question and a named person to answer it", "Sales and marketing managers", "active"],
@@ -594,7 +594,7 @@ const NEXT = [
 const WAIT = [
   ["Sales manager", "Pass marks, warm-lead signals, pause decision."],
   ["Platform owner", "Change request sent 11 Nov: record who sets a lead's offer. Also asked whether re-scoring runs and who files it."],
-  ["Platform owner and builder", "Change request sent 11 Nov: only settled payments grant access and a seat; reversals and failed membership payments reach a person."],
+  ["Platform owner and builder", "Change request sent 11 Nov, corrected 12 Nov after review: one rule for what counts as paid across the three payment paths; is the 30-minute payment job on in production? Reversals and failed membership payments reach a person."],
   ["Program lead", "Fourteen questions sent 11 Nov: any $4,500 checkout links, expired approvals, who approves outbound batches, access after a returned payment or a refund, repair agents, digest fixes, unrecognised plans, credit alerts, the refund ledger. Still open: who files platform changes, and a date."],
   ["Admissions operations", "Asked 11 Nov which of three versions of the refund terms is final; program lead copied."],
   ["Sales and marketing managers", "Owners for two legacy jobs."],
@@ -610,6 +610,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-12", "Payment brief corrected after the platform owner's review: a 30-minute job already catches returned payments for revenue, the amount floor is $100, and the platform has three rules for 'paid', not one."],
   ["2026-11-11", "Every code reference in the 32 capability specs checked; a sample of 50 unlabelled references reviewed by hand."],
   ["2026-11-11", "Cancellation state explainer merged and its criterion passed; eleventh capability built as a draft."],
   ["2026-11-11", "Refund ledger and policy answers merged and its criterion passed; tenth capability built as a draft."],

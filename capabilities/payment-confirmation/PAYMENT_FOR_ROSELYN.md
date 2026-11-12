@@ -32,7 +32,7 @@ Code: [`paymentState.js`](paymentState.js), with 9 tests in [`paymentState.test.
 
 Read from the platform code at commit `109820a`. This is what the code allows, not a record of what has happened.
 
-1. **A returned payment changes nothing.** When a payment is returned (reversed), the handler logs it, but only a failed payment updates the enrollment (`webhookController.ts:168-176`). The person stays marked as paid, keeps portal access and keeps their seat.
+1. **A returned payment doesn't free the seat or remove access.** When a payment is returned (reversed), the payment-notice handler logs it, but only a failed payment updates the enrollment (`webhookController.ts:168-176`). A separate job does catch it later, if it's switched on (see the correction below): every 30 minutes it re-reads each recorded payment and marks returned, voided, refunded and charged-back ones as failed, which takes them out of revenue. That job doesn't change portal access, the seat or the member tier. So the person keeps their access and their seat either way.
 
 2. **The payment's own status isn't checked.** The notice includes the payment's status. The handler reads it (`webhookController.ts:67`) but marks the person paid whatever it says (`:118-121`).
 
@@ -50,12 +50,24 @@ Read from the platform code at commit `109820a`. This is what the code allows, n
    - A notice with no reference is acknowledged so the payment provider stops retrying (`webhookController.ts:101-105`).
    - A bad signature is rejected (`:42-49`).
 
+## Corrections after platform review (2026-11-12)
+
+Kes reviewed the change request I sent on 11 November. Each point below was then checked against the platform code at `109820a`.
+
+| What I said | What's right | Where |
+|---|---|---|
+| A returned payment changes nothing. | A 30-minute job (`PaySimplePaymentSync`) re-reads each recorded payment. It marks returned, voided, refunded and charged-back ones as failed, which takes them out of revenue. It doesn't touch portal access, the seat or the tier. It only runs when `PAYSIMPLE_SYNC_ENABLED=true`, and whether that's on in production is **unknown**. | `paymentSyncService.ts:31-36`, `:232-256`; `schedulerService.ts:2229-2241`; `env.ts:39` |
+| The amount floor is $50. | The floor is **$100**. $50 is the Open House seat-hold deposit that the floor exists to screen out. | `paymentReconciliationService.ts:40-64` |
+| Settled-only matches the rule the platform already uses. | The platform has **three** rules. The payment-notice handler accepts any status. The 30-minute job counts `Authorized` as paid. The reconciliation job accepts only `Settled` or `Posted`. A settled-only webhook follows the third and conflicts with the second. | `webhookController.ts:67`, `:118-121`; `paymentSyncService.ts:31-33`; `paymentReconciliationService.ts:37` |
+
+**A risk in the fix I proposed.** I said to leave an `Authorized` payment pending. If that also means the payment id isn't recorded on the enrollment, nothing would ever promote it. The 30-minute job only reads enrollments that already have a payment id (`paymentSyncService.ts:110-121`). A customer who really paid could stay locked out. So the fix has to record the payment id even while the enrollment waits. It also needs one agreed rule for when `Authorized` counts as paid, used in all three places.
+
 ## What needs a decision
 
 | # | Question | Who | Options |
 |---|---|---|---|
 | 1 | What should happen when a payment is returned? | Roselyn, with Ali | Mark it for a person to review · remove access and free the seat · leave as is (today) |
-| 2 | Should a payment only count when its status says it has settled? | Ali or Kes | Check the status · leave as is |
+| 2 | What single rule says a payment counts as paid, used by the notice handler, the 30-minute job and reconciliation alike? Is the 30-minute job on in production? | Ali or Kes | Settled or Posted only (an Authorized card waits, with its payment id recorded so it can be promoted) · Authorized counts too (as the 30-minute job does today) · leave the three rules as they are |
 | 3 | Should failed first membership payments be recorded? | Ali or Kes | Record them on the membership · leave as is |
 | 4 | Should the platform record which payment notices it has handled? | Ali or Kes | A store of handled notices, so a repeat changes nothing |
 
