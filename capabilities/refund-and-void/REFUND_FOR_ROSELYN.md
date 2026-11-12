@@ -33,7 +33,14 @@ Read from the platform code at commit `109820a`. This is what the code allows, n
 
 5. **A pending row is never resolved, and doesn't stop a second attempt.** The over-refund check counts only succeeded rows (`refundService.ts:44-47`). Nothing stops two refunds on the same payment at once (`Refund.ts:72-75`). In practice the payment's status in PaySimple usually stops the second one, but a row left pending stays pending.
 
-6. **What works as the spec says:**
+6. **There are three versions of the terms, and none is confirmed.**
+   - Cory's facts say the terms are drafted and pending approval (`salesHubCoryController.ts:33`).
+   - The launch briefs carry a provisional 7-day refund, case by case after that, and none after Week 2 (`docs/training-program-2026-q3/launch-briefs/04-decisions-locked.md:44-45`).
+   - The company knowledge base has an entry that quotes a 14-day / non-refundable clause and labels itself "Approved policy". A platform session log flags this contradiction (`docs/sessions/CC-20261005-r6h2.md:2566`).
+
+   Vick reads only the first and quotes none of them.
+
+7. **What works as the spec says:**
    - The row is written as pending before the gateway call (`refundService.ts:139-152`).
    - An already-reversed payment is refused (`:110-112`).
    - Partial amounts are refused, because the gateway only reverses whole payments (`:123-126`, `paysimpleService.ts:379-381`).
@@ -47,11 +54,21 @@ Read from the platform code at commit `109820a`. This is what the code allows, n
 - **You have no admin login,** so you can't reach the review or approval surface for this capability.
 - **The agent can't read the payment gateway or the production database** (both are denied by default). For the platform-rule part of a recommendation, a person has to run the lookup on the refunds page and pass the result in. Without it, the draft says the payment is unknown.
 
+## Refund policy trail
+
+How the search for the approved terms has gone, so nobody repeats a step. Add a row for each step. People are listed by role here because this repository is public.
+
+| Date | Step | Result | Next |
+|---|---|---|---|
+| 2026-11-11 | Read the platform code and documents for refund terms | Three versions found (finding 6); none confirmed | Ask the owner of the finalized-agreement task |
+| 2026-11-11 | Checked the finalized-agreement task (due 2026-06-19) | Not checked yet: the agent has no access to the task tracker | Admissions operations or the approver checks it |
+| 2026-11-11 | Note drafted to admissions operations, approver copied | Drafted, not sent | Send; record the reply here |
+
 ## What needs a decision
 
 | # | Question | Who | Options |
 |---|---|---|---|
-| 1 | What are the refund and cancellation terms? | Roselyn, with Ali | Approve the drafted terms · revise them. Until then, Vick states no terms |
+| 1 | Which of the three versions is the refund policy, and who signs it off? | Roselyn, with Ali | Confirm one · write a new one. Until then, Vick states no terms |
 | 2 | Should a refund remove access and free the seat? | Roselyn, with Ali | Remove both · flag for a person · leave as is (today) |
 | 3 | Should a refund that moved money always be recorded as succeeded? | Ali or Kes | Record the gateway result first, and the credit void separately |
 | 4 | When spent credit can't be recovered, who's told? | Roselyn, with finance | Flag it on the refund · leave as is |
