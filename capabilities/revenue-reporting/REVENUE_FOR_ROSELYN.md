@@ -22,6 +22,8 @@ Code: [`revenueAnswers.js`](revenueAnswers.js), with 10 tests in [`revenueAnswer
 
 ## What I found in the platform
 
+The definitions of net revenue, "net" and "collected", and the labels each one carries on screen, are set out side by side in [DEFINITIONS.md](DEFINITIONS.md).
+
 Read from the platform code at commit `109820a`. This is what the code does, not a measurement of production.
 
 1. **There are two answers to "what's our net revenue?"** The platform's list of approved metric definitions marks net revenue as **unavailable**: "Source IDENTIFIED but not yet wired … nothing here can compute a figure yet" (`adminOs/metricRegistry.ts:171-190`). The dashboard reports it that way (`revenueDashboardService.ts:151-160`). But the payments feed serves a figure called `net`: collected less refunds (`revenuePaymentsService.ts:182`).
