@@ -1,0 +1,166 @@
+#!/usr/bin/env node
+// Check the file:line citations in a platform capability file against the code they cite.
+//
+// Read-only: runs `git show` / `git ls-tree` against a local platform checkout and writes a
+// report. It changes nothing in either repo. Same inputs, same report.
+//
+// A citation is `path:line` or `path:start-end`, optionally followed by `(label)`. The label
+// names what should be there (a function, a field, or a quoted phrase). For each citation:
+//   no_file        the path does not exist at that commit (or matches more than one file)
+//   out_of_range   the cited line is past the end of the file
+//   ok             every label token appears inside the cited range (±2 lines)
+//   moved          the tokens appear in the file, but not in the cited range (reports where)
+//   missing        a label token appears nowhere in the file
+//   unlabelled     in range, but there is no label, so the script cannot tell what was meant
+//
+// Each citation is checked at two commits: the code as researched, and the code built
+// against. "ok then, moved now" is drift; "moved or missing at both" was never right.
+//
+// Usage: node scripts/checkCitations.mjs <platform repo> <capability json path> <then> <now> [out.md]
+//          [--sample N --seed S [--dump review.json]] [--rank N]
+//   --sample draws a seeded, stratified random sample of the unlabelled citations for a hand
+//   review (an estimate); --dump writes each one's context and cited lines for that review.
+//   --rank lists the unlabelled citations to fix first, by consequence (not an estimate).
+// Failure modes handled: a path missing at a commit is reported as no_file (checked against
+// ls-tree before any read); a bad repo path or commit fails fast with the git error. Not handled: citations that use
+// another format (e.g. "line 33 of x.ts"), which are simply not found.
+
+import { execFileSync } from 'node:child_process';
+import { writeFileSync } from 'node:fs';
+import { CITE, checkSource, classify } from './citationMatch.mjs';
+import { sample, rank } from './citationSample.mjs';
+
+const argv = process.argv.slice(2);
+const flag = (name) => {
+  const i = argv.indexOf(name);
+  if (i < 0) return null;
+  const [, v] = argv.splice(i, 2);
+  return v;
+};
+const sampleN = flag('--sample'), seed = flag('--seed'), dump = flag('--dump'), rankN = flag('--rank');
+const [repo, capPath, thenRef, nowRef, out] = argv;
+const badNum = (v) => v !== null && !/^\d+$/.test(v);
+if (!repo || !capPath || !thenRef || !nowRef || badNum(sampleN) || badNum(seed) || badNum(rankN) || (sampleN !== null && seed === null)) {
+  console.error('Usage: node scripts/checkCitations.mjs <platform repo> <capability json path> <then> <now> [out.md]');
+  process.exit(2);
+}
+
+const git = (...args) => execFileSync('git', ['-C', repo, ...args], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024, timeout: 30000 });
+
+const fileCache = new Map();
+const treeCache = new Map();
+function tree(ref) {
+  if (!treeCache.has(ref)) treeCache.set(ref, git('ls-tree', '-r', '--name-only', ref).split('\n').filter(Boolean));
+  return treeCache.get(ref);
+}
+/** The path at that commit, accepting a citation that omits leading folders if it is unambiguous. */
+function resolve(ref, path) {
+  const files = tree(ref);
+  if (files.includes(path)) return path;
+  const hits = files.filter((f) => f.endsWith('/' + path));
+  return hits.length === 1 ? hits[0] : null;
+}
+function lines(ref, rawPath) {
+  const path = resolve(ref, rawPath);
+  if (!path) return null;
+  const key = `${ref}:${path}`;
+  if (!fileCache.has(key)) fileCache.set(key, git('show', key).split('\n'));
+  return fileCache.get(key);
+}
+const check = (ref, path, start, end, label) => checkSource(lines(ref, path), start, end, label);
+
+const doc = JSON.parse(git('show', `${nowRef}:${capPath}`));
+const rows = [];
+for (const cap of doc.capabilities) {
+  const seen = new Set();
+  // Walk field by field so each citation knows where it is used (evidence, blocker, acceptance).
+  for (const [field, value] of Object.entries(cap)) {
+    const body = JSON.stringify(value);
+    for (const m of body.matchAll(CITE)) {
+      const [text, path, s, e, label] = m;
+      if (seen.has(text)) continue;
+      seen.add(text);
+      const start = Number(s), end = e ? Number(e) : null;
+      const context = body.slice(Math.max(0, m.index - 220), m.index + text.length + 120);
+      rows.push({ cap: cap.capability_id, field, path, start, end, text, context,
+        then: check(thenRef, path, start, end, label), now: check(nowRef, path, start, end, label) });
+    }
+  }
+}
+
+for (const r of rows) r.class = classify(r.then.verdict, r.now.verdict);
+
+const count = (k) => rows.filter((r) => r.class === k).length;
+const order = ['never right', 'wrong now', 'drifted', 'other', 'not in repo', 'correct', 'unverifiable'];
+const caps = [...new Set(rows.map((r) => r.cap))];
+const md = [
+  `# Citation check: ${capPath}`,
+  '',
+  `Code as researched: \`${thenRef}\`. Code built against: \`${nowRef}\`. Generated by \`scripts/checkCitations.mjs\`; rerun it rather than editing this file.`,
+  '',
+  `${rows.length} citations across ${caps.length} capabilities (each counted once per capability).`,
+  '',
+  '| Result | Count | Meaning |',
+  '|---|---|---|',
+  `| never right | ${count('never right')} | the label is not in the cited range at either commit |`,
+  `| wrong now | ${count('wrong now')} | wrong at the later commit; the file did not exist when researched, so there is no baseline |`,
+  `| drifted | ${count('drifted')} | right when researched, wrong now |`,
+  `| other | ${count('other')} | mixed (e.g. wrong then, right now) |`,
+  `| not in repo | ${count('not in repo')} | the cited file was never committed, so it cannot be checked |`,
+  `| correct | ${count('correct')} | the label is in the cited range now |`,
+  `| unverifiable | ${count('unverifiable')} | the line exists, but there is no label to check it against |`,
+  '',
+  '## By capability (labelled citations only)',
+  '',
+  '| Capability | Never right | Drifted | Correct |',
+  '|---|---|---|---|',
+  ...caps.map((c) => {
+    const rs = rows.filter((r) => r.cap === c);
+    const n = (k) => rs.filter((r) => r.class === k).length;
+    return `| ${c} | ${n('never right')} | ${n('drifted')} | ${n('correct')} |`;
+  }),
+  '',
+  '## Every citation that needs attention',
+  '',
+  '| Capability | Citation | Result | As researched | Now |',
+  '|---|---|---|---|---|',
+  ...rows.filter((r) => ['never right', 'wrong now', 'drifted', 'other'].includes(r.class))
+    .sort((a, b) => order.indexOf(a.class) - order.indexOf(b.class) || a.cap.localeCompare(b.cap))
+    .map((r) => `| ${r.cap} | \`${r.text.replace(/\|/g, '\\|')}\` | ${r.class} | ${r.then.verdict}${r.then.detail ? `: ${r.then.detail}` : ''} | ${r.now.verdict}${r.now.detail ? `: ${r.now.detail}` : ''} |`),
+  '',
+].join('\n');
+
+const unlabelled = rows.filter((r) => r.class === 'unverifiable');
+const cell = (s) => String(s).replace(/\|/g, '\\|');
+const extra = [];
+let drawn = [];
+if (sampleN !== null) {
+  drawn = sample(unlabelled, Number(sampleN), Number(seed));
+  extra.push(
+    `## Random sample for hand review (estimate)`, '',
+    `${drawn.length} of the ${unlabelled.length} unlabelled citations, drawn with seed ${seed}, spread across capabilities in proportion to how many each has. Rerun with the same seed to get the same list. Results are recorded in the review file, not here.`, '',
+    '| # | Capability | Field | Citation |', '|---|---|---|---|',
+    ...drawn.map((r, i) => `| ${i + 1} | ${r.cap} | ${r.field} | \`${cell(r.text)}\` |`), '');
+}
+if (rankN !== null) {
+  const driftedFiles = new Set(rows.filter((r) => ['drifted', 'never right', 'wrong now'].includes(r.class)).map((r) => r.path));
+  const capsById = Object.fromEntries(doc.capabilities.map((c) => [c.capability_id, c]));
+  const ranked = rank(unlabelled, capsById, driftedFiles).slice(0, Number(rankN));
+  extra.push(
+    `## Fix-first list (by consequence, not an estimate)`, '',
+    'Score: moves money +3, reports only +1; human decision +1; used as a blocker or in release behaviour +2, as supporting evidence +1; in a file where a labelled citation already drifted +2. This list leans toward risky citations on purpose, so it must not be used to estimate an error rate.', '',
+    '| Score | Capability | Field | Citation |', '|---|---|---|---|',
+    ...ranked.map((r) => `| ${r.score} | ${r.cap} | ${r.field} | \`${cell(r.text)}\` |`), '');
+}
+const report = extra.length ? `${md}\n${extra.join('\n')}` : md;
+if (out) writeFileSync(out, report);
+if (dump) {
+  const nowLines = (r) => {
+    const src = lines(nowRef, r.path);
+    if (!src) return null;
+    const lo = Math.max(0, r.start - 4), hi = Math.min(src.length, Math.min((r.end ?? r.start), r.start + 14) + 3);
+    return src.slice(lo, hi).map((l, i) => `${lo + i + 1}: ${l.slice(0, 180)}`);
+  };
+  writeFileSync(dump, JSON.stringify(drawn.map((r, i) => ({ n: i + 1, cap: r.cap, field: r.field, text: r.text, context: r.context, cited: nowLines(r) })), null, 1));
+}
+console.log(order.map((k) => `${k}: ${count(k)}`).join(' · '), `· total ${rows.length}`);

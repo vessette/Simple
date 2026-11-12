@@ -92,6 +92,23 @@ nothing here is validated yet.
 - backend/src/services/paysimpleRecurring.ts:138 (suspendRecurringSchedule)
 - backend/src/models/Subscription.ts:85 (canceled_at, cancel_reason)
 
+### Citation corrections (checked 2026-11-11)
+
+The list above is kept as the platform wrote it. Checked with `git show <commit>:<file> | grep -n`
+at `ccbd870` (the earliest platform commit in `109820a`'s history that carries these
+citations) and at `109820a` (the version this capability was built against):
+
+| Cited | At `ccbd870` | At `109820a` | Verdict |
+|---|---|---|---|
+| participantRoutes.ts:437 | route at :461 | route at :461 | Never right |
+| subscriptionService.ts:644-682 (cancelSubscription) | starts at :642 | :710-737 | Drifted after it was written |
+| subscriptionScheduleService.ts:159-198 | docstring :159, function :164 | same | Correct |
+| paysimpleRecurring.ts:138 | :138 | :138 | Correct |
+| Subscription.ts:85 (canceled_at, cancel_reason) | :39-40, :78-79 (85 is `tableName`) | same | Never right |
+
+Source of the citations: the platform's `backend/src/services/agentDomain/capabilities/sales.json:1157-1160`.
+Fixing them there is decision 5 in `capabilities/subscription-cancellation/CANCELLATION_FOR_ROSELYN.md`.
+
 ## Failure paths you must handle
 
 
