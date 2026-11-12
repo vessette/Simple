@@ -523,7 +523,7 @@ const SETUP = [
   ["Pipeline digest answers and composer", "Answers six pipeline questions with each figure's source, marks failed sources unavailable with the reason, and composes one digest per Central date and recipient for the existing sender.", "12 tests", [1,1], "capabilities/pipeline-digest/"],
   ["Checkout and price explainer", "Quotes plan prices only from the platform's price list, refuses any it can't trace (including the retired $4,500), and explains the checkout steps and payment states. Never issues a link.", "10 tests", [1,1], "capabilities/enrollment-checkout/"],
   ["Membership plan and billing answers", "Answers a member's plan, price, credit and billing-date questions from the price list and their own record, each with its source; missing dates are unknown, never worked out.", "11 tests", [1,1], "capabilities/subscription-checkout/"],
-  ["Payment and seat state explainer", "For a named person, explains payment, portal access, seat and which payment-notice path produced them, each traced to its record; flags records that don't fit together.", "9 tests", [1,1], "capabilities/payment-confirmation/"],
+  ["Payment and seat state explainer", "For a named person, explains payment, portal access, seat and which payment-notice path produced them, each traced to its record; flags records that don't fit together. Applies the agreed rule for 'paid' (settled or posted only) to a payment-provider read, and sorts paid enrollments by name for the pre-flight check.", "14 tests", [1,1], "capabilities/payment-confirmation/"],
   ["Refund ledger and policy answers", "Describes each refund row for a payment and cites it, says the refund terms are unapproved rather than quoting any, sends refund requests to a person, and drafts recommendations that carry no decision.", "10 tests", [1,1], "capabilities/refund-and-void/"],
   ["Cancellation state explainer", "For a named member, explains their subscription, whether a payment schedule exists and what the gateway reads, and the recorded cancellation reason with who wrote it. With no schedule it says a cancel would stop nothing at the gateway, never that the member is safe from charges.", "12 tests", [1,1], "capabilities/subscription-cancellation/"],
   ["Code-reference check of the sales specs", "A read-only checker for every code reference in the 32 capability specs, at the date they were researched and today, plus a seeded random sample of 50 references checked by hand.", "17 tests", null, "docs/discovery/06-citation-check-sales.md"],
@@ -610,6 +610,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-12", "Vick now uses the agreed definition of 'paid' in one place, and can produce the pre-flight list of who would lose access, by name, from read-only payment lookups."],
   ["2026-11-12", "Program lead's answers recorded: only settled payments count, a reversal removes access, the 30-minute payment job is off, the $4,500 route is retired, and re-scoring runs. The checkout explainer no longer says a paid enrollment's payment settled."],
   ["2026-11-12", "Payment brief corrected after the platform owner's review: a 30-minute job already catches returned payments for revenue, the amount floor is $100, and the platform has three rules for 'paid', not one."],
   ["2026-11-11", "Every code reference in the 32 capability specs checked; a sample of 50 unlabelled references reviewed by hand."],
@@ -643,7 +644,7 @@ el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
   ["35/56", "acceptance criteria passed", 35 / 56],
-  ["177", "automated tests, all passing", 1],
+  ["182", "automated tests, all passing", 1],
   ["42", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");

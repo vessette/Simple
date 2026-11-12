@@ -26,7 +26,20 @@ It also flags records that don't fit together, for a person to look at:
 - **Marked paid with no payment id.** That means it wasn't marked paid by a payment notice.
 - **A membership is active but the enrollment isn't marked paid.**
 
-Code: [`paymentState.js`](paymentState.js), with 9 tests in [`paymentState.test.js`](paymentState.test.js).
+**One definition of paid** (added 2026-11-12). Vick uses the rule Ali decided, not any of the platform's three: only `Settled` or `Posted` counts. It lives in one place, [`paidRule.js`](paidRule.js). The enrollment record doesn't store the payment's own status, so:
+- **Without a read from the payment provider**, Vick says whether the payment counts as paid is **unknown**, and names the payment id to look up.
+- **With a read of that same payment**, it answers yes or no and cites the read. It flags a person when the record says paid but the read says `Authorized` (not paid yet under the rule) or a reversal (access to be removed and the seat freed, by a person).
+- **A read for a different payment, or a status the rule doesn't cover**, stays unknown.
+
+**The pre-flight list.** Given the read-only lookups of each paid enrollment's payment, Vick sorts every paid enrollment by name into one of four groups:
+- **reversed:** would lose access;
+- **only authorised:** would lose access under the new rule;
+- **keeps access:** settled or posted;
+- **unknown:** no payment id, no lookup, a failed lookup, or an uncovered status.
+
+No enrollment is dropped. It writes nothing.
+
+Code: [`paymentState.js`](paymentState.js) and [`paidRule.js`](paidRule.js), with 14 tests in [`paymentState.test.js`](paymentState.test.js).
 
 ## What I found in the platform
 
@@ -73,6 +86,19 @@ Read-only checks Ali ran in production.
 - **How many paid enrollments have a payment that isn't Settled or Posted?** This can't be answered from the database. No table stores the payment provider's status: the notice handler reads it, logs it, and drops it before marking the enrollment paid. Only a few dozen paid enrollments have a payment id recorded, so checking each one with the payment provider is a small job. Ali suggests doing that before the fix, to learn whether this has actually happened.
 
 **What this means for Vick.** Because no record stores the payment's own status, Vick can't tell whether a paid enrollment's money settled. It says "paid" means *marked paid*, and that whether the payment settled is unknown from the record. (The checkout explainer said "Payment settled" until 2026-11-12. That's now corrected and pinned by a test.)
+
+## Ali's follow-up on the pre-flight check (2026-11-12)
+
+Ali told Kes and Quincy not to use the 30-minute job's dry run to list who would lose access. Checked in the code at `109820a`:
+
+- **It returns counts, not names.** The summary is `knownPayments`, `fetched`, `fetchErrors`, `markedPaid`, `markedFailed` and `unchanged` (`paymentSyncService.ts:45-53`). The one closing log line prints the same counts (`:270-273`).
+- **It still counts `Authorized` as paid** (`paymentSyncService.ts:31-33`). So anyone paid on an `Authorized` payment shows as unchanged, and that's the group the new rule creates. The dry run would come back calmer than the truth.
+
+**What to use instead:**
+- **The source of the list:** the read-only lookups of each paid enrollment's payment. They give both groups by name, and they need no code change. Vick's pre-flight list (above) does the sorting.
+- **The dry run:** worth running afterwards, only as a cross-check on the reversal count.
+- **Who runs the lookups:** Quincy, together with Ali. They need the live payment credentials, which exist only in the production container, so nobody runs them alone.
+- **Seat figures:** check them with a left join from classes to enrollments that counts `payment_status = 'paid'` and compares it with `seats_taken`.
 
 ## What needs a decision
 
