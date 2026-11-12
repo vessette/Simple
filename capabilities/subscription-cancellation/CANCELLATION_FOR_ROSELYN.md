@@ -45,6 +45,8 @@ Read from the platform code at commit `109820a`. This is what the code does, not
 
 7. **The story's citations point at the wrong lines at `109820a`.** `subscriptionService.ts:644-682` is the free-access grant and revoke, not the cancel (that's `:710-737`). The cancel route is `participantRoutes.ts:461`, not `:437`. The two columns are at `Subscription.ts:39-40` and `:78-79`, not `:85`. The suspend call (`paysimpleRecurring.ts:138`) is right. The citations come from the platform's capability file (`agentDomain/capabilities/sales.json:1157-1160`).
 
+   The Git history shows this isn't only drift. At `ccbd870`, the earliest platform commit that carries these citations, the cancel function started at `:642`, so that one was close and has moved since. The route (`:437`) and the column (`:85`) were wrong even then. Whatever writes these citations doesn't check them.
+
 8. **What works as the spec says:**
    - A reason is required; an empty one is refused with a 400 (`participantController.ts:159-160`).
    - The route needs the member to be logged in (`participantRoutes.ts:461`).
@@ -66,7 +68,7 @@ Read from the platform code at commit `109820a`. This is what the code does, not
 | 2 | Should a past-due member be able to cancel, with the schedule suspended? | Roselyn, with Ali | Allow it · send it to a person · leave as is (today) |
 | 3 | Should member reasons and system notes be kept in separate fields? | Ali or Kes | Separate them · tag the system values · leave as is |
 | 4 | What is a member owed on cancelling? | Roselyn, with Ali | Same answer as refund decision 1. Until then, Vick states no terms |
-| 5 | Fix the misleading code comment and the story's citations? | Ali or Kes | Yes · no |
+| 5 | Fix the misleading code comment and the story's citations, and check how citations are generated? | Ali or Kes | Fix both and add a check · fix both only · no |
 
 ## Your answers
 
