@@ -61,6 +61,8 @@ Read from the platform code at commit `109820a`. This is what the code does, not
 
 ## What needs a decision
 
+The grant and revoke flow, with these decisions marked where they fall and the data points to record for each seat, is in [COMP_DECISION_FLOW.md](COMP_DECISION_FLOW.md).
+
 | # | Question | Who | Options |
 |---|---|---|---|
 | 1 | Someone already paying is given a comp. What happens to the paid plan? | Roselyn, with Ali | Refuse the grant while a paid plan is active · cancel the paid plan's renewals first · allow both, but report the person once as paying · leave as is (today) |
