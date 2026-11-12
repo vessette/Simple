@@ -62,7 +62,7 @@ How the search for the approved terms has gone, so nobody repeats a step. Add a 
 |---|---|---|---|
 | 2026-11-11 | Read the platform code and documents for refund terms | Three versions found (finding 6); none confirmed | Ask the owner of the finalized-agreement task |
 | 2026-11-11 | Checked the finalized-agreement task (due 2026-06-19) | Not checked yet: the agent has no access to the task tracker | Admissions operations or the approver checks it |
-| 2026-11-11 | Note drafted to admissions operations, approver copied | Drafted, not sent | Send; record the reply here |
+| 2026-11-11 | Note sent to admissions operations, approver copied: which version is the policy, and was the task completed? | Sent; awaiting a reply | Record the reply here; follow up if none by 2026-11-16 |
 
 ## What needs a decision
 
