@@ -61,8 +61,8 @@ td:first-child { font-weight: 600; white-space: nowrap; }
   </header>
 
   <div class="snap" aria-label="Snapshot">
-    <div><b>10 of 39</b><span>stories in the plan complete</span></div>
-    <div><b>3 of 32</b><span>of Vick's tasks drafted</span></div>
+    <div><b>11 of 39</b><span>stories in the plan complete</span></div>
+    <div><b>4 of 32</b><span>of Vick's tasks drafted</span></div>
     <div><b>0</b><span>tasks switched on or sending anything</span></div>
     <div><b>3 Dec</b><span>build phase starts</span></div>
   </div>
@@ -75,6 +75,7 @@ td:first-child { font-weight: 600; white-space: nowrap; }
       <li><span><strong>Plan for the 16 old sales agents.</strong> <span class="sub">For each one: keep it, fold it into one of Vick's tasks, retire it, or ask the right owner.</span></span></li>
       <li><span><strong>First two of Vick's tasks drafted.</strong> <span class="sub">Finding prospects and scoring how well they fit the program, and explaining which offer a lead belongs in (it says "can't place" rather than guessing). Both only suggest, both are tested, and neither is switched on.</span></span></li>
       <li><span><strong>Third task drafted: missed strategy calls.</strong> <span class="sub">Vick explains which calls count as missed, always naming the scheduled time, the waiting time used and the call's status. It changes nothing and contacts nobody. 14 tests pass.</span></span></li>
+      <li><span><strong>Fourth task drafted: outbound sequence health.</strong> <span class="sub">Vick explains each sequence's health score part by part, flags stalled sequences and proposes fixes without carrying them out. If any part can't be checked, the score is unknown. 12 tests pass.</span></span></li>
       <li><span><strong>Caught an old agent that could email strangers with no review.</strong> <span class="sub">The Apollo weekly enrollment agent was set up to approve leads itself and add them to cold email campaigns. Ali confirmed it's switched off.</span></span></li>
       <li><span><strong>Manager access fixed.</strong> <span class="sub">Roselyn couldn't open Vick's review page. Ali granted access on 10 November, so she can now review and approve Vick's work.</span></span></li>
       <li><span><strong>Platform change request sent to Kes.</strong> <span class="sub">Asked for a record of who sets a lead's offer, shared three related findings from the code, and asked whether offer re-scoring is running.</span></span></li>
@@ -88,6 +89,7 @@ td:first-child { font-weight: 600; white-space: nowrap; }
       <li class="c"><span><strong>Nothing records who chose a lead's offer.</strong> <span class="sub">So a person's routing choice can't be protected or enforced yet. This needs a platform change, and sales can't file the request against the platform domain itself.</span></span></li>
       <li class="c"><span><strong>Vick's rules aren't defined yet.</strong> <span class="sub">Pass marks, what makes a lead warm, what always stays with a person, and the correct price and dates all need Roselyn's answers. Until then every task stays a draft.</span></span></li>
       <li class="c"><span><strong>The platform disagrees on when a call counts as missed.</strong> <span class="sub">The goal says 15 minutes, the spec says 30 minutes, and the code that runs waits 2 hours. Vick won't pick one until Roselyn does.</span></span></li>
+      <li class="c"><span><strong>Two older agents may be acting without approval.</strong> <span class="sub">They retry failed emails and mark week-old errors as resolved automatically. A sequence that has stopped sending also scores 100. Whether these agents run is unknown.</span></span></li>
       <li class="c"><span><strong>There's nowhere in the platform for the manager to approve Vick's work.</strong> <span class="sub">A decision queue for Roselyn is one of Vick's planned tasks, and the platform has no code for it yet.</span></span></li>
     </ul>
 
@@ -100,6 +102,7 @@ td:first-child { font-weight: 600; white-space: nowrap; }
         <tr><td>Roselyn</td><td>Which task Vick learns first, what stays human, pass marks, warm-lead signals, correct price and dates</td><td>Turns drafts into tasks you can approve.</td></tr>
         <tr><td>Kes</td><td>Is offer re-scoring running, and who files the "who set this offer" change?</td><td>Platform owns the lead record.</td></tr>
         <tr><td>Ali</td><td>Who files the platform change, and confirm a date (Fri 13 Nov suggested)</td><td>Unblocks the change request.</td></tr>
+        <tr><td>Ali or Kes</td><td>Are the campaign repair agents running, and who owns sequence health: sales, marketing or platform?</td><td>Stops unapproved resends and settles ownership.</td></tr>
         <tr><td>Roselyn &amp; Sohail</td><td>Who owns two old marketing agents</td><td>Closes the last open items in the legacy plan.</td></tr>
       </tbody>
     </table></div>
