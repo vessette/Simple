@@ -22,7 +22,7 @@ Code: [`revenueAnswers.js`](revenueAnswers.js), with 10 tests in [`revenueAnswer
 
 ## What I found in the platform
 
-The definitions of net revenue, "net" and "collected", and the labels each one carries on screen, are set out side by side in [DEFINITIONS.md](DEFINITIONS.md). Every figure labelled "revenue" anywhere on the platform, with its source and what affects it, is in [REVENUE_INSTANCES.md](REVENUE_INSTANCES.md). That table found two more problems: the opportunities page projects revenue at a hardcoded $4,500 per enrolment, and the governance page shows revenue as $0 when its lookup fails.
+The definitions of net revenue, "net" and "collected", and the labels each one carries on screen, are set out side by side in [DEFINITIONS.md](DEFINITIONS.md). Every figure labelled "revenue" anywhere on the platform, with its source and what affects it, is in [REVENUE_INSTANCES.md](REVENUE_INSTANCES.md). That table found two more problems: the opportunities page projects revenue at a hardcoded $4,500 per enrolment, and the governance page shows revenue as $0 when its lookup fails. Possible fixes for both are in [FIXES_PROPOSED.md](FIXES_PROPOSED.md).
 
 Read from the platform code at commit `109820a`. This is what the code does, not a measurement of production.
 
