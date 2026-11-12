@@ -78,6 +78,15 @@ The grant service would write its own entry to `audit_logs`, inside the same dat
 
 The `audit_logs` table already has every column this needs. `action` takes up to 50 characters, and the values go in its JSON fields. **No new table and no schema change.**
 
+### Also from the review of the existing log
+
+[AUDIT_LOG_REVIEW.md](AUDIT_LOG_REVIEW.md) checks what today's log captures against what accountability needs. It adds four smaller changes:
+
+4. **Tell the admin when a grant or revoke fails.** The Free Access button swallows the error today (`PersonHistoryDrawer.tsx:108-110`). This is the smallest fix and doesn't depend on any decision.
+5. **Make the entries readable** by Roselyn, either through a filtered view or as an export Vick reports on. Nothing in the platform lists audit entries today.
+6. **Record the admin's real address,** using the existing `describeCaller` helper (`authFailureLog.ts:39`). The saved IP today is Cloudflare's.
+7. **State how long the records are kept.** No code deletes them, and there's no policy.
+
 ## Approval: two options
 
 | | Option A: name the approver (recommended now) | Option B: request, then approve |
