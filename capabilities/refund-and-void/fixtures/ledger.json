@@ -1,0 +1,15 @@
+{
+  "_note": "Fictional rows shaped like the platform's refunds table (Refund.ts:17-32). No real people or payments.",
+  "now": 1794434400000,
+  "ledger": [
+    { "id": "rf-001", "paysimple_payment_id": "900101", "paysimple_refund_id": "RV-5501", "amount_cents": 178800, "method": "refund", "status": "succeeded", "customer_email": "pat.example@example.com", "voided_credit_cents": 5000, "issued_by": "admin.one@example.com", "error": null, "created_at": "2026-11-03T02:30:00Z" },
+    { "id": "rf-002", "paysimple_payment_id": "900202", "paysimple_refund_id": null, "amount_cents": 19900, "method": "void", "status": "failed", "customer_email": "sam.example@example.com", "voided_credit_cents": 0, "issued_by": "admin.one@example.com", "error": "gateway timeout", "created_at": "2026-11-05T16:00:00Z" },
+    { "id": "rf-003", "paysimple_payment_id": "900303", "paysimple_refund_id": null, "amount_cents": 19900, "method": "refund", "status": "pending", "customer_email": "lee.example@example.com", "voided_credit_cents": 0, "issued_by": null, "error": null, "created_at": "2026-11-06T18:00:00Z" }
+  ],
+  "payments": {
+    "voidable": { "Id": 900202, "Amount": 199, "Status": "Authorized", "CanVoidUntil": "2026-11-12T05:00:00Z", "ActualSettledDate": null },
+    "settled": { "Id": 900404, "Amount": 1788, "Status": "Settled", "CanVoidUntil": null, "ActualSettledDate": "2026-11-01T12:00:00Z" },
+    "unsettled": { "Id": 900505, "Amount": 199, "Status": "Posted", "CanVoidUntil": "2026-11-01T05:00:00Z", "ActualSettledDate": null },
+    "reversed": { "Id": 900101, "Amount": 1788, "Status": "Reversed", "CanVoidUntil": null, "ActualSettledDate": "2026-10-28T12:00:00Z" }
+  }
+}
