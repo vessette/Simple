@@ -159,13 +159,22 @@
       "criteria": [
         {
           "text": "Every price quoted traces to PLANS (subscriptionService.ts:73-80); the agent refuses to state a price it cannot trace and never uses the 4500 default.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/enrollment-checkout/checkoutExplainer.js",
+        "capabilities/enrollment-checkout/checkoutExplainer.test.js",
+        "capabilities/enrollment-checkout/fixtures/plans.json",
+        "capabilities/enrollment-checkout/CHECKOUT_FOR_ROSELYN.md"
+      ],
+      "tests_added": [
+        "capabilities/enrollment-checkout/checkoutExplainer.test.js: every price quoted traces to PLANS",
+        "capabilities/enrollment-checkout/checkoutExplainer.test.js: a price that cannot be traced is refused",
+        "capabilities/enrollment-checkout/checkoutExplainer.test.js: 4500 is never quoted: asked about it, the answer is that it is not the price"
+      ],
+      "notes": "Criterion verified by named tests (10 pass), merged in PR #34 at 4fbdbe7. Human decision at every level: explains and quotes only, never issues a link. PLANS is at subscriptionService.ts:78-85 at platform 109820a. Finding: POST /api/create-invoice issues 4500 links (no amount passed).",
+      "updated_at": "2026-11-12T01:44:48.959Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
