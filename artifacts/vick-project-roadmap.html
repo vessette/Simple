@@ -478,7 +478,7 @@ const CAPS = [
   ["quote_and_offer_packet_preparation", "outreach", "Prepare quotes and offer packets", "A person sets the price and sends it.", "absent", 4, [0,1], "later"],
   ["price_statement_consistency_audit", "outreach", "Check every stated price agrees", "Reports each place a price disagrees with the approved one.", "absent", 6, [0,1], "later"],
   ["enrollment_completion_follow_through", "enroll", "Follow enrollments through to a seat", "Nobody who agreed to enroll is lost before their seat is active.", "partial", 5, [0,1], "next"],
-  ["enrollment_checkout_link_issuance", "enroll", "Issue checkout and payment links", "Payment link plus a pending enrollment to reconcile later.", "implemented", 4, [0,1], "later"],
+  ["enrollment_checkout_link_issuance", "enroll", "Issue checkout and payment links", "Explains checkout and quotes prices only from the price list; never issues a link.", "implemented", 4, [1,1], "done", "capabilities/enrollment-checkout/"],
   ["payment_confirmation_and_seat_grant", "enroll", "Confirm payment and grant the seat", "Exactly one seat, no double count on a replay.", "implemented", 5, [0,1], "later"],
   ["payment_handoff_integrity", "enroll", "Keep the payment handoff intact", "The person who agreed to buy is the person charged.", "partial", 6, [0,1], "later"],
   ["app_originated_payment_reconciliation", "enroll", "Reconcile payments the app missed", "Links a settled payment whose notice never arrived.", "implemented", 5, [0,1], "later"],
@@ -521,6 +521,7 @@ const SETUP = [
   ["Outbound sequence health explainer", "Explains each sequence's health score part by part, names credit given without data, flags stalls and proposes unexecuted repairs; unknown when a part can't be checked.", "12 tests", [1,1], "capabilities/outbound-sequence-health/"],
   ["Outbound batch approval packet", "Builds one approval packet from fixtures for a named approver: excludes unsubscribed, suppressed and duplicate prospects first, reports the real number instead of padding, and never expires into approval.", "11 tests", [1,1], "capabilities/outbound-batch-approval/"],
   ["Pipeline digest answers and composer", "Answers six pipeline questions with each figure's source, marks failed sources unavailable with the reason, and composes one digest per Central date and recipient for the existing sender.", "12 tests", [1,1], "capabilities/pipeline-digest/"],
+  ["Checkout and price explainer", "Quotes plan prices only from the platform's price list, refuses any it can't trace (including the retired $4,500), and explains the checkout steps and payment states. Never issues a link.", "10 tests", [1,1], "capabilities/enrollment-checkout/"],
   ["Weekly one-pager", "Status page for senior managers, published to GitHub Pages and refreshed every weekday by a scheduled job.", "Live page", null, "artifacts/vick-weekly-update.html"],
   ["Capability map", "Interactive map of all 32 capabilities along the customer journey, with ceilings, human decisions, tools and dependencies.", "Built from 32 specs", null, "artifacts/vick-capability-map.html"],
   ["Workflows", "The sales journey with its human gates, how a capability earns autonomy, and how each piece of work is built.", "8 human gates mapped", null, "artifacts/vick-workflows.html"],
@@ -540,6 +541,7 @@ const DECISIONS = [
   ["F7", "Two legacy agents retry failed emails and mark week-old errors resolved with no approval.", "Nobody has authorised these actions. Whether they run is unknown; asked the program lead or platform owner to check.", "active"],
   ["F8", "The platform auto-approves any pending approval request once its expiry passes, every 15 minutes.", "An outbound packet filed with an expiry would be approved with nobody looking. Packets carry no expiry; raised with the program lead or platform owner.", "active"],
   ["F9", "The platform digest fails completely when one source fails, can send twice, and follows the server clock instead of Central time.", "The composer reports each source on its own and keys on the Central date. Two small platform fixes proposed to the program lead or platform owner.", "active"],
+  ["F10", "The live checkout route creates payment links at the retired $4,500 price.", "It passes no amount, so a $4,500 default applies; test mode hides it. Whether anyone received one is unknown; raised for a read-only check.", "active"],
   ["P1", "Offer routing labels a lead only; it doesn't start outreach.", "Slower first contact, but nobody receives the wrong offer.", "next"],
   ["P2", "Pause re-scoring until a person can override an offer.", "Stops silent switching while the provenance fix is built.", "next"],
   ["D4", "Publish only the one-pager to GitHub Pages, through a dedicated workflow.", "Keeps the site to one page even though the repository is public.", "done"],
@@ -552,6 +554,7 @@ const RISKS = [
   ["Sales can't file changes against the platform domain", "Medium: fixes stall", "Asked the program lead and platform owner who files", "Program lead", "active"],
   ["Legacy campaign agents acting without approval", "Medium: emails resent or errors hidden", "Asked whether they run; propose pausing retries and auto-resolve if they do", "Program lead, platform owner", "active"],
   ["Approval requests auto-approve on expiry", "High: outreach approved with nobody looking", "Packets carry no expiry; propose expiring outbound requests into rejected instead", "Program lead, platform owner", "active"],
+  ["Checkout route issues wrong-priced links", "High: a prospect charged $4,500 instead of $149 to $199 a month", "Read-only check for $4,500 links; pass the plan price or switch the route off", "Program lead, platform owner", "active"],
   ["Legacy jobs with no owner", "Low: stale automation keeps running", "Each has one named question and a named person to answer it", "Sales and marketing managers", "active"],
   ["Plan dates compress into the build window", "Medium: 30 capabilities in 7 weeks", "Build the three proposed tasks first; demo the strongest end-to-end path", "Architect", "next"],
 ];
@@ -576,7 +579,7 @@ const NEXT = [
 const WAIT = [
   ["Sales manager", "Pass marks, warm-lead signals, pause decision."],
   ["Platform owner", "Change request sent 11 Nov: record who sets a lead's offer. Also asked whether re-scoring runs and who files it."],
-  ["Program lead", "Who files platform changes; confirm a date; are the campaign repair agents running? Two digest fixes."],
+  ["Program lead", "Who files platform changes; confirm a date; are the campaign repair agents running? Two digest fixes. Any $4,500 checkout links?"],
   ["Sales and marketing managers", "Owners for two legacy jobs."],
 ];
 
@@ -590,6 +593,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-11", "Checkout and price explainer merged and its criterion passed; seventh capability built as a draft."],
   ["2026-11-11", "Pipeline digest answers and composer merged and its criterion passed; sixth capability built as a draft."],
   ["2026-11-11", "Outbound batch approval packet merged and its criterion passed; fifth capability built as a draft."],
   ["2026-11-11", "Outbound sequence health explainer merged and its criterion passed; fourth capability built as a draft."],
@@ -611,9 +615,9 @@ const storiesTotal = 7 + CAPS.length;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["30/56", "acceptance criteria passed", 30 / 56],
-  ["107", "automated tests, all passing", 1],
-  ["32", "pull requests merged", 1],
+  ["31/56", "acceptance criteria passed", 31 / 56],
+  ["117", "automated tests, all passing", 1],
+  ["34", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 
