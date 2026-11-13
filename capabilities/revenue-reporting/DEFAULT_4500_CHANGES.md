@@ -96,4 +96,4 @@ So the flexible part is the assumption, and the protected part is the price.
 2. **Kes makes changes 1-6 and the shared function together,** with the tests, in one change. Done partly, an unset setting would make some projections "unavailable" while others still show $4,500.
 3. **Change 7** at any time. It's unused code.
 
-**The one decision needed:** Ali's choice of what a projection assumes per enrolment. Everything else is mechanical. The options and questions for that conversation are in [ALI_PROJECTION_PRICE_BRIEF.md](ALI_PROJECTION_PRICE_BRIEF.md).
+**The one decision needed:** Ali's choice of what a projection assumes per enrolment. Everything else is mechanical. The options and questions, for Ali to answer by reply, are in [ALI_PROJECTION_PRICE_BRIEF.md](ALI_PROJECTION_PRICE_BRIEF.md).
