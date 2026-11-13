@@ -785,13 +785,36 @@
       "criteria": [
         {
           "text": "Every figure is reproducible from a named endpoint and filter; the agent reports unavailable rather than zero where a source is missing, and never derives revenue from a price times a count.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/revenue-reporting/revenueAnswers.js",
+        "capabilities/revenue-reporting/revenueAnswers.test.js",
+        "capabilities/revenue-reporting/fixtures/responses.json",
+        "capabilities/revenue-reporting/REVENUE_FOR_ROSELYN.md",
+        "capabilities/revenue-reporting/DEFINITIONS.md",
+        "capabilities/revenue-reporting/REVENUE_INSTANCES.md",
+        "capabilities/revenue-reporting/FIXES_PROPOSED.md",
+        "capabilities/revenue-reporting/PLAN_PRICE_CHECK_AND_GOVERNANCE.md",
+        "capabilities/revenue-reporting/CHECKLIST_AND_ERROR_STRATEGY.md",
+        "capabilities/revenue-reporting/DEFAULT_4500_CHANGES.md",
+        "capabilities/revenue-reporting/ALI_PROJECTION_PRICE_BRIEF.md"
+      ],
+      "tests_added": [
+        "capabilities/revenue-reporting/revenueAnswers.test.js: every figure is reproducible from a named endpoint, field and filter",
+        "capabilities/revenue-reporting/revenueAnswers.test.js: each figure is read from the field that holds it, pinned",
+        "capabilities/revenue-reporting/revenueAnswers.test.js: a missing source is unavailable with its reason, never zero",
+        "capabilities/revenue-reporting/revenueAnswers.test.js: net revenue: the platform marks it unavailable, and Vick says so with its reason",
+        "capabilities/revenue-reporting/revenueAnswers.test.js: never derives revenue from a price times a count: projections are refused as revenue",
+        "capabilities/revenue-reporting/revenueAnswers.test.js: MRR and collected say what they are, so neither is mistaken for cash in the bank",
+        "capabilities/revenue-reporting/revenueAnswers.test.js: rosters: a known plan or month is read; anything else is refused",
+        "capabilities/revenue-reporting/revenueAnswers.test.js: describe gives the figure with its endpoint, field and filter",
+        "capabilities/revenue-reporting/revenueAnswers.test.js: failure paths: unknown figure, bad responses, no figure name",
+        "capabilities/revenue-reporting/revenueAnswers.test.js: idempotent and read-only: same answer twice, responses untouched"
+      ],
+      "notes": "R2 answers only: each figure read unchanged from the revenue endpoint response a person passes in, with endpoint, field and filter. Unavailable with a reason, never zero, for a missing or broken source. Net revenue reported unavailable per the platform metric registry; the feed figure named collected less refunds. Projections refused as revenue. 10 tests; 10 of 11 mutants killed, the 11th equivalent. Found at 109820a: two meanings of net; collected is one recorded amount per enrolment; dashboard and feed count different credits; no date-range filter; refund ledger may be incomplete; brief scope description and analytics citations out of date. See capabilities/revenue-reporting/REVENUE_FOR_ROSELYN.md.",
+      "updated_at": "2026-11-13T00:19:30.445Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,

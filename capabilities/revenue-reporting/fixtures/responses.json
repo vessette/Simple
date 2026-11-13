@@ -1,0 +1,25 @@
+{
+  "note": "Synthetic endpoint responses shaped like platform commit 109820a. Figures are invented; no real people.",
+  "responses": {
+    "GET /api/admin/revenue/payments": {
+      "summary": { "collected": 12345.5, "memberships": 12195.5, "deposits": 150, "refunds": 199, "net": 12146.5,
+        "membershipCount": 9, "depositAvailableCount": 3, "depositAppliedCount": 2, "refundCount": 1 },
+      "transactions": []
+    },
+    "GET /api/admin/revenue/subscriptions": {
+      "kpis": { "mrr": 1543, "arr": 18516, "activeSubscribers": 9, "compedSeats": 2, "otherPaidCount": 1, "staffCount": 3,
+        "arpu": 171.44, "lapsedMrr": 348, "lapsedSubscribers": 2, "collectibleMrr": 1195 },
+      "planBreakdown": [ { "plan": "annual", "label": "Annual", "count": 4, "amount": 596 }, { "plan": "monthly", "label": "Monthly", "count": 5, "amount": 995 } ],
+      "upcomingPayments": [],
+      "tenureFunnel": [ { "label": "Explorer", "count": 20, "byPlan": {}, "snapshotRatioPct": null }, { "label": "Month 1", "count": 4, "byPlan": {}, "snapshotRatioPct": 20 } ],
+      "attention": [ { "enrollment_id": "e-1", "payer_name": "Person A", "payer_email": "a@example.com", "kind": "lapsed", "plan": "monthly", "reference_date": "2026-10-01T00:00:00Z", "days_overdue": 42 } ]
+    },
+    "GET /api/admin/revenue/dashboard": {
+      "revenueForecast": { "projectedEnrollments": 6, "projectedRevenue": 894, "pipelineValue": 2980, "priceAssumption": { "value": 149 } },
+      "unavailable": [ { "key": "revenue.net_revenue", "name": "Net revenue", "reason": "Source IDENTIFIED but not yet wired (confirmed 2026-09-05)." } ]
+    },
+    "GET /api/admin/revenue/plan/:plan:annual": { "members": [ { "enrollment_id": "e-2", "payer_name": "Person B", "plan": "annual", "monthly_amount": 149 } ] },
+    "GET /api/admin/revenue/tenure/:month:1": { "members": [ { "enrollment_id": "e-3", "payer_name": "Person C", "plan": "monthly", "monthly_amount": 199 } ] },
+    "GET /api/admin/revenue/explorers": { "explorers": [ { "enrollment_id": "e-4" }, { "enrollment_id": "e-5" } ] }
+  }
+}
