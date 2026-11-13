@@ -1,6 +1,7 @@
-# Meeting brief: what should a revenue projection assume per enrolment?
+# Decision note: what should a revenue projection assume per enrolment?
 
-**For:** Ali, in a 15-minute meeting with Victoria. Kes is welcome but not needed.
+**For:** Ali, to decide by reply. Kes is copied for the code change that follows.
+**How to answer:** a one-line reply is enough: the option, plus answers to whichever questions below you have a view on. For example, "B, one price for everyone, net of the deposit credit".
 **Why now:** every revenue projection on the platform uses $4,500 per enrolment, a price nobody has paid. On 10 September you ruled that projections should read one labelled setting and that the $4,500 default must change (ESCALATION-002, decisions 1 and 5). The code fix is ready to plan (see [DEFAULT_4500_CHANGES.md](DEFAULT_4500_CHANGES.md)). It needs one thing from you: **the value that setting should hold, and what it should mean.**
 
 ## What the platform already shows
@@ -24,7 +25,7 @@ Each one answers a different question. **The right one depends on what the proje
 
 **My suggestion:** B now, because it's honest and needs only data the platform already has. Move to C once there's a few months of renewal history. But it depends on your answer to question 1.
 
-## Questions for the meeting
+## Questions
 
 Each answer maps directly to a code or settings change.
 
@@ -37,30 +38,17 @@ Each answer maps directly to a code or settings change.
 7. **Is the campaign tab's $25,000 a different product,** such as corporate deals? If yes, it gets its own name. If not, it reads the same setting.
 8. **Does a projected enrolment mean a paid one?** Checkouts that fail or stay pending don't bring in money. Pending ones are unclear, because missed payment notices leave some paid members showing as pending.
 
-## What I'll bring
+## Figures worth checking before you decide
 
-From the revenue page, fetched on the day by someone with admin access:
+From the revenue page, which anyone with admin access can open:
 - **The current plan mix:** how many members are on annual and how many on monthly.
 - **The lapsed-member figures.**
 - **The tenure funnel,** so it's clear what can and can't be measured yet.
 
-These are totals only. They're shown in the meeting and kept out of the repo, because the repo is public.
+These are totals only. They stay out of the repo, because the repo is public.
 
-## After the meeting
+## Once you've decided
 
 - **Record the decision and its reason** in ESCALATION-002 and in the answers section of [REVENUE_FOR_ROSELYN.md](REVENUE_FOR_ROSELYN.md).
 - **Run Checklist 1** in [CHECKLIST_AND_ERROR_STRATEGY.md](CHECKLIST_AND_ERROR_STRATEGY.md): set the value, have Kes remove the defaults, check the projections move as expected, and tell Roselyn.
 - **Update Vick's notes** that say production holds $4,500.
-
-## A message to set up the meeting
-
-> **Subject:** 15 minutes on the revenue projection price
->
-> Hi Ali,
->
-> Every revenue projection on the platform still uses $4,500 per enrolment, and nobody has ever paid that. Your 10 September decision says projections should read one labelled setting and the $4,500 default should go. The code change is planned, but it needs one call from you: what that setting should hold and what it should mean.
->
-> I've put together five options and eight short questions, each tied to the change it unlocks. Could we take 15 minutes this week? Any time that suits you works for me.
->
-> Thanks,
-> Victoria
