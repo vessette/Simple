@@ -385,17 +385,17 @@
     "known": true,
     "disclosure": "A criterion counts as passing when it is marked in `.colaberry/progress.json` in this repository. The verifier reads that file on every sync and records what it found. A story showing 0 of N is not a rejection: nothing has been claimed yet.",
     "summary": {
-      "stories": 124,
+      "stories": 43,
       "checked": 39,
-      "verified": 1,
-      "awaiting_criteria": 37,
-      "outstanding_criteria": 48
+      "verified": 21,
+      "awaiting_criteria": 18,
+      "outstanding_criteria": 18
     },
     "stories": [
       {
         "story_id": "sales.CAP.abandoned_checkout_identification",
         "title": "Abandoned-checkout identification, separated from free signups and ex-members",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -410,98 +410,21 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.abandoned_checkout_identification.autonomy:R2",
-        "title": "Abandoned-checkout identification, separated from free signups and ex-members · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.abandoned_checkout_identification.autonomy:R4",
-        "title": "Abandoned-checkout identification, separated from free signups and ex-members · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.abandoned_checkout_identification.autonomy:R6",
-        "title": "Abandoned-checkout identification, separated from free signups and ex-members · R6",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.app_originated_payment_reconciliation",
         "title": "App-originated payment reconciliation after a missed webhook",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.app_originated_payment_reconciliation and changes a file. Commit your work with a `Story: sales.CAP.app_originated_payment_reconciliation` trailer (or sales.CAP.app_originated_payment_reconciliation in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every in-scope or out-of-scope verdict cites the amount match, the time window and the customer-id scope; the agent never says a payment 'should probably' be linked."
-        ],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.app_originated_payment_reconciliation.autonomy:R2",
-        "title": "App-originated payment reconciliation after a missed webhook · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
         "reasons": [],
         "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.app_originated_payment_reconciliation.autonomy:R4",
-        "title": "App-originated payment reconciliation after a missed webhook · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.app_originated_payment_reconciliation.autonomy:R5",
-        "title": "App-originated payment reconciliation after a missed webhook · R5",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
+        "commit_sha": "46df4f7404082f1c57320af6a553cb1adc3a5dfa"
       },
       {
         "story_id": "sales.CAP.billing_health_watch",
         "title": "Billing health watch: duplicates, lapses, expiring cards, schedules against the book",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -516,74 +439,21 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.billing_health_watch.autonomy:R2",
-        "title": "Billing health watch: duplicates, lapses, expiring cards, schedules against the book · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.billing_health_watch.autonomy:R4",
-        "title": "Billing health watch: duplicates, lapses, expiring cards, schedules against the book · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.billing_health_watch.autonomy:R6",
-        "title": "Billing health watch: duplicates, lapses, expiring cards, schedules against the book · R6",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.comped_seat_grant_and_revocation",
         "title": "Comped seat grant and revocation",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.comped_seat_grant_and_revocation and changes a file. Commit your work with a `Story: sales.CAP.comped_seat_grant_and_revocation` trailer (or sales.CAP.comped_seat_grant_and_revocation in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every comp listed traces to a subscriptions row; the agent states explicitly that comped seats are excluded from revenue, and never proposes a grant as though it were a routine step."
-        ],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.comped_seat_grant_and_revocation.autonomy:R2",
-        "title": "Comped seat grant and revocation · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
         "reasons": [],
         "outstanding": [],
-        "commit_sha": null
+        "commit_sha": "ff888abea362700326efe3760bb3ae52ecbd4b57"
       },
       {
         "story_id": "sales.CAP.da_revenue_reporting_transition",
         "title": "Data Analyst revenue and enrolment reporting duties transitioning to AI",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -598,74 +468,23 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.da_revenue_reporting_transition.autonomy:R0",
-        "title": "Data Analyst revenue and enrolment reporting duties transitioning to AI · R0",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.enrollment_checkout_link_issuance",
         "title": "Enrolment checkout: PaySimple customer, hosted payment link, pending enrolment",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
         "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.enrollment_checkout_link_issuance and changes a file. Commit your work with a `Story: sales.CAP.enrollment_checkout_link_issuance` trailer (or sales.CAP.enrollment_checkout_link_issuance in the subject line) and push."
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
         ],
-        "outstanding": [
-          "Every price quoted traces to PLANS (subscriptionService.ts:73-80); the agent refuses to state a price it cannot trace and never uses the 4500 default."
-        ],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.enrollment_checkout_link_issuance.autonomy:R2",
-        "title": "Enrolment checkout: PaySimple customer, hosted payment link, pending enrolment · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
         "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.enrollment_checkout_link_issuance.autonomy:R3",
-        "title": "Enrolment checkout: PaySimple customer, hosted payment link, pending enrolment · R3",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.enrollment_checkout_link_issuance.autonomy:R4",
-        "title": "Enrolment checkout: PaySimple customer, hosted payment link, pending enrolment · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
+        "commit_sha": "4fbdbe7bdb7fef23963a803a1c3b7a9dc42d798f"
       },
       {
         "story_id": "sales.CAP.enrollment_completion_follow_through",
         "title": "Enrolment completion follow-through, from checkout started to seat active",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -680,61 +499,22 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.enrollment_completion_follow_through.autonomy:R2",
-        "title": "Enrolment completion follow-through, from checkout started to seat active · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.enrollment_completion_follow_through.autonomy:R4",
-        "title": "Enrolment completion follow-through, from checkout started to seat active · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.enrollment_completion_follow_through.autonomy:R5",
-        "title": "Enrolment completion follow-through, from checkout started to seat active · R5",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring",
         "title": "ICP prospect discovery and program-fit scoring",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
         "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.icp_prospect_discovery_and_fit_scoring and changes a file. Commit your work with a `Story: sales.CAP.icp_prospect_discovery_and_fit_scoring` trailer (or sales.CAP.icp_prospect_discovery_and_fit_scoring in the subject line) and push."
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
         ],
-        "outstanding": [
-          "Baseline tests pass on fixtures, and a fixture whose fit score cannot be computed is recorded as unknown rather than defaulted to a number."
-        ],
-        "commit_sha": null
+        "outstanding": [],
+        "commit_sha": "c4022edc340acd47172da4123877d2523c60c194"
       },
       {
-        "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.autonomy:R1",
-        "title": "ICP prospect discovery and program-fit scoring · R1",
+        "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L1-BY-HAND",
+        "title": "ICP prospect discovery and program-fit scoring · 1 · do it by hand",
         "status": "not_started",
         "verification_state": null,
         "verified": false,
@@ -745,8 +525,8 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.autonomy:R3",
-        "title": "ICP prospect discovery and program-fit scoring · R3",
+        "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L2-IN-THE-APP",
+        "title": "ICP prospect discovery and program-fit scoring · 2 · do it in the app",
         "status": "not_started",
         "verification_state": null,
         "verified": false,
@@ -757,8 +537,20 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.autonomy:R5",
-        "title": "ICP prospect discovery and program-fit scoring · R5",
+        "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L3-TOOL-REQUEST",
+        "title": "ICP prospect discovery and program-fit scoring · 3 · request the tool",
+        "status": "not_started",
+        "verification_state": null,
+        "verified": false,
+        "criteria_passed": null,
+        "criteria_total": null,
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": null
+      },
+      {
+        "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L4-AGENT-WATCHED",
+        "title": "ICP prospect discovery and program-fit scoring · 4 · agent does it, watched",
         "status": "not_started",
         "verification_state": null,
         "verified": false,
@@ -771,7 +563,7 @@
       {
         "story_id": "sales.CAP.manager_decision_queue_for_sales_actions",
         "title": "A decision queue the accountable manager can actually reach",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -786,245 +578,63 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.manager_decision_queue_for_sales_actions.autonomy:R0",
-        "title": "A decision queue the accountable manager can actually reach · R0",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.manager_decision_queue_for_sales_actions.autonomy:R2",
-        "title": "A decision queue the accountable manager can actually reach · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.offer_pipeline_routing",
         "title": "Offer pipeline classification for unrouted leads",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
         "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.offer_pipeline_routing and changes a file. Commit your work with a `Story: sales.CAP.offer_pipeline_routing` trailer (or sales.CAP.offer_pipeline_routing in the subject line) and push."
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
         ],
-        "outstanding": [
-          "Every answer cites the taxonomy rule it used, and an unmappable lead returns 'cannot place' rather than a guess."
-        ],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.offer_pipeline_routing.autonomy:R2",
-        "title": "Offer pipeline classification for unrouted leads · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
         "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.offer_pipeline_routing.autonomy:R4",
-        "title": "Offer pipeline classification for unrouted leads · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.offer_pipeline_routing.autonomy:R6",
-        "title": "Offer pipeline classification for unrouted leads · R6",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
+        "commit_sha": "bbf313a5ae3be553f8d7d2465a8d05e610e02e11"
       },
       {
         "story_id": "sales.CAP.outbound_batch_preparation_for_approval",
         "title": "Outbound enrolment batch prepared for human approval",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
         "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.outbound_batch_preparation_for_approval and changes a file. Commit your work with a `Story: sales.CAP.outbound_batch_preparation_for_approval` trailer (or sales.CAP.outbound_batch_preparation_for_approval in the subject line) and push."
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
         ],
-        "outstanding": [
-          "A fixture batch with fewer qualifying prospects than the cap produces the smaller real number: a test asserting padding must fail."
-        ],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.outbound_batch_preparation_for_approval.autonomy:R1",
-        "title": "Outbound enrolment batch prepared for human approval · R1",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
         "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.outbound_batch_preparation_for_approval.autonomy:R3",
-        "title": "Outbound enrolment batch prepared for human approval · R3",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.outbound_batch_preparation_for_approval.autonomy:R4",
-        "title": "Outbound enrolment batch prepared for human approval · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
+        "commit_sha": "9abe2dbebc8c159b3a0164c9259df2c966c17a2c"
       },
       {
         "story_id": "sales.CAP.outbound_sequence_health_watch",
         "title": "Outbound sequence health watch: detect and propose",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
         "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.outbound_sequence_health_watch and changes a file. Commit your work with a `Story: sales.CAP.outbound_sequence_health_watch` trailer (or sales.CAP.outbound_sequence_health_watch in the subject line) and push."
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
         ],
-        "outstanding": [
-          "Every score is traceable to its input components, and an unreachable component yields unknown rather than a passing default."
-        ],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.outbound_sequence_health_watch.autonomy:R2",
-        "title": "Outbound sequence health watch: detect and propose · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
         "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.outbound_sequence_health_watch.autonomy:R4",
-        "title": "Outbound sequence health watch: detect and propose · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.outbound_sequence_health_watch.autonomy:R6",
-        "title": "Outbound sequence health watch: detect and propose · R6",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
+        "commit_sha": "38a4d19feb10c5c93d971a07d075ab4cb2919cfa"
       },
       {
         "story_id": "sales.CAP.payment_confirmation_and_seat_grant",
         "title": "Payment webhook confirmation, seat grant and portal access",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.payment_confirmation_and_seat_grant and changes a file. Commit your work with a `Story: sales.CAP.payment_confirmation_and_seat_grant` trailer (or sales.CAP.payment_confirmation_and_seat_grant in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every claim traces to the enrolment, subscription or health sample it came from; the agent reports unknown where no record exists."
-        ],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.payment_confirmation_and_seat_grant.autonomy:R2",
-        "title": "Payment webhook confirmation, seat grant and portal access · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
         "reasons": [],
         "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.payment_confirmation_and_seat_grant.autonomy:R4",
-        "title": "Payment webhook confirmation, seat grant and portal access · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.payment_confirmation_and_seat_grant.autonomy:R5",
-        "title": "Payment webhook confirmation, seat grant and portal access · R5",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
+        "commit_sha": "d230ee8d31d9918ff37cc811753161e24ecb114b"
       },
       {
         "story_id": "sales.CAP.payment_handoff_integrity",
         "title": "Payment-handoff integrity across the hosted-page boundary",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1039,45 +649,9 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.payment_handoff_integrity.autonomy:R2",
-        "title": "Payment-handoff integrity across the hosted-page boundary · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.payment_handoff_integrity.autonomy:R4",
-        "title": "Payment-handoff integrity across the hosted-page boundary · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.payment_handoff_integrity.autonomy:R6",
-        "title": "Payment-handoff integrity across the hosted-page boundary · R6",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.payment_webhook_replay_dedup_watch",
         "title": "Payment webhook replay and delivery-dedup gap watch",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1092,98 +666,23 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.payment_webhook_replay_dedup_watch.autonomy:R0",
-        "title": "Payment webhook replay and delivery-dedup gap watch · R0",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.payment_webhook_replay_dedup_watch.autonomy:R4",
-        "title": "Payment webhook replay and delivery-dedup gap watch · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.payment_webhook_replay_dedup_watch.autonomy:R6",
-        "title": "Payment webhook replay and delivery-dedup gap watch · R6",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.pipeline_digest_for_manager",
         "title": "Sales pipeline digest for the accountable manager",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
         "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.pipeline_digest_for_manager and changes a file. Commit your work with a `Story: sales.CAP.pipeline_digest_for_manager` trailer (or sales.CAP.pipeline_digest_for_manager in the subject line) and push."
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
         ],
-        "outstanding": [
-          "Every figure carries its source, and an unavailable source is reported as unavailable with the reason."
-        ],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.pipeline_digest_for_manager.autonomy:R2",
-        "title": "Sales pipeline digest for the accountable manager · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
         "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.pipeline_digest_for_manager.autonomy:R4",
-        "title": "Sales pipeline digest for the accountable manager · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.pipeline_digest_for_manager.autonomy:R6",
-        "title": "Sales pipeline digest for the accountable manager · R6",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
+        "commit_sha": "c48cd95bf77156ff78755565e27aa36059dde119"
       },
       {
         "story_id": "sales.CAP.pipeline_stage_and_lead_temperature_stewardship",
         "title": "Pipeline stage, lead temperature and forecast stewardship",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1198,45 +697,9 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.pipeline_stage_and_lead_temperature_stewardship.autonomy:R2",
-        "title": "Pipeline stage, lead temperature and forecast stewardship · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.pipeline_stage_and_lead_temperature_stewardship.autonomy:R4",
-        "title": "Pipeline stage, lead temperature and forecast stewardship · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.pipeline_stage_and_lead_temperature_stewardship.autonomy:R6",
-        "title": "Pipeline stage, lead temperature and forecast stewardship · R6",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.price_statement_consistency_audit",
         "title": "Price-statement consistency audit across every surface that quotes a price",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1251,45 +714,9 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.price_statement_consistency_audit.autonomy:R0",
-        "title": "Price-statement consistency audit across every surface that quotes a price · R0",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.price_statement_consistency_audit.autonomy:R2",
-        "title": "Price-statement consistency audit across every surface that quotes a price · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.price_statement_consistency_audit.autonomy:R6",
-        "title": "Price-statement consistency audit across every surface that quotes a price · R6",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.prospect_outreach_draft_for_human_send",
         "title": "Prospect outreach and sales material drafted for a human to send",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1304,45 +731,9 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.prospect_outreach_draft_for_human_send.autonomy:R1",
-        "title": "Prospect outreach and sales material drafted for a human to send · R1",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.prospect_outreach_draft_for_human_send.autonomy:R3",
-        "title": "Prospect outreach and sales material drafted for a human to send · R3",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.prospect_outreach_draft_for_human_send.autonomy:R4",
-        "title": "Prospect outreach and sales material drafted for a human to send · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.prospect_question_answering_from_approved_kb",
         "title": "Grounded answers to prospect questions from the approved sales knowledge base",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1357,45 +748,9 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.prospect_question_answering_from_approved_kb.autonomy:R2",
-        "title": "Grounded answers to prospect questions from the approved sales knowledge base · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.prospect_question_answering_from_approved_kb.autonomy:R4",
-        "title": "Grounded answers to prospect questions from the approved sales knowledge base · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.prospect_question_answering_from_approved_kb.autonomy:R5",
-        "title": "Grounded answers to prospect questions from the approved sales knowledge base · R5",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.quote_and_offer_packet_preparation",
         "title": "Quote and offer packet preparation for a human to price and send",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1410,74 +765,21 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.quote_and_offer_packet_preparation.autonomy:R1",
-        "title": "Quote and offer packet preparation for a human to price and send · R1",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.quote_and_offer_packet_preparation.autonomy:R3",
-        "title": "Quote and offer packet preparation for a human to price and send · R3",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.quote_and_offer_packet_preparation.autonomy:R4",
-        "title": "Quote and offer packet preparation for a human to price and send · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.refund_and_void_issuance",
         "title": "Refund and void issuance against a settled or unsettled payment",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.refund_and_void_issuance and changes a file. Commit your work with a `Story: sales.CAP.refund_and_void_issuance` trailer (or sales.CAP.refund_and_void_issuance in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every answer cites the ledger row or the approved policy text; where the policy is unapproved the agent says so rather than stating terms, and it never asserts that a refund will be issued."
-        ],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.refund_and_void_issuance.autonomy:R2",
-        "title": "Refund and void issuance against a settled or unsettled payment · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
         "reasons": [],
         "outstanding": [],
-        "commit_sha": null
+        "commit_sha": "4771cccf7a42ae4c10eea4fca556eb80bdf78f4d"
       },
       {
         "story_id": "sales.CAP.renewal_and_revenue_follow_through_worklist",
         "title": "Renewal and revenue follow-through worklist",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1492,45 +794,9 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.renewal_and_revenue_follow_through_worklist.autonomy:R2",
-        "title": "Renewal and revenue follow-through worklist · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.renewal_and_revenue_follow_through_worklist.autonomy:R4",
-        "title": "Renewal and revenue follow-through worklist · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.renewal_and_revenue_follow_through_worklist.autonomy:R5",
-        "title": "Renewal and revenue follow-through worklist · R5",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.renewal_reminder_lifecycle",
         "title": "Renewal reminder and autopay-disclosure lifecycle",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1545,86 +811,21 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.renewal_reminder_lifecycle.autonomy:R2",
-        "title": "Renewal reminder and autopay-disclosure lifecycle · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.renewal_reminder_lifecycle.autonomy:R4",
-        "title": "Renewal reminder and autopay-disclosure lifecycle · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.revenue_and_subscription_reporting",
         "title": "Collected revenue, MRR, ARR, plan mix and tenure reporting",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.revenue_and_subscription_reporting and changes a file. Commit your work with a `Story: sales.CAP.revenue_and_subscription_reporting` trailer (or sales.CAP.revenue_and_subscription_reporting in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every figure is reproducible from a named endpoint and filter; the agent reports unavailable rather than zero where a source is missing, and never derives revenue from a price times a count."
-        ],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.revenue_and_subscription_reporting.autonomy:R2",
-        "title": "Collected revenue, MRR, ARR, plan mix and tenure reporting · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
         "reasons": [],
         "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.revenue_and_subscription_reporting.autonomy:R4",
-        "title": "Collected revenue, MRR, ARR, plan mix and tenure reporting · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.revenue_and_subscription_reporting.autonomy:R6",
-        "title": "Collected revenue, MRR, ARR, plan mix and tenure reporting · R6",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
+        "commit_sha": "18669d7e6825d9dd202fd8846d08496b445c7b29"
       },
       {
         "story_id": "sales.CAP.revenue_definition_integrity_guard",
         "title": "Revenue-definition integrity guard: app-originated checkout only",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1639,45 +840,9 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.revenue_definition_integrity_guard.autonomy:R2",
-        "title": "Revenue-definition integrity guard: app-originated checkout only · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.revenue_definition_integrity_guard.autonomy:R4",
-        "title": "Revenue-definition integrity guard: app-originated checkout only · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.revenue_definition_integrity_guard.autonomy:R6",
-        "title": "Revenue-definition integrity guard: app-originated checkout only · R6",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.seat_capacity_and_cohort_fill_forecast",
         "title": "Seat capacity and cohort fill forecast",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1692,168 +857,47 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.seat_capacity_and_cohort_fill_forecast.autonomy:R0",
-        "title": "Seat capacity and cohort fill forecast · R0",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.seat_capacity_and_cohort_fill_forecast.autonomy:R2",
-        "title": "Seat capacity and cohort fill forecast · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.seat_capacity_and_cohort_fill_forecast.autonomy:R6",
-        "title": "Seat capacity and cohort fill forecast · R6",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.strategy_call_no_show_detection_and_recovery",
         "title": "Strategy-call no-show detection and recovery queue",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
         "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.strategy_call_no_show_detection_and_recovery and changes a file. Commit your work with a `Story: sales.CAP.strategy_call_no_show_detection_and_recovery` trailer (or sales.CAP.strategy_call_no_show_detection_and_recovery in the subject line) and push."
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
         ],
-        "outstanding": [
-          "Every answer names the scheduled time, the grace threshold and the current status, and no answer asserts a count without the underlying rows."
-        ],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.strategy_call_no_show_detection_and_recovery.autonomy:R2",
-        "title": "Strategy-call no-show detection and recovery queue · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
         "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.strategy_call_no_show_detection_and_recovery.autonomy:R4",
-        "title": "Strategy-call no-show detection and recovery queue · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
+        "commit_sha": "4786eea9e6089678cb2d7a1d14b8376e09032333"
       },
       {
         "story_id": "sales.CAP.subscription_cancellation_and_schedule_suspension",
         "title": "Subscription cancellation and recurring-schedule suspension",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.subscription_cancellation_and_schedule_suspension and changes a file. Commit your work with a `Story: sales.CAP.subscription_cancellation_and_schedule_suspension` trailer (or sales.CAP.subscription_cancellation_and_schedule_suspension in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every claim traces to the subscription row or a gateway read; where no schedule id exists the agent says the suspend would be a no-op rather than implying the member is safe from charges."
-        ],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.subscription_cancellation_and_schedule_suspension.autonomy:R2",
-        "title": "Subscription cancellation and recurring-schedule suspension · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
         "reasons": [],
         "outstanding": [],
-        "commit_sha": null
+        "commit_sha": "030063e02764f2b46129ff7344e40eaa8a586732"
       },
       {
         "story_id": "sales.CAP.subscription_checkout_and_plan_activation",
         "title": "Membership subscription checkout and plan activation",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.subscription_checkout_and_plan_activation and changes a file. Commit your work with a `Story: sales.CAP.subscription_checkout_and_plan_activation` trailer (or sales.CAP.subscription_checkout_and_plan_activation in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every price and date traces to code or to the member's row; an unknown is reported as unknown rather than computed from an assumption."
-        ],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.subscription_checkout_and_plan_activation.autonomy:R2",
-        "title": "Membership subscription checkout and plan activation · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
         "reasons": [],
         "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.subscription_checkout_and_plan_activation.autonomy:R3",
-        "title": "Membership subscription checkout and plan activation · R3",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.subscription_checkout_and_plan_activation.autonomy:R4",
-        "title": "Membership subscription checkout and plan activation · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
+        "commit_sha": "fb7b89dc17887d9cd27a93bed0c746e8db3a74a8"
       },
       {
         "story_id": "sales.CAP.subscription_churn_and_renewal_risk_analysis",
         "title": "Subscription churn and renewal-risk analysis",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1868,45 +912,9 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.subscription_churn_and_renewal_risk_analysis.autonomy:R0",
-        "title": "Subscription churn and renewal-risk analysis · R0",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.subscription_churn_and_renewal_risk_analysis.autonomy:R2",
-        "title": "Subscription churn and renewal-risk analysis · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.subscription_churn_and_renewal_risk_analysis.autonomy:R5",
-        "title": "Subscription churn and renewal-risk analysis · R5",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.CAP.team_license_and_sponsored_seat_administration",
         "title": "Team-license and sponsored-seat administration",
-        "status": "not_started",
+        "status": "in_progress",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1921,97 +929,46 @@
         "commit_sha": null
       },
       {
-        "story_id": "sales.CAP.team_license_and_sponsored_seat_administration.autonomy:R2",
-        "title": "Team-license and sponsored-seat administration · R2",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.team_license_and_sponsored_seat_administration.autonomy:R3",
-        "title": "Team-license and sponsored-seat administration · R3",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
-        "story_id": "sales.CAP.team_license_and_sponsored_seat_administration.autonomy:R4",
-        "title": "Team-license and sponsored-seat administration · R4",
-        "status": "not_started",
-        "verification_state": null,
-        "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
-        "commit_sha": null
-      },
-      {
         "story_id": "sales.LEGACY-MIGRATION-PLAN",
         "title": "Legacy migration plan",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 3,
         "criteria_total": 3,
         "reasons": [
-          "None of the 3 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.LEGACY-MIGRATION-PLAN and changes a file. Commit your work with a `Story: sales.LEGACY-MIGRATION-PLAN` trailer (or sales.LEGACY-MIGRATION-PLAN in the subject line) and push."
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
         ],
-        "outstanding": [
-          "The plan accounts for every inherited legacy record for this domain, each one kept, merged or retired with a reason.",
-          "The migration is described as replayable: running it twice leaves the same end state, with no duplicated side effects.",
-          "The plan states what happens to a record the migration cannot classify, rather than assuming none exist."
-        ],
-        "commit_sha": null
+        "outstanding": [],
+        "commit_sha": "20c8df545267f1e55a50b3a81523dc4350905cac"
       },
       {
         "story_id": "sales.RESEARCH-1-SYSTEM-CLASSES",
         "title": "Compare the five system classes, and place this domain among them",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 3,
         "criteria_total": 3,
         "reasons": [
-          "None of the 3 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.RESEARCH-1-SYSTEM-CLASSES and changes a file. Commit your work with a `Story: sales.RESEARCH-1-SYSTEM-CLASSES` trailer (or sales.RESEARCH-1-SYSTEM-CLASSES in the subject line) and push."
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
         ],
-        "outstanding": [
-          "The document compares all five system classes (chatbot, fixed workflow, tool-using agent, agentic system, multi-agent system) and names which one this domain needs.",
-          "The choice cites this domain's own capability count and its human-reserved count, so the argument would change if those numbers changed.",
-          "The document states explicitly which class this domain does NOT need, and what would have to change to justify the next class up."
-        ],
-        "commit_sha": null
+        "outstanding": [],
+        "commit_sha": "7f5d4777c80872da5064de8d59b7fb997bf44552"
       },
       {
         "story_id": "sales.RESEARCH-2-AGENT-ANATOMY",
         "title": "Map the nine anatomy elements onto this domain's agent",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 3,
         "criteria_total": 3,
         "reasons": [
-          "None of the 3 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.RESEARCH-2-AGENT-ANATOMY and changes a file. Commit your work with a `Story: sales.RESEARCH-2-AGENT-ANATOMY` trailer (or sales.RESEARCH-2-AGENT-ANATOMY in the subject line) and push."
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
         ],
-        "outstanding": [
-          "All nine anatomy elements are addressed, with none left blank and none dismissed as not applicable without a stated reason.",
-          "Each element names the concrete platform surface, tool or record it maps to, rather than describing the element in general terms.",
-          "Any element that cannot be filled is recorded as a gap with what is missing, rather than omitted."
-        ],
-        "commit_sha": null
+        "outstanding": [],
+        "commit_sha": "c27be1758efd08f5c9781e5d58d9c804d7c02a20"
       },
       {
         "story_id": "sales.RESEARCH-3-ROLE-AND-DA-TRANSITION",
@@ -2021,62 +978,52 @@
         "verified": true,
         "criteria_passed": 3,
         "criteria_total": 3,
-        "reasons": [],
+        "reasons": [
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
+        ],
         "outstanding": [],
         "commit_sha": "8714eb229dfe7d0472b31acdb66270e77aeed7e7"
       },
       {
         "story_id": "sales.RESEARCH-4-MANAGER-INTERVIEW",
         "title": "Prepare a 30-minute interview with Roselyn and propose a weekly check-in",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 3,
         "criteria_total": 3,
         "reasons": [
-          "None of the 3 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.RESEARCH-4-MANAGER-INTERVIEW and changes a file. Commit your work with a `Story: sales.RESEARCH-4-MANAGER-INTERVIEW` trailer (or sales.RESEARCH-4-MANAGER-INTERVIEW in the subject line) and push."
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
         ],
-        "outstanding": [
-          "The interview plan fits 30 minutes, and every question is specific to this domain rather than reusable for any agent.",
-          "A weekly check-in is proposed with a named day, a duration, and the three things it reviews.",
-          "The plan states what to do with each answer, so a completed interview changes the build rather than only recording opinions."
-        ],
-        "commit_sha": null
+        "outstanding": [],
+        "commit_sha": "256afdec743ef804d1dce125f143ebdfbd3eeb11"
       },
       {
         "story_id": "sales.RESEARCH-5-THREE-PROPOSED-TASKS",
         "title": "Capture three proposed agent tasks with boundaries and completion evidence",
-        "status": "not_started",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 3,
         "criteria_total": 3,
         "reasons": [
-          "None of the 3 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.RESEARCH-5-THREE-PROPOSED-TASKS and changes a file. Commit your work with a `Story: sales.RESEARCH-5-THREE-PROPOSED-TASKS` trailer (or sales.RESEARCH-5-THREE-PROPOSED-TASKS in the subject line) and push."
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
         ],
-        "outstanding": [
-          "Exactly three agent tasks are proposed, each with its boundary stated as what the agent must NOT do.",
-          "Each task names the evidence that proves it completed, and that evidence is something other than the task being marked done.",
-          "Each task names the human who approves it wherever approval is required."
-        ],
-        "commit_sha": null
+        "outstanding": [],
+        "commit_sha": "b9125be81abda33a705e2a7f7bde404b51ed5f7f"
       },
       {
         "story_id": "sales.STORY-000",
         "title": "STORY-000 · Build your Command Center",
-        "status": "not_started",
-        "verification_state": "submitted",
-        "verified": false,
-        "criteria_passed": 5,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 6,
         "criteria_total": 6,
         "reasons": [
-          "5 of 6 acceptance criteria are marked as passing. Outstanding: Given the autonomy ladder panel, when it renders, then all ten rungs are present with the owner's wording, and each capability's ceiling is marked against the rung it stops at."
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
         ],
-        "outstanding": [
-          "Given the autonomy ladder panel, when it renders, then all ten rungs are present with the owner's wording, and each capability's ceiling is marked against the rung it stops at."
-        ],
+        "outstanding": [],
         "commit_sha": "0f6e8ed3b5a887197f56a2e225dcafc0b126177f"
       }
     ]

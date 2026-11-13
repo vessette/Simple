@@ -3,13 +3,13 @@
   "project": "sales",
   "totals": {
     "stories_total": 39,
-    "stories_verified": 1,
-    "stories_submitted": 1,
-    "stories_in_progress": 37,
+    "stories_verified": 21,
+    "stories_submitted": 0,
+    "stories_in_progress": 18,
     "stories_not_started": 0,
     "criteria_total": 56,
-    "criteria_passed": 8,
-    "points_awarded": 21
+    "criteria_passed": 38,
+    "points_awarded": 441
   },
   "stories": [
     {
@@ -73,17 +73,15 @@
       "notes": "R2 explainer only: for one payment a person passes in, the reconciler verdict (in_scope, out_of_scope, unknown), the guard that decided it, and the amount, time-window and customer-id checks, each with a file:line at platform 109820a. Unknown, never guessed, where a read is missing or the date has no time. 12 tests, 12/12 mutants killed. Found: Authorized counted as collected (one of the five paid places); path B ignores the shared-customer exclusion; no-open-checkout candidates counted every run; dry run omits activations; production PaymentDate format unconfirmed; a failed final write likely not retried (from reading). See capabilities/app-payment-reconcile/RECONCILE_FOR_ROSELYN.md.",
       "updated_at": "2026-11-12T23:17:10.304Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every in-scope or out-of-scope verdict cites the amount match, the time window and the customer-id scope; the agent never says a payment 'should probably' be linked."
-        ]
+        "verified_at": "2026-11-12T23:25:39.018Z",
+        "commit_sha": "46df4f7404082f1c57320af6a553cb1adc3a5dfa",
+        "commit_url": "https://github.com/vessette/Simple/commit/46df4f7404082f1c57320af6a553cb1adc3a5dfa",
+        "commit_at": "2026-11-12T23:17:49Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -148,17 +146,15 @@
       "notes": "R2 report only: lists active and revoked comps from subscriptions rows a person passes in (Vick cannot reach production). 10 tests, 10/10 mutants killed. Found at platform 109820a: a comp grant marks the enrolment paid, so comps pass the paying-member filter and are kept out of MRR only by the row the revenue page picks; a revoked comp can still count as Free Access; no reason is recorded (the admin audit log records who and when; corrected from an earlier draft that said neither). The comp-plus-paid rule is still open with Roselyn and Ali. See capabilities/comped-seat/COMPS_FOR_ROSELYN.md.",
       "updated_at": "2026-11-12T23:09:35.072Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every comp listed traces to a subscriptions row; the agent states explicitly that comped seats are excluded from revenue, and never proposes a grant as though it were a routine step."
-        ]
+        "verified_at": "2026-11-12T23:11:18.092Z",
+        "commit_sha": "ff888abea362700326efe3760bb3ae52ecbd4b57",
+        "commit_url": "https://github.com/vessette/Simple/commit/ff888abea362700326efe3760bb3ae52ecbd4b57",
+        "commit_at": "2026-11-12T22:53:36Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -213,17 +209,15 @@
       "notes": "Criterion verified by named tests (10 pass), merged in PR #34 at 4fbdbe7. Human decision at every level: explains and quotes only, never issues a link. PLANS is at subscriptionService.ts:78-85 at platform 109820a. Finding: POST /api/create-invoice issues 4500 links (no amount passed).",
       "updated_at": "2026-11-12T01:44:48.959Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every price quoted traces to PLANS (subscriptionService.ts:73-80); the agent refuses to state a price it cannot trace and never uses the 4500 default."
-        ]
+        "verified_at": "2026-11-12T01:45:06.292Z",
+        "commit_sha": "4fbdbe7bdb7fef23963a803a1c3b7a9dc42d798f",
+        "commit_url": "https://github.com/vessette/Simple/commit/4fbdbe7bdb7fef23963a803a1c3b7a9dc42d798f",
+        "commit_at": "2026-11-12T01:41:12Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -269,17 +263,15 @@
       "notes": "autonomy:R1 baseline only: capabilities/icp-fit-scoring/ (node --test capabilities/icp-fit-scoring/fitScoring.test.js, 16 pass). No live Apollo call; capability remains draft and nothing is promoted. Assumption for Roselyn: title and employee count are the minimum inputs for a real score.",
       "updated_at": null,
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Baseline tests pass on fixtures, and a fixture whose fit score cannot be computed is recorded as unknown rather than defaulted to a number."
-        ]
+        "verified_at": "2026-11-10T21:05:35.306Z",
+        "commit_sha": "c4022edc340acd47172da4123877d2523c60c194",
+        "commit_url": "https://github.com/vessette/Simple/commit/c4022edc340acd47172da4123877d2523c60c194",
+        "commit_at": "2026-11-10T21:01:48Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -325,17 +317,15 @@
       "notes": "autonomy:R2 explainer only: capabilities/offer-pipeline-routing/ (node --test capabilities/offer-pipeline-routing/offerTaxonomy.test.js, 14 pass). The taxonomy is the platform's three classifyOffer rules, held as an unapproved draft. Read-only; capability remains draft. Routing findings and decisions for Roselyn in ROUTING_FOR_ROSELYN.md and ROSELYN_ONE_PAGER.md.",
       "updated_at": null,
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every answer cites the taxonomy rule it used, and an unmappable lead returns 'cannot place' rather than a guess."
-        ]
+        "verified_at": "2026-11-10T21:36:43.787Z",
+        "commit_sha": "bbf313a5ae3be553f8d7d2465a8d05e610e02e11",
+        "commit_url": "https://github.com/vessette/Simple/commit/bbf313a5ae3be553f8d7d2465a8d05e610e02e11",
+        "commit_at": "2026-11-10T21:36:24Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -361,17 +351,15 @@
       "notes": "Criterion verified by named tests (11 pass), merged in PR #30 at 9abe2db; a padding mutation fails 5 tests. R1 fixtures only: no database, enrolment or send. Packets carry no expiry; the platform auto-approves expired approval requests (approvalRequestTimeoutJob.ts).",
       "updated_at": "2026-11-12T01:29:44.339Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "A fixture batch with fewer qualifying prospects than the cap produces the smaller real number: a test asserting padding must fail."
-        ]
+        "verified_at": "2026-11-12T01:30:05.335Z",
+        "commit_sha": "9abe2dbebc8c159b3a0164c9259df2c966c17a2c",
+        "commit_url": "https://github.com/vessette/Simple/commit/9abe2dbebc8c159b3a0164c9259df2c966c17a2c",
+        "commit_at": "2026-11-12T01:29:44Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -397,17 +385,15 @@
       "notes": "Criterion verified by named tests (12 pass), merged in PR #28 at 38a4d19. R2 explainer only: retries, resolves and writes nothing; repair proposals are unexecuted. Ownership contested (sales, marketing or platform).",
       "updated_at": "2026-11-12T01:20:30.261Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every score is traceable to its input components, and an unreachable component yields unknown rather than a passing default."
-        ]
+        "verified_at": "2026-11-12T01:20:47.604Z",
+        "commit_sha": "38a4d19feb10c5c93d971a07d075ab4cb2919cfa",
+        "commit_url": "https://github.com/vessette/Simple/commit/38a4d19feb10c5c93d971a07d075ab4cb2919cfa",
+        "commit_at": "2026-11-12T01:16:59Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -440,17 +426,15 @@
       "notes": "Criterion verified by named tests (9 pass), merged in PR #38 at d230ee8. Human decision at every level: explains only. Findings for the platform owners: returned payments change nothing; payment status not checked before marking paid; SUB- failures not recorded; check-then-increment not atomic. 2026-11-12: Vick now applies the program lead's rule (only Settled or Posted counts as paid) through paidRule.js, and preflightList() sorts paid enrolments by name from read-only lookups (14 tests pass, 5 of 5 mutants killed). This adds a fourth source, a gateway read of the same payment id, which the criterion does not name; without a read the claim is unknown, so the criterion as written still holds. Flagged for the program lead to confirm a gateway read is an allowed source. Later 2026-11-12, after the platform builder's spec review: a reversal now reads as a drop to Week 0 with login kept (no seat freed by hand), Voided sits with failed, the five places the platform decides paid are cited, and the pre-flight list covers active memberships (15 tests pass, 8 of 8 mutants killed).",
       "updated_at": "2026-11-12T21:06:31.510Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every claim traces to the enrolment, subscription or health sample it came from; the agent reports unknown where no record exists."
-        ]
+        "verified_at": "2026-11-12T02:08:03.539Z",
+        "commit_sha": "d230ee8d31d9918ff37cc811753161e24ecb114b",
+        "commit_url": "https://github.com/vessette/Simple/commit/d230ee8d31d9918ff37cc811753161e24ecb114b",
+        "commit_at": "2026-11-12T02:00:11Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -532,17 +516,15 @@
       "notes": "Criterion verified by named tests (12 pass), merged in PR #32 at 0c5fa49. R2: answers and composes only; the existing sender delivers. One digest per (Central date, recipient).",
       "updated_at": "2026-11-12T01:37:02.039Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every figure carries its source, and an unavailable source is reported as unavailable with the reason."
-        ]
+        "verified_at": "2026-11-12T01:37:20.675Z",
+        "commit_sha": "c48cd95bf77156ff78755565e27aa36059dde119",
+        "commit_url": "https://github.com/vessette/Simple/commit/c48cd95bf77156ff78755565e27aa36059dde119",
+        "commit_at": "2026-11-12T01:34:17Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -709,17 +691,15 @@
       "notes": "R2, human decision at every level: answers from refund ledger rows and the policy text only; the terms are unapproved (salesHubCoryController.ts:33), so none are stated; refund requests go to a person; recommendations carry no decision. 10 tests pass on main after PR #40 (merge 802f35d).",
       "updated_at": "2026-11-12T03:47:51.210Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every answer cites the ledger row or the approved policy text; where the policy is unapproved the agent says so rather than stating terms, and it never asserts that a refund will be issued."
-        ]
+        "verified_at": "2026-11-12T03:48:10.184Z",
+        "commit_sha": "4771cccf7a42ae4c10eea4fca556eb80bdf78f4d",
+        "commit_url": "https://github.com/vessette/Simple/commit/4771cccf7a42ae4c10eea4fca556eb80bdf78f4d",
+        "commit_at": "2026-11-12T03:24:02Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -816,17 +796,15 @@
       "notes": "R2 answers only: each figure read unchanged from the revenue endpoint response a person passes in, with endpoint, field and filter. Unavailable with a reason, never zero, for a missing or broken source. Net revenue reported unavailable per the platform metric registry; the feed figure named collected less refunds. Projections refused as revenue. 10 tests; 10 of 11 mutants killed, the 11th equivalent. Found at 109820a: two meanings of net; collected is one recorded amount per enrolment; dashboard and feed count different credits; no date-range filter; refund ledger may be incomplete; brief scope description and analytics citations out of date. See capabilities/revenue-reporting/REVENUE_FOR_ROSELYN.md.",
       "updated_at": "2026-11-13T00:19:30.445Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every figure is reproducible from a named endpoint and filter; the agent reports unavailable rather than zero where a source is missing, and never derives revenue from a price times a count."
-        ]
+        "verified_at": "2026-11-13T00:20:46.573Z",
+        "commit_sha": "18669d7e6825d9dd202fd8846d08496b445c7b29",
+        "commit_url": "https://github.com/vessette/Simple/commit/18669d7e6825d9dd202fd8846d08496b445c7b29",
+        "commit_at": "2026-11-12T23:32:40Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -908,17 +886,15 @@
       "notes": "Criterion verified by named tests (14 pass, merged in PR #26 at 4786eea). R2 explainer only: marks, cancels and contacts nothing. Grace threshold unsettled (30 min spec vs 2 h running code), so no default; awaiting the sales manager.",
       "updated_at": "2026-11-12T01:10:46.664Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every answer names the scheduled time, the grace threshold and the current status, and no answer asserts a count without the underlying rows."
-        ]
+        "verified_at": "2026-11-12T01:11:04.629Z",
+        "commit_sha": "4786eea9e6089678cb2d7a1d14b8376e09032333",
+        "commit_url": "https://github.com/vessette/Simple/commit/4786eea9e6089678cb2d7a1d14b8376e09032333",
+        "commit_at": "2026-11-12T01:08:00Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -951,17 +927,15 @@
       "notes": "R2, human decision at every level: explains subscription state, the schedule id on the row, a person-supplied gateway read, and the recorded cancel reason with its writer; every claim names the subscription row or gateway read; with no schedule id the suspend is called a no-op and a guard refuses any all-clear line; terms unapproved (salesHubCoryController.ts:33), so none stated. 12 tests pass on main after PR #42 (merge fd4c800). The story's cited lines are wrong at 109820a; see the brief, finding 7.",
       "updated_at": "2026-11-12T04:47:59.886Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every claim traces to the subscription row or a gateway read; where no schedule id exists the agent says the suspend would be a no-op rather than implying the member is safe from charges."
-        ]
+        "verified_at": "2026-11-12T04:48:25.086Z",
+        "commit_sha": "030063e02764f2b46129ff7344e40eaa8a586732",
+        "commit_url": "https://github.com/vessette/Simple/commit/030063e02764f2b46129ff7344e40eaa8a586732",
+        "commit_at": "2026-11-12T04:23:43Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -988,17 +962,15 @@
       "notes": "Criterion verified by named tests (11 pass), merged in PR #36 at ef3788d. Human decision at every level: answers only. The spec's class-start billing anchor is stale; since 2026-10-30 it is the payment day.",
       "updated_at": "2026-11-12T01:55:11.028Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every price and date traces to code or to the member's row; an unknown is reported as unknown rather than computed from an assumption."
-        ]
+        "verified_at": "2026-11-12T01:55:29.298Z",
+        "commit_sha": "911b64b3f25aaf64f8bbbaf453dfb333eeca276e",
+        "commit_url": "https://github.com/vessette/Simple/commit/911b64b3f25aaf64f8bbbaf453dfb333eeca276e",
+        "commit_at": "2026-11-12T01:55:11Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -1080,19 +1052,15 @@
       "notes": "Document: docs/migration/legacy-migration-plan.md (all 16 records; 4 unknowns each with a question and answerer; replay rules; unclassifiable-record handling). Nothing switched off or changed. Production state of ApolloWeeklyEnrollmentAgent is unknown; checks for someone with access are in docs/migration/apollo-production-checks.md.",
       "updated_at": null,
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 3,
         "criteria_total": 3,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "The plan accounts for every inherited legacy record for this domain, each one kept, merged or retired with a reason.",
-          "The migration is described as replayable: running it twice leaves the same end state, with no duplicated side effects.",
-          "The plan states what happens to a record the migration cannot classify, rather than assuming none exist."
-        ]
+        "verified_at": "2026-11-10T20:41:43.912Z",
+        "commit_sha": "20c8df545267f1e55a50b3a81523dc4350905cac",
+        "commit_url": "https://github.com/vessette/Simple/commit/20c8df545267f1e55a50b3a81523dc4350905cac",
+        "commit_at": "2026-11-10T20:41:28Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -1118,19 +1086,15 @@
       "notes": "Document: docs/discovery/01-system-classes.md, re-verified against platform commit 456de02. Recommendation depends on the 12 human-reserved flags, all still draft; revisit after Roselyn's review.",
       "updated_at": null,
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 3,
         "criteria_total": 3,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "The document compares all five system classes (chatbot, fixed workflow, tool-using agent, agentic system, multi-agent system) and names which one this domain needs.",
-          "The choice cites this domain's own capability count and its human-reserved count, so the argument would change if those numbers changed.",
-          "The document states explicitly which class this domain does NOT need, and what would have to change to justify the next class up."
-        ]
+        "verified_at": "2026-11-10T17:58:54.399Z",
+        "commit_sha": "7f5d4777c80872da5064de8d59b7fb997bf44552",
+        "commit_url": "https://github.com/vessette/Simple/commit/7f5d4777c80872da5064de8d59b7fb997bf44552",
+        "commit_at": "2026-11-10T17:53:35Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -1156,19 +1120,15 @@
       "notes": "Document: docs/discovery/02-agent-anatomy.md, cited against platform commit 949fe19. 2 of 9 elements unknown (reasoning, memory); coordination does not exist and is recorded as a gap.",
       "updated_at": null,
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 3,
         "criteria_total": 3,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "All nine anatomy elements are addressed, with none left blank and none dismissed as not applicable without a stated reason.",
-          "Each element names the concrete platform surface, tool or record it maps to, rather than describing the element in general terms.",
-          "Any element that cannot be filled is recorded as a gap with what is missing, rather than omitted."
-        ]
+        "verified_at": "2026-11-10T18:19:10.846Z",
+        "commit_sha": "c27be1758efd08f5c9781e5d58d9c804d7c02a20",
+        "commit_url": "https://github.com/vessette/Simple/commit/c27be1758efd08f5c9781e5d58d9c804d7c02a20",
+        "commit_at": "2026-11-10T18:18:59Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -1200,7 +1160,7 @@
         "verified_at": "2026-11-10T17:30:49.336Z",
         "commit_sha": "8714eb229dfe7d0472b31acdb66270e77aeed7e7",
         "commit_url": "https://github.com/vessette/Simple/commit/8714eb229dfe7d0472b31acdb66270e77aeed7e7",
-        "commit_at": "2026-11-10T16:43:52Z",
+        "commit_at": "2026-11-10T17:30:37Z",
         "points_awarded": 21,
         "outstanding": []
       }
@@ -1228,19 +1188,15 @@
       "notes": "Document: docs/discovery/04-manager-interview.md. Agenda only: nothing sent or scheduled by this project; the weekly check-in is a proposal. Answers section is empty until the interview happens.",
       "updated_at": null,
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 3,
         "criteria_total": 3,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "The interview plan fits 30 minutes, and every question is specific to this domain rather than reusable for any agent.",
-          "A weekly check-in is proposed with a named day, a duration, and the three things it reviews.",
-          "The plan states what to do with each answer, so a completed interview changes the build rather than only recording opinions."
-        ]
+        "verified_at": "2026-11-10T18:39:18.084Z",
+        "commit_sha": "256afdec743ef804d1dce125f143ebdfbd3eeb11",
+        "commit_url": "https://github.com/vessette/Simple/commit/256afdec743ef804d1dce125f143ebdfbd3eeb11",
+        "commit_at": "2026-11-10T21:50:46Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -1266,19 +1222,15 @@
       "notes": "Document: docs/discovery/05-three-proposed-tasks.md. Three draft capabilities (lead temperature proposals, price-statement audit, abandoned-checkout list); all stay draft. Pass marks and which comes first wait on Roselyn (interview Q1, Q5).",
       "updated_at": null,
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 3,
         "criteria_total": 3,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Exactly three agent tasks are proposed, each with its boundary stated as what the agent must NOT do.",
-          "Each task names the evidence that proves it completed, and that evidence is something other than the task being marked done.",
-          "Each task names the human who approves it wherever approval is required."
-        ]
+        "verified_at": "2026-11-10T18:43:57.622Z",
+        "commit_sha": "b9125be81abda33a705e2a7f7bde404b51ed5f7f",
+        "commit_url": "https://github.com/vessette/Simple/commit/b9125be81abda33a705e2a7f7bde404b51ed5f7f",
+        "commit_at": "2026-11-10T18:43:44Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     },
     {
@@ -1316,17 +1268,15 @@
       "notes": "Criterion 3: each capability's ceiling is read from the coverage route's target_autonomy, which the route fills from the research max_permitted_autonomy (platform coverageMatrix.ts:146), and marked on the ladder as 'ceiling (draft)' with rungs above it unreachable. Ceilings are research drafts, unvalidated and advisory, never authority. All ten rungs are read from releases[] in the owner's wording.",
       "updated_at": null,
       "verification": {
-        "state": "submitted",
-        "criteria_passed": 5,
+        "state": "verified",
+        "criteria_passed": 6,
         "criteria_total": 6,
-        "verified_at": null,
+        "verified_at": "2026-11-10T18:26:39.745Z",
         "commit_sha": "0f6e8ed3b5a887197f56a2e225dcafc0b126177f",
         "commit_url": "https://github.com/vessette/Simple/commit/0f6e8ed3b5a887197f56a2e225dcafc0b126177f",
-        "commit_at": "2026-11-07T01:49:18Z",
-        "points_awarded": null,
-        "outstanding": [
-          "Given the autonomy ladder panel, when it renders, then all ten rungs are present with the owner's wording, and each capability's ceiling is marked against the rung it stops at."
-        ]
+        "commit_at": "2026-11-10T18:26:08Z",
+        "points_awarded": 21,
+        "outstanding": []
       }
     }
   ]
