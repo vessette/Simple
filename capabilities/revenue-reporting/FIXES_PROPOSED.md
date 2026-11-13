@@ -12,7 +12,7 @@ The opportunities page and the Cory forecast project revenue at $4,500 per enrol
 - it's **read from the `price_per_enrollment` setting,** not a number typed into the code;
 - the setting's **old default of $4,500 is changed**, so the wrong number isn't simply moved into the setting.
 
-(`docs/marketing/ESCALATION-002-fabricated-metrics.md:213-219`, `:241-247`.) The revenue dashboard already works this way (`revenueDashboardService.ts:145-146`, `:204-206`). The other places don't yet.
+(`docs/marketing/ESCALATION-002-fabricated-metrics.md:213-219`, `:241-247`.) The revenue dashboard already works this way (`revenueDashboardService.ts:145-146`, `:204-206`). The other places don't yet. But production holds $4,500 in that setting too (`checkPriceAgreement.js:281-283`), so until 1a is decided, even the revenue dashboard projects at $4,500.
 
 **Where it stands in the code.** The platform's price check freezes two files as known debt: the opportunities forecast and the scenario simulator, both at $4,500 (`scripts/checkPriceAgreement.js:47-61`). It fails the build if any third file adds a price of its own.
 
@@ -59,6 +59,8 @@ If the lookup behind the governance page fails, its Revenue tile shows **$0** (`
 - **A test:** check that a failed lookup produces "unavailable", never 0.
 
 It's a small change for Kes. The same pattern applies anywhere else on the platform that turns a failure into a zero.
+
+The step-by-step plan for both problems, with a list of every price point on the platform, is in [PLAN_PRICE_CHECK_AND_GOVERNANCE.md](PLAN_PRICE_CHECK_AND_GOVERNANCE.md).
 
 ## Suggested order
 
