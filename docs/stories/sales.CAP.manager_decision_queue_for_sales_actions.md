@@ -1,5 +1,7 @@
 # sales.CAP.manager_decision_queue_for_sales_actions — A decision queue the accountable manager can actually reach
 
+**CANDIDATE -- not started, not assigned.** This is one line on this domain's list of everything its agent could eventually do. It becomes real work only when the builder picks it and their manager agrees, at which point it opens as four stories. Until then it is deliberately inert, and the honest status of it is "not started" rather than "behind".
+
 Roselyn can see, decide and record every financial and outreach decision her agent prepares; without this, every other capability in this domain is stalled at draft.
 
 **Built today:** absent. **Requirement validated:** draft -- Roselyn must confirm scope, exceptions and success measures; she has no admin login today
@@ -11,7 +13,7 @@ Roselyn can see, decide and record every financial and outreach decision her age
 
 Full build prompt is attached to this story.
 
-**Release:** r2 · r2 (weeks 0–0)
+**Release:** autonomy:R0 · Legacy migration plan (weeks 0–0)
 **Owner:** 
 **Blocked by:** nothing — you can start this now
 

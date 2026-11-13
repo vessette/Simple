@@ -1,12 +1,12 @@
 {
   "schema_version": 2,
-  "project": "sales",
+  "project": "Sales, Enrollment & Subscriptions",
   "totals": {
-    "stories_total": 39,
+    "stories_total": 43,
     "stories_verified": 21,
     "stories_submitted": 0,
     "stories_in_progress": 18,
-    "stories_not_started": 0,
+    "stories_not_started": 4,
     "criteria_total": 56,
     "criteria_passed": 38,
     "points_awarded": 441
@@ -14,7 +14,7 @@
   "stories": [
     {
       "id": "sales.CAP.abandoned_checkout_identification",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -42,7 +42,7 @@
     },
     {
       "id": "sales.CAP.app_originated_payment_reconciliation",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -86,7 +86,7 @@
     },
     {
       "id": "sales.CAP.billing_health_watch",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -114,7 +114,7 @@
     },
     {
       "id": "sales.CAP.comped_seat_grant_and_revocation",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -159,7 +159,7 @@
     },
     {
       "id": "sales.CAP.da_revenue_reporting_transition",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -187,7 +187,7 @@
     },
     {
       "id": "sales.CAP.enrollment_checkout_link_issuance",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -222,7 +222,7 @@
     },
     {
       "id": "sales.CAP.enrollment_completion_follow_through",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -250,7 +250,7 @@
     },
     {
       "id": "sales.CAP.icp_prospect_discovery_and_fit_scoring",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -275,8 +275,136 @@
       }
     },
     {
+      "id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L1-BY-HAND",
+      "release": "autonomy:R0",
+      "acceptance_total": 2,
+      "criteria": [
+        {
+          "text": "The capability was performed end to end by hand, producing its real outcome on real inputs.",
+          "passed": false
+        },
+        {
+          "text": "A run log exists recording the date, the elapsed time, each step actually performed, every judgment call made, and at least one way the recorded workflow differed from what the work was really like.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": null,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L2-IN-THE-APP",
+      "release": "autonomy:R0",
+      "acceptance_total": 2,
+      "criteria": [
+        {
+          "text": "The same outcome was produced a second time using only the product, with no agent, no script and no direct database edit -- or the exact step that made this impossible is written down as a named gap.",
+          "passed": false
+        },
+        {
+          "text": "The app route was compared against the step 1 run log, and every difference between them is recorded.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": null,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L3-TOOL-REQUEST",
+      "release": "autonomy:R0",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "A change request for a tool exists against this domain, filed by the builder, naming the tool, its scope, what it must never touch, and who approves a run.",
+          "passed": false
+        },
+        {
+          "text": "The request cites the step 1 run log and the step 2 result as its evidence.",
+          "passed": false
+        },
+        {
+          "text": "A named human other than the builder has recorded a decision on it. A decline counts; an undecided request does not.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": null,
+        "outstanding": []
+      }
+    },
+    {
+      "id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L4-AGENT-WATCHED",
+      "release": "autonomy:R0",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "Baseline tests pass on fixtures, and a fixture whose fit score cannot be computed is recorded as unknown rather than defaulted to a number.",
+          "passed": false
+        },
+        {
+          "text": "The agent produced the same outcome as the step 1 run log, on the same inputs, including the exceptions recorded there.",
+          "passed": false
+        },
+        {
+          "text": "Every run in the evidence window was approved by a named human before it took effect, and the record shows who.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 0,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": null,
+        "outstanding": []
+      }
+    },
+    {
       "id": "sales.CAP.manager_decision_queue_for_sales_actions",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -304,7 +432,7 @@
     },
     {
       "id": "sales.CAP.offer_pipeline_routing",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -330,7 +458,7 @@
     },
     {
       "id": "sales.CAP.outbound_batch_preparation_for_approval",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -364,7 +492,7 @@
     },
     {
       "id": "sales.CAP.outbound_sequence_health_watch",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -398,7 +526,7 @@
     },
     {
       "id": "sales.CAP.payment_confirmation_and_seat_grant",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -439,7 +567,7 @@
     },
     {
       "id": "sales.CAP.payment_handoff_integrity",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -467,7 +595,7 @@
     },
     {
       "id": "sales.CAP.payment_webhook_replay_dedup_watch",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -495,7 +623,7 @@
     },
     {
       "id": "sales.CAP.pipeline_digest_for_manager",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -529,7 +657,7 @@
     },
     {
       "id": "sales.CAP.pipeline_stage_and_lead_temperature_stewardship",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -557,7 +685,7 @@
     },
     {
       "id": "sales.CAP.price_statement_consistency_audit",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -585,7 +713,7 @@
     },
     {
       "id": "sales.CAP.prospect_outreach_draft_for_human_send",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -613,7 +741,7 @@
     },
     {
       "id": "sales.CAP.prospect_question_answering_from_approved_kb",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -641,7 +769,7 @@
     },
     {
       "id": "sales.CAP.quote_and_offer_packet_preparation",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -669,7 +797,7 @@
     },
     {
       "id": "sales.CAP.refund_and_void_issuance",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -704,7 +832,7 @@
     },
     {
       "id": "sales.CAP.renewal_and_revenue_follow_through_worklist",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -732,7 +860,7 @@
     },
     {
       "id": "sales.CAP.renewal_reminder_lifecycle",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -760,7 +888,7 @@
     },
     {
       "id": "sales.CAP.revenue_and_subscription_reporting",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -809,7 +937,7 @@
     },
     {
       "id": "sales.CAP.revenue_definition_integrity_guard",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -837,7 +965,7 @@
     },
     {
       "id": "sales.CAP.seat_capacity_and_cohort_fill_forecast",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -865,7 +993,7 @@
     },
     {
       "id": "sales.CAP.strategy_call_no_show_detection_and_recovery",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -899,7 +1027,7 @@
     },
     {
       "id": "sales.CAP.subscription_cancellation_and_schedule_suspension",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -940,7 +1068,7 @@
     },
     {
       "id": "sales.CAP.subscription_checkout_and_plan_activation",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -975,7 +1103,7 @@
     },
     {
       "id": "sales.CAP.subscription_churn_and_renewal_risk_analysis",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -1003,7 +1131,7 @@
     },
     {
       "id": "sales.CAP.team_license_and_sponsored_seat_administration",
-      "release": "r2",
+      "release": "autonomy:R0",
       "acceptance_total": 1,
       "criteria": [
         {
@@ -1031,7 +1159,7 @@
     },
     {
       "id": "sales.LEGACY-MIGRATION-PLAN",
-      "release": "r1",
+      "release": "autonomy:R0",
       "acceptance_total": 3,
       "criteria": [
         {
@@ -1065,7 +1193,7 @@
     },
     {
       "id": "sales.RESEARCH-1-SYSTEM-CLASSES",
-      "release": "r0",
+      "release": "autonomy:R0",
       "acceptance_total": 3,
       "criteria": [
         {
@@ -1099,7 +1227,7 @@
     },
     {
       "id": "sales.RESEARCH-2-AGENT-ANATOMY",
-      "release": "r0",
+      "release": "autonomy:R0",
       "acceptance_total": 3,
       "criteria": [
         {
@@ -1133,7 +1261,7 @@
     },
     {
       "id": "sales.RESEARCH-3-ROLE-AND-DA-TRANSITION",
-      "release": "r0",
+      "release": "autonomy:R0",
       "acceptance_total": 3,
       "criteria": [
         {
@@ -1167,7 +1295,7 @@
     },
     {
       "id": "sales.RESEARCH-4-MANAGER-INTERVIEW",
-      "release": "r0",
+      "release": "autonomy:R0",
       "acceptance_total": 3,
       "criteria": [
         {
@@ -1201,7 +1329,7 @@
     },
     {
       "id": "sales.RESEARCH-5-THREE-PROPOSED-TASKS",
-      "release": "r0",
+      "release": "autonomy:R0",
       "acceptance_total": 3,
       "criteria": [
         {

@@ -1,5 +1,7 @@
 # sales.CAP.offer_pipeline_routing — Offer pipeline classification for unrouted leads
 
+**CANDIDATE -- not started, not assigned.** This is one line on this domain's list of everything its agent could eventually do. It becomes real work only when the builder picks it and their manager agrees, at which point it opens as four stories. Until then it is deliberately inert, and the honest status of it is "not started" rather than "behind".
+
 Every inbound lead lands in the right offer pipeline (accelerator, advisory, custom build, enterprise) so no enquiry sits unrouted and the offer discussed is the right one.
 
 **Built today:** implemented. **Requirement validated:** draft -- Roselyn must confirm scope, exceptions and success measures; she has no admin login today
@@ -9,7 +11,7 @@ Every inbound lead lands in the right offer pipeline (accelerator, advisory, cus
 
 Full build prompt is attached to this story.
 
-**Release:** r2 · r2 (weeks 0–0)
+**Release:** autonomy:R0 · Legacy migration plan (weeks 0–0)
 **Owner:** 
 **Blocked by:** nothing — you can start this now
 

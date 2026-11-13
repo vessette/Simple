@@ -1,5 +1,7 @@
 # sales.CAP.team_license_and_sponsored_seat_administration — Team-license and sponsored-seat administration
 
+**CANDIDATE -- not started, not assigned.** This is one line on this domain's list of everything its agent could eventually do. It becomes real work only when the builder picks it and their manager agrees, at which point it opens as four stories. Until then it is deliberately inert, and the honest status of it is "not started" rather than "behind".
+
 An employer can buy a block of reassignable seats, their people can redeem one each, and the sponsor can see who used what, without a seat being redeemed twice.
 
 **Built today:** implemented. **Requirement validated:** draft -- Roselyn must confirm scope, exceptions and success measures; she has no admin login today
@@ -13,7 +15,7 @@ An employer can buy a block of reassignable seats, their people can redeem one e
 
 Full build prompt is attached to this story.
 
-**Release:** r2 · r2 (weeks 0–0)
+**Release:** autonomy:R0 · Legacy migration plan (weeks 0–0)
 **Owner:** 
 **Blocked by:** nothing — you can start this now
 

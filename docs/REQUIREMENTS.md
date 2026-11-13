@@ -1,4 +1,4 @@
-# sales — Requirements
+# Sales, Enrollment & Subscriptions — Requirements
 
 The sales domain agent.
 

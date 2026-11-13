@@ -834,7 +834,7 @@ The article's canonical example: spin up a read-only `Explore` subagent to map a
 The bar is: would research take more than 5 file reads OR more than 1 round of web search? If yes, spin up a subagent. If no, stay in-session.
 
 <!-- COLABERRY:BEGIN — managed by the build pipeline. Edits inside this block are overwritten. -->
-# CLAUDE.md — sales
+# CLAUDE.md — Sales, Enrollment & Subscriptions
 
 Conventions for this build. Claude Code reads this automatically.
 

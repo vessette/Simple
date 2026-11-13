@@ -1,6 +1,6 @@
-# sales — Stories
+# Sales, Enrollment & Subscriptions — Stories
 
-38 stories across 3 releases, walking-skeleton first:
+43 stories across 1 releases, walking-skeleton first:
 the earliest release proves the thinnest end-to-end path including the trust
 spine, and later releases stack features on top of something already working.
 
@@ -13,28 +13,10 @@ the page you keep open for the rest of the programme and demo from. It belongs t
 release and fulfils none of your requirements, because it is the window onto your
 system rather than a part of it.
 
-## r0 · Discovery and validation — weeks 0–0
+## autonomy:R0 · Legacy migration plan — weeks 0–0
 
-**Goal:** Deliver every r0 story for sales.
-**Done when you can show:** The r0 documents exist in the repository and their acceptance criteria are met.
-
-- **[sales.RESEARCH-1-SYSTEM-CLASSES](stories/sales.RESEARCH-1-SYSTEM-CLASSES.md)** — Compare the five system classes, and place this domain among them
-- **[sales.RESEARCH-2-AGENT-ANATOMY](stories/sales.RESEARCH-2-AGENT-ANATOMY.md)** — Map the nine anatomy elements onto this domain's agent
-- **[sales.RESEARCH-3-ROLE-AND-DA-TRANSITION](stories/sales.RESEARCH-3-ROLE-AND-DA-TRANSITION.md)** — Document Roselyn's role, and which DA responsibilities transition
-- **[sales.RESEARCH-4-MANAGER-INTERVIEW](stories/sales.RESEARCH-4-MANAGER-INTERVIEW.md)** — Prepare a 30-minute interview with Roselyn and propose a weekly check-in
-- **[sales.RESEARCH-5-THREE-PROPOSED-TASKS](stories/sales.RESEARCH-5-THREE-PROPOSED-TASKS.md)** — Capture three proposed agent tasks with boundaries and completion evidence
-
-## r1 · Legacy migration plan — weeks 0–0
-
-**Goal:** Deliver every r1 story for sales.
-**Done when you can show:** The r1 documents exist in the repository and their acceptance criteria are met.
-
-- **[sales.LEGACY-MIGRATION-PLAN](stories/sales.LEGACY-MIGRATION-PLAN.md)** — Legacy migration plan
-
-## r2 · r2 — weeks 0–0
-
-**Goal:** Deliver every r2 story for sales.
-**Done when you can show:** The r2 documents exist in the repository and their acceptance criteria are met.
+**Goal:** Deliver every autonomy:R0 story for Sales, Enrollment & Subscriptions.
+**Done when you can show:** The autonomy:R0 documents exist in the repository and their acceptance criteria are met.
 
 - **[sales.CAP.abandoned_checkout_identification](stories/sales.CAP.abandoned_checkout_identification.md)** — Abandoned-checkout identification, separated from free signups and ex-members
 - **[sales.CAP.app_originated_payment_reconciliation](stories/sales.CAP.app_originated_payment_reconciliation.md)** — App-originated payment reconciliation after a missed webhook
@@ -44,6 +26,10 @@ system rather than a part of it.
 - **[sales.CAP.enrollment_checkout_link_issuance](stories/sales.CAP.enrollment_checkout_link_issuance.md)** — Enrolment checkout: PaySimple customer, hosted payment link, pending enrolment
 - **[sales.CAP.enrollment_completion_follow_through](stories/sales.CAP.enrollment_completion_follow_through.md)** — Enrolment completion follow-through, from checkout started to seat active
 - **[sales.CAP.icp_prospect_discovery_and_fit_scoring](stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.md)** — ICP prospect discovery and program-fit scoring
+- **[sales.CAP.icp_prospect_discovery_and_fit_scoring.L1-BY-HAND](stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L1-BY-HAND.md)** — ICP prospect discovery and program-fit scoring · 1 · do it by hand
+- **[sales.CAP.icp_prospect_discovery_and_fit_scoring.L2-IN-THE-APP](stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L2-IN-THE-APP.md)** — ICP prospect discovery and program-fit scoring · 2 · do it in the app
+- **[sales.CAP.icp_prospect_discovery_and_fit_scoring.L3-TOOL-REQUEST](stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L3-TOOL-REQUEST.md)** — ICP prospect discovery and program-fit scoring · 3 · request the tool
+- **[sales.CAP.icp_prospect_discovery_and_fit_scoring.L4-AGENT-WATCHED](stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L4-AGENT-WATCHED.md)** — ICP prospect discovery and program-fit scoring · 4 · agent does it, watched
 - **[sales.CAP.manager_decision_queue_for_sales_actions](stories/sales.CAP.manager_decision_queue_for_sales_actions.md)** — A decision queue the accountable manager can actually reach
 - **[sales.CAP.offer_pipeline_routing](stories/sales.CAP.offer_pipeline_routing.md)** — Offer pipeline classification for unrouted leads
 - **[sales.CAP.outbound_batch_preparation_for_approval](stories/sales.CAP.outbound_batch_preparation_for_approval.md)** — Outbound enrolment batch prepared for human approval
@@ -68,3 +54,10 @@ system rather than a part of it.
 - **[sales.CAP.subscription_checkout_and_plan_activation](stories/sales.CAP.subscription_checkout_and_plan_activation.md)** — Membership subscription checkout and plan activation
 - **[sales.CAP.subscription_churn_and_renewal_risk_analysis](stories/sales.CAP.subscription_churn_and_renewal_risk_analysis.md)** — Subscription churn and renewal-risk analysis
 - **[sales.CAP.team_license_and_sponsored_seat_administration](stories/sales.CAP.team_license_and_sponsored_seat_administration.md)** — Team-license and sponsored-seat administration
+- **[sales.LEGACY-MIGRATION-PLAN](stories/sales.LEGACY-MIGRATION-PLAN.md)** — Legacy migration plan
+- **[sales.RESEARCH-1-SYSTEM-CLASSES](stories/sales.RESEARCH-1-SYSTEM-CLASSES.md)** — Compare the five system classes, and place this domain among them
+- **[sales.RESEARCH-2-AGENT-ANATOMY](stories/sales.RESEARCH-2-AGENT-ANATOMY.md)** — Map the nine anatomy elements onto this domain's agent
+- **[sales.RESEARCH-3-ROLE-AND-DA-TRANSITION](stories/sales.RESEARCH-3-ROLE-AND-DA-TRANSITION.md)** — Document Roselyn's role, and which DA responsibilities transition
+- **[sales.RESEARCH-4-MANAGER-INTERVIEW](stories/sales.RESEARCH-4-MANAGER-INTERVIEW.md)** — Prepare a 30-minute interview with Roselyn and propose a weekly check-in
+- **[sales.RESEARCH-5-THREE-PROPOSED-TASKS](stories/sales.RESEARCH-5-THREE-PROPOSED-TASKS.md)** — Capture three proposed agent tasks with boundaries and completion evidence
+- **[sales.STORY-000](stories/sales.STORY-000.md)** — STORY-000 · Build your Command Center

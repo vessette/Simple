@@ -1,5 +1,7 @@
 # sales.CAP.payment_webhook_replay_dedup_watch — Payment webhook replay and delivery-dedup gap watch
 
+**CANDIDATE -- not started, not assigned.** This is one line on this domain's list of everything its agent could eventually do. It becomes real work only when the builder picks it and their manager agrees, at which point it opens as four stories. Until then it is deliberately inert, and the honest status of it is "not started" rather than "behind".
+
 A replayed or duplicated payment notification cannot quietly advance a billing period or grant a second seat, and the absence of a delivery-level dedup store stops being invisible.
 
 **Built today:** absent. **Requirement validated:** draft -- Roselyn must confirm scope, exceptions and success measures; she has no admin login today
@@ -12,7 +14,7 @@ A replayed or duplicated payment notification cannot quietly advance a billing p
 
 Full build prompt is attached to this story.
 
-**Release:** r2 · r2 (weeks 0–0)
+**Release:** autonomy:R0 · Legacy migration plan (weeks 0–0)
 **Owner:** 
 **Blocked by:** nothing — you can start this now
 

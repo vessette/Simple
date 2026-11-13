@@ -1,5 +1,7 @@
 # sales.CAP.prospect_outreach_draft_for_human_send — Prospect outreach and sales material drafted for a human to send
 
+**CANDIDATE -- not started, not assigned.** This is one line on this domain's list of everything its agent could eventually do. It becomes real work only when the builder picks it and their manager agrees, at which point it opens as four stories. Until then it is deliberately inert, and the honest status of it is "not started" rather than "behind".
+
 Roselyn and Ali get ready-to-review outreach and sales material on demand, and the send stays a human act, which is the cadence the business already runs on.
 
 **Built today:** absent. **Requirement validated:** draft -- Roselyn must confirm scope, exceptions and success measures; she has no admin login today
@@ -13,7 +15,7 @@ Roselyn and Ali get ready-to-review outreach and sales material on demand, and t
 
 Full build prompt is attached to this story.
 
-**Release:** r2 · r2 (weeks 0–0)
+**Release:** autonomy:R0 · Legacy migration plan (weeks 0–0)
 **Owner:** 
 **Blocked by:** nothing — you can start this now
 

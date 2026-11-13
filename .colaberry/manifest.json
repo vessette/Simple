@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-11-13T20:06:25.594Z",
-  "plan_version": 1,
-  "plan_sha256": "68f70123d241bb94056adc1d08127a51ad2ce3b948af8b3ce1e6b2faa504e30d",
-  "correlation_id": "cc-20261113-q7m2-postladder-sales",
+  "generated_at": "2026-11-13T22:43:19.272Z",
+  "plan_version": 2,
+  "plan_sha256": "94a7939ab26b0c36dff67f585e07711a78f3f674f3df9d0d63260c303f66bc67",
+  "correlation_id": null,
   "project_id": "d7372aa3-4903-5299-922d-997fa49df97f",
   "truth_revision": null,
   "files": [
     {
       "path": "docs/REQUIREMENTS.md",
-      "sha256": "77ae2cb867104b7bd4b3f9c46b5ce50c430faa3d775fa71879f1794e47277c6c"
+      "sha256": "9e0a854f85f10c5f50141d8424b97852fe50a8bd6082555bcc2394eb5f720907"
     },
     {
       "path": "docs/STORIES.md",
-      "sha256": "870353e2a935b66e68858fcf518f7d43bd66a65b3c52ac2cc817640d90941899"
+      "sha256": "b73914420d00695af40eb1d56e92da9681e797d2cf5e7b2c75c7cd3cd8de208b"
     },
     {
       "path": "docs/TRACEABILITY.md",
-      "sha256": "e5e6cfc6eed582e22a3adefd7d8524aeb25e71c3ec1e4717ba702015318fe039"
+      "sha256": "7a01cc465dc2d0166ee8938d003a1c3191882154f633c79ed286cefe44b82f78"
     },
     {
       "path": "docs/DATA_CONTRACT.md",
@@ -24,171 +24,187 @@
     },
     {
       "path": "CLAUDE.md",
-      "sha256": "f5db216b07b5e97bba465227fa959d1d0a83e31d8c73e2b969f728966d6f0a23"
+      "sha256": "f1e5f48a8eceeaa15ff7c978ae7994aa5350f1bcc5cdc107d573ac4299885e0a"
     },
     {
       "path": "docs/stories/sales.CAP.abandoned_checkout_identification.md",
-      "sha256": "0ec7bfc3e0c336eab28c22bfea9ad67f1350895d2eb89d8d4650b4ebe292e524"
+      "sha256": "4499303e6c75059a0bd28179c3d5258ac12ade27c99d69208ba47199ef72159a"
     },
     {
       "path": "docs/stories/sales.CAP.app_originated_payment_reconciliation.md",
-      "sha256": "61bab203cc7545ac6c3bc7af144addf92b38b3d2cff22195c851e6898add9478"
+      "sha256": "e88cbed54b1101cb269f838819d305e7a4a9afdf5c5598eeb41b400c88b40cc7"
     },
     {
       "path": "docs/stories/sales.CAP.billing_health_watch.md",
-      "sha256": "26c300de44f98e78490f71fc5ee12aad650bd54a7eeecc5516903c271b41a647"
+      "sha256": "987ba5d2be76f8da72caa91983c0fcf3493cc17d29445e6b550bed0fcfcb5ae6"
     },
     {
       "path": "docs/stories/sales.CAP.comped_seat_grant_and_revocation.md",
-      "sha256": "3516b271f25859ece9b17021a0a4641b31b411a9f1d2b51e50e11d666cf4b678"
+      "sha256": "fe0241252d2eb723215e6c0afe7b34c6f187e560906b933d3ec60ab1463fa0d9"
     },
     {
       "path": "docs/stories/sales.CAP.da_revenue_reporting_transition.md",
-      "sha256": "af4123af79085f5fde6dbad7e28c47b519946d42013e36fbc249a0cdb95263f9"
+      "sha256": "a580321d5f8c459841515e4907b3699f8b9dad12823a46385c9d45019251fc1f"
     },
     {
       "path": "docs/stories/sales.CAP.enrollment_checkout_link_issuance.md",
-      "sha256": "722f2ebf6acacd8107ec2b6d88c3f7826debfce5a8edceb013ccedc939e07dc9"
+      "sha256": "c26d6cea7f44a76a2001fb7170a273dba5a99c06b5d12ba4fd17da47a733534d"
     },
     {
       "path": "docs/stories/sales.CAP.enrollment_completion_follow_through.md",
-      "sha256": "4d427caf2681334ccd849516964f6d9844a0b41ef1b50c010b0eb7427af61915"
+      "sha256": "cd3849020af42cc702a257c5d2871092b22968b5b71a2d895f92554c0896a4f8"
     },
     {
       "path": "docs/stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.md",
-      "sha256": "19db09e9b38fd9fd7ba339da79010442b944fe0914bdd873018147e78f22c2f0"
+      "sha256": "6c69f9698b93c0a8ff33420585def8c4a49408a929d8d07d26a0ddc1ff766d74"
+    },
+    {
+      "path": "docs/stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L1-BY-HAND.md",
+      "sha256": "246ddd5218ce227cfcb4937c752fbf4ab290d56264fe0bfbe4b79fd91f7b8378"
+    },
+    {
+      "path": "docs/stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L2-IN-THE-APP.md",
+      "sha256": "365dafa993518f010b48e31af644754ca2c54c85f3a6b0aefa617db566d03988"
+    },
+    {
+      "path": "docs/stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L3-TOOL-REQUEST.md",
+      "sha256": "71a537568b2869b8ead624cdd06fa29dd6ebe5835e8d90498b472608dd67a389"
+    },
+    {
+      "path": "docs/stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L4-AGENT-WATCHED.md",
+      "sha256": "426dcbf2c656040b443f8b35ac7f9dee2f38a056461699162aef0f5b9104d4e8"
     },
     {
       "path": "docs/stories/sales.CAP.manager_decision_queue_for_sales_actions.md",
-      "sha256": "367133d1720d68179ee1de348a5a98105b22bf013b90883f946f565c10ba2324"
+      "sha256": "b1718cd8923db5d25215cfbf7ac7c07da4d865982f9297d774192d631d6eb90c"
     },
     {
       "path": "docs/stories/sales.CAP.offer_pipeline_routing.md",
-      "sha256": "dd2bef8ad1214cc0afba5b1bd899ac5e0160608823f246b9c6314494ecc6b65c"
+      "sha256": "c0778137727aad5c641ee99e24145c1cd3100267a51414c3109e9ec5033a1210"
     },
     {
       "path": "docs/stories/sales.CAP.outbound_batch_preparation_for_approval.md",
-      "sha256": "f55ffd016fe67f8588f379289d2d626b9b3437a5058a63d798abeddd0b6d378a"
+      "sha256": "f4223d0849d157e319621fe1ce231388a1ca7e603de311c0c0931af53c3513c1"
     },
     {
       "path": "docs/stories/sales.CAP.outbound_sequence_health_watch.md",
-      "sha256": "3c57de1a572ae123172db24f0964fdbc53f2783da87cfa436b7bb3ec0180ee2e"
+      "sha256": "09d8ca8bea5ad75c0fc18232c3626ae7b30159b1f81692fb40ce800878b83604"
     },
     {
       "path": "docs/stories/sales.CAP.payment_confirmation_and_seat_grant.md",
-      "sha256": "0364b82e7994d0f5ad5ac2cf67b1f426896d6e28cfd507a7f9baf37d5ac9af9f"
+      "sha256": "e361d46210fb34a6e762311018ba436484fa4c57f2b54c15b49f30d31cb69d81"
     },
     {
       "path": "docs/stories/sales.CAP.payment_handoff_integrity.md",
-      "sha256": "43e6de2ea112fc30dc5c975887b97a1aa174488b28dbdd027e2b1d07032cfcf6"
+      "sha256": "7f135c61823265fca4eda7a35b4533c898f6f6150bcad037c3e1847cb5991fab"
     },
     {
       "path": "docs/stories/sales.CAP.payment_webhook_replay_dedup_watch.md",
-      "sha256": "ac7e1ac3e2f3d2fce71dd9ac58b3b2b72684bcea2b0ea7c938a457a3776e35b0"
+      "sha256": "59516341acfa56be782eba1521a082dae8a429d6f2e9826f66a25645968d0c4f"
     },
     {
       "path": "docs/stories/sales.CAP.pipeline_digest_for_manager.md",
-      "sha256": "c3f8c4072a1c07d05b1982718edcfdf8f65440ca2fb6fb95a6068375b0e8476d"
+      "sha256": "a01d69e25d11b10ba259eb8cf0983b7b884347331645b179e64101a47d8a1fd4"
     },
     {
       "path": "docs/stories/sales.CAP.pipeline_stage_and_lead_temperature_stewardship.md",
-      "sha256": "2f0fa298141a3a8da7809a69ff73783f34e4888d0a106fe2f45a0299203da9d9"
+      "sha256": "bc3f244ef02b938f6472e7d6b72b61897f945f4c1c8ef780d9ce78c933ac73f6"
     },
     {
       "path": "docs/stories/sales.CAP.price_statement_consistency_audit.md",
-      "sha256": "3daa3cc36fe99eb9ffec22c9a87904037572e00d834b7978aa19626370edbbf2"
+      "sha256": "796b90a39734f9653c36f2e3dd65c7d234bd33962358b77fdea3bbef0eb8e263"
     },
     {
       "path": "docs/stories/sales.CAP.prospect_outreach_draft_for_human_send.md",
-      "sha256": "9d77ad51897dfbc47ed86b9e548150a173561ceb6df4d6a41431ac7851da8399"
+      "sha256": "eba125ce0f17a0b31bb3e2f110cf42f44182cf601cfb8dbe7f770a74c4509f7a"
     },
     {
       "path": "docs/stories/sales.CAP.prospect_question_answering_from_approved_kb.md",
-      "sha256": "e80d1fed85800a83b3af480c2db142763d66be908c6f577a97e98f580989a48b"
+      "sha256": "b91abae0c21de8e4415a75aaca3c8b8170cc1e30f9320024f500f23b95192298"
     },
     {
       "path": "docs/stories/sales.CAP.quote_and_offer_packet_preparation.md",
-      "sha256": "92e1f72aed943878a37fc92d842a0fd9db785955fa0431900107b2bb45455987"
+      "sha256": "2ee30ae0cb3e00225d5bc91889a4401b21c6aa1babefcb5fd859e1dcac6ebaca"
     },
     {
       "path": "docs/stories/sales.CAP.refund_and_void_issuance.md",
-      "sha256": "547a5c33fbb2f65536eccc2e24b5df1d085965da0e271ee262ddb07bcbdecb44"
+      "sha256": "9cf0892649afe3e74dbcdde7a8b9df7d1386443d8f48ab4bbc2b6d0f3f27f3ac"
     },
     {
       "path": "docs/stories/sales.CAP.renewal_and_revenue_follow_through_worklist.md",
-      "sha256": "71a73cec68b96efa5bb692cfebfd8fa9001685ebc5b197486f84c498b3de1c12"
+      "sha256": "d61eeda6242ba13fe83c92455a103e60f56c33e25691ac28b14ce08baf2f5f4d"
     },
     {
       "path": "docs/stories/sales.CAP.renewal_reminder_lifecycle.md",
-      "sha256": "04c1cccc3be0a32413d68c9386194cde832b21c6e6f4f194fe508825757b5db0"
+      "sha256": "0f8d1dfb8405d9fb1b4b98f3c0bad735b9fcc6c8dd2e05e20154e4f0ea40ebd2"
     },
     {
       "path": "docs/stories/sales.CAP.revenue_and_subscription_reporting.md",
-      "sha256": "d7dd7c8dc641d51eafdfeff310ba2df609fee04d1ed8aa025ba57a4cfae6881e"
+      "sha256": "10a3242fa4970a5ebf8c1185974861a3638fffae8f15a34487cb55b836cab8df"
     },
     {
       "path": "docs/stories/sales.CAP.revenue_definition_integrity_guard.md",
-      "sha256": "7c93af81c84c2497e2549696317bb7033359ea5d820f68ac8422672c8236f4b1"
+      "sha256": "04325bee5776e260f9bb199321c85ea2de175946ea3b4651226d0887650ee963"
     },
     {
       "path": "docs/stories/sales.CAP.seat_capacity_and_cohort_fill_forecast.md",
-      "sha256": "c435584975a2549c610d9c1aecc0a23b89e9116af1420a6e77bce2c3789a0d5b"
+      "sha256": "9ba67816d419caef43fbad0cee2123f3a6181d610c5f350b4d3b50589415fc2b"
     },
     {
       "path": "docs/stories/sales.CAP.strategy_call_no_show_detection_and_recovery.md",
-      "sha256": "79f9d2e4cf541a1de872914af36585922dbb159d5de0666798e74cdfdfed06f3"
+      "sha256": "3a5475dd7392d5b15439b32e51db1a594d137d941416be099839cc650af97856"
     },
     {
       "path": "docs/stories/sales.CAP.subscription_cancellation_and_schedule_suspension.md",
-      "sha256": "7966f02a8a82a79d60422458dce11a24f1e30496db7f2a1daf3eb0e3bd9eaf59"
+      "sha256": "8dde6fe8b0c16347f6a56f9932c9d8fbe598725b75c716b85d8271072b4ea1f5"
     },
     {
       "path": "docs/stories/sales.CAP.subscription_checkout_and_plan_activation.md",
-      "sha256": "625eb1b81e4788d65c1a5e76d5332deb19057d8e42880448e0980f2ba5945f7b"
+      "sha256": "473900372e25386f604b4b621751cc84b37285eb72f52fb4d3681c2b4b00d57a"
     },
     {
       "path": "docs/stories/sales.CAP.subscription_churn_and_renewal_risk_analysis.md",
-      "sha256": "ccf3198a197be67855e8205d35c8e67c532f296b814ec8019a952fc537ef64d4"
+      "sha256": "0780b005a62d42abd13b705ce1f4e401b1a4ad844d6573029df8b764da179781"
     },
     {
       "path": "docs/stories/sales.CAP.team_license_and_sponsored_seat_administration.md",
-      "sha256": "f6eaeb90d39fa2371f945e8c4bba683b6ca85a7071496d2e0267b9577513c4cc"
+      "sha256": "a2cd1520134fb323e9b14c191d3dd10735de1a695fe3f3feba4e7202f8618386"
     },
     {
       "path": "docs/stories/sales.LEGACY-MIGRATION-PLAN.md",
-      "sha256": "30c5592045fb7b07dc153248e0719e4f329dd21676507e8440dffaad0c5d1ed9"
+      "sha256": "fbe20e442db44cb9d5a0b7d7a69fe5e502090093f306434f52fff1e9f054f318"
     },
     {
       "path": "docs/stories/sales.RESEARCH-1-SYSTEM-CLASSES.md",
-      "sha256": "46814161210333f0355c7f72bbcc81d5641a839fa67a337f5cb26dfac9e9820e"
+      "sha256": "5d6b69023aefd7fb24ee2dd955845a9aafd3a224a165a8df1e9b1bf4934436fc"
     },
     {
       "path": "docs/stories/sales.RESEARCH-2-AGENT-ANATOMY.md",
-      "sha256": "f3063aada23f991b45943ad231978be9eee5310c6eb58858e94e5458e7d79c12"
+      "sha256": "623d5639725aaed60423e26068f8b1c40425ca3be13502fe14baf559395adc34"
     },
     {
       "path": "docs/stories/sales.RESEARCH-3-ROLE-AND-DA-TRANSITION.md",
-      "sha256": "b5008b65723c6ac10b06def9fa63c0c9e536132f54036ea311708fc6e874e2be"
+      "sha256": "abd4cb79d0e18c3817e5e766b8c4a5bf2e0725be252cbf9478c1e4b6e30c8cab"
     },
     {
       "path": "docs/stories/sales.RESEARCH-4-MANAGER-INTERVIEW.md",
-      "sha256": "eb976dbc8397f52947e9c7b98c848e6e042848b5b0d5aff21b6685454826d91e"
+      "sha256": "0708ab8c9ddd53e56b7b344fd6d0ce82186de3e16f755ae912ea5cb1f182eff0"
     },
     {
       "path": "docs/stories/sales.RESEARCH-5-THREE-PROPOSED-TASKS.md",
-      "sha256": "60142f53b957436a6da6c6f4adfd182cd8da1f3e604087a6f6ba18197cd93cfd"
+      "sha256": "98b25a587b46c59f743039099bc8d6ca58a836f0f352226b56630fb112e25095"
     },
     {
       "path": "docs/stories/sales.STORY-000.md",
-      "sha256": "1f99aa49344711922ff624772ea3d71769cf1d8c060b382711fbfca67de587ed"
+      "sha256": "f7eff8c325e3f3271b27933d682a0e22e7142ee0996cdb844806ac96a7ff5675"
     },
     {
       "path": ".colaberry/plan.json",
-      "sha256": "340b14561a213fb80df0e15735c78ec4ebed50e6f30ae064a2baee40b5c120bd"
+      "sha256": "f06152d02b6dbb8c2761a8969db439e057c63d70ef81b4677de72d834c47501f"
     },
     {
       "path": ".colaberry/progress.json",
-      "sha256": "8eec62d40912cf4772b32259f06a7aa558e8a1f3e5c674647b18e7616d26b31d"
+      "sha256": "086360c4326708f3ff503b90eee0fa4fd2c9ce09188ac8d92142a175d7faad0a"
     },
     {
       "path": ".colaberry/profile.json",

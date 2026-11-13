@@ -1,5 +1,7 @@
 # sales.CAP.pipeline_stage_and_lead_temperature_stewardship — Pipeline stage, lead temperature and forecast stewardship
 
+**CANDIDATE -- not started, not assigned.** This is one line on this domain's list of everything its agent could eventually do. It becomes real work only when the builder picks it and their manager agrees, at which point it opens as four stories. Until then it is deliberately inert, and the honest status of it is "not started" rather than "behind".
+
 The pipeline reflects reality: every lead sits at the stage it is actually at, with a temperature and a history, so the forecast is about the business rather than about stale rows.
 
 **Built today:** implemented. **Requirement validated:** draft -- Roselyn must confirm scope, exceptions and success measures; she has no admin login today
@@ -10,7 +12,7 @@ The pipeline reflects reality: every lead sits at the stage it is actually at, w
 
 Full build prompt is attached to this story.
 
-**Release:** r2 · r2 (weeks 0–0)
+**Release:** autonomy:R0 · Legacy migration plan (weeks 0–0)
 **Owner:** 
 **Blocked by:** nothing — you can start this now
 

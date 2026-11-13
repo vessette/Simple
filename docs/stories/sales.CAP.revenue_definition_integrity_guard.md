@@ -1,5 +1,7 @@
 # sales.CAP.revenue_definition_integrity_guard — Revenue-definition integrity guard: app-originated checkout only
 
+**CANDIDATE -- not started, not assigned.** This is one line on this domain's list of everything its agent could eventually do. It becomes real work only when the builder picks it and their manager agrees, at which point it opens as four stories. Until then it is deliberately inert, and the honest status of it is "not started" rather than "behind".
+
 No surface in the business reports revenue that was not collected through an app-originated checkout, so nobody ever plans against a figure that was multiplied into existence.
 
 **Built today:** partial. **Requirement validated:** draft -- Roselyn must confirm scope, exceptions and success measures; she has no admin login today
@@ -10,7 +12,7 @@ No surface in the business reports revenue that was not collected through an app
 
 Full build prompt is attached to this story.
 
-**Release:** r2 · r2 (weeks 0–0)
+**Release:** autonomy:R0 · Legacy migration plan (weeks 0–0)
 **Owner:** 
 **Blocked by:** nothing — you can start this now
 

@@ -1,5 +1,7 @@
 # sales.CAP.icp_prospect_discovery_and_fit_scoring — ICP prospect discovery and program-fit scoring
 
+**IN FLIGHT.** This capability is the one this domain is building right now. The work itself is its four ladder stories -- do it by hand, do it in the app, request the tool, then let the agent do it watched -- and they run in that order. This row is the capability they belong to, not a fifth piece of work.
+
 A reviewable queue of sourced prospects, each carrying a program-fit score and an ROI estimate, so selling time goes to the best-fit names instead of to sourcing.
 
 **Built today:** implemented. **Requirement validated:** draft -- Roselyn must confirm scope, exceptions and success measures; she has no admin login today
@@ -10,7 +12,7 @@ A reviewable queue of sourced prospects, each carrying a program-fit score and a
 
 Full build prompt is attached to this story.
 
-**Release:** r2 · r2 (weeks 0–0)
+**Release:** autonomy:R0 · Legacy migration plan (weeks 0–0)
 **Owner:** 
 **Blocked by:** nothing — you can start this now
 

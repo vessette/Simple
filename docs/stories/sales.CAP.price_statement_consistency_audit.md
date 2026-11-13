@@ -1,5 +1,7 @@
 # sales.CAP.price_statement_consistency_audit — Price-statement consistency audit across every surface that quotes a price
 
+**CANDIDATE -- not started, not assigned.** This is one line on this domain's list of everything its agent could eventually do. It becomes real work only when the builder picks it and their manager agrees, at which point it opens as four stories. Until then it is deliberately inert, and the honest status of it is "not started" rather than "behind".
+
 Every surface that states a price states the same price, so a prospect is never quoted a number the business does not charge.
 
 **Built today:** absent. **Requirement validated:** draft -- Roselyn must confirm scope, exceptions and success measures; she has no admin login today
@@ -11,7 +13,7 @@ Every surface that states a price states the same price, so a prospect is never 
 
 Full build prompt is attached to this story.
 
-**Release:** r2 · r2 (weeks 0–0)
+**Release:** autonomy:R0 · Legacy migration plan (weeks 0–0)
 **Owner:** 
 **Blocked by:** nothing — you can start this now
 

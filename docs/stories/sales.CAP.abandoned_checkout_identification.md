@@ -1,5 +1,7 @@
 # sales.CAP.abandoned_checkout_identification — Abandoned-checkout identification, separated from free signups and ex-members
 
+**CANDIDATE -- not started, not assigned.** This is one line on this domain's list of everything its agent could eventually do. It becomes real work only when the builder picks it and their manager agrees, at which point it opens as four stories. Until then it is deliberately inert, and the honest status of it is "not started" rather than "behind".
+
 The people who started paying and stopped can be found and called, without mistaking a free Explorer signup or a former member for a live prospect.
 
 **Built today:** implemented. **Requirement validated:** draft -- Roselyn must confirm scope, exceptions and success measures; she has no admin login today
@@ -10,7 +12,7 @@ The people who started paying and stopped can be found and called, without mista
 
 Full build prompt is attached to this story.
 
-**Release:** r2 · r2 (weeks 0–0)
+**Release:** autonomy:R0 · Legacy migration plan (weeks 0–0)
 **Owner:** 
 **Blocked by:** nothing — you can start this now
 

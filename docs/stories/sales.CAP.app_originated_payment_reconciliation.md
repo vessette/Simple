@@ -1,5 +1,7 @@
 # sales.CAP.app_originated_payment_reconciliation — App-originated payment reconciliation after a missed webhook
 
+**CANDIDATE -- not started, not assigned.** This is one line on this domain's list of everything its agent could eventually do. It becomes real work only when the builder picks it and their manager agrees, at which point it opens as four stories. Until then it is deliberately inert, and the honest status of it is "not started" rather than "behind".
+
 A student whose payment settled but whose webhook never arrived is linked to their payment and activated, while bootcamp and manual charges on the shared gateway can never leak into our revenue.
 
 **Built today:** implemented. **Requirement validated:** draft -- Roselyn must confirm scope, exceptions and success measures; she has no admin login today
@@ -11,7 +13,7 @@ A student whose payment settled but whose webhook never arrived is linked to the
 
 Full build prompt is attached to this story.
 
-**Release:** r2 · r2 (weeks 0–0)
+**Release:** autonomy:R0 · Legacy migration plan (weeks 0–0)
 **Owner:** 
 **Blocked by:** nothing — you can start this now
 
