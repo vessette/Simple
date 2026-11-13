@@ -106,4 +106,6 @@ C5 and C1-C2 first: they're small, and they stop false figures and a false "heal
 4. **The page changes in Part C,** then C4.
 5. **B8** when Roselyn and Ali next discuss campaign forecasts.
 
+The checklist for changing the projection price, and a single way to handle failed lookups on the governance page, are in [CHECKLIST_AND_ERROR_STRATEGY.md](CHECKLIST_AND_ERROR_STRATEGY.md).
+
 Vick doesn't wait on any of this. It already reports missing figures as unavailable and refuses projections as revenue.
