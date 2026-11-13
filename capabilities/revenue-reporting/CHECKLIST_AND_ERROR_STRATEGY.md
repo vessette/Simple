@@ -12,6 +12,8 @@
 5. **It's changed on the admin settings page** (`PATCH /api/admin/settings`, `settingsRoutes.ts:37`). That needs an admin login whose role includes the `system` section (`mgmtSectionGate.ts:242`; `mgmtRoles.ts:78-80`, `:138`). Roselyn's `revenue` role can't change it, and shouldn't.
 6. **Every change is recorded,** with who made it, the old value and the new one (`settingsService.ts:104-118`).
 
+Every line where $4,500 is set in the code, and a proposal to replace them with one function, are in [DEFAULT_4500_CHANGES.md](DEFAULT_4500_CHANGES.md).
+
 **Fixing the row alone isn't enough.** If the row were ever deleted, or the value couldn't be read, the $4,500 default and fallback in the code would quietly take over again. So the code defaults have to go too.
 
 ## Who's involved
