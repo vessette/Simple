@@ -140,7 +140,7 @@ main > section { display: grid; gap: 18px; scroll-margin-top: 16px; min-width: 0
 /* generic grids and cards */
 .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; align-items: start; }
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 16px; display: grid; gap: 8px; align-content: start; min-width: 0; }
-.card ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.card ul, .card ol { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
 .card h3 small { display: block; font: 500 11.5px var(--mono); color: var(--muted); margin-top: 2px; }
 
 /* architecture diagram */
@@ -345,6 +345,15 @@ footer { border-top: 1px solid var(--line); padding-top: 16px; color: var(--mute
           </ul>
         </div>
       </div>
+      <div class="card" style="margin-top:12px"><h3>How each capability is delivered (from 13 November)</h3>
+        <p class="small muted">One capability at a time, through four steps, then the next. The 32 capabilities are candidates until reviewed. Prospect discovery goes first.</p>
+        <ol>
+          <li><b>Do it by hand.</b> Do the work the way a person does it now, and write down what actually happens, exceptions included.</li>
+          <li><b>Do it in the app.</b> Do the same work through the product, and record where the product can't.</li>
+          <li><b>Request the tool.</b> File the tool or change the agent would need through the portal, for the manager to decide.</li>
+          <li><b>The agent does it, watched.</b> The agent does the work, and a person reviews every output before anything leaves.</li>
+        </ol>
+      </div>
     </section>
 
     <section id="capabilities">
@@ -451,8 +460,8 @@ footer { border-top: 1px solid var(--line); padding-top: 16px; color: var(--mute
 </div>
 
 <script>
-const UPDATED = "Updated 12 November 2026";
-const TODAY = "2026-11-11";
+const UPDATED = "Updated 13 November 2026";
+const TODAY = "2026-11-13";
 const GH = "https://github.com/vessette/Simple/blob/main/";
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -610,12 +619,16 @@ const PHASES = [
   ["Discovery and validation", "Release 0 · 6 stories", "2026-11-05", "2026-11-11", "done"],
   ["Legacy migration plan", "Release 1 · 1 story", "2026-11-10", "2026-11-11", "done"],
   ["Manager validation", "Check-ins and answers", "2026-11-11", "2026-12-02", "active"],
-  ["Capability build", "Release 2 · 32 capabilities", "2026-11-10", "2027-01-21", "plan"],
+  ["Capability build", "Release 2 · 32 candidates, four steps each", "2026-11-10", "2027-01-21", "plan"],
   ["Demo preparation", "Five recordings", "2027-01-22", "2027-01-27", "plan"],
   ["Demo Day", "28 January 2027", "2027-01-28", "2027-01-28", "ms"],
 ];
 
 const LOG = [
+  ["2026-11-13", "Flagged that the four new steps were on the board but missing from the repository plan. The program lead found the published plan had not been republished since 21 October, in all seven builders' repositories, and fixed it the same afternoon. The four stories are now in the plan with 10 criteria; nothing already passed was lost."],
+  ["2026-11-13", "Board reshaped by the program lead: 124 stories became 43. Per-rung stories removed; each capability now goes through four steps (by hand, in the app, request the tool, agent watched), starting with prospect discovery. Nothing finished was touched: 21 stories verified, 38 of 56 criteria passed."],
+  ["2026-11-13", "Open items sent by email: decisions, fixes and read-only checks to the program lead, platform owner and builder; decisions and five questions that unblock new capabilities to the sales manager."],
+  ["2026-11-12", "Projection-price brief for the program lead turned into a decision note answered by reply; no meeting needed."],
   ["2026-11-12", "Revenue answers built: every figure read from its endpoint with the field and filter that reproduce it, unavailable rather than zero, and net revenue reported unavailable as the platform defines it. Fourteenth capability built as a draft."],
   ["2026-11-12", "Missed-webhook payment explainer built: for one payment, the job's verdict and the guard that decided it, with the amount, window and customer-id checks cited every time. Thirteenth capability built as a draft; six questions raised."],
   ["2026-11-12", "Reviewed the platform audit log for free seats: it shows which admin and when, but not why or who approved, and nobody accountable can read it. Four more fixes added to the proposal, the smallest being to tell the admin when a grant fails."],
@@ -651,13 +664,14 @@ const LOG = [
 el("updated").textContent = UPDATED;
 const capsDone = CAPS.filter(c => c[7] === "done").length;
 const storiesDone = 7 + capsDone; // setup stories (Command Center, 5 research, legacy) all complete
-const storiesTotal = 7 + CAPS.length;
+const LADDER = 4; // step-by-step stories for prospect discovery, in the plan since 13 Nov with 10 criteria; none started
+const storiesTotal = 7 + CAPS.length + LADDER;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["38/56", "acceptance criteria passed", 38 / 56],
+  ["38/66", "acceptance criteria passed", 38 / 66],
   ["215", "automated tests, all passing", 1],
-  ["48", "pull requests merged", 1],
+  ["49", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 
