@@ -613,7 +613,6 @@ const WAIT = [
   ["Program lead", "Fourteen questions sent 11 Nov: any $4,500 checkout links, expired approvals, who approves outbound batches, access after a returned payment or a refund, repair agents, digest fixes, unrecognised plans, credit alerts, the refund ledger. Still open: who files platform changes, and a date."],
   ["Admissions operations", "Asked 11 Nov which of three versions of the refund terms is final; program lead copied."],
   ["Sales and marketing managers", "Owners for two legacy jobs."],
-  ["Program lead", "Asked 13 Nov: the four new step-by-step stories for prospect discovery are on the board but not yet in the repository plan, and have no acceptance criteria."],
 ];
 
 const PHASES = [
@@ -626,6 +625,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-13", "Flagged that the four new steps were on the board but missing from the repository plan. The program lead found the published plan had not been republished since 21 October, in all seven builders' repositories, and fixed it the same afternoon. The four stories are now in the plan with 10 criteria; nothing already passed was lost."],
   ["2026-11-13", "Board reshaped by the program lead: 124 stories became 43. Per-rung stories removed; each capability now goes through four steps (by hand, in the app, request the tool, agent watched), starting with prospect discovery. Nothing finished was touched: 21 stories verified, 38 of 56 criteria passed."],
   ["2026-11-13", "Open items sent by email: decisions, fixes and read-only checks to the program lead, platform owner and builder; decisions and five questions that unblock new capabilities to the sales manager."],
   ["2026-11-12", "Projection-price brief for the program lead turned into a decision note answered by reply; no meeting needed."],
@@ -664,12 +664,12 @@ const LOG = [
 el("updated").textContent = UPDATED;
 const capsDone = CAPS.filter(c => c[7] === "done").length;
 const storiesDone = 7 + capsDone; // setup stories (Command Center, 5 research, legacy) all complete
-const LADDER = 4; // step-by-step stories for prospect discovery, added to the board 13 Nov; none started
+const LADDER = 4; // step-by-step stories for prospect discovery, in the plan since 13 Nov with 10 criteria; none started
 const storiesTotal = 7 + CAPS.length + LADDER;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["38/56", "acceptance criteria passed", 38 / 56],
+  ["38/66", "acceptance criteria passed", 38 / 66],
   ["215", "automated tests, all passing", 1],
   ["49", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
