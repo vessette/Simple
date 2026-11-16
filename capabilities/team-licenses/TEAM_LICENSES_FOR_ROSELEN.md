@@ -37,11 +37,20 @@ The core guards work. Each code is unique, the seat is locked while it's redeeme
 1. **Redemption doesn't check whether the sponsor has paid.** A code from a sponsor whose invoice is pending or cancelled still creates a **paid** enrolment (`sponsorController.ts:207-228`). Vick flags any sponsor in that state who still has unredeemed codes.
 2. **Nothing in the platform creates seat codes.** They're added by hand, so "never more redemptions than seats bought" depends on whoever adds them. Production has one sponsor with 25 seats bought and no codes at all (`dayNinetyReportService.ts:76-80`), so none of those 25 can be redeemed yet. Vick reports both too few codes and too many.
 
+3. **The public redemption form tells a stranger more than it should.** No sponsor has codes yet, so nothing has been exposed, but it should be fixed before the first code goes out:
+   - an expired code gets a different message from a made-up one, so someone guessing learns which codes are real;
+   - a code someone already used answers "welcome back" with that person's internal enrolment id, without checking it's the same person;
+   - if a used code's enrolment has been deleted, the code works again for anyone;
+   - unlike the other sponsor forms, it has no limit on how many attempts one address can make (`enrollmentRoutes.ts:20`).
+
+How to fix 1 to 3, issue codes safely, and the tests that prove it are in the revised specification for Kes: [REDEMPTION_SPEC_FOR_KES.md](REDEMPTION_SPEC_FOR_KES.md).
+
 Also: an old sponsorship kit document in the code (`frontend/src/docs/CorporateSponsorshipKit.md`) still says **$4,500 per participant**. As far as I can find, nothing shows it or emails it; the kit email has no prices. It should be deleted or marked retired so nobody reuses it.
 
 ## What I need
 
-- **Ali:** should redeeming a seat require the sponsor's invoice to be paid? And who adds seat codes for the 25-seat sponsor?
-- **Roselen:** when a sponsor asks about prices, are the registry figures ($1,200 and $950) still right?
+- **Ali:** which sponsor billing states should allow codes to be issued and redeemed? My suggestion: paid and invoiced yes, pending and cancelled no. Who adds seat codes for the 25-seat sponsor? The other open decisions are listed at the end of the spec.
+- **Roselen:** when a sponsor asks about prices, are the registry figures ($1,200 and $950) still right? And do sponsors usually name all their employees when they buy, or add people over time?
+- **Kes:** check the spec's list of how the redemption form can end, and size the fix.
 
 Code: [teamLicenses.js](teamLicenses.js). Tests: [teamLicenses.test.js](teamLicenses.test.js), 7 tests. Registry entries and price copies, copied from the platform: [fixtures/sources.json](fixtures/sources.json).
