@@ -1,6 +1,6 @@
 # Missed strategy calls: what Vick does, and what needs your decision
 
-**For:** Roselyn (accountable manager, Sales, Enrollment & Subscriptions)
+**For:** Roselen (accountable manager, Sales, Enrollment & Subscriptions)
 **Capability:** `sales.strategy_call_no_show_detection_and_recovery`
 **Status:** draft. Nothing here is approved, switched on or sending anything.
 

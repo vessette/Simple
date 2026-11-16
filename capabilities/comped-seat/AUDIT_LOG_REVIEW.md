@@ -1,8 +1,8 @@
 # Review: does the existing audit log make free-seat grants accountable?
 
-**For:** Roselyn (sales owner) and Ali (approver), with Kes for the platform side.
+**For:** Roselen (sales owner) and Ali (approver), with Kes for the platform side.
 **Status:** review, read from the platform code at commit `109820a`. This is what the code does. I haven't looked at the production table, so how many rows exist and whether any are missing is unchecked.
-**Short answer:** partly. The log can show that *some* admin made a grant request, and when. It can't show why, who approved it, or whether it took effect. And the person accountable for free seats, Roselyn, has no way to see it.
+**Short answer:** partly. The log can show that *some* admin made a grant request, and when. It can't show why, who approved it, or whether it took effect. And the person accountable for free seats, Roselen, has no way to see it.
 
 ## How a grant gets recorded
 
@@ -34,7 +34,7 @@
 | Who approved it? | **No.** |
 | Did the grant actually take effect? | **Not reliably.** A revoke with nothing to revoke still answers success and is logged as a `delete` (`acceleratorRoutes.ts:101-109`). A failed grant isn't logged at all, which is fine; but on the page the admin isn't told it failed either, because the error is silently swallowed (`PersonHistoryDrawer.tsx:108-110`). |
 | Was the person already paying? | **No.** |
-| Can Roselyn see any of this? | **No.** Nothing in the platform lists audit entries. The only code that reads the table counts the rows and fetches the newest one for a system status panel (`managementService.ts:20-35`). Seeing who granted a seat takes direct database access. |
+| Can Roselen see any of this? | **No.** Nothing in the platform lists audit entries. The only code that reads the table counts the rows and fetches the newest one for a system status panel (`managementService.ts:20-35`). Seeing who granted a seat takes direct database access. |
 | Is the record complete? | **Not guaranteed:** the write is fire-and-forget, after the response. |
 | How long is it kept? | **No policy.** No code deletes from the table, so rows stay unless someone removes them by hand. |
 
@@ -55,12 +55,12 @@ The first three are in [COMP_AUDIT_PROPOSAL.md](COMP_AUDIT_PROPOSAL.md). The las
 2. **A confirmation dialog** instead of a one-click toggle. *(Change 2.)*
 3. **A named entry written with the grant, or not at all.** It records what happened, the actor's kind, id and email, and the person's state before the grant. *(Change 3.)*
 4. **Tell the admin when a grant or revoke fails.** Today the page swallows the error. That's a defect under this repo's own rules, and the smallest fix of all.
-5. **Make the entries readable** by the people accountable for them: a filtered view of free-seat entries for Roselyn, or rows a person exports for Vick to report on. Without this, the rest only helps someone with database access.
+5. **Make the entries readable** by the people accountable for them: a filtered view of free-seat entries for Roselen, or rows a person exports for Vick to report on. Without this, the rest only helps someone with database access.
 6. **Record the real caller's address** using the platform's existing `describeCaller` helper (`authFailureLog.ts:39`), which reads the forwarded header that nginx sets.
 7. **State how long audit rows are kept,** even if the answer is "forever".
 
-## Questions for Roselyn and Ali
+## Questions for Roselen and Ali
 
-1. Should Roselyn have a view of free-seat grants and revokes, or should someone export them for Vick to report on?
+1. Should Roselen have a view of free-seat grants and revokes, or should someone export them for Vick to report on?
 2. How long should grant records be kept?
 3. Is fixing the silent failure on the Free Access button (item 4) something Kes can take now? It's small and doesn't depend on the other decisions.

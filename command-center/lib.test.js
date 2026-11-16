@@ -201,7 +201,7 @@ test('gaps: the missing ladder mapping and an unreachable manager are named', ()
 
 // Same shape as the live GET /agent-domains-mine/sales response (2026-11-06), trimmed.
 const domainResponse = {
-  title: 'Sales, Enrollment & Subscriptions', accountable_human: 'Roselyn', researched_at: '2026-10-09', agent_id: null,
+  title: 'Sales, Enrollment & Subscriptions', accountable_human: 'Roselen', researched_at: '2026-10-09', agent_id: null,
   counts: { distinct_capabilities: 32, confirmed: 0, draft: 32, unique_tools_required: 34,
     complete_release_coverage: 0, outstanding_manager_decisions: 32,
     by_classification: { inherited: 6 }, by_implementation: { absent: 7 } },

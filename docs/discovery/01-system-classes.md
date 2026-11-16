@@ -1,8 +1,8 @@
 # System classes: where Sales, Enrollment & Subscriptions belongs
 
 **Story:** `sales.RESEARCH-1-SYSTEM-CLASSES` · **Release:** Discovery and validation
-**Accountable human:** Roselyn · **Prepared by:** Victoria Spencer-Auber · **Drafted:** 2026-11-05 · **Re-verified:** 2026-11-10
-**Status:** draft for Roselyn's review. Nothing in this document enables, grants or changes an agent.
+**Accountable human:** Roselen · **Prepared by:** Victoria Spencer-Auber · **Drafted:** 2026-11-05 · **Re-verified:** 2026-11-10
+**Status:** draft for Roselen's review. Nothing in this document enables, grants or changes an agent.
 
 All platform citations refer to the public platform repository
 `ColaberryIntern/ColaberryEnterprise_AI_LeadershipAccelerator` at commit `456de02`
@@ -41,7 +41,7 @@ re-counted from the file rather than copied.
 | Distinct tools required | 34, of which 4 exist in a real registry | Q2; `sales.json:3767` |
 | Capabilities blocked on live email | 15 (`live_email` is default-denied) | Q1; `backend/src/services/delivery/execution/executionPolicy.ts:33-42` |
 | AI employee for this domain | none (`agent_id: null`) | `backend/src/services/agentDomain/agentDomainRegistry.ts:190` |
-| Can Roselyn reach a review surface? | no (`can_reach_surface: false`, no `admin_users` row) | `agentDomainRegistry.ts:188-189`, `:82-84` |
+| Can Roselen reach a review surface? | no (`can_reach_surface: false`, no `admin_users` row) | `agentDomainRegistry.ts:188-189`, `:82-84` |
 
 Paths in the Source column without a directory are under `backend/src/services/agentDomain/`.
 
@@ -93,7 +93,7 @@ observe and propose.** Three numbers drive this.
 
 **1. 12 of 32 capabilities (37.5%) are reserved to a human at every level.** For those, the
 most any system may do is prepare the decision: gather the payment record, the subscription
-schedule and the enrollment, and put them in front of Roselyn. Gathering from several places in
+schedule and the enrollment, and put them in front of Roselen. Gathering from several places in
 response to a question is exactly what a tool-using agent does and what a fixed workflow does
 badly, because which record matters next depends on what the last one showed. The live incident
 behind `sales.payment_handoff_integrity` (a PaySimple hosted page minting its own customer, three
@@ -141,12 +141,12 @@ not a reason for agents to hand work to each other.
 
 All four of these, not any one:
 
-1. **Roselyn can review.** She needs an `admin_users` row so she can open the review surface
+1. **Roselen can review.** She needs an `admin_users` row so she can open the review surface
    (`agentDomainRegistry.ts:188-189`). Today this blocker is recorded on all 32 capabilities, and
    she is not on Basecamp either, so the ticket fallback is unavailable (`sales.json:3763`). No
    capability can leave `draft` until this changes.
 2. **At least one capability has passed R3 in a sandbox.** That means its tools exist in the
-   registries (today 4 of 34), and it has run user-initiated sandbox operations that Roselyn has
+   registries (today 4 of 34), and it has run user-initiated sandbox operations that Roselen has
    checked.
 3. **An approved reference to verify against.** Shadow-mode comparison exists for two capabilities
    only (payment confirmation and reconciliation; `sales.json:3765`). An agentic system that
@@ -159,7 +159,7 @@ ceiling. The 4 capabilities capped at R2 stay below the agentic line regardless.
 
 ---
 
-## Findings worth flagging to Roselyn
+## Findings worth flagging to Roselen
 
 - **A fixed workflow already makes an approval decision with no human.** `ApolloWeeklyEnrollmentAgent`
   approves Apollo recommendations with fit >= 50 and enrolls them into cold outbound
@@ -181,7 +181,7 @@ ceiling. The 4 capabilities capped at R2 stay below the agentic line regardless.
 - **How often each existing sales workflow actually runs in production, and whether it is enabled.**
   The registry and scheduler show the configured schedule, not what ran. Source needed: the
   production agent run log, which is not in this repository.
-- **What Roselyn wants first and what she considers "good".** No source exists. That's the job of
+- **What Roselen wants first and what she considers "good".** No source exists. That's the job of
   `sales.RESEARCH-4-MANAGER-INTERVIEW`.
 - **How many capabilities would stay human-reserved after her review.** All 12 flags are draft
   (`requirement_validation_state: draft` on all 32; Q1). The recommendation above depends on that
@@ -197,7 +197,7 @@ at commit `456de02`. All `file:line` references above are in that repository.
 | Ref | What it shows |
 |---|---|
 | `backend/src/services/agentDomain/capabilities/sales.json` | Domain capability matrix, researched 2026-10-09: counts, capabilities, legacy dispositions, notes (`:3646`, `:3760-3767`) |
-| `backend/src/services/agentDomain/agentDomainRegistry.ts:82-84`, `:182-194` | Sales domain row: no agent, Roselyn cannot reach the surface |
+| `backend/src/services/agentDomain/agentDomainRegistry.ts:82-84`, `:182-194` | Sales domain row: no agent, Roselen cannot reach the surface |
 | `backend/src/services/agentDomain/agentDomainStoryTemplates.ts:179-188` | The brief for this story (where 32 / 16 / 12 come from) |
 | `backend/src/services/agentDomain/agentDomainReleaseLadder.ts:128-142` | R8 / agent-to-agent handoff does not exist |
 | `backend/src/services/agentRegistrySeed.ts:195`, `:567`, `:583`, `:705`, `:1875`, `:2311` | Sales-adjacent registry entries, all cron |

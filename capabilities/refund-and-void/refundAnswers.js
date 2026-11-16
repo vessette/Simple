@@ -81,7 +81,7 @@ export function policyAnswer(policy = POLICY) {
   const cite = [{ source: policy.source, text: policy.text }];
   const lines = policy.approved
     ? [`The approved refund policy reads: "${policy.text}"`]
-    : [`The refund and cancellation terms are not approved yet. The platform records them as "${policy.text}", so there are no terms to quote. Ask Roselyn or Ali.`];
+    : [`The refund and cancellation terms are not approved yet. The platform records them as "${policy.text}", so there are no terms to quote. Ask Roselen or Ali.`];
   return { kind: 'policy', lines: assertNoPromise(lines), citations: cite };
 }
 

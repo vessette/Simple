@@ -1,8 +1,8 @@
 # Legacy migration plan: Sales, Enrollment & Subscriptions
 
 **Story:** `sales.LEGACY-MIGRATION-PLAN` · **Release:** Legacy migration plan
-**Accountable human:** Roselyn · **Prepared by:** Victoria Spencer-Auber · **Date:** 2026-11-10
-**Status:** a plan for Roselyn to review. Nothing has been switched off, deleted or changed. Every step below needs a named person's decision first.
+**Accountable human:** Roselen · **Prepared by:** Victoria Spencer-Auber · **Date:** 2026-11-10
+**Status:** a plan for Roselen to review. Nothing has been switched off, deleted or changed. Every step below needs a named person's decision first.
 
 Citations are to `ColaberryIntern/ColaberryEnterprise_AI_LeadershipAccelerator` at commit `949fe19` (11:36 AM CST on 2026-11-10). Paths starting `services/` are under `backend/src/`. The dispositions come from the story brief and `services/agentDomain/capabilities/sales.json` (`legacy_dispositions`, line 3646). They were checked, not redone.
 
@@ -14,7 +14,7 @@ Citations are to `ColaberryIntern/ColaberryEnterprise_AI_LeadershipAccelerator` 
 |---|---|---|
 | Migrated to a capability | 5 | Keep running unchanged; the capability record takes ownership |
 | Superseded | 6 | The safe half carries into a successor capability; the unsafe half is switched off once the successor exists |
-| Retired | 1 | Already disabled on every boot; needs Roselyn's confirmation, then removal from the schedule |
+| Retired | 1 | Already disabled on every boot; needs Roselen's confirmation, then removal from the schedule |
 | Unknown | 4 | Unchanged until one named question is answered by a named person |
 | **Total** | **16** | |
 
@@ -55,9 +55,9 @@ Each stays **exactly as it is today** until its question is answered.
 
 | Record | The single question that resolves it | Who can answer | Why it's unresolved |
 |---|---|---|---|
-| `CampaignEvolutionEngine` | Does Marketing own generating and A/B-testing outbound message variants? | **Roselyn and Sohail Syed** (Marketing Intelligence & Brand) | It's outbound content optimisation, whose natural owner is Marketing (brief) |
+| `CampaignEvolutionEngine` | Does Marketing own generating and A/B-testing outbound message variants? | **Roselen and Sohail Syed** (Marketing Intelligence & Brand) | It's outbound content optimisation, whose natural owner is Marketing (brief) |
 | `CampaignOpsSuperAgent` | Who owns the Campaign Operations department report, now that its inputs are moving into a sales capability? | **Ali** | Its department is Campaign Operations, not Sales, and that department has no owner here (brief; category `dept_super`, `:2231`) |
-| `ConversationOptimizationAgent` | Should reply-rate drop detection become a sales capability, **with the rewriting of its own instructions removed**? | **Roselyn and Sohail Syed** | The rewriting is forbidden either way: an agent may not edit the instructions that govern itself (brief, citing the learner-success charter) |
+| `ConversationOptimizationAgent` | Should reply-rate drop detection become a sales capability, **with the rewriting of its own instructions removed**? | **Roselen and Sohail Syed** | The rewriting is forbidden either way: an agent may not edit the instructions that govern itself (brief, citing the learner-success charter) |
 | `MandrillOpenClickPoll` | Does Marketing or Platform claim email open/click attribution, including its dedup rule `(lead, outcome, subject, day)`? | **Sohail Syed** (Marketing) or **Kes** (Platform). Ali decides if neither claims it. | It's marketing measurement, not selling (brief). Its matching rule fixed 40% of rows being mis-attributed before 2026-09-11 (`:258`), so it must not be lost. |
 
 ---
@@ -77,7 +77,7 @@ What's still live:
 
 This is the pattern the brief warns about: 28 of 39 "retire" rows elsewhere still held live, reachable code.
 
-**Retiring it properly means:** Roselyn confirms, and then a developer removes its schedule entry and its registry entry. Until then it stays disabled, as it is today.
+**Retiring it properly means:** Roselen confirms, and then a developer removes its schedule entry and its registry entry. Until then it stays disabled, as it is today.
 
 ---
 
@@ -189,7 +189,7 @@ What follows is the original analysis.
 
 **A one-page version with read-only queries and answer lines is in [`apollo-production-checks.md`](apollo-production-checks.md).** Send that one.
 
-All read-only. They're written down so the request is exact and the answers can be filed here. Ask **Ali or Kes**. "Last 30 days" is a suggestion, so use whatever window Roselyn wants.
+All read-only. They're written down so the request is exact and the answers can be filed here. Ask **Ali or Kes**. "Last 30 days" is a suggestion, so use whatever window Roselen wants.
 
 **Is it running?**
 
@@ -212,7 +212,7 @@ All read-only. They're written down so the request is exact and the answers can 
 **Reading the answers:**
 - **1 and 3 both "yes":** it runs every weekday.
 - **Check 4 above zero:** it has approved leads with no person.
-- **Check 6 shows sent messages:** those people were contacted. That is the evidence Roselyn needs for the step 2 decision below.
+- **Check 6 shows sent messages:** those people were contacted. That is the evidence Roselen needs for the step 2 decision below.
 
 Not in the repository, and so not checked: whether an unsubscribed lead can be enrolled. Ask that alongside check 8; it is **unknown** here.
 
@@ -223,12 +223,12 @@ Not in the repository, and so not checked: whether an unsubscribed lead can be e
 
 | Step | Decision | Who | Blocks |
 |---|---|---|---|
-| 1 | ~~Roselyn gets an admin login~~ **Done 2026-11-10:** the `agents` section grant, given by Ali | Ali | Every confirmation below. She can't approve anything in the platform today (`services/agentDomain/agentDomainRegistry.ts:188-189`). |
-| 2 | **Answered 2026-11-10: it is not running.** It is switched off in the governance table, so the question becomes whether it should ever be switched on, and on what terms. | Roselyn, with Ali | Nothing else, but it's live behaviour with no human approver. Whether it is running in production is **unknown** from the repository. |
-| 3 | Confirm the retirement of `ContentOptimizationAgent` | Roselyn | Removal of its schedule and registry entries |
-| 4 | Answer the four ownership questions | Roselyn and Sohail; Ali; Kes | The 4 unknown rows |
+| 1 | ~~Roselen gets an admin login~~ **Done 2026-11-10:** the `agents` section grant, given by Ali | Ali | Every confirmation below. She can't approve anything in the platform today (`services/agentDomain/agentDomainRegistry.ts:188-189`). |
+| 2 | **Answered 2026-11-10: it is not running.** It is switched off in the governance table, so the question becomes whether it should ever be switched on, and on what terms. | Roselen, with Ali | Nothing else, but it's live behaviour with no human approver. Whether it is running in production is **unknown** from the repository. |
+| 3 | Confirm the retirement of `ContentOptimizationAgent` | Roselen | Removal of its schedule and registry entries |
+| 4 | Answer the four ownership questions | Roselen and Sohail; Ali; Kes | The 4 unknown rows |
 | 5 | Build the migration ledger | A developer | Any step that changes a row |
-| 6 | Approve each successor capability | Roselyn | Switching off the unsafe half of each of the 6 superseded rows. Until then the legacy rows keep running as today. |
+| 6 | Approve each successor capability | Roselen | Switching off the unsafe half of each of the 6 superseded rows. Until then the legacy rows keep running as today. |
 
 The 5 migrated rows need no step in this sequence. They keep running.
 
@@ -243,5 +243,5 @@ The 5 migrated rows need no step in this sequence. They keep running.
 | `services/agentRegistrySeed.ts:3365-3368`, `:3381-3391`, `:3434-3440` | `findOrCreate` on boot; status preserved; the force-disable |
 | `services/aiOpsScheduler.ts:142-146`, `:176`, `:226`, `:280-296` | Name not unique; the retired agent still scheduled; Apollo schedule; the `enabled` gate |
 | `docs/architecture/ai-workforce-management/LEGACY_AGENT_CLASSIFICATION.csv` | 246 rows: 16 for this domain, 21 unresolved |
-| `services/agentDomain/agentDomainRegistry.ts:188-189` | Roselyn can't reach the approval surface |
+| `services/agentDomain/agentDomainRegistry.ts:188-189` | Roselen can't reach the approval surface |
 | `docs/discovery/04-manager-interview.md` | The proposed weekly check-in |

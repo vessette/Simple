@@ -1,6 +1,6 @@
 # Refunds and voids: what Vick does, and what needs a decision
 
-**For:** Roselyn (accountable manager, Sales, Enrollment & Subscriptions), Ali (approver), and finance.
+**For:** Roselen (accountable manager, Sales, Enrollment & Subscriptions), Ali (approver), and finance.
 **Capability:** `sales.refund_and_void_issuance`
 **Status:** draft. **A refund moves money out and can't be undone, so it's a person's decision, always.** Vick answers questions and can draft a recommendation. It never issues, voids or reverses a payment, not even in a test.
 
@@ -69,10 +69,10 @@ How the search for the approved terms has gone, so nobody repeats a step. Add a 
 
 | # | Question | Who | Options |
 |---|---|---|---|
-| 1 | Which of the three versions is the refund policy, and who signs it off? | Roselyn, with Ali | Confirm one · write a new one. Until then, Vick states no terms |
-| 2 | Should a refund remove access and free the seat? | Roselyn, with Ali | Remove both · flag for a person · leave as is (today) |
+| 1 | Which of the three versions is the refund policy, and who signs it off? | Roselen, with Ali | Confirm one · write a new one. Until then, Vick states no terms |
+| 2 | Should a refund remove access and free the seat? | Roselen, with Ali | Remove both · flag for a person · leave as is (today) |
 | 3 | Should a refund that moved money always be recorded as succeeded? | Ali or Kes | Record the gateway result first, and the credit void separately |
-| 4 | When spent credit can't be recovered, who's told? | Roselyn, with finance | Flag it on the refund · leave as is |
+| 4 | When spent credit can't be recovered, who's told? | Roselen, with finance | Flag it on the refund · leave as is |
 | 5 | Does your 10 November access cover the refunds page? | Ali | Yes · no, review another way |
 
 ## Your answers

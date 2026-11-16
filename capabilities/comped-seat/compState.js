@@ -20,7 +20,7 @@
 
 const ROW = 'subscription row';
 const ENROLMENT = 'enrolment row';
-export const DECIDERS = 'Roselyn (sales owner) and Ali (approver)';
+export const DECIDERS = 'Roselen (sales owner) and Ali (approver)';
 
 /** What the revenue figures do with a comp, stated in full. Every report carries it. */
 export const REVENUE_STATEMENT = Object.freeze({

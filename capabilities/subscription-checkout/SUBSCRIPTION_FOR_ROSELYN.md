@@ -1,6 +1,6 @@
 # Membership checkout: what Vick does, and what needs a decision
 
-**For:** Roselyn (accountable manager, Sales, Enrollment & Subscriptions), and Ali.
+**For:** Roselen (accountable manager, Sales, Enrollment & Subscriptions), and Ali.
 **Capability:** `sales.subscription_checkout_and_plan_activation`
 **Status:** draft. **Starting a checkout or activating a plan is a person's decision, always.** Vick answers questions; it never starts, discounts or activates anything.
 
@@ -39,7 +39,7 @@ Read from the platform code at commit `109820a`. This is what the code allows, n
 
 | # | Question | Who | Options |
 |---|---|---|---|
-| 1 | Should anything still tell members billing starts on the class start date? | Roselyn | Update the wording to "the day you pay" |
+| 1 | Should anything still tell members billing starts on the class start date? | Roselen | Update the wording to "the day you pay" |
 | 2 | What should happen to a membership whose plan isn't recognised? | Ali or Kes | Stop and flag it for a person · keep treating it as monthly (today) |
 | 3 | If marking a credit as used fails, who finds out? | Ali or Kes | Alert a person and retry · leave as a log line (today) |
 

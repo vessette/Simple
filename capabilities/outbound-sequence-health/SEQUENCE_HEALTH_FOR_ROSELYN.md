@@ -1,6 +1,6 @@
 # Outbound sequence health: what Vick does, and what needs a decision
 
-**For:** Roselyn (accountable manager, Sales, Enrollment & Subscriptions). Also relevant to Ali, and to Kes or Sohail on ownership.
+**For:** Roselen (accountable manager, Sales, Enrollment & Subscriptions). Also relevant to Ali, and to Kes or Sohail on ownership.
 **Capability:** `sales.outbound_sequence_health_watch`
 **Status:** draft. Nothing here is approved, switched on, retried or resolved.
 
@@ -52,10 +52,10 @@ Read from the platform code at commit `109820a`. This is what the code allows, n
 
 | # | Question | Who | Options |
 |---|---|---|---|
-| 1 | Should a sequence with no activity count as healthy? | Roselyn | Healthy (as today) · "idle, check it" · unknown |
+| 1 | Should a sequence with no activity count as healthy? | Roselen | Healthy (as today) · "idle, check it" · unknown |
 | 2 | Are the repair and self-healing agents running, and should their automatic retries and auto-resolve be paused? | Ali or Kes | Check the governance table, as for Apollo |
 | 3 | Who owns this capability? These agents run campaign delivery, which may belong to marketing or platform rather than sales. | Ali, with Sohail and Kes | Sales · Marketing · Platform |
-| 4 | What score counts as healthy, degraded or critical? | Roselyn | The platform's 80 / 60 cut-offs, or her own |
+| 4 | What score counts as healthy, degraded or critical? | Roselen | The platform's 80 / 60 cut-offs, or her own |
 
 ## Your answers
 

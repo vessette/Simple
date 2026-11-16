@@ -1,6 +1,6 @@
 # Comped seats: what Vick does, and what needs a decision
 
-**For:** Roselyn (accountable manager, Sales, Enrollment & Subscriptions), Ali (approver).
+**For:** Roselen (accountable manager, Sales, Enrollment & Subscriptions), Ali (approver).
 **Capability:** `sales.comped_seat_grant_and_revocation`
 **Status:** draft. **A comp sets a named person's price to zero. That's a discount, so granting or revoking one is a person's decision, always.** Vick reports who holds a comp. It never grants, revokes or recommends either.
 
@@ -67,7 +67,7 @@ The grant and revoke flow, with these decisions marked where they fall and the d
 
 | # | Question | Who | Options |
 |---|---|---|---|
-| 1 | Someone already paying is given a comp. What happens to the paid plan? | Roselyn, with Ali | Refuse the grant while a paid plan is active · cancel the paid plan's renewals first · allow both, but report the person once as paying · leave as is (today) |
+| 1 | Someone already paying is given a comp. What happens to the paid plan? | Roselen, with Ali | Refuse the grant while a paid plan is active · cancel the paid plan's renewals first · allow both, but report the person once as paying · leave as is (today) |
 | 2 | Should a grant require a reason and write a named audit entry? (Proposal: [COMP_AUDIT_PROPOSAL.md](COMP_AUDIT_PROPOSAL.md)) | Ali or Kes | Adopt the proposal · require a reason only · leave as is (who and when are logged today; why is not) |
 | 3 | Should a revoked comp stop counting as a Free Access seat on the revenue page? | Ali or Kes | Yes, read only active comps · leave as is |
 | 4 | Should comps be kept out of the "paid" counts, including the payment pre-flight list? | Ali, with Quincy | Mark comps separately · leave as is, and Vick lists them apart |

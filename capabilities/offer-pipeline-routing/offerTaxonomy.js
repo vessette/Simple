@@ -7,7 +7,7 @@
 //
 // The taxonomy is the platform's classifyOffer() rules (ColaberryEnterprise_AI_
 // LeadershipAccelerator @ 949fe19, backend/src/services/offerScoringService.ts:91-131),
-// ported unchanged. It is a DRAFT: no approved offer taxonomy exists, and Roselyn has
+// ported unchanged. It is a DRAFT: no approved offer taxonomy exists, and Roselen has
 // not reviewed this one. Three platform behaviours are deliberately not carried over:
 //   1. The fallback "Default: Accelerator" (:125-130). Every lead matching no rule is
 //      given Accelerator, even one with no data. Here that is 'cannot place'.

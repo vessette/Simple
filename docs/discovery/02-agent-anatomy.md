@@ -1,8 +1,8 @@
 # Agent anatomy: the nine elements, mapped onto the sales agent
 
 **Story:** `sales.RESEARCH-2-AGENT-ANATOMY` · **Release:** Discovery and validation
-**Accountable human:** Roselyn · **Prepared by:** Victoria Spencer-Auber · **Date:** 2026-11-10
-**Status:** draft for Roselyn's review. Nothing in this document enables, grants or changes an agent.
+**Accountable human:** Roselen · **Prepared by:** Victoria Spencer-Auber · **Date:** 2026-11-10
+**Status:** draft for Roselen's review. Nothing in this document enables, grants or changes an agent.
 
 All platform citations refer to the public repository
 `ColaberryIntern/ColaberryEnterprise_AI_LeadershipAccelerator` at commit `949fe19`
@@ -11,7 +11,7 @@ Live figures come from `GET /api/admin/agent-domains-mine` and `/agent-domains-m
 read in November 2026.
 
 
-> **Update, 2026-11-10 (from Ali):** Roselyn was never missing an admin login. She holds the management role `revenue`; what she lacked was the `agents` section grant, which carries the per-agent dashboard and the review page. The platform's own diagnostic (`manager_has_no_admin_login`) reported the wrong cause. **She has the grant now**, and needs to sign out and back in once. Statements below that she "can't log in" or "can't reach" the page reflect that diagnostic and are no longer current.
+> **Update, 2026-11-10 (from Ali):** Roselen was never missing an admin login. She holds the management role `revenue`; what she lacked was the `agents` section grant, which carries the per-agent dashboard and the review page. The platform's own diagnostic (`manager_has_no_admin_login`) reported the wrong cause. **She has the grant now**, and needs to sign out and back in once. Statements below that she "can't log in" or "can't reach" the page reflect that diagnostic and are no longer current.
 
 ---
 
@@ -22,7 +22,7 @@ read in November 2026.
 | 1. Reasoning | **Unknown** |
 | 2. Memory | **Unknown** |
 | 3. Inputs | Draft only |
-| 4. Communication | Exists; Roselyn's access fixed 2026-11-10 (see update) |
+| 4. Communication | Exists; Roselen's access fixed 2026-11-10 (see update) |
 | 5. Tools | Missing |
 | 6. Procedures | Draft only |
 | 7. Coordination | Missing: does not exist in the platform |
@@ -59,7 +59,7 @@ How the agent decides what to say or do.
 - **Missing:**
   - Vick's role charter, if there isn't one. A charter is an `AgentRoleCharter` row, holding a mission, responsibilities, boundaries and what Vick may do alone, with approval, or never (`models/AgentRoleCharter.ts:76-89`).
   - A decision on which model Vick uses.
-- **First honest version:** a role charter whose responsibilities come from `docs/discovery/03-role-and-da-transition.md` (the "splits" and "transitions" rows), whose `authority_forbidden` list holds the human-only items from that document, and which Roselyn approves.
+- **First honest version:** a role charter whose responsibilities come from `docs/discovery/03-role-and-da-transition.md` (the "splits" and "transitions" rows), whose `authority_forbidden` list holds the human-only items from that document, and which Roselen approves.
 
 ## 2. Memory
 
@@ -71,7 +71,7 @@ What the agent carries from one conversation to the next.
   - The platform's own audit warns against approval flags nobody checks (`docs/architecture/ai-workforce-management/MEMORY_MAP.md:41-45`).
 - **Exists today (Vick):** **Unknown.** I can't see whether Vick has any memory proposals.
 - **Missing:** any decision on what a sales agent should remember. For example: a lead's warm or cold history, or why a lead didn't convert.
-- **First honest version:** nothing remembered automatically. Vick proposes a memory only for a lead outcome Roselyn has confirmed, and she approves each one. Leads' personal details stay in the CRM, not in agent memory.
+- **First honest version:** nothing remembered automatically. Vick proposes a memory only for a lead outcome Roselen has confirmed, and she approves each one. Leads' personal details stay in the CRM, not in agent memory.
 
 ## 3. Inputs
 
@@ -80,8 +80,8 @@ What the agent reads.
 - **Exists today:** inputs are written down **per capability** in the research matrix. Every one of the 32 capabilities has an `inputs` field (`services/agentDomain/capabilities/sales.json`). All 32 are `draft` (`/coverage`, `validation_state`).
 - **Exists today (Vick):** Vick reads nothing. It has 0 tools, and an agent reads data only through a tool (element 5).
 - **Missing:**
-  - Approved inputs. Roselyn has validated none of the 32.
-  - Any input from the systems Roselyn actually uses: GoHighLevel (her CRM) and Zoom. Neither appears in the coverage data, so whether any connection exists is **unknown**.
+  - Approved inputs. Roselen has validated none of the 32.
+  - Any input from the systems Roselen actually uses: GoHighLevel (her CRM) and Zoom. Neither appears in the coverage data, so whether any connection exists is **unknown**.
   - One agreed price. The coverage data records four copies that disagree.
 - **First honest version:** read-only access to the platform's own lead and enrollment records (the `query_lead_conversion_metrics` tool exists, `services/reese/agentToolCapabilities.ts:231-234`), plus an approved, single-version program and price sheet.
 
@@ -93,13 +93,13 @@ How the agent talks to people.
   - **Talk**, a continuing thread between one manager and one agent (`models/AgentManagerConversation.ts:1-6`; `services/agentManagerConversationService.ts`).
   - **Email** can technically be reused (`docs/architecture/ai-workforce-management/COMMUNICATION_MAP.md:49-59`).
   - One agent, Reese, already contacts people on its own initiative, with safety caps (`COMMUNICATION_MAP.md:35-38`).
-- **Exists today (Vick):** a Talk thread is possible, but **Roselyn can't open it**: `manager_has_no_admin_login` (`agentDomainRegistry.ts:82-84`, `:188-189`).
+- **Exists today (Vick):** a Talk thread is possible, but **Roselen can't open it**: `manager_has_no_admin_login` (`agentDomainRegistry.ts:82-84`, `:188-189`).
 - **Missing:**
-  - Roselyn's admin login.
+  - Roselen's admin login.
   - Any permission to send to leads: `live_email` is denied by default for every agent (`services/delivery/execution/executionPolicy.ts:33-42`).
   - Text messaging and calls: no evidence in the coverage data.
   - Per-manager timezone, which the communication audit confirms is absent (`COMMUNICATION_MAP.md:40-44`).
-- **First honest version:** Vick talks only to Roselyn, through Talk, once she has a login. Every message to a lead is a draft that a person sends.
+- **First honest version:** Vick talks only to Roselen, through Talk, once she has a login. Every message to a lead is a draft that a person sends.
 
 ## 5. Tools
 
@@ -113,9 +113,9 @@ What the agent can actually do.
   - `create_tickets`
   - `read_attachments`
   - `escalate_to_human`
-- **A caution about one of those four:** `escalate_to_human` today creates a *curriculum* handoff ticket through Dara's chain (`agentToolCapabilities.ts:88-94`). It exists by name, but a sales version would have to route to Roselyn.
+- **A caution about one of those four:** `escalate_to_human` today creates a *curriculum* handoff ticket through Dara's chain (`agentToolCapabilities.ts:88-94`). It exists by name, but a sales version would have to route to Roselen.
 - **Missing:** 30 of the 34 tools, and any grant at all.
-- **First honest version:** read-only tools only, for example `query_lead_conversion_metrics`, plus a sales-routed `escalate_to_human`. Granting even one lifts the `no_tool_grants` limit (element 8), so each grant is a real decision for Roselyn, not a formality.
+- **First honest version:** read-only tools only, for example `query_lead_conversion_metrics`, plus a sales-routed `escalate_to_human`. Granting even one lifts the `no_tool_grants` limit (element 8), so each grant is a real decision for Roselen, not a formality.
 
 ## 6. Procedures
 
@@ -123,13 +123,13 @@ The steps the agent follows.
 
 - **Exists today:**
   - Each of the 32 capabilities in the research matrix has a `workflow` and `exceptions` field, plus a `release_behaviour` list for each rung (`sales.json`; all 32 have `release_behaviour`).
-  - Roselyn's own five steps are written down in `docs/discovery/03-role-and-da-transition.md`.
+  - Roselen's own five steps are written down in `docs/discovery/03-role-and-da-transition.md`.
 - **Exists today (Vick):** **Unknown** whether a role charter holds any procedure (element 1). Everything above is draft.
 - **Missing:**
   - Approval of any workflow.
-  - The steps for "enrollment completion", which the research matrix says are unknown until Roselyn names them. Her answer that "enrolled means paid" is a start.
+  - The steps for "enrollment completion", which the research matrix says are unknown until Roselen names them. Her answer that "enrolled means paid" is a start.
   - The list of reasons for a lead not converting.
-- **First honest version:** one procedure, warm/cold/not-interested sorting with a reason, written from Roselyn's step 1 and approved by her.
+- **First honest version:** one procedure, warm/cold/not-interested sorting with a reason, written from Roselen's step 1 and approved by her.
 
 ## 7. Coordination
 
@@ -145,7 +145,7 @@ How the agent works with other agents.
 
   None of these exists for agents.
 - **Why it matters here:**
-  - Roselyn asked for Cory's work to be mapped before Vick is built, so there are no duplicate tasks.
+  - Roselen asked for Cory's work to be mapped before Vick is built, so there are no duplicate tasks.
   - The Cora voice agent already calls warm and cold leads (`docs/synthflow-warm-lead-prompt.md:3-4`).
   - Without handoffs, overlap can only be prevented by **people deciding who owns what** (`03-role-and-da-transition.md`, row 1).
 - **First honest version:** no coordination at all. A written ownership table, kept by a person, says which tasks are Cora's, Cory's and Vick's.
@@ -167,7 +167,7 @@ What stops the agent from doing harm.
 - **Exists today (Vick):** all of the above. Vick is not enabled.
 - **Missing:**
   - Sales-specific forbidden actions in a role charter (element 1). For example: never quote a price that isn't on the approved sheet, and never contact a lead marked cold or not interested.
-  - The legal limit on contacting cold leads that Roselyn mentioned is **unknown**. It isn't in the repository.
+  - The legal limit on contacting cold leads that Roselen mentioned is **unknown**. It isn't in the repository.
 - **First honest version:** the platform safeguards as they are, plus a charter `authority_forbidden` list covering money, sending, and contact with cold leads.
 
 ## 9. Verification
@@ -181,14 +181,14 @@ How anyone knows the agent is working.
 - **Missing:**
   - Any test.
   - Approved reference outcomes to compare against.
-  - Every pass mark. The readiness tests in `03-role-and-da-transition.md` leave each pass mark for Roselyn, and no evaluation criteria exist in the platform (`docs/architecture/ai-workforce-management/CURRENT_STATE.md:94`).
-- **First honest version:** a shadow comparison for one capability. Vick's warm/cold proposals are set beside Roselyn's call outcomes for a set of real leads she chooses, at a pass mark she sets.
+  - Every pass mark. The readiness tests in `03-role-and-da-transition.md` leave each pass mark for Roselen, and no evaluation criteria exist in the platform (`docs/architecture/ai-workforce-management/CURRENT_STATE.md:94`).
+- **First honest version:** a shadow comparison for one capability. Vick's warm/cold proposals are set beside Roselen's call outcomes for a set of real leads she chooses, at a pass mark she sets.
 
 ---
 
 ## Gaps, in the order they block
 
-1. ~~Roselyn's admin login.~~ **Resolved 2026-11-10:** the missing piece was the `agents` section grant, now given. Before that, there's no Talk thread (communication) and no approval of a charter, memory or tool.
+1. ~~Roselen's admin login.~~ **Resolved 2026-11-10:** the missing piece was the `agents` section grant, now given. Before that, there's no Talk thread (communication) and no approval of a charter, memory or tool.
 2. **One approved price and program sheet.** Without it, any input that quotes a price is wrong.
 3. **Vick's role charter.** Without it, reasoning, procedures and the sales-specific safeguards have nothing to stand on.
 4. **The first tool grant.** Until one is granted, everything stays at R2 or below.
@@ -203,7 +203,7 @@ Platform repository: https://github.com/ColaberryIntern/ColaberryEnterprise_AI_L
 
 | Element | Reference | What it shows |
 |---|---|---|
-| Identity | `services/agentDomain/agentDomainRegistry.ts:82-84`, `:186-191` | Sales row: `agent_id: null`, Roselyn can't reach the surface |
+| Identity | `services/agentDomain/agentDomainRegistry.ts:82-84`, `:186-191` | Sales row: `agent_id: null`, Roselen can't reach the surface |
 | 1 | `services/agentBlueprint/agentSystemPrompt.ts:1-5`, `:98`, `:111`, `:121` | Prompt assembly: charter, directives, approved memory, safety block |
 | 1 | `services/agentManagerConversationService.ts:63`, `:504-506` | Model used by Talk (`AI_MODEL`, default `gpt-4o-mini`) |
 | 1 | `models/AiAgent.ts:322-361` | Agent record fields: `system_prompt`, `tools_granted`, `autonomy_level` |

@@ -32,7 +32,7 @@ test('happy path: best fit first, with scores, the sequence and the named approv
   const p = buildPacket(input());
   assert.deepEqual(p.prospects.map((x) => x.id), ['r1', 'r2', 'r3', 'r7', 'r4', 'r5', 'r6']);
   assert.deepEqual(p.prospects.map((x) => x.fit_score), [92, 81, 77, 71, 65, 58, 50]);
-  assert.equal(p.approver, 'Roselyn');
+  assert.equal(p.approver, 'Roselen');
   assert.equal(p.proposed_sequence, fx.sequence);
 });
 
@@ -86,8 +86,8 @@ test('the packet waits: time never approves it, only the named approver can deci
   assert.equal(approvalState(p), 'awaiting_approval');
   assert.equal(approvalState(p, { by: 'system:auto_approve_timeout', outcome: 'approved' }), 'awaiting_approval');
   assert.equal(approvalState(p, { by: 'Someone else', outcome: 'approved' }), 'awaiting_approval');
-  assert.equal(approvalState(p, { by: 'Roselyn', outcome: 'approved' }), 'approved');
-  assert.equal(approvalState(p, { by: 'Roselyn', outcome: 'rejected' }), 'rejected');
+  assert.equal(approvalState(p, { by: 'Roselen', outcome: 'approved' }), 'approved');
+  assert.equal(approvalState(p, { by: 'Roselen', outcome: 'rejected' }), 'rejected');
 });
 
 test('failure paths: missing approver, sequence, suppression state, bad cap or threshold', () => {

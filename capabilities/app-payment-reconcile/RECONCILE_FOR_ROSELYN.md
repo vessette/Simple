@@ -1,6 +1,6 @@
 # Payments that missed their webhook: what Vick does, and what needs a decision
 
-**For:** Roselyn (accountable manager, Sales, Enrollment & Subscriptions), Ali (approver); Kes for the platform findings.
+**For:** Roselen (accountable manager, Sales, Enrollment & Subscriptions), Ali (approver); Kes for the platform findings.
 **Capability:** `sales.app_originated_payment_reconciliation`
 **Status:** draft. **Reconciling marks a person paid and switches on their membership, so it's a person's decision, always.** Vick explains why one payment is or isn't in scope. It never links a payment, never runs the reconciler, and never says a payment "should" be linked.
 
@@ -54,7 +54,7 @@ Read from the platform code at commit `109820a`. This is what the code does, not
 
 7. **Which person gets a contested payment depends on row order.** The candidate query has no sort order (`:238-245`). If two enrolments with the same email both have a matching checkout, which one path B links isn't fixed.
 
-8. **The brief's citations hold up well this time.** Its line numbers match `109820a`. The one that's only roughly right is `paymentReconciliationService.ts:193-212`, which spans the sweep's email matching and its write step. The brief's note that Roselyn has no admin login is out of date: she holds the `revenue` role and has had the `agents` section since 10 November.
+8. **The brief's citations hold up well this time.** Its line numbers match `109820a`. The one that's only roughly right is `paymentReconciliationService.ts:193-212`, which spans the sweep's email matching and its write step. The brief's note that Roselen has no admin login is out of date: she holds the `revenue` role and has had the `agents` section since 10 November.
 
 9. **What works as the spec says:**
    - The origin guard runs on both paths. Path A was fixed to use it on 2026-08-19 (`:39-47`, `:364-366`).

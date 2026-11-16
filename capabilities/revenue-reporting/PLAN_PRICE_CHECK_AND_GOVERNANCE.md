@@ -1,6 +1,6 @@
 # Plan: a price check that covers every price, and a governance page that says when it can't load
 
-**For:** Kes (platform owner, who would build it), with Roselyn and Ali for the decisions marked.
+**For:** Kes (platform owner, who would build it), with Roselen and Ali for the decisions marked.
 **Status:** plan only. Nothing is built, and it changes platform code that Vick doesn't own. Platform references are to commit `109820a`. It follows on from [FIXES_PROPOSED.md](FIXES_PROPOSED.md).
 
 ## Part A: every price point on the platform today
@@ -40,7 +40,7 @@ Bootcamp tuition and manual charges on the shared PaySimple account aren't price
 | B5 | **Widen the check in two ways:** by **value**, so any money literal equal to a listed price (178800, 19900, 89400, and so on) outside the price file fails; and by **name**, so any constant named for money (PRICE, REVENUE, DEAL, AMOUNT, CENTS, FEE) fails unless it's on an allow-list with a reason. Small, common numbers like $50 and $100 are matched by name only, so ordinary code isn't flagged. | Kes | The check covers every row of Part A |
 | B6 | **Make the check prove it works,** as it already does for its existing rules: plant a `REVENUE_PER_ENROLLMENT = 2500`, an `avgDealValue = 25000` and a typed `1788`, and confirm the check fails on each. | Kes | Its self-test includes the three |
 | B7 | **Clear the frozen list.** Once B3 lands, the two files on it fail the check's "no longer needed" rule, by design. Remove them, and update the comment saying they await Ali. | Kes | The frozen list is empty |
-| B8 | **Decide what the $25,000 is.** If it's a different product, such as corporate deals, it belongs in the price file under its own name and is shown as such. | Roselyn, with Ali | Named or removed |
+| B8 | **Decide what the $25,000 is.** If it's a different product, such as corporate deals, it belongs in the price file under its own name and is shown as such. | Roselen, with Ali | Named or removed |
 
 **Who updates prices from then on:**
 - **Ali decides any price change.** Kes changes the price file.
@@ -78,7 +78,7 @@ If a last good figure is stored (C4), it appears underneath, clearly marked as o
 > Last loaded: $X at 4:10 PM CST. This may be out of date.
 
 - **[Try again]** reloads the figures. The page already has a reload function.
-- **[Open the Revenue page]** gives Roselyn the figure from its own page, which has its own error handling.
+- **[Open the Revenue page]** gives Roselen the figure from its own page, which has its own error handling.
 - **Every figure fails on its own.** One failed lookup doesn't blank the whole page.
 - **The message is announced to screen readers,** and doesn't rely on colour alone.
 - **A real zero still shows as $0.** Only a missing figure shows "unavailable".
@@ -104,7 +104,7 @@ C5 and C1-C2 first: they're small, and they stop false figures and a false "heal
 2. **B1.** Ali picks the projection price; everything in Part B waits on it.
 3. **B2-B4,** then **B5-B7.**
 4. **The page changes in Part C,** then C4.
-5. **B8** when Roselyn and Ali next discuss campaign forecasts.
+5. **B8** when Roselen and Ali next discuss campaign forecasts.
 
 The checklist for changing the projection price, and a single way to handle failed lookups on the governance page, are in [CHECKLIST_AND_ERROR_STRATEGY.md](CHECKLIST_AND_ERROR_STRATEGY.md).
 

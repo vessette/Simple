@@ -1,15 +1,15 @@
 # Apollo enrollment agent: production checks
 
 **For:** Ali or Kes, or anyone with read access to the production database
-**Asked by:** Victoria Spencer-Auber, for Roselyn (Sales, Enrollment & Subscriptions)
+**Asked by:** Victoria Spencer-Auber, for Roselen (Sales, Enrollment & Subscriptions)
 **Background:** `docs/migration/legacy-migration-plan.md`, section "Is `ApolloWeeklyEnrollmentAgent` running in production?"
 
 **Why we're asking:** the code lets this agent approve leads and enroll them into cold outbound every weekday, with no person approving. The repository can't show whether it is actually doing that. These checks can.
 
 **Rules for running them:**
-- **Read only.** Every query is a `SELECT`. Please don't switch anything off while checking. Pausing the agent is Roselyn's decision once the answers are in.
+- **Read only.** Every query is a `SELECT`. Please don't switch anything off while checking. Pausing the agent is Roselen's decision once the answers are in.
 - **Counts only.** No names or emails are needed. Check 8 deliberately returns a number.
-- **The window is the last 30 days.** Change it if Roselyn asks for a different one.
+- **The window is the last 30 days.** Change it if Roselen asks for a different one.
 - The table and column names come from the platform's models at commit `949fe19`. If one doesn't match the live database, note it and skip that check.
 
 
@@ -103,6 +103,6 @@
 | 7 shows the send engine off | Leads are queued, not contacted |
 | 8 is above 0 | Current students or members were enrolled as cold prospects |
 
-**Who decides next:** Roselyn, with Ali, decides whether to pause the agent. That's step 2 of the migration plan's sequence.
+**Who decides next:** Roselen, with Ali, decides whether to pause the agent. That's step 2 of the migration plan's sequence.
 
 **Checked by:** &nbsp;&nbsp;&nbsp;&nbsp; **Date:**

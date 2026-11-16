@@ -2,7 +2,7 @@
   "_note": "Fictional prospect recommendations for tests. No real people; every address is at example.com.",
   "threshold": 50,
   "cap": 20,
-  "approver": "Roselyn",
+  "approver": "Roselen",
   "sequence": "Cold outbound: AI Leadership Accelerator",
   "suppressed": ["blocked@example.com"],
   "in_other_packets": ["held@example.com"],

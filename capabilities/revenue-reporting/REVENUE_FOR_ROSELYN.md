@@ -1,6 +1,6 @@
 # Revenue questions: what Vick answers, and what needs a decision
 
-**For:** Roselyn (accountable manager, Sales, Enrollment & Subscriptions), Ali (approver); Kes for the platform findings.
+**For:** Roselen (accountable manager, Sales, Enrollment & Subscriptions), Ali (approver); Kes for the platform findings.
 **Capability:** `sales.revenue_and_subscription_reporting`
 **Status:** draft. Reporting moves no money, but a made-up revenue figure is the most damaging thing this area can produce. So Vick gives only figures the platform already serves, each with where it came from.
 
@@ -58,7 +58,7 @@ Read from the platform code at commit `109820a`. This is what the code does, not
    - The rosters are at `:550-580`, not `:463-486`.
    - The MRR figures are at `:379-465`, which only partly overlaps the brief's `:305-400`.
 
-   The routes, the controller and the payments-feed citations are right. The brief's note that Roselyn has no admin login is out of date.
+   The routes, the controller and the payments-feed citations are right. The brief's note that Roselen has no admin login is out of date.
 
 9. **What works as the spec says:**
    - Real revenue is never estimated: the old "enrolments × $4,500" figure was removed, and net revenue reports unavailable with its reason (`revenueDashboardService.ts:1-28`).
@@ -79,7 +79,7 @@ Read from the platform code at commit `109820a`. This is what the code does, not
 | 1 | Until PaySimple payments are wired in, what figure should "revenue" mean in reports? | Ali | Net revenue stays unavailable, and collected less refunds is shown under its own name (Vick's default) · treat collected less refunds as revenue, with its caveats |
 | 2 | Rename the feed's `net` so it isn't read as net revenue? | Kes | Rename it · add a label on the page · leave as is |
 | 3 | Should the dashboard and the feed count the same credits? | Kes | Both count only deposits · both count all credits · leave as is |
-| 4 | Do you need figures for a month or a quarter? | Roselyn | Yes, and which ones · not for now |
+| 4 | Do you need figures for a month or a quarter? | Roselen | Yes, and which ones · not for now |
 
 ## Your answers
 

@@ -1,6 +1,6 @@
 # Offer routing: three decisions for you
 
-**For:** Roselyn · **From:** Victoria · **For the weekly check-in**
+**For:** Roselen · **From:** Victoria · **For the weekly check-in**
 The evidence behind this page is in `ROUTING_FOR_ROSELYN.md`, for anyone who wants it.
 
 ## Why now

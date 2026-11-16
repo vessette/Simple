@@ -1,6 +1,6 @@
 # Outbound batches for approval: what Vick does, and what needs a decision
 
-**For:** Roselyn (accountable manager, Sales, Enrollment & Subscriptions), and Ali as the other named approver.
+**For:** Roselen (accountable manager, Sales, Enrollment & Subscriptions), and Ali as the other named approver.
 **Capability:** `sales.outbound_batch_preparation_for_approval`
 **Status:** draft. Nothing here enrolls, sends or approves anything.
 
@@ -38,12 +38,12 @@ Read from the platform code at commit `109820a`. This is what the code allows, n
 
 | # | Question | Who | Options |
 |---|---|---|---|
-| 1 | What fit score should qualify a prospect? | Roselyn | 50, as the old agent used, or her own |
-| 2 | How many prospects per batch, and how often? | Roselyn | 20 a day · 300 a week · another number |
-| 3 | Who approves: Roselyn, Ali, or either? | Roselyn and Ali | One named person per packet |
+| 1 | What fit score should qualify a prospect? | Roselen | 50, as the old agent used, or her own |
+| 2 | How many prospects per batch, and how often? | Roselen | 20 a day · 300 a week · another number |
+| 3 | Who approves: Roselen, Ali, or either? | Roselen and Ali | One named person per packet |
 | 4 | Should approval requests ever expire into approval? | Ali or Kes | For outbound packets: never. Leave the expiry date empty, or change the sweep to expire into "rejected" |
 
-Roselyn also needs an approval screen she can actually use, which is the decision-queue capability. Until then, a packet can only be reviewed at the weekly check-in.
+Roselen also needs an approval screen she can actually use, which is the decision-queue capability. Until then, a packet can only be reviewed at the weekly check-in.
 
 ## Your answers
 
