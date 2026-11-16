@@ -35,6 +35,25 @@ Measured against the platform at `ffc1f09`:
 
 Until then, **email reply recorded in the repo** meets every criterion. Each answer is dated, carries her reason, and nothing moves without her. This is Ali's call; the evidence is above.
 
+### What auto-approval does to accountability, and a better balance
+
+**The problem isn't speed; it's who answers for the decision.**
+- **Nobody is accountable.** The record says the decider was `system:auto_approve_timeout`. If an auto-approved action goes wrong, there's no person who chose it, only a person who didn't get to it in time.
+- **It turns silence into consent.** Roselen's authority becomes "approve, or be overruled by the clock". Being busy has the same effect as saying yes.
+- **It rewards not looking.** If things go through anyway, the queue stops feeling like a responsibility, and the reviews that matter get skipped too.
+- **The audit trail misleads.** "Approved" reads like a judgement was made. For a price, a refund rule or who gets billed, that's a record of a decision nobody took.
+
+**Why it exists:** the timeout was built so held agent actions (an outreach message waiting for review) don't sit forever. That's a fair efficiency concern. The fix is to keep the speed without making time the decider.
+
+**A better approach:**
+1. **Split by risk.** Routine, low-risk, reversible actions can keep a time limit. Anything this brief marks *human decision* (prices, refunds, billing, outreach wording) never does.
+2. **When time runs out, fail safe, not open.** An expired item should become *not done* and *escalated*, never *approved*. A missed outreach message waits; a wrong charge can't be taken back.
+3. **Escalate instead of deciding.** A reminder to Roselen when half the window has gone. At the deadline, it goes to Ali as backup, and the item stays pending, visibly overdue.
+4. **Name a deputy for absences.** If Roselen is away, a named person (Ali) decides. Delegation keeps a person accountable; a timer doesn't.
+5. **Keep the queue small.** Fewer, better-prepared decisions, each answerable in a line, with the most important first. Efficiency comes from good preparation, not from removing the person.
+
+So: speed is kept by reminders, escalation, a deputy and short decisions. Accountability is kept by never letting time make the decision.
+
 ## How a decision works
 
 1. **Vick presents** one proposal: what's proposed, the evidence (a write-up with file and line references), and the options.
