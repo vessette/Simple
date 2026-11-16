@@ -493,7 +493,7 @@ const CAPS = [
   ["app_originated_payment_reconciliation", "enroll", "Reconcile payments the app missed", "Explains why one payment is or is not in scope for the missed-webhook job, citing the amount match, the time window and the customer-id check every time; never says a payment should be linked.", "implemented", 5, [1,1], "done", "capabilities/app-payment-reconcile/"],
   ["payment_webhook_replay_dedup_watch", "enroll", "Watch for duplicate payment notices", "A replay can't grant a second seat or skip a billing period.", "absent", 6, [0,1], "later"],
   ["subscription_checkout_and_plan_activation", "enroll", "Membership checkout and activation", "Answers plan, price, credit and date questions from the price list and the member's record; unknown is never guessed.", "implemented", 4, [1,1], "done", "capabilities/subscription-checkout/"],
-  ["team_license_and_sponsored_seat_administration", "enroll", "Team licenses and sponsored seats", "Employer seat blocks, each redeemed once.", "implemented", 4, [0,1], "later"],
+  ["team_license_and_sponsored_seat_administration", "enroll", "Team licenses and sponsored seats", "Employer seat blocks, each redeemed once.", "implemented", 4, [1,1], "done", "capabilities/team-licenses/"],
   ["refund_and_void_issuance", "money", "Refunds and voids", "Answers refund-ledger and policy questions from the ledger rows and the policy text; states no unapproved terms and never says a refund will happen.", "implemented", 2, [1,1], "done", "capabilities/refund-and-void/"],
   ["subscription_cancellation_and_schedule_suspension", "money", "Cancel subscriptions and stop charges", "Explains a member's subscription, payment schedule and recorded cancellation reason, each from its record; never says a member won't be charged.", "implemented", 2, [1,1], "done", "capabilities/subscription-cancellation/"],
   ["comped_seat_grant_and_revocation", "money", "Grant and remove free seats", "Lists who holds a free seat and since when, each from its subscription record, and says free seats are excluded from revenue; never proposes granting one.", "implemented", 2, [1,1], "done", "capabilities/comped-seat/"],
@@ -626,6 +626,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-16", "Team licenses merged: Vick quotes team prices only from the approved claims registry, and only when every copy agrees. Found that redeeming a seat does not check whether the sponsor has paid, that a used code can be reused after its enrolment is deleted, and that the redemption form reveals which codes are real; a revised specification for the platform owner is in the repository. No sponsor has codes yet, so nothing has been exposed."],
   ["2026-11-16", "Renewal reminder schedule merged: Vick says who is due which reminder and on what date in Central time, with the working, and calls a reminder sent only when the platform's record says so. Whether reminders are switched on in production is still to be confirmed."],
   ["2026-11-16", "Billing watch explainer merged: Vick reports all six billing checks as found, passed or unknown, and explains each finding with the check that produced it. Found the expiring-card check never runs (card expiry is never fetched) and an unreadable payment gateway passes silently; fixes and questions for the platform owner and program lead drafted."],
   ["2026-11-16", "Prospect-question answers merged: Vick answers a rep only from approved material, and checks any answer (including the Sales Hub's own) for an invented price, date or policy. Found the Sales Hub's pinned cohort dates (July 2026) have passed; a holding note for reps and a one-line fix for the platform owner are drafted."],
@@ -676,9 +677,9 @@ const storiesTotal = 7 + CAPS.length + LADDER;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["43/66", "acceptance criteria passed", 43 / 66],
+  ["44/66", "acceptance criteria passed", 44 / 66],
   ["215", "automated tests, all passing", 1],
-  ["59", "pull requests merged", 1],
+  ["60", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 

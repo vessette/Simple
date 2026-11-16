@@ -694,13 +694,26 @@
       "criteria": [
         {
           "text": "Every figure traces to a named endpoint; the forecast is described as a count projection and never as revenue.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/pipeline-stewardship/pipelineExplainer.js",
+        "capabilities/pipeline-stewardship/pipelineExplainer.test.js",
+        "capabilities/pipeline-stewardship/fixtures/responses.json",
+        "capabilities/pipeline-stewardship/PIPELINE_FOR_ROSELEN.md"
+      ],
+      "tests_added": [
+        "capabilities/pipeline-stewardship/pipelineExplainer.test.js: every figure traces to a named endpoint and field",
+        "capabilities/pipeline-stewardship/pipelineExplainer.test.js: the forecast is a count projection: no dollar figure, never called revenue",
+        "capabilities/pipeline-stewardship/pipelineExplainer.test.js: asking for forecast or pipeline revenue is refused, with the reason",
+        "capabilities/pipeline-stewardship/pipelineExplainer.test.js: a lead: its stage, and a temperature with what it is based on",
+        "capabilities/pipeline-stewardship/pipelineExplainer.test.js: a lead with no recorded activity has an unknown temperature, not cold",
+        "capabilities/pipeline-stewardship/pipelineExplainer.test.js: missing or odd values are unavailable with a reason, never zero or guessed",
+        "capabilities/pipeline-stewardship/pipelineExplainer.test.js: read-only and deterministic: inputs untouched, same answer twice"
+      ],
+      "notes": "R2, read-only: Vick explains a lead's stage and what its temperature is based on (interaction outcomes or a manual override, from temperature history), the pipeline stats and the forecast, each figure with its endpoint and field at platform 30091e1. The forecast is reported as projected enrolments only; its dollar fields (count x hardcoded $4,500, opportunityScoringService.ts:18) are refused. No recorded activity gives unknown, not the platform's default cold. Found: blank or unknown stages are counted as new_lead (leadService.ts:704-717); automatic moves only go forward but can re-advance a lead a person moved back; the brief's endpoint paths and source module are wrong. See capabilities/pipeline-stewardship/PIPELINE_FOR_ROSELEN.md.",
+      "updated_at": "2026-11-16T21:08:19.987Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,

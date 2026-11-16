@@ -1,0 +1,21 @@
+{
+  "note": "Made-up endpoint responses in the platform's shapes (adminLeadController.ts, adminOpportunityController.ts, opportunityScoringService.ts:378-412). No real lead.",
+  "lead": { "lead": { "id": 101, "name": "P1", "pipeline_stage": "meeting_scheduled", "lead_temperature": "warm", "temperature_updated_at": "2026-11-10T15:00:00.000Z" } },
+  "history": { "history": [
+    { "previous_temperature": "cool", "new_temperature": "warm", "trigger_type": "interaction_outcome", "trigger_detail": "replied", "created_at": "2026-11-10T15:00:00.000Z" },
+    { "previous_temperature": "cold", "new_temperature": "cool", "trigger_type": "interaction_outcome", "trigger_detail": "opened", "created_at": "2026-11-02T15:00:00.000Z" }
+  ] },
+  "stats": { "stats": { "new_lead": 120, "contacted": 40, "meeting_scheduled": 12, "proposal_sent": 5, "negotiation": 2, "enrolled": 9, "lost": 30 } },
+  "forecast": {
+    "by_level": [
+      { "level": "cold_prospect", "count": 100, "conversion_rate": 0.02, "projected_enrollments": 2, "projected_revenue": 9000 },
+      { "level": "warming", "count": 30, "conversion_rate": 0.08, "projected_enrollments": 2.4, "projected_revenue": 10800 },
+      { "level": "qualified", "count": 10, "conversion_rate": 0.2, "projected_enrollments": 2, "projected_revenue": 9000 },
+      { "level": "hot_opportunity", "count": 4, "conversion_rate": 0.45, "projected_enrollments": 1.8, "projected_revenue": 8100 },
+      { "level": "ready_to_close", "count": 1, "conversion_rate": 0.75, "projected_enrollments": 0.8, "projected_revenue": 3600 }
+    ],
+    "total_projected_enrollments": 9,
+    "total_projected_revenue": 40500,
+    "weighted_pipeline_value": 61875
+  }
+}
