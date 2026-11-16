@@ -88,6 +88,18 @@ The seat row is already locked for the transaction (`:173-180`). Inside that sam
 - **Never log a full code:** last 4 characters only.
 - **Storing codes hashed:** safer, but sponsors need to see their codes to hand them out. **Decision: Kes and Ali.**
 
+### A redeemed code stays used, whatever happens to the enrolment
+
+Today the code's state is partly worked out from the enrolment. If the enrolment is gone, a redeemed seat falls through and is redeemed again by whoever submits it (`sponsorController.ts:204`). The fix is for the seat row to record its own state, permanently:
+
+1. **The seat row is the record.** On redemption, set `status = 'redeemed'`, `redeemed_at`, and a new `redeemed_email` column, in the same transaction as the enrolment. After that, the code's state never depends on the enrolment still existing.
+2. **States only move forward:** `available` → `redeemed`; `available` → `expired`; `redeemed` → `reassigned` (by an admin only, which issues a *new* code). Nothing ever goes back to `available`, and `redeemed_at` is never cleared. Enforce this in the database, not just in code:
+   - a check constraint: if `status` is redeemed or reassigned, then `redeemed_at` is not null;
+   - a trigger that rejects any change from redeemed, reassigned or expired back to available, or any change to `redeemed_at` once it's set.
+3. **No fall-through.** A redeemed seat whose enrolment is missing gets the identical failure response and an alert. A person decides what to do: restore the enrolment, or issue a new code to the right person.
+4. **Protect the link.** The seat's link to its enrolment should be `ON DELETE RESTRICT`, so an enrolment tied to a seat can't be deleted. Withdrawing someone changes their enrolment's status instead. The model doesn't set a delete rule (`SponsorSeat.ts:54-58`), so the live behaviour depends on how the table was created. **Kes:** what does the actual constraint in the database say?
+5. **Every change is logged** in the existing sponsor audit log: who, when, from which state, to which state.
+
 ## 5. Monitoring
 
 Add to the daily billing check (`billingHealthCheck.ts`) as findings:
@@ -112,7 +124,9 @@ Each one fails against today's code and passes after the change, except the last
 8. The 6th failed attempt on one code pauses it.
 9. Issuing codes past `seats_purchased` is refused; two simultaneous issues cannot exceed it together.
 10. Generated codes are 12 base32 characters, unique, and never appear in full in logs.
-11. **Unchanged:** two simultaneous redemptions of one code still produce one enrolment.
+11. A redeemed seat can never go back to `available`, and its `redeemed_at` can't be cleared. The database rejects both, even from a direct update.
+12. Deleting an enrolment tied to a seat is refused.
+13. **Unchanged:** two simultaneous redemptions of one code still produce one enrolment.
 
 ## 7. What doesn't change
 
@@ -131,3 +145,4 @@ The seat-row lock, one enrolment per code, and the input validation all stay as 
 | Per-code pause threshold | Kes |
 | Store codes hashed or readable | Kes and Ali |
 | Is the outcome table in section 1 complete? What does `errorHandler` return? | Kes |
+| What delete rule does the live seat-to-enrolment link have? | Kes |
