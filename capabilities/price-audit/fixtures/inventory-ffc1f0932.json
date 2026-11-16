@@ -1,0 +1,1732 @@
+{
+ "platform_ref": "origin/main",
+ "commit": "ffc1f0932",
+ "note": "Locations, kinds and figures only, from scripts/priceInventory.mjs. No platform code text is stored here (this repository is public). Not-live entries (tests, docs, scripts, comments, spec text) are counted in summary but not listed.",
+ "summary": {
+  "scanned": 869,
+  "live": 241,
+  "not_live": 628,
+  "stale": 23,
+  "assumed_price": 1,
+  "agrees": 136,
+  "reference": 22,
+  "source_of_truth": 18,
+  "mentions_retired": 2,
+  "unclear": 39
+ },
+ "live": [
+  {
+   "location": "backend/src/controllers/salesHubCoryController.ts:28",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "backend/src/routes/admin/productionActivationRoute.ts:177",
+   "kind": "other_or_unclear",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/seeds/seedAliOutreachCampaign.ts:134",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/seeds/seedAllCampaigns.ts:48",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/seeds/seedClassReadinessCampaign.ts:20",
+   "kind": "other_or_unclear",
+   "figures": []
+  },
+  {
+   "location": "backend/src/seeds/seedColdOutboundCampaign.ts:49",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/seeds/seedColdOutboundCampaign.ts:156",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/seeds/seedColdOutboundPhases.ts:114",
+   "kind": "other_or_unclear",
+   "figures": [
+    5600,
+    291200,
+    873600
+   ]
+  },
+  {
+   "location": "backend/src/seeds/seedColdOutboundPhases.ts:166",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/seeds/seedColdOutboundPhases.ts:191",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/seeds/seedColdOutboundPhases.ts:209",
+   "kind": "other_or_unclear",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/seeds/seedColdOutboundPhases.ts:273",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/seeds/seedDefaultSequence.ts:21",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/seeds/seedDefaultSequence.ts:93",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/seeds/seedDefaultSequence.ts:125",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/seeds/seedDefaultSequence.ts:160",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/seeds/seedKbData.ts:45",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/seeds/seedKbData.ts:46",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/seeds/seedKbData.ts:221",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/seeds/seedKbData.ts:235",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/seeds/seedKbData.ts:249",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/seeds/seedKbData.ts:452",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/seeds/seedOfferCampaigns.ts:410",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/services/adminOs/metrics/marketingMetrics.ts:171",
+   "kind": "mentions_retired",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/services/admissionsKnowledgeGate.ts:111",
+   "kind": "mentions_retired",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/services/admissionsKnowledgeSeed.ts:197",
+   "kind": "other_or_unclear",
+   "figures": [
+    250,
+    250,
+    1000,
+    2500,
+    5000
+   ]
+  },
+  {
+   "location": "backend/src/services/admissionsPricing.ts:23",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/services/admissionsPricing.ts:27",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/services/admissionsPricing.ts:28",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/services/admissionsPricing.ts:29",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/services/billing/billingHealthCheck.ts:303",
+   "kind": "other_or_unclear",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "backend/src/services/enrollmentTarget.ts:52",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/services/enrollmentTarget.ts:225",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/services/enrollmentTarget.ts:226",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/services/inbox/coraKnowledgeBase.ts:31",
+   "kind": "stale",
+   "figures": [
+    149,
+    199,
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/services/inbox/coraKnowledgeBase.ts:32",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "backend/src/services/inbox/coraKnowledgeBase.ts:33",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "backend/src/services/inbox/coraKnowledgeBase.ts:34",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/services/inbox/coraKnowledgeBase.ts:183",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "backend/src/services/inbox/coraKnowledgeBase.ts:184",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "backend/src/services/inbox/coraKnowledgeBase.ts:185",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/services/inbox/coraKnowledgeBase.ts:186",
+   "kind": "stale",
+   "figures": [
+    149,
+    199,
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/services/inbox/coraKnowledgeBase.ts:275",
+   "kind": "stale",
+   "figures": [
+    149,
+    199,
+    4500,
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/services/inbox/coraKnowledgeBaseQA.ts:17",
+   "kind": "stale",
+   "figures": [
+    149,
+    199,
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/services/inbox/coraKnowledgeBaseQA.ts:21",
+   "kind": "stale",
+   "figures": [
+    149,
+    199,
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/services/internship/internshipCallPrompt.ts:120",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "backend/src/services/internship/internshipOnboarding.ts:87",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "backend/src/services/kbService.ts:23",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/services/kbService.ts:24",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/services/membershipPrice.ts:6",
+   "kind": "source_of_truth",
+   "figures": [
+    149,
+    1788
+   ]
+  },
+  {
+   "location": "backend/src/services/membershipPrice.ts:10",
+   "kind": "source_of_truth",
+   "figures": [
+    1788
+   ]
+  },
+  {
+   "location": "backend/src/services/membershipPrice.ts:13",
+   "kind": "source_of_truth",
+   "figures": [
+    1788
+   ]
+  },
+  {
+   "location": "backend/src/services/membershipPrice.ts:20",
+   "kind": "source_of_truth",
+   "figures": [
+    1788,
+    1700
+   ]
+  },
+  {
+   "location": "backend/src/services/membershipPrice.ts:55",
+   "kind": "source_of_truth",
+   "figures": [
+    1788
+   ]
+  },
+  {
+   "location": "backend/src/services/membershipPrice.ts:58",
+   "kind": "source_of_truth",
+   "figures": []
+  },
+  {
+   "location": "backend/src/services/membershipPrice.ts:61",
+   "kind": "source_of_truth",
+   "figures": []
+  },
+  {
+   "location": "backend/src/services/membershipPrice.ts:69",
+   "kind": "source_of_truth",
+   "figures": []
+  },
+  {
+   "location": "backend/src/services/opportunityScoringService.ts:18",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/services/renewalExposure.ts:40",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/services/renewalExposure.ts:97",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/services/renewalExposure.ts:98",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/services/reporting/coryStrategicSimulationEngine.ts:105",
+   "kind": "assumed_price",
+   "figures": [
+    2500
+   ]
+  },
+  {
+   "location": "backend/src/services/settingsService.ts:9",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/services/strategic-intelligence/scenarioSimulationEngine.ts:25",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "backend/src/services/subscriptionService.ts:79",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "backend/src/services/subscriptionService.ts:80",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "frontend/public/knowledge/assets/kb-app.js:25",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/assets/kb-app.js:143",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/data/curriculum-kb.js:5",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/data/curriculum-kb.js:104",
+   "kind": "agrees",
+   "figures": [
+    149,
+    20
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/data/product-kb.js:39",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure-print-43s9yp-print-print-1th0u9g.html:241",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure-print-43s9yp-print-print-1th0u9g.html:246",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure-print-43s9yp-print-print-1th0u9g.html:253",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure-print-43s9yp-print-print-1th0u9g.html:298",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure-print-43s9yp-print-print-1th0u9g.html:302",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure-print-43s9yp-print.html:202",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure-print-43s9yp-print.html:207",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure-print-43s9yp-print.html:214",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure-print-43s9yp-print.html:259",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure-print-43s9yp-print.html:263",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure-print-43s9yp.html:193",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure-print-43s9yp.html:198",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure-print-43s9yp.html:205",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure-print-43s9yp.html:250",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure-print-43s9yp.html:254",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure.html:234",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure.html:239",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure.html:248",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure.html:293",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/AI-Architect-Accelerator-Brochure.html:297",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/_ds_bundle.js:1974",
+   "kind": "other_or_unclear",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/_ds_bundle.js:3335",
+   "kind": "other_or_unclear",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/guidelines/showcase.jsx:166",
+   "kind": "other_or_unclear",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/index.html:283",
+   "kind": "other_or_unclear",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/templates/comparison-sheet/ComparisonSheet.dc.html:37",
+   "kind": "agrees",
+   "figures": [
+    149,
+    10
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/templates/email-newsletter/EmailNewsletter.dc.html:27",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/templates/one-pager/OnePager.dc.html:33",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/templates/one-pager/OnePager.dc.html:82",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/templates/one-pager/OnePager.dc.html:86",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/templates/proposal/Proposal.dc.html:42",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/design/ui_kits/marketing-website/program-enroll.jsx:110",
+   "kind": "other_or_unclear",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:14",
+   "kind": "other_or_unclear",
+   "figures": []
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:336",
+   "kind": "agrees",
+   "figures": [
+    149,
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:337",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:426",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:427",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:462",
+   "kind": "other_or_unclear",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:463",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:464",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:482",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:483",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:500",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:592",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:609",
+   "kind": "other_or_unclear",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:610",
+   "kind": "agrees",
+   "figures": [
+    149,
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:646",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:682",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:1171",
+   "kind": "agrees",
+   "figures": [
+    149,
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:1207",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:1278",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:1279",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:1423",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:1424",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:1478",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:1603",
+   "kind": "agrees",
+   "figures": [
+    149,
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:1604",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:1640",
+   "kind": "agrees",
+   "figures": [
+    199,
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:2550",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:3936",
+   "kind": "agrees",
+   "figures": [
+    149,
+    20
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/kb.json:4031",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/docs/brand-visual-style.html:291",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/docs/campaign-brief.html:136",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/docs/faq-objections.html:214",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/docs/faq-objections.html:215",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/docs/faq-objections.html:244",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199,
+    20,
+    10
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/docs/launch-checklist.html:66",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199,
+    20,
+    10
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/docs/messaging-positioning.html:358",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/docs/messaging-positioning.html:363",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/docs/program-fact-sheet.html:70",
+   "kind": "other_or_unclear",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/docs/program-fact-sheet.html:191",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/docs/program-fact-sheet.html:196",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/docs/program-fact-sheet.html:332",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/docs/program-fact-sheet.html:337",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/hub-data.js:18",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/hub-data.js:202",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/index.html:69",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199,
+    20,
+    10
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/marketing/index.html:84",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/README.md:16",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/app.js:106",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/app.js:147",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/app.js:203",
+   "kind": "other_or_unclear",
+   "figures": []
+  },
+  {
+   "location": "frontend/public/knowledge/sales/app.js:206",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/app.js:209",
+   "kind": "agrees",
+   "figures": [
+    199,
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.js:1",
+   "kind": "other_or_unclear",
+   "figures": []
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:88",
+   "kind": "agrees",
+   "figures": [
+    149,
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:89",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:148",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:149",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:172",
+   "kind": "other_or_unclear",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:173",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:174",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:186",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:187",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:198",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:260",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:271",
+   "kind": "other_or_unclear",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:272",
+   "kind": "agrees",
+   "figures": [
+    149,
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:296",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:320",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:647",
+   "kind": "agrees",
+   "figures": [
+    149,
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:671",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:718",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:719",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:802",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:803",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:839",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:922",
+   "kind": "agrees",
+   "figures": [
+    149,
+    149
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:923",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/public/knowledge/sales/kb-data.json:947",
+   "kind": "agrees",
+   "figures": [
+    199,
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/MembershipLanding.tsx:22",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/MembershipLanding.tsx:662",
+   "kind": "other_or_unclear",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/MembershipLanding.tsx:669",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/OpenHouseModal.tsx:55",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/personaContent.ts:40",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/personaContent.ts:62",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/personaContent.ts:68",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/personaContent.ts:99",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/personaContent.ts:132",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/personaContent.ts:162",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/personaContent.ts:175",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/personaContent.ts:181",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/personaContent.ts:210",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/personaContent.ts:242",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/personaContent.ts:272",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/personaContent.ts:285",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/personaContent.ts:291",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/personaContent.ts:329",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/personaContent.ts:379",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/components/membership/personaContent.ts:401",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/config/claimsRegistry.ts:82",
+   "kind": "source_of_truth",
+   "figures": [
+    1788
+   ]
+  },
+  {
+   "location": "frontend/src/config/claimsRegistry.ts:83",
+   "kind": "source_of_truth",
+   "figures": [
+    149,
+    199,
+    1200,
+    950
+   ]
+  },
+  {
+   "location": "frontend/src/config/claimsRegistry.ts:457",
+   "kind": "source_of_truth",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/config/claimsRegistry.ts:470",
+   "kind": "source_of_truth",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/src/config/claimsRegistry.ts:476",
+   "kind": "source_of_truth",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/src/config/claimsRegistry.ts:487",
+   "kind": "source_of_truth",
+   "figures": [
+    1200
+   ]
+  },
+  {
+   "location": "frontend/src/config/claimsRegistry.ts:498",
+   "kind": "source_of_truth",
+   "figures": [
+    950
+   ]
+  },
+  {
+   "location": "frontend/src/config/claimsRegistry.ts:520",
+   "kind": "source_of_truth",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "frontend/src/config/claimsRegistry.ts:531",
+   "kind": "source_of_truth",
+   "figures": [
+    1788
+   ]
+  },
+  {
+   "location": "frontend/src/config/claimsRegistry.ts:536",
+   "kind": "source_of_truth",
+   "figures": [
+    149,
+    199,
+    1200,
+    950
+   ]
+  },
+  {
+   "location": "frontend/src/config/demoScenarios.json:1",
+   "kind": "other_or_unclear",
+   "figures": []
+  },
+  {
+   "location": "frontend/src/pages/AIArchitectLandingPage.tsx:222",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/src/pages/AIPilotLandingPage.tsx:109",
+   "kind": "other_or_unclear",
+   "figures": [
+    2500
+   ]
+  },
+  {
+   "location": "frontend/src/pages/AIPilotLandingPage.tsx:128",
+   "kind": "other_or_unclear",
+   "figures": [
+    2500
+   ]
+  },
+  {
+   "location": "frontend/src/pages/AIPilotLandingPage.tsx:188",
+   "kind": "other_or_unclear",
+   "figures": [
+    2500
+   ]
+  },
+  {
+   "location": "frontend/src/pages/AIPilotVerticalPage.tsx:30",
+   "kind": "other_or_unclear",
+   "figures": [
+    2500
+   ]
+  },
+  {
+   "location": "frontend/src/pages/AIPilotVerticalPage.tsx:50",
+   "kind": "other_or_unclear",
+   "figures": [
+    2500
+   ]
+  },
+  {
+   "location": "frontend/src/pages/AIPilotVerticalPage.tsx:70",
+   "kind": "other_or_unclear",
+   "figures": [
+    2500
+   ]
+  },
+  {
+   "location": "frontend/src/pages/AIPilotVerticalPage.tsx:161",
+   "kind": "other_or_unclear",
+   "figures": [
+    2500
+   ]
+  },
+  {
+   "location": "frontend/src/pages/AIPilotVerticalPage.tsx:214",
+   "kind": "other_or_unclear",
+   "figures": [
+    2500
+   ]
+  },
+  {
+   "location": "frontend/src/pages/AIXceleratorLandingPage.tsx:47",
+   "kind": "other_or_unclear",
+   "figures": [
+    2500,
+    2500,
+    1500,
+    2000
+   ]
+  },
+  {
+   "location": "frontend/src/pages/AIXceleratorLandingPage.tsx:107",
+   "kind": "other_or_unclear",
+   "figures": [
+    1750,
+    2500
+   ]
+  },
+  {
+   "location": "frontend/src/pages/AIXceleratorLandingPage.tsx:229",
+   "kind": "other_or_unclear",
+   "figures": [
+    2500
+   ]
+  },
+  {
+   "location": "frontend/src/pages/AlumniChampionPage.tsx:31",
+   "kind": "other_or_unclear",
+   "figures": [
+    2500
+   ]
+  },
+  {
+   "location": "frontend/src/pages/AlumniChampionPage.tsx:239",
+   "kind": "other_or_unclear",
+   "figures": [
+    2500
+   ]
+  },
+  {
+   "location": "frontend/src/pages/PricingPage.tsx:120",
+   "kind": "other_or_unclear",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/pages/PricingPage.tsx:122",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/src/pages/PricingPage.tsx:152",
+   "kind": "other_or_unclear",
+   "figures": [
+    950
+   ]
+  },
+  {
+   "location": "frontend/src/pages/PricingPage.tsx:154",
+   "kind": "other_or_unclear",
+   "figures": [
+    1200,
+    950
+   ]
+  },
+  {
+   "location": "frontend/src/pages/PricingPage.tsx:189",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/src/pages/PricingPage.tsx:202",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199,
+    950
+   ]
+  },
+  {
+   "location": "frontend/src/pages/SponsorshipPage.tsx:176",
+   "kind": "other_or_unclear",
+   "figures": [
+    1200
+   ]
+  },
+  {
+   "location": "frontend/src/pages/SponsorshipPage.tsx:183",
+   "kind": "other_or_unclear",
+   "figures": [
+    950
+   ]
+  },
+  {
+   "location": "frontend/src/pages/admin/AdminSettingsPage.tsx:122",
+   "kind": "stale",
+   "figures": [
+    4500
+   ]
+  },
+  {
+   "location": "frontend/src/pages/portal/internship/InternshipOnboarding.tsx:117",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/src/pages/portal/internship/InternshipPage.tsx:491",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/pages/portal/internship/InternshipPage.tsx:492",
+   "kind": "agrees",
+   "figures": [
+    199
+   ]
+  },
+  {
+   "location": "frontend/src/pages/portal/today/InternshipOpportunityCard.tsx:223",
+   "kind": "agrees",
+   "figures": [
+    149,
+    199
+   ]
+  },
+  {
+   "location": "frontend/src/pages/publicV2/pricingV2.css:171",
+   "kind": "agrees",
+   "figures": [
+    149
+   ]
+  },
+  {
+   "location": "frontend/src/utils/kbMergeTags.ts:40",
+   "kind": "reference",
+   "figures": []
+  },
+  {
+   "location": "frontend/src/utils/kbMergeTags.ts:41",
+   "kind": "reference",
+   "figures": []
+  }
+ ]
+}

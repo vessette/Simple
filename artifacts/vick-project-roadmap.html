@@ -476,7 +476,7 @@ const THEMES = [
 const CAPS = [
   ["icp_prospect_discovery_and_fit_scoring", "leads", "Find prospects and score program fit", "Reviewable queue of prospects with a fit score and ROI estimate.", "implemented", 5, [1,1], "done", "capabilities/icp-fit-scoring/"],
   ["offer_pipeline_routing", "leads", "Explain which offer a lead belongs in", "Cites the rule that placed it, or says it can't place the lead.", "implemented", 6, [1,1], "done", "capabilities/offer-pipeline-routing/"],
-  ["pipeline_stage_and_lead_temperature_stewardship", "leads", "Keep lead stage and temperature current", "Every lead at its real stage, warm or cold, with history.", "implemented", 6, [0,1], "next"],
+  ["pipeline_stage_and_lead_temperature_stewardship", "leads", "Keep lead stage and temperature current", "Every lead at its real stage, warm or cold, with history.", "implemented", 6, [1,1], "done", "capabilities/pipeline-stewardship/"],
   ["strategy_call_no_show_detection_and_recovery", "leads", "Catch missed strategy calls", "Explains which calls count as missed, naming the time, threshold and status.", "implemented", 4, [1,1], "done", "capabilities/strategy-call-no-show/"],
   ["abandoned_checkout_identification", "leads", "Find people who stopped at checkout", "Kept apart from free sign-ups and former members.", "implemented", 6, [1,1], "done", "capabilities/abandoned-checkout/"],
   ["seat_capacity_and_cohort_fill_forecast", "leads", "Forecast seats and class fill", "So a seat-scarcity claim to a prospect is true.", "absent", 6, [0,1], "later"],
@@ -627,6 +627,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-16", "Pipeline explainer merged: Vick explains where a lead sits, what its temperature rests on, and the forecast as a count of expected enrolments, refusing the forecast's $4,500 dollar figures. A lead with no activity is reported as unknown, not cold."],
   ["2026-11-16", "Platform owner reviewed every open fix: all are changes to the live platform, so each needs the program lead's approval and a named owner, and none is approved for build yet. Nine action points are now with the program lead. Two citation items (correcting the two repeated code references in the sales specs, and a second, independent check of the 50 sampled references) stay with this project."],
   ["2026-11-16", "Team licenses merged: Vick quotes team prices only from the approved claims registry, and only when every copy agrees. Found that redeeming a seat does not check whether the sponsor has paid, that a used code can be reused after its enrolment is deleted, and that the redemption form reveals which codes are real; a revised specification for the platform owner is in the repository. No sponsor has codes yet, so nothing has been exposed."],
   ["2026-11-16", "Renewal reminder schedule merged: Vick says who is due which reminder and on what date in Central time, with the working, and calls a reminder sent only when the platform's record says so. Whether reminders are switched on in production is still to be confirmed."],
@@ -679,9 +680,9 @@ const storiesTotal = 7 + CAPS.length + LADDER;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["44/66", "acceptance criteria passed", 44 / 66],
+  ["45/66", "acceptance criteria passed", 45 / 66],
   ["215", "automated tests, all passing", 1],
-  ["60", "pull requests merged", 1],
+  ["61", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 

@@ -735,13 +735,27 @@
       "criteria": [
         {
           "text": "The inventory names every known location including the two stale 4500 constants; a positive control confirms a fabricated location returns no match.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/price-audit/priceInventory.js",
+        "capabilities/price-audit/priceInventory.test.js",
+        "capabilities/price-audit/fixtures/inventory-ffc1f0932.json",
+        "capabilities/price-audit/PRICE_INVENTORY_FOR_ROSELEN.md",
+        "scripts/priceInventory.mjs"
+      ],
+      "tests_added": [
+        "capabilities/price-audit/priceInventory.test.js: the inventory names the two stale $4,500 constants, live",
+        "capabilities/price-audit/priceInventory.test.js: every location the brief names is in the inventory, with its status today",
+        "capabilities/price-audit/priceInventory.test.js: positive control: a fabricated location returns no match, and a planted constant is caught",
+        "capabilities/price-audit/priceInventory.test.js: classification of each kind of line",
+        "capabilities/price-audit/priceInventory.test.js: the live-versus-archive rule",
+        "capabilities/price-audit/priceInventory.test.js: the recorded scan is internally consistent",
+        "capabilities/price-audit/priceInventory.test.js: malformed input is refused; scanning is deterministic"
+      ],
+      "notes": "R0: a read-only scan (scripts/priceInventory.mjs, git grep on the platform at ffc1f09) and classifier list every location that states or derives a price, with a proposed live-versus-archive rule written down for review. 869 lines, 241 live: 23 stale $4,500 (incl. the two private constants opportunityScoringService.ts:18 and scenarioSimulationEngine.ts:25, the settings default, the Cora pay-in-full text, seeded outreach), 1 assumed ($2,500), 136 agree, 22 reference, 39 for a person to look at. The two constants the brief named (paysimpleService, revenueDashboardService) are already removed. Positive control: a fabricated location returns no match; a planted constant is caught. The rule is proposed, not yet reviewed. See capabilities/price-audit/PRICE_INVENTORY_FOR_ROSELEN.md.",
+      "updated_at": "2026-11-16T21:50:01.550Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
