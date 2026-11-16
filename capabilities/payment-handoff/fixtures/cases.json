@@ -1,0 +1,38 @@
+{
+  "note": "Made-up subscriptions, enrolments and gateway responses in the platform's shapes. Customer and account ids are invented (9xxxx); no real person.",
+  "cases": {
+    "hosted_page_minted": {
+      "subscription": { "id": "s1", "paysimple_customer_id": "90001", "paysimple_payment_id": "70001", "paysimple_schedule_id": "S1" },
+      "enrollment": { "id": "e1", "email": "p1@example.com", "paysimple_customer_id": "90001" },
+      "payment": { "Id": 70001, "CustomerId": 90002, "AccountId": 80002, "Status": "Settled" },
+      "customers": { "90001": { "Id": 90001, "Email": "p1@example.com" }, "90002": { "Id": 90002, "Email": "P1@example.com" } },
+      "sharedWith": ["e1"]
+    },
+    "same_customer": {
+      "subscription": { "id": "s2", "paysimple_customer_id": "90010", "paysimple_payment_id": "70010", "paysimple_schedule_id": null },
+      "enrollment": { "id": "e2", "email": "p2@example.com", "paysimple_customer_id": "90010" },
+      "payment": { "Id": 70010, "CustomerId": 90010, "AccountId": 80010 },
+      "customers": { "90010": { "Id": 90010, "Email": "p2@example.com" } }
+    },
+    "poisoned_cache": {
+      "subscription": { "id": "s3", "paysimple_customer_id": "90099", "paysimple_payment_id": "70020", "paysimple_schedule_id": null },
+      "enrollment": { "id": "e3", "email": "p3@example.com", "paysimple_customer_id": "90099" },
+      "payment": { "Id": 70020, "CustomerId": 90021, "AccountId": 80021 },
+      "customers": { "90099": { "Id": 90099, "Email": "stranger@example.com" }, "90021": { "Id": 90021, "Email": "p3@example.com" } },
+      "sharedWith": ["e3", "e7", "e8"]
+    },
+    "gateway_unread": {
+      "subscription": { "id": "s4", "paysimple_customer_id": "90030", "paysimple_payment_id": "70030", "paysimple_schedule_id": "S4" },
+      "enrollment": { "id": "e4", "email": "p4@example.com", "paysimple_customer_id": "90030" },
+      "payment": null,
+      "customers": {}
+    },
+    "excluded_no_payment": {
+      "subscription": { "id": "s5", "paysimple_customer_id": "90040", "paysimple_payment_id": null, "paysimple_schedule_id": "S5" },
+      "enrollment": { "id": "e5", "email": "ach1@example.com", "paysimple_customer_id": "90040" },
+      "payment": null,
+      "customers": { "90040": { "Id": 90040, "Email": "ach1@example.com" } },
+      "exclusions": ["ach1@example.com"]
+    }
+  }
+}

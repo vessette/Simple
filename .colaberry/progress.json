@@ -617,13 +617,26 @@
       "criteria": [
         {
           "text": "Every claim traces to a gateway read or a stored row; an unverifiable id is reported as unverified rather than as matching.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/payment-handoff/handoffExplainer.js",
+        "capabilities/payment-handoff/handoffExplainer.test.js",
+        "capabilities/payment-handoff/fixtures/cases.json",
+        "capabilities/payment-handoff/HANDOFF_FOR_ROSELEN.md"
+      ],
+      "tests_added": [
+        "capabilities/payment-handoff/handoffExplainer.test.js: every claim traces to a gateway read or a stored row",
+        "capabilities/payment-handoff/handoffExplainer.test.js: an unverifiable id is unverified, never matching",
+        "capabilities/payment-handoff/handoffExplainer.test.js: the hosted page minted its own customer: stored and charged differ, and the account resolves from the first payment",
+        "capabilities/payment-handoff/handoffExplainer.test.js: a stored id pointing at someone else, and shared by other enrolments, is flagged, not reconciled",
+        "capabilities/payment-handoff/handoffExplainer.test.js: an excluded member is reported as excluded, not broken",
+        "capabilities/payment-handoff/handoffExplainer.test.js: a clean handoff: same customer, belongs to the payer, no findings",
+        "capabilities/payment-handoff/handoffExplainer.test.js: malformed input is refused; nothing is modified"
+      ],
+      "notes": "R2, read-only: for a named subscription Vick states the customer id stored at checkout, the one the charge landed on (GET /v4/payment/{id}.CustomerId), whether the billing account resolves (AccountId), and whether each id belongs to the payer (GET /v4/customer/{id}.Email vs the enrolment email, fail closed), each claim naming its stored row field or gateway read (platform ffc1f09). Flags ids belonging to someone else, ids shared across enrolments (exclude, do not reconcile), unresolved schedule accounts; excluded members reported as excluded. Unread or emailless records are unverified, never matching. Open: no backfill audit of historical subscriptions exists. See capabilities/payment-handoff/HANDOFF_FOR_ROSELEN.md.",
+      "updated_at": "2026-11-16T22:13:19.034Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
