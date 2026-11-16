@@ -913,13 +913,26 @@
       "criteria": [
         {
           "text": "Every due date is reproducible from current_period_end and the lead-day constants; the agent never claims a reminder was sent without the idempotency record.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/renewal-reminders/reminderSchedule.js",
+        "capabilities/renewal-reminders/reminderSchedule.test.js",
+        "capabilities/renewal-reminders/fixtures/book.json",
+        "capabilities/renewal-reminders/REMINDERS_FOR_ROSELEN.md"
+      ],
+      "tests_added": [
+        "capabilities/renewal-reminders/reminderSchedule.test.js: every reminder date is the period end in Central plus or minus its constant",
+        "capabilities/renewal-reminders/reminderSchedule.test.js: dates are Central calendar days, not UTC: an evening-UTC end is the day before in Central",
+        "capabilities/renewal-reminders/reminderSchedule.test.js: who is due today, by the platform rules, with each date reproducible",
+        "capabilities/renewal-reminders/reminderSchedule.test.js: sent only with a ledger row marked sent; claimed is not sent; no ledger is unknown",
+        "capabilities/renewal-reminders/reminderSchedule.test.js: with the switch off, nothing is said to send",
+        "capabilities/renewal-reminders/reminderSchedule.test.js: the window rules match the platform: final wins inside a day, lapse follow-ups only on days 1 and 7",
+        "capabilities/renewal-reminders/reminderSchedule.test.js: malformed input is refused; nothing is modified"
+      ],
+      "notes": "R2, read-only: for each subscription Vick gives the four reminder dates in Central (period end in Central plus or minus ADVANCE_LEAD_DAYS, FINAL_LEAD_DAYS, LAPSE_FOLLOWUP_DAYS) with the working, who is due today by the platform rules (0f9ba1e), and whether each was sent: sent only for a ledger row with status sent and sent_at; claimed is unconfirmed; no ledger read is unknown. Sends nothing. Open: whether RENEWAL_REMINDERS_ENABLED is on in production; stuck claimed rows block a reminder and nothing reports them. See capabilities/renewal-reminders/REMINDERS_FOR_ROSELEN.md.",
+      "updated_at": "2026-11-16T20:29:35.690Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
