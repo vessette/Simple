@@ -497,7 +497,7 @@ const CAPS = [
   ["refund_and_void_issuance", "money", "Refunds and voids", "Answers refund-ledger and policy questions from the ledger rows and the policy text; states no unapproved terms and never says a refund will happen.", "implemented", 2, [1,1], "done", "capabilities/refund-and-void/"],
   ["subscription_cancellation_and_schedule_suspension", "money", "Cancel subscriptions and stop charges", "Explains a member's subscription, payment schedule and recorded cancellation reason, each from its record; never says a member won't be charged.", "implemented", 2, [1,1], "done", "capabilities/subscription-cancellation/"],
   ["comped_seat_grant_and_revocation", "money", "Grant and remove free seats", "Lists who holds a free seat and since when, each from its subscription record, and says free seats are excluded from revenue; never proposes granting one.", "implemented", 2, [1,1], "done", "capabilities/comped-seat/"],
-  ["billing_health_watch", "money", "Billing health watch", "Duplicates, lapses and expiring cards, reported daily.", "implemented", 6, [0,1], "later"],
+  ["billing_health_watch", "money", "Billing health watch", "Duplicates, lapses and expiring cards, reported daily.", "implemented", 6, [1,1], "done", "capabilities/billing-health/"],
   ["renewal_reminder_lifecycle", "renew", "Renewal reminders and autopay notice", "Once per period and per reminder kind.", "implemented", 4, [0,1], "later"],
   ["renewal_and_revenue_follow_through_worklist", "renew", "Daily renewals and revenue worklist", "Renewals due, past due, lapsed and expiring, in order.", "partial", 5, [0,1], "later"],
   ["subscription_churn_and_renewal_risk_analysis", "renew", "Churn and renewal-risk analysis", "Members most likely to lapse, with the reason.", "absent", 5, [0,1], "later"],
@@ -625,6 +625,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-16", "Billing watch explainer merged: Vick reports all six billing checks as found, passed or unknown, and explains each finding with the check that produced it. Found the expiring-card check never runs (card expiry is never fetched) and an unreadable payment gateway passes silently; fixes and questions for the platform owner and program lead drafted."],
   ["2026-11-16", "Prospect-question answers merged: Vick answers a rep only from approved material, and checks any answer (including the Sales Hub's own) for an invented price, date or policy. Found the Sales Hub's pinned cohort dates (July 2026) have passed; a holding note for reps and a one-line fix for the platform owner are drafted."],
   ["2026-11-16", "Abandoned-checkout explainer merged: Vick says why a person is or is not an abandoned checkout, naming their payment status and latest subscription status, and keeps paid former members and free Explorer sign-ups off the call list."],
   ["2026-11-16", "Revenue definition guard merged: Vick says whether a revenue figure follows the rule (only money collected through the app's own checkout counts), citing the rule and the code line. It found two figures that break it, the Opportunities page ($4,500) and the Cory simulation ($2,500), and that the two problems the plan listed are already fixed. Proposed adding refunds and time periods to the rules; questions for the sales manager and program lead drafted."],
@@ -673,9 +674,9 @@ const storiesTotal = 7 + CAPS.length + LADDER;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["41/66", "acceptance criteria passed", 41 / 66],
+  ["42/66", "acceptance criteria passed", 42 / 66],
   ["215", "automated tests, all passing", 1],
-  ["55", "pull requests merged", 1],
+  ["57", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 
