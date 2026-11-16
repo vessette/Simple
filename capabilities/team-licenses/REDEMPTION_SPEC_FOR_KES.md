@@ -56,6 +56,24 @@ What's **not checked** at all: whether the sponsor has paid (`billing_status`, `
 | Per code | After 5 failed attempts on one code, pause it and notify the sponsor's contact (**Decision: Kes**, threshold) | The same identical failure response |
 | Overall | Alert when failures across all codes spike (for example 10× the daily norm) | Nothing |
 
+### 3b2. What each person sees under a payment rule
+
+The rule is **Decision: Ali**. Whatever he picks, each person should see:
+
+| Sponsor billing state | Redemption (suggested) | Employee sees | Sponsor dashboard shows | Sales owner |
+|---|---|---|---|---|
+| paid | Allowed | Success | Seats used / available | Nothing |
+| invoiced (within payment terms) | Allowed, flagged as unpaid | Success | Seats used, plus "invoice outstanding" | Told when the terms lapse |
+| pending (no invoice yet) | Refused | The neutral "couldn't activate that code" message. **Never** "your employer hasn't paid": an employee shouldn't learn their employer's finances. | "Codes become active once the invoice is paid" | Notified of each refused attempt |
+| cancelled | Refused; unused codes expired | The same neutral message | "Sponsorship cancelled" | Notified |
+
+Open for Ali alongside it:
+- How long are the payment terms?
+- What happens to people who already redeemed if an invoice goes past due: keep access, pause it, or a person decides?
+- When a sponsor cancels, what happens to people already enrolled?
+
+The employee did nothing wrong in any of these cases. So a refusal always comes with a path forward (the person who sent the code is told), and the employee never sees an error that blames them.
+
 ### 3c. Checks inside the existing locked transaction
 
 The seat row is already locked for the transaction (`:173-180`). Inside that same transaction, in this order:
@@ -115,10 +133,12 @@ Add to the daily billing check (`billingHealthCheck.ts`) as findings:
 
 Each one fails against today's code and passes after the change, except the last.
 
+**Write test 4 first.** It reproduces the reuse gap end to end: *a seat is redeemed; its enrolment is deleted (which clears the link, `models/index.ts:1266`); the same code is then submitted with a **different** email; no enrolment may be created.* Today it fails, because a new paid enrolment is created. Writing it before any fix proves the bug, defines what "fixed" means, and keeps it from coming back. I can draft it for the platform's test suite if that helps.
+
 1. An unknown code, an expired code and a reassigned code return **byte-identical** responses (status, body, headers).
 2. A redeemed code submitted with a **different** email returns that same response and **no** ids.
 3. A redeemed code with the **same** email returns 200 and no ids, and creates nothing.
-4. A seat whose enrolment is missing is **not** re-redeemed; it returns the identical failure and raises an alert.
+4. **(Write first.)** A redeemed seat whose enrolment has been deleted is **not** re-redeemed when the code is submitted again with a different email; it returns the identical failure and raises an alert.
 5. A sponsor in each refused billing state cannot redeem; one in each allowed state can.
 6. Redemption is refused once redeemed seats equal `seats_purchased`.
 7. The 6th attempt from one address within 15 minutes returns 429.
