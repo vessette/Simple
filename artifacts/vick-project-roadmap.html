@@ -478,7 +478,7 @@ const CAPS = [
   ["offer_pipeline_routing", "leads", "Explain which offer a lead belongs in", "Cites the rule that placed it, or says it can't place the lead.", "implemented", 6, [1,1], "done", "capabilities/offer-pipeline-routing/"],
   ["pipeline_stage_and_lead_temperature_stewardship", "leads", "Keep lead stage and temperature current", "Every lead at its real stage, warm or cold, with history.", "implemented", 6, [0,1], "next"],
   ["strategy_call_no_show_detection_and_recovery", "leads", "Catch missed strategy calls", "Explains which calls count as missed, naming the time, threshold and status.", "implemented", 4, [1,1], "done", "capabilities/strategy-call-no-show/"],
-  ["abandoned_checkout_identification", "leads", "Find people who stopped at checkout", "Kept apart from free sign-ups and former members.", "implemented", 6, [0,1], "next"],
+  ["abandoned_checkout_identification", "leads", "Find people who stopped at checkout", "Kept apart from free sign-ups and former members.", "implemented", 6, [1,1], "done", "capabilities/abandoned-checkout/"],
   ["seat_capacity_and_cohort_fill_forecast", "leads", "Forecast seats and class fill", "So a seat-scarcity claim to a prospect is true.", "absent", 6, [0,1], "later"],
   ["prospect_outreach_draft_for_human_send", "outreach", "Draft outreach for a person to send", "The send stays a human act.", "absent", 4, [0,1], "later"],
   ["outbound_batch_preparation_for_approval", "outreach", "Prepare outreach batches for approval", "One packet for a named approver; never padded, never expires into approval.", "partial", 4, [1,1], "done", "capabilities/outbound-batch-approval/"],
@@ -625,6 +625,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-16", "Abandoned-checkout explainer merged: Vick says why a person is or is not an abandoned checkout, naming their payment status and latest subscription status, and keeps paid former members and free Explorer sign-ups off the call list."],
   ["2026-11-16", "Revenue definition guard merged: Vick says whether a revenue figure follows the rule (only money collected through the app's own checkout counts), citing the rule and the code line. It found two figures that break it, the Opportunities page ($4,500) and the Cory simulation ($2,500), and that the two problems the plan listed are already fixed. Proposed adding refunds and time periods to the rules; questions for the sales manager and program lead drafted."],
   ["2026-11-16", "Sales manager's name corrected to Roselen across every document this project writes."],
   ["2026-11-13", "Flagged that the four new steps were on the board but missing from the repository plan. The program lead found the published plan had not been republished since 21 October, in all seven builders' repositories, and fixed it the same afternoon. The four stories are now in the plan with 10 criteria; nothing already passed was lost."],
@@ -671,9 +672,9 @@ const storiesTotal = 7 + CAPS.length + LADDER;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["39/66", "acceptance criteria passed", 39 / 66],
+  ["40/66", "acceptance criteria passed", 40 / 66],
   ["215", "automated tests, all passing", 1],
-  ["52", "pull requests merged", 1],
+  ["54", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 
