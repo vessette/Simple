@@ -1,0 +1,12 @@
+{
+  "traced_at": "ColaberryEnterprise_AI_LeadershipAccelerator @ d4c90d3, 16 Nov 2026",
+  "note": "Each figure traced by reading the platform code. No production value was read; the guard never needs one.",
+  "figures": [
+    { "surface": "Revenue dashboard response", "label": "Actual revenue", "presented_as": "revenue", "derivation": "unavailable_with_reason", "traced_to": "revenueDashboardService.ts:148-160" },
+    { "surface": "Revenue dashboard response", "label": "Projected revenue", "presented_as": "projection", "derivation": "count_times_price", "price_source": "setting", "labelled_assumption": true, "traced_to": "revenueDashboardService.ts:144-146" },
+    { "surface": "Campaign attribution", "label": "Total revenue per lead", "presented_as": "revenue", "derivation": "unavailable_with_reason", "traced_to": "revenueDashboardService.ts:293-295" },
+    { "surface": "Marketing channel ROI", "label": "Channel revenue", "presented_as": "revenue", "derivation": "unavailable_with_reason", "traced_to": "marketingAnalyticsService.ts:15-20" },
+    { "surface": "Opportunities page", "label": "Projected Revenue", "presented_as": "projection", "derivation": "count_times_price", "price_source": "constant", "labelled_assumption": false, "traced_to": "opportunityScoringService.ts:18, :200, :394; AdminOpportunitiesPage.tsx:360" },
+    { "surface": "Cory simulation", "label": "Revenue", "presented_as": "projection", "derivation": "count_times_price", "price_source": "constant", "labelled_assumption": true, "traced_to": "coryStrategicSimulationEngine.ts:105, :119, :126" }
+  ]
+}

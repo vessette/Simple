@@ -942,13 +942,29 @@
       "criteria": [
         {
           "text": "Every verdict cites one of the four rule statements; the agent never asserts a revenue number of its own.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/revenue-guard/revenueGuard.js",
+        "capabilities/revenue-guard/revenueGuard.test.js",
+        "capabilities/revenue-guard/fixtures/surfaces.json",
+        "capabilities/revenue-guard/GUARD_FOR_ROSELEN.md"
+      ],
+      "tests_added": [
+        "capabilities/revenue-guard/revenueGuard.test.js: there are exactly four rule statements, each cited to file:line",
+        "capabilities/revenue-guard/revenueGuard.test.js: every verdict, for every derivation and shape, cites one of the four rule statements",
+        "capabilities/revenue-guard/revenueGuard.test.js: the guard never asserts a revenue number: a value given is never echoed or recomputed",
+        "capabilities/revenue-guard/revenueGuard.test.js: an enrolment is not a payment: ten enrolments and no collected money is not revenue",
+        "capabilities/revenue-guard/revenueGuard.test.js: a missing source is unavailable with a reason, never zero",
+        "capabilities/revenue-guard/revenueGuard.test.js: count times price: revenue breaks; a projection passes only if labelled and read from the setting",
+        "capabilities/revenue-guard/revenueGuard.test.js: collected money meets only when app-originated; untraced origin is cannot_tell, never meets",
+        "capabilities/revenue-guard/revenueGuard.test.js: the traced surfaces at platform main: two projections break the rule, nothing else does",
+        "capabilities/revenue-guard/revenueGuard.test.js: malformed input is refused, not guessed at",
+        "capabilities/revenue-guard/revenueGuard.test.js: same input, same verdicts, in the same order"
+      ],
+      "notes": "R2 guard only: for a revenue figure a person has traced (surface, label, derivation, price source, origin), Vick says meets, breaks, allowed projection or cannot tell, citing one of four rule statements with file:line at platform d4c90d3. It never reads, echoes or computes a revenue number. Traced six surfaces: Opportunities page (fixed $4,500) and Cory simulation (fixed $2,500) break the count-times-price rule. The plan's two live violations (revenueDashboardService actualRevenue, paysimpleService $4,500 default) are already fixed on platform main. The four rule statements are not listed in the plan; they are drawn from its exceptions and outcome, for the sales manager to confirm. See capabilities/revenue-guard/GUARD_FOR_ROSELEN.md.",
+      "updated_at": "2026-11-16T19:17:43.801Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
