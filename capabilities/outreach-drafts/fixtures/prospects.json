@@ -1,0 +1,8 @@
+{
+  "note": "Committed prospect fixtures for R1 drafting. Made up; no real person. Approved sources are the Sales Hub pinned facts copied in capabilities/prospect-kb-answers/fixtures/pinned.json.",
+  "prospects": [
+    { "label": "P1", "stage": "new_lead", "context": "You asked about building AI systems for your team.", "suppressed": false },
+    { "label": "P2", "stage": "contacted", "context": "", "suppressed": false },
+    { "label": "P3", "stage": "new_lead", "context": "", "suppressed": true }
+  ]
+}
