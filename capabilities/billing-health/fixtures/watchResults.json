@@ -1,0 +1,21 @@
+{
+  "note": "Made-up watch results in the shape runBillingHealthCheck returns (billingHealthCheck.ts:325-372). Rows use P1, P2 and so on; no real member.",
+  "all_read": { "database": "read", "gateway_schedules": "read", "card_expiry": "read", "reminder_history": "read" },
+  "as_production_runs": { "database": "read", "gateway_schedules": "read", "card_expiry": "not_wired", "reminder_history": "read" },
+  "busy": {
+    "findings": [
+      { "severity": "act_now", "code": "schedule_book_mismatch", "headline": "The schedules at PaySimple and the ones we think we have do not agree", "detail": "", "action": "Reconcile before anything else. Do not create more schedules until this is zero.", "rows": ["at gateway but not in our book: S1"] },
+      { "severity": "act_now", "code": "scheduled_charge_failed", "headline": "2 member(s) had an automatic payment decline", "detail": "", "action": "Contact each member to put a current card on file in PaySimple. Do NOT send a payment link: the schedule is still live and would charge them again.", "rows": ["P1", "P2"] },
+      { "severity": "watch", "code": "duplicate_active_rows", "headline": "1 member(s) hold more than one active subscription row", "detail": "", "action": "No action unless a new job reads subscriptions. Anything that does must key on the member, not the row.", "rows": ["P3"] },
+      { "severity": "soon", "code": "lapsed_no_followup", "headline": "1 member(s) are past their renewal date with no follow-up recorded", "detail": "", "action": "Check the renewal reminder job ran today, then confirm these members were mailed.", "rows": ["P4"] }
+    ],
+    "milestones": [], "needsAttention": true, "checkedAt": "2026-11-16T20:00:00.000Z"
+  },
+  "quiet": { "findings": [], "milestones": [], "needsAttention": false, "checkedAt": "2026-11-16T20:00:00.000Z" },
+  "one_check_failed": {
+    "findings": [
+      { "severity": "soon", "code": "check_failed", "headline": "The \"lapsedNoFollowup\" check could not run", "detail": "connection terminated", "action": "A check that cannot run is not a passing check. Fix it before trusting a quiet report." }
+    ],
+    "milestones": [], "needsAttention": true, "checkedAt": "2026-11-16T20:00:00.000Z"
+  }
+}

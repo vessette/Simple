@@ -106,13 +106,30 @@
       "criteria": [
         {
           "text": "Every finding cites the check that produced it; an unreadable source yields unknown rather than a pass.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/billing-health/billingExplainer.js",
+        "capabilities/billing-health/billingExplainer.test.js",
+        "capabilities/billing-health/fixtures/watchResults.json",
+        "capabilities/billing-health/BILLING_WATCH_FOR_ROSELEN.md"
+      ],
+      "tests_added": [
+        "capabilities/billing-health/billingExplainer.test.js: every finding cites the check that produced it",
+        "capabilities/billing-health/billingExplainer.test.js: an unreadable source never yields a pass, in any combination",
+        "capabilities/billing-health/billingExplainer.test.js: as production runs today, card expiry is never read, so the watch is never fully healthy",
+        "capabilities/billing-health/billingExplainer.test.js: a gateway that cannot be read leaves the schedule check unknown, not passed",
+        "capabilities/billing-health/billingExplainer.test.js: a reminder history with no sends is unknown, not healthy",
+        "capabilities/billing-health/billingExplainer.test.js: a check that threw is unknown, and its error is not mistaken for a finding",
+        "capabilities/billing-health/billingExplainer.test.js: every severity is explained, and a person, not Vick, acts",
+        "capabilities/billing-health/billingExplainer.test.js: a recurring finding is marked, never hidden",
+        "capabilities/billing-health/billingExplainer.test.js: an unrecognised finding is escalated, not cited to a guessed check",
+        "capabilities/billing-health/billingExplainer.test.js: healthy only when every source was read and nothing was found",
+        "capabilities/billing-health/billingExplainer.test.js: malformed input is refused, and the result is not modified"
+      ],
+      "notes": "R2 explainer only: for a billing watch result and the sources the run could read, Vick reports all six checks as finding, passed or unknown, and explains each finding with the check that produced it (file:line at platform 2e4c86f), its severity and what a person does. Unreadable, empty or unwired sources are unknown, never passed. Found: card expiry is never fetched, so the expiring-card check returns nothing on every run (billingGatewayState.ts:15-18; billingHealthCheck.ts:182, :348); an unreadable gateway skips the schedule check silently (billingGatewayState.ts:50-56; billingHealthCheck.ts:349); a reminder history with no sends passes (billingHealthCheck.ts:160-161). See capabilities/billing-health/BILLING_WATCH_FOR_ROSELEN.md.",
+      "updated_at": "2026-11-16T20:12:06.306Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
