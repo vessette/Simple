@@ -454,13 +454,21 @@
       "criteria": [
         {
           "text": "Every capability in this matrix names the decision it needs from Roselyn, and no capability claims a confirmed requirement.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/decision-queue/decisionMatrix.json",
+        "capabilities/decision-queue/decisionMatrix.test.js",
+        "capabilities/decision-queue/DECISION_QUEUE_FOR_ROSELEN.md"
+      ],
+      "tests_added": [
+        "capabilities/decision-queue/decisionMatrix.test.js: every capability in the plan names the decision it needs from the sales manager",
+        "capabilities/decision-queue/decisionMatrix.test.js: no capability claims a confirmed requirement",
+        "capabilities/decision-queue/decisionMatrix.test.js: every decision points at evidence that exists"
+      ],
+      "notes": "R0, nothing built: the workflow (present, accept/reject/defer with a reason, record decider/time/reason, undecided stays undecided, nothing times out into approval), six decision types with the evidence each needs and how each is rolled back, and a matrix naming one decision from the sales manager for each of the 32 capabilities, all awaiting, each linked to its evidence. A test checks the matrix against plan.json. Found at platform ffc1f09: the approval page is /admin/approval-requests (adminRoutes.tsx:304), not /admin/approvals; it offers approve/reject only (no defer) and a bulk approve (approvalRequestRoutes.ts:17-19). Access: our records say the program lead granted it on 10 Nov; the sales manager is asked to confirm. See capabilities/decision-queue/DECISION_QUEUE_FOR_ROSELEN.md.",
+      "updated_at": "2026-11-16T22:35:47.842Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
