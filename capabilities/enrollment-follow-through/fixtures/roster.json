@@ -1,0 +1,14 @@
+{
+  "note": "Made-up enrolment rows in the shape GET /api/admin/enrollments returns (acceleratorService.ts:799-826). No real person.",
+  "rows": [
+    { "id": "e1", "email": "p1@example.com", "status": "active", "payment_status": "paid", "portal_enabled": true, "enrollment_type": "standard", "subscription": { "plan": "annual", "status": "active" } },
+    { "id": "e2", "email": "p2@example.com", "status": "active", "payment_status": "paid", "portal_enabled": false, "enrollment_type": "standard", "subscription": { "plan": "monthly", "status": "active" } },
+    { "id": "e3", "email": "p3@example.com", "status": "active", "payment_status": "pending_invoice", "portal_enabled": false, "enrollment_type": "standard", "subscription": null },
+    { "id": "e4", "email": "p4@example.com", "status": "active", "payment_status": "failed", "portal_enabled": false, "enrollment_type": "standard", "subscription": { "plan": "monthly", "status": "failed" } },
+    { "id": "e5", "email": "P5@Example.com", "status": "active", "payment_status": "pending", "portal_enabled": false, "enrollment_type": "standard", "subscription": { "plan": "monthly", "status": "pending" } },
+    { "id": "e6", "email": "p5@example.com ", "status": "active", "payment_status": "pending", "portal_enabled": true, "enrollment_type": "explorer", "subscription": null },
+    { "id": "e7", "email": "p7@example.com", "status": "active", "payment_status": "pending", "portal_enabled": true, "enrollment_type": "explorer", "subscription": null },
+    { "id": "e8", "email": "p8@example.com", "status": "withdrawn", "payment_status": "pending", "portal_enabled": false, "enrollment_type": "standard", "subscription": null },
+    { "id": "e9", "email": "p9@example.com", "status": "active", "payment_status": "pending", "portal_enabled": false, "enrollment_type": "standard", "subscription": null }
+  ]
+}
