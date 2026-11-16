@@ -460,8 +460,8 @@ footer { border-top: 1px solid var(--line); padding-top: 16px; color: var(--mute
 </div>
 
 <script>
-const UPDATED = "Updated 13 November 2026";
-const TODAY = "2026-11-13";
+const UPDATED = "Updated 16 November 2026";
+const TODAY = "2026-11-16";
 const GH = "https://github.com/vessette/Simple/blob/main/";
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -502,7 +502,7 @@ const CAPS = [
   ["renewal_and_revenue_follow_through_worklist", "renew", "Daily renewals and revenue worklist", "Renewals due, past due, lapsed and expiring, in order.", "partial", 5, [0,1], "later"],
   ["subscription_churn_and_renewal_risk_analysis", "renew", "Churn and renewal-risk analysis", "Members most likely to lapse, with the reason.", "absent", 5, [0,1], "later"],
   ["revenue_and_subscription_reporting", "report", "Revenue and subscription reporting", "Answers revenue, MRR, plan-mix and tenure questions from the revenue endpoints, naming the endpoint, field and filter of every figure; unavailable, never zero, when a source is missing; never revenue from a price times a count.", "implemented", 6, [1,1], "done", "capabilities/revenue-reporting/"],
-  ["revenue_definition_integrity_guard", "report", "Revenue definition guard", "Only revenue collected through the app's checkout counts.", "partial", 6, [0,1], "later"],
+  ["revenue_definition_integrity_guard", "report", "Revenue definition guard", "Only revenue collected through the app's checkout counts.", "partial", 6, [1,1], "done", "capabilities/revenue-guard/"],
   ["da_revenue_reporting_transition", "report", "Take over analyst reporting", "Blocked until the current manual work is written down.", "unknown", 0, [0,1], "later"],
   ["pipeline_digest_for_manager", "report", "Pipeline digest for the manager", "Answers pipeline questions with every figure's source; unavailable is never shown as zero.", "partial", 6, [1,1], "done", "capabilities/pipeline-digest/"],
   ["manager_decision_queue_for_sales_actions", "control", "Manager decision queue", "Where the manager approves what the agent prepares. Every other capability depends on it.", "absent", 2, [0,1], "later"],
@@ -625,6 +625,8 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-16", "Revenue definition guard merged: Vick says whether a revenue figure follows the rule (only money collected through the app's own checkout counts), citing the rule and the code line. It found two figures that break it, the Opportunities page ($4,500) and the Cory simulation ($2,500), and that the two problems the plan listed are already fixed. Proposed adding refunds and time periods to the rules; questions for the sales manager and program lead drafted."],
+  ["2026-11-16", "Sales manager's name corrected to Roselen across every document this project writes."],
   ["2026-11-13", "Flagged that the four new steps were on the board but missing from the repository plan. The program lead found the published plan had not been republished since 21 October, in all seven builders' repositories, and fixed it the same afternoon. The four stories are now in the plan with 10 criteria; nothing already passed was lost."],
   ["2026-11-13", "Board reshaped by the program lead: 124 stories became 43. Per-rung stories removed; each capability now goes through four steps (by hand, in the app, request the tool, agent watched), starting with prospect discovery. Nothing finished was touched: 21 stories verified, 38 of 56 criteria passed."],
   ["2026-11-13", "Open items sent by email: decisions, fixes and read-only checks to the program lead, platform owner and builder; decisions and five questions that unblock new capabilities to the sales manager."],
@@ -669,9 +671,9 @@ const storiesTotal = 7 + CAPS.length + LADDER;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["38/66", "acceptance criteria passed", 38 / 66],
+  ["39/66", "acceptance criteria passed", 39 / 66],
   ["215", "automated tests, all passing", 1],
-  ["51", "pull requests merged", 1],
+  ["52", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 
