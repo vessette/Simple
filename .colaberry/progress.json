@@ -925,13 +925,25 @@
       "criteria": [
         {
           "text": "Every row cites its source check; excluded members are provably absent; an empty day is reported as empty.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/renewal-worklist/worklist.js",
+        "capabilities/renewal-worklist/worklist.test.js",
+        "capabilities/renewal-worklist/fixtures/sources.json",
+        "capabilities/renewal-worklist/WORKLIST_FOR_ROSELEN.md"
+      ],
+      "tests_added": [
+        "capabilities/renewal-worklist/worklist.test.js: every row cites the check that produced each of its reasons",
+        "capabilities/renewal-worklist/worklist.test.js: excluded members are provably absent, from every source, whatever the case of their email",
+        "capabilities/renewal-worklist/worklist.test.js: an empty day is reported as empty, and an unread source is never an empty day",
+        "capabilities/renewal-worklist/worklist.test.js: one row per member, ordered by consequence, with every reason kept",
+        "capabilities/renewal-worklist/worklist.test.js: no row ever proposes a catch-up charge or a payment link for a scheduled member",
+        "capabilities/renewal-worklist/worklist.test.js: malformed input is refused; nothing is modified"
+      ],
+      "notes": "R2, read-only: one ordered list per day, one row per member, from the subscriptions endpoint (attention, upcomingPayments within 7 days) and the billing watch findings (declined autopay, lapsed with no follow-up, expiring card), each reason citing its check (platform ffc1f09). Members on the standing exclusion lists (subscriptionScheduleService.ts:39-43, :52-55) are never listed, only counted; a test proves their absence and that it would fail without the list. An empty day says so; an unread source makes the list incomplete, never empty. No row proposes a catch-up charge. Ordering is proposed for the sales manager. Found: the exclusion lists hold five members, not the two the brief says. See capabilities/renewal-worklist/WORKLIST_FOR_ROSELEN.md.",
+      "updated_at": "2026-11-16T21:59:49.980Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,

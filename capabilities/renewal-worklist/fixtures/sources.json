@@ -1,0 +1,25 @@
+{
+  "note": "Made-up responses in the platform's shapes (subscriptionAnalyticsService.ts:75-118; billingHealthCheck.ts findings). No real member. The exclusions here are made-up stand-ins for the platform's two hardcoded lists.",
+  "exclusions": ["ach1@example.com", "card1@example.com"],
+  "subs": {
+    "attention": [
+      { "enrollment_id": "e1", "payer_name": "P1", "payer_email": "p1@example.com", "kind": "lapsed", "plan": "monthly", "reference_date": "2026-11-10T18:00:00.000Z", "days_overdue": 6 },
+      { "enrollment_id": "e2", "payer_name": "P2", "payer_email": "p2@example.com", "kind": "failed", "plan": "monthly", "reference_date": "2026-11-14T12:00:00.000Z", "days_overdue": 0 },
+      { "enrollment_id": "e9", "payer_name": "A1", "payer_email": "ACH1@example.com", "kind": "lapsed", "plan": "monthly", "reference_date": "2026-11-01T18:00:00.000Z", "days_overdue": 15 }
+    ],
+    "upcomingPayments": [
+      { "enrollment_id": "e3", "payer_name": "P3", "payer_email": "p3@example.com", "plan": "monthly", "amount": 199, "due_date": "2026-11-20T18:00:00.000Z", "in_days": 4 },
+      { "enrollment_id": "e4", "payer_name": "P4", "payer_email": "p4@example.com", "plan": "annual", "amount": 1788, "due_date": "2026-12-20T18:00:00.000Z", "in_days": 34 },
+      { "enrollment_id": "e8", "payer_name": "C1", "payer_email": "card1@example.com", "plan": "monthly", "amount": 199, "due_date": "2026-11-18T18:00:00.000Z", "in_days": 2 }
+    ]
+  },
+  "watch": {
+    "findings": [
+      { "severity": "act_now", "code": "scheduled_charge_failed", "headline": "1 member(s) had an automatic payment decline", "rows": ["P5 <p5@example.com> schedule S5, period ended 2026-11-12: Insufficient funds"] },
+      { "severity": "act_now", "code": "lapsed_no_followup", "headline": "1 member(s) are past their renewal date with no follow-up recorded", "rows": ["P1 <p1@example.com> due 2026-11-10, 6d ago"] },
+      { "severity": "soon", "code": "card_expires_before_charge", "headline": "2 member(s) have a card that expires before their next charge", "rows": ["P3 <p3@example.com> card expires 10/2026, next charge 2026-11-20", "C1 <card1@example.com> card expires 07/2026, next charge 2026-11-18"] },
+      { "severity": "watch", "code": "duplicate_active_rows", "headline": "1 member(s) hold more than one active subscription row", "rows": ["P6 (2 rows: 2026-10-01, 2026-11-01)"] }
+    ],
+    "milestones": [], "needsAttention": true
+  }
+}
