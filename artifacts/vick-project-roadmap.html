@@ -480,7 +480,7 @@ const CAPS = [
   ["strategy_call_no_show_detection_and_recovery", "leads", "Catch missed strategy calls", "Explains which calls count as missed, naming the time, threshold and status.", "implemented", 4, [1,1], "done", "capabilities/strategy-call-no-show/"],
   ["abandoned_checkout_identification", "leads", "Find people who stopped at checkout", "Kept apart from free sign-ups and former members.", "implemented", 6, [1,1], "done", "capabilities/abandoned-checkout/"],
   ["seat_capacity_and_cohort_fill_forecast", "leads", "Forecast seats and class fill", "So a seat-scarcity claim to a prospect is true.", "absent", 6, [0,1], "later"],
-  ["prospect_outreach_draft_for_human_send", "outreach", "Draft outreach for a person to send", "The send stays a human act.", "absent", 4, [0,1], "later"],
+  ["prospect_outreach_draft_for_human_send", "outreach", "Draft outreach for a person to send", "The send stays a human act.", "absent", 4, [1,1], "done", "capabilities/outreach-drafts/"],
   ["outbound_batch_preparation_for_approval", "outreach", "Prepare outreach batches for approval", "One packet for a named approver; never padded, never expires into approval.", "partial", 4, [1,1], "done", "capabilities/outbound-batch-approval/"],
   ["outbound_sequence_health_watch", "outreach", "Watch outreach sequences for faults", "Explains each health score part by part; unknown when a part can't be checked.", "partial", 6, [1,1], "done", "capabilities/outbound-sequence-health/"],
   ["prospect_question_answering_from_approved_kb", "outreach", "Answer prospect questions from approved material", "Never invents a price, date or policy.", "implemented", 5, [1,1], "done", "capabilities/prospect-kb-answers/"],
@@ -627,6 +627,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-16", "Outreach drafts merged: Vick drafts introductions, follow-ups and pricing notes for a named person to send, with every figure traced to approved facts, the banned word \"free\" refused under the Texas training rule, and no way to send, queue or schedule anything. Found \"free\" still on three live surfaces; a legal question is with the program lead."],
   ["2026-11-16", "Payment handoff merged: for any subscription, Vick says which customer id was stored at checkout, which one the charge landed on, and whether each belongs to the payer, citing a stored record or a read-only payment lookup for every statement. An id that cannot be checked is reported as unverified, never as matching."],
   ["2026-11-16", "Renewal worklist merged: one short daily list of members whose money needs attention, each reason citing the check behind it, members on the standing exclusion lists kept off, and an empty day reported as empty. A proposed definition of \"needs attention\", an ordering rule and early-warning signals are with the sales manager."],
   ["2026-11-16", "Enrolment follow-through merged: for a named person, Vick says which enrolment step they are stuck at, the next action and who owns it. A person with two records appears once, and a step with no named owner shows as unowned. The steps and owners are waiting for the sales manager."],
@@ -684,9 +685,9 @@ const storiesTotal = 7 + CAPS.length + LADDER;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["49/66", "acceptance criteria passed", 49 / 66],
+  ["50/66", "acceptance criteria passed", 50 / 66],
   ["215", "automated tests, all passing", 1],
-  ["65", "pull requests merged", 1],
+  ["66", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 
