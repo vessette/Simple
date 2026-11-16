@@ -19,13 +19,28 @@
       "criteria": [
         {
           "text": "Every verdict names the payment_status and the latest subscription status; a paid former member is explicitly excluded with the reason.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/abandoned-checkout/checkoutExplainer.js",
+        "capabilities/abandoned-checkout/checkoutExplainer.test.js",
+        "capabilities/abandoned-checkout/fixtures/roster.json",
+        "capabilities/abandoned-checkout/ABANDONED_CHECKOUT_FOR_ROSELEN.md"
+      ],
+      "tests_added": [
+        "capabilities/abandoned-checkout/checkoutExplainer.test.js: every verdict names the payment_status and the latest subscription status",
+        "capabilities/abandoned-checkout/checkoutExplainer.test.js: a paid former member with a pending renewal checkout is excluded, with the reason",
+        "capabilities/abandoned-checkout/checkoutExplainer.test.js: pending with a pending latest subscription is an abandoned checkout, with its start date",
+        "capabilities/abandoned-checkout/checkoutExplainer.test.js: a free Explorer signup never appears on the abandoned list",
+        "capabilities/abandoned-checkout/checkoutExplainer.test.js: a checkout later completed leaves the list once the payment is linked",
+        "capabilities/abandoned-checkout/checkoutExplainer.test.js: the two lists, from the roster: abandoned by checkout date, not-paid includes Explorers",
+        "capabilities/abandoned-checkout/checkoutExplainer.test.js: missing or unknown values are unknown, never guessed",
+        "capabilities/abandoned-checkout/checkoutExplainer.test.js: malformed input is refused",
+        "capabilities/abandoned-checkout/checkoutExplainer.test.js: read-only and deterministic: same row, same answer; the row is untouched"
+      ],
+      "notes": "R2 explainer only: for one named person's roster row (GET /api/admin/enrollments), Vick says abandoned checkout, excluded (paid former member with a pending renewal, paid, or free Explorer signup), not abandoned, or unknown. Every verdict names payment_status and the latest subscription status, with file:line at platform 3f34163. Produces the abandoned list (by checkout date) and the not-paid-any list. Contacts nobody. Found: a missing payment_status is on no list but badged Failed (enrollmentPaymentFilter.ts:66). See capabilities/abandoned-checkout/ABANDONED_CHECKOUT_FOR_ROSELEN.md.",
+      "updated_at": "2026-11-16T19:44:45.351Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
