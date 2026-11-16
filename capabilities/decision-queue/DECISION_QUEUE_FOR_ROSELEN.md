@@ -12,6 +12,29 @@ Two gaps between that page and this design, for Ali:
 - **It only offers approve or reject** (`approvalRequestRoutes.ts:17-18`), with no "defer". Under this design a deferred decision stays visibly undecided, which the page can show only by leaving the item untouched.
 - **It has a bulk-approve action** (`:19`), which records many decisions at once with no reason for each. That's useful for routine held messages, but it shouldn't be used for these decisions, each of which needs its own reason.
 
+## Is the approval page the right place? Criteria for Ali
+
+Measured against the platform at `ffc1f09`:
+
+| Criterion | Why it matters | The approval page today |
+|---|---|---|
+| **Nothing is approved by time passing** | The brief's core rule: a decision only counts if a person made it | **Fails.** A job every 15 minutes approves any request whose time has run out, recording the decider as `system:auto_approve_timeout` (`approvalRequestTimeoutJob.ts:12-20`; scheduled at `schedulerService.ts:1893-1901`) |
+| **Defer is an option** | Roselen can say "not yet, I need X" without that being read as yes or no | **Fails.** Approve or reject only (`approvalRequestRoutes.ts:17-18`) |
+| **A reason with every decision** | The audit trail must say why, not just what | **Partly.** A reason code exists (`ApprovalRequest.ts:32`), but bulk approve records many at once without individual reasons (`approvalRequestRoutes.ts:19`) |
+| **Who decided, and when** | So a capability can move from "proposed" to "decided by Roselen on [date]" | **Passes** (`decided_by`, `decided_at`, `ApprovalRequest.ts:37-38`) |
+| **Roselen can reach it** | Otherwise there's no surface at all | **To confirm.** It needs an admin login (`requireAdmin`); access was recorded as granted on 10 November |
+| **She sees only her decisions** | The page lists every agent's held actions (`approvalRequestRoutes.ts:13`), so sales decisions would sit among unrelated ones | **Unclear.** Whether it can filter to sales isn't confirmed |
+| **The evidence is shown with the proposal** | She should decide from the write-up, not from memory | **Unclear.** The page shows held agent actions; whether it can link a write-up isn't confirmed |
+
+**Why defer matters:** without it, every proposal is forced into yes or no. And on this page, an item left alone is *auto-approved* when its window closes. "Not yet" is the most common honest answer to a new rule ("I need to check with Ali first"), so a page without defer and with a timeout turns hesitation into approval. With defer, Roselen keeps the decision open on purpose, can say what she's waiting for, and nothing moves until she comes back to it.
+
+**My read:** the page isn't suitable for these decisions **as it stands**. Using it would need, at least:
+- these requests excluded from the timeout sweep;
+- a "defer" state;
+- bulk approve kept away from them.
+
+Until then, **email reply recorded in the repo** meets every criterion. Each answer is dated, carries her reason, and nothing moves without her. This is Ali's call; the evidence is above.
+
 ## How a decision works
 
 1. **Vick presents** one proposal: what's proposed, the evidence (a write-up with file and line references), and the options.
@@ -82,4 +105,4 @@ When you answer one, I'll record it in that capability's write-up and update the
 ## What I need from Ali
 
 1. Is the approval page (`/admin/approval-requests`) the right place for these decisions, or is email reply, recorded in the repo, enough for now? The brief marks this as a governance choice.
-2. If it's the page: should it gain a "defer" option, and should bulk approve be kept away from these decisions?
+2. If it's the page: should these requests be excluded from the 15-minute auto-approve sweep, should it gain a "defer" option, and should bulk approve be kept away from them? (This overlaps with your action point 8 from Kes's review: approval requests expiring into "approved".)
