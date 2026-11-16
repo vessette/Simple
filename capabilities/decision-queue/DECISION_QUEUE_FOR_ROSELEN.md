@@ -54,6 +54,31 @@ Until then, **email reply recorded in the repo** meets every criterion. Each ans
 
 So: speed is kept by reminders, escalation, a deputy and short decisions. Accountability is kept by never letting time make the decision.
 
+### Decision note for Ali: should held actions keep auto-approving?
+
+**The fact:** a held agent action is approved automatically **4 hours** after it's raised if nobody acts (`agentActionAuthorizationBridge.ts:95`, `:173`; the sweep runs every 15 minutes). Anything raised at 6 PM is approved by 10 PM.
+
+**What to weigh:**
+
+| Factor | Question | How to find out |
+|---|---|---|
+| What goes through the queue today | Which agents' actions are held, and are any of them human decisions (prices, refunds, billing, outreach wording)? | A read-only count of approval requests by action type |
+| How often time decides | How many requests were approved by the timeout rather than by a person? | Count requests whose `decided_by` is `system:auto_approve_timeout`, over the last 30 days, by action type |
+| Whether it can be undone | For each action type: if a wrong one goes through, can it be taken back? (A held email can't be unsent.) | Per action type, from the agent's own design |
+| Who relies on the speed | Which cadences would stall without the timeout? | The agents' owners (Kes, Quincy) |
+| Roselen's capacity | How many decisions a day can she realistically make, and when is she away? | Ask her |
+
+**Keeping the current approach:**
+- *Benefits:* nothing waits forever; outreach keeps its cadence; no new work.
+- *Risks:* human decisions get made by a clock; the audit trail shows approvals nobody gave; Roselen's role becomes nominal. And the brief's rule ("no proposal may be auto-approved by elapsed time") can't be met on this surface.
+
+**Options:**
+- **A. Keep as is.** Fastest, and accountability gap stays.
+- **B. Exclude human-decision action types from the sweep;** they stay pending and escalate to Ali at the deadline. Others keep the 4-hour timeout. *(Recommended: small change, keeps the speed where it's safe.)*
+- **C. Fail safe for everything:** an expired request becomes "not done, escalated" instead of approved. Safest, but slows routine outreach.
+
+**The one decision needed from Ali:** A, B or C. Plus: who runs the two read-only counts above, so the choice rests on numbers rather than guesses. This is part of his action point 8 from Kes's review.
+
 ## How a decision works
 
 1. **Vick presents** one proposal: what's proposed, the evidence (a write-up with file and line references), and the options.
