@@ -505,7 +505,7 @@ const CAPS = [
   ["revenue_definition_integrity_guard", "report", "Revenue definition guard", "Only revenue collected through the app's checkout counts.", "partial", 6, [1,1], "done", "capabilities/revenue-guard/"],
   ["da_revenue_reporting_transition", "report", "Take over analyst reporting", "Blocked until the current manual work is written down.", "unknown", 0, [0,1], "later"],
   ["pipeline_digest_for_manager", "report", "Pipeline digest for the manager", "Answers pipeline questions with every figure's source; unavailable is never shown as zero.", "partial", 6, [1,1], "done", "capabilities/pipeline-digest/"],
-  ["manager_decision_queue_for_sales_actions", "control", "Manager decision queue", "Where the manager approves what the agent prepares. Every other capability depends on it.", "absent", 2, [0,1], "later"],
+  ["manager_decision_queue_for_sales_actions", "control", "Manager decision queue", "Where the manager approves what the agent prepares. Every other capability depends on it.", "absent", 2, [1,1], "done", "capabilities/decision-queue/"],
 ];
 
 const RUNGS = [
@@ -614,6 +614,8 @@ const WAIT = [
   ["Program lead", "Fourteen questions sent 11 Nov: any $4,500 checkout links, expired approvals, who approves outbound batches, access after a returned payment or a refund, repair agents, digest fixes, unrecognised plans, credit alerts, the refund ledger. Still open: who files platform changes, and a date."],
   ["Admissions operations", "Asked 11 Nov which of three versions of the refund terms is final; program lead copied."],
   ["Sales and marketing managers", "Owners for two legacy jobs."],
+  ["Sales manager and admissions operations", "A 20-minute interview to write the recurring reporting duty list; questions and four candidate reports are drafted."],
+  ["Program lead", "Reword or retire the reporting-transition story: \"DA\" means the Data Analytics bootcamp, as confirmed on 10 Nov. And whether held actions should keep auto-approving after 4 hours (options A, B or C drafted)."],
   ["Program lead", "Whether renewal reminders are switched on in production, and when the last one was sent (question drafted 16 Nov)."],
 ];
 
@@ -627,6 +629,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-16", "Decision queue merged: one decision the sales manager needs to make for each of the 32 capabilities, all awaiting, with how a decision is recorded and undone. Found that the platform's approval page auto-approves anything left for 4 hours, which breaks the rule that time never decides; a note with options is with the program lead."],
   ["2026-11-16", "Outreach drafts merged: Vick drafts introductions, follow-ups and pricing notes for a named person to send, with every figure traced to approved facts, the banned word \"free\" refused under the Texas training rule, and no way to send, queue or schedule anything. Found \"free\" still on three live surfaces; a legal question is with the program lead."],
   ["2026-11-16", "Payment handoff merged: for any subscription, Vick says which customer id was stored at checkout, which one the charge landed on, and whether each belongs to the payer, citing a stored record or a read-only payment lookup for every statement. An id that cannot be checked is reported as unverified, never as matching."],
   ["2026-11-16", "Renewal worklist merged: one short daily list of members whose money needs attention, each reason citing the check behind it, members on the standing exclusion lists kept off, and an empty day reported as empty. A proposed definition of \"needs attention\", an ordering rule and early-warning signals are with the sales manager."],
@@ -685,9 +688,9 @@ const storiesTotal = 7 + CAPS.length + LADDER;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["50/66", "acceptance criteria passed", 50 / 66],
+  ["51/66", "acceptance criteria passed", 51 / 66],
   ["215", "automated tests, all passing", 1],
-  ["66", "pull requests merged", 1],
+  ["67", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 

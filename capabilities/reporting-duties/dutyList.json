@@ -1,0 +1,31 @@
+{
+  "status": "draft: candidates only, NOT the duty list. Nothing here is confirmed until the interview with Roselen (and Taiwo, who holds reporting in the sources) fills it in.",
+  "interviewed": null,
+  "source_of_candidates": "Taiwo's brief lists four recurring reports (platform docs, 16-taiwo-admissions.md:48-53), as recorded in docs/discovery/03-role-and-da-transition.md:206-211.",
+  "duties": [
+    {
+      "duty": "Daily enrollment reporting",
+      "reports": [
+        { "name": "Daily enrollment dashboard", "question": "Who enrolled, paid or got stuck yesterday?", "data_source": "GET /api/admin/enrollments (acceleratorService.ts:799-826)", "recipient": null, "cadence": "daily", "timezone": null, "channel": null, "done_by_today": null, "candidate_for_drafting": null, "confirmed": false }
+      ]
+    },
+    {
+      "duty": "Cohort progress reporting",
+      "reports": [
+        { "name": "Weekly cohort progress", "question": "How is each cohort doing week to week?", "data_source": "unsourced", "recipient": null, "cadence": "weekly", "timezone": null, "channel": null, "done_by_today": null, "candidate_for_drafting": null, "confirmed": false }
+      ]
+    },
+    {
+      "duty": "Subscription and revenue reporting",
+      "reports": [
+        { "name": "Monthly subscription and MRR trends", "question": "How are memberships and the run-rate moving month to month?", "data_source": "GET /api/admin/revenue/subscriptions (subscriptionAnalyticsService.ts:113-119)", "recipient": null, "cadence": "monthly", "timezone": null, "channel": null, "done_by_today": null, "candidate_for_drafting": null, "confirmed": false }
+      ]
+    },
+    {
+      "duty": "Cohort retrospective",
+      "reports": [
+        { "name": "End-of-cohort retrospective", "question": "What did a finished cohort achieve, and what should change?", "data_source": "unsourced", "recipient": null, "cadence": "per cohort", "timezone": null, "channel": null, "done_by_today": null, "candidate_for_drafting": null, "confirmed": false }
+      ]
+    }
+  ]
+}
