@@ -485,7 +485,7 @@ const CAPS = [
   ["outbound_sequence_health_watch", "outreach", "Watch outreach sequences for faults", "Explains each health score part by part; unknown when a part can't be checked.", "partial", 6, [1,1], "done", "capabilities/outbound-sequence-health/"],
   ["prospect_question_answering_from_approved_kb", "outreach", "Answer prospect questions from approved material", "Never invents a price, date or policy.", "implemented", 5, [1,1], "done", "capabilities/prospect-kb-answers/"],
   ["quote_and_offer_packet_preparation", "outreach", "Prepare quotes and offer packets", "A person sets the price and sends it.", "absent", 4, [0,1], "later"],
-  ["price_statement_consistency_audit", "outreach", "Check every stated price agrees", "Reports each place a price disagrees with the approved one.", "absent", 6, [0,1], "later"],
+  ["price_statement_consistency_audit", "outreach", "Check every stated price agrees", "Reports each place a price disagrees with the approved one.", "absent", 6, [1,1], "done", "capabilities/price-audit/"],
   ["enrollment_completion_follow_through", "enroll", "Follow enrollments through to a seat", "Nobody who agreed to enroll is lost before their seat is active.", "partial", 5, [0,1], "next"],
   ["enrollment_checkout_link_issuance", "enroll", "Issue checkout and payment links", "Explains checkout and quotes prices only from the price list; never issues a link.", "implemented", 4, [1,1], "done", "capabilities/enrollment-checkout/"],
   ["payment_confirmation_and_seat_grant", "enroll", "Confirm payment and grant the seat", "Explains a person's payment, seat and payment path, each from its record; unknown when no record exists.", "implemented", 5, [1,1], "done", "capabilities/payment-confirmation/"],
@@ -627,6 +627,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-16", "Price inventory merged: a read-only scan lists every place the platform states a price. 23 live lines still state the retired $4,500, including the two private constants, the projection setting's default, the chat assistant's pay-in-full text and seeded outreach copy. The rule for live versus archived locations is proposed and waiting for review."],
   ["2026-11-16", "Pipeline explainer merged: Vick explains where a lead sits, what its temperature rests on, and the forecast as a count of expected enrolments, refusing the forecast's $4,500 dollar figures. A lead with no activity is reported as unknown, not cold."],
   ["2026-11-16", "Platform owner reviewed every open fix: all are changes to the live platform, so each needs the program lead's approval and a named owner, and none is approved for build yet. Nine action points are now with the program lead. Two citation items (correcting the two repeated code references in the sales specs, and a second, independent check of the 50 sampled references) stay with this project."],
   ["2026-11-16", "Team licenses merged: Vick quotes team prices only from the approved claims registry, and only when every copy agrees. Found that redeeming a seat does not check whether the sponsor has paid, that a used code can be reused after its enrolment is deleted, and that the redemption form reveals which codes are real; a revised specification for the platform owner is in the repository. No sponsor has codes yet, so nothing has been exposed."],
@@ -680,9 +681,9 @@ const storiesTotal = 7 + CAPS.length + LADDER;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["45/66", "acceptance criteria passed", 45 / 66],
+  ["46/66", "acceptance criteria passed", 46 / 66],
   ["215", "automated tests, all passing", 1],
-  ["61", "pull requests merged", 1],
+  ["62", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 

@@ -259,13 +259,26 @@
       "criteria": [
         {
           "text": "Every state traces to the enrolment and subscription rows; a person with two rows is reported as one person, and an unowned step is reported as unowned rather than assigned to whoever is handy.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/enrollment-follow-through/followThrough.js",
+        "capabilities/enrollment-follow-through/followThrough.test.js",
+        "capabilities/enrollment-follow-through/fixtures/roster.json",
+        "capabilities/enrollment-follow-through/FOLLOW_THROUGH_FOR_ROSELEN.md"
+      ],
+      "tests_added": [
+        "capabilities/enrollment-follow-through/followThrough.test.js: every state traces to the enrolment and subscription rows it was read from",
+        "capabilities/enrollment-follow-through/followThrough.test.js: a person with two rows is one person: abandoned checkout plus Explorer account",
+        "capabilities/enrollment-follow-through/followThrough.test.js: an unowned step is reported unowned, never assigned to whoever is handy",
+        "capabilities/enrollment-follow-through/followThrough.test.js: each step, with its next action",
+        "capabilities/enrollment-follow-through/followThrough.test.js: the stuck list: one entry per person, most advanced step first, nobody complete or free",
+        "capabilities/enrollment-follow-through/followThrough.test.js: missing fields are unknown, never guessed",
+        "capabilities/enrollment-follow-through/followThrough.test.js: malformed input is refused; nothing is modified"
+      ],
+      "notes": "R2, read-only: for a named person Vick states the enrolment step they are stuck at (paid but locked out, invoice unpaid, payment failed, checkout abandoned, not started), the next action and the owner, each read from the enrolment row and latest subscription with the platform rule cited (ffc1f09). Rows are grouped by email so two rows are one person; owners come only from a map the sales manager sets, otherwise unowned. Missing fields are unknown. The steps and owners are proposed for the sales manager to confirm. See capabilities/enrollment-follow-through/FOLLOW_THROUGH_FOR_ROSELEN.md.",
+      "updated_at": "2026-11-16T21:54:10.649Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
