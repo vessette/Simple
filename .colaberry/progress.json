@@ -199,10 +199,21 @@
           "passed": false
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/reporting-duties/dutyList.json",
+        "capabilities/reporting-duties/dutyList.js",
+        "capabilities/reporting-duties/dutyList.test.js",
+        "capabilities/reporting-duties/REPORTING_DUTIES_FOR_ROSELEN.md"
+      ],
+      "tests_added": [
+        "capabilities/reporting-duties/dutyList.test.js: the committed draft is candidates only: it does not meet the bar, and scope is unknown",
+        "capabilities/reporting-duties/dutyList.test.js: every candidate already names a data source or an explicit \"unsourced\"",
+        "capabilities/reporting-duties/dutyList.test.js: a list meets the bar once it is interviewed and every report is confirmed",
+        "capabilities/reporting-duties/dutyList.test.js: the bar catches each way a list can fall short",
+        "capabilities/reporting-duties/dutyList.test.js: the interview checklist: what each report still needs"
+      ],
+      "notes": "NOT PASSED: the criterion needs a duty list written from interviewing the sales manager (and admissions operations, who holds reporting in the sources); no interview has happened. Prepared: a draft of four candidate reports from the admissions brief, each with a data source or unsourced, all unconfirmed; a readiness check that keeps scope unknown until an interview is recorded and every report confirmed; interview questions. The program lead confirmed on 10 Nov that DA means the Data Analytics bootcamp, not a Data Analyst role (docs/discovery/03-role-and-da-transition.md:10), so the story wording needs changing at the source. See capabilities/reporting-duties/REPORTING_DUTIES_FOR_ROSELEN.md.",
+      "updated_at": "2026-11-16T22:50:18.663Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
