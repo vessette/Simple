@@ -483,7 +483,7 @@ const CAPS = [
   ["prospect_outreach_draft_for_human_send", "outreach", "Draft outreach for a person to send", "The send stays a human act.", "absent", 4, [0,1], "later"],
   ["outbound_batch_preparation_for_approval", "outreach", "Prepare outreach batches for approval", "One packet for a named approver; never padded, never expires into approval.", "partial", 4, [1,1], "done", "capabilities/outbound-batch-approval/"],
   ["outbound_sequence_health_watch", "outreach", "Watch outreach sequences for faults", "Explains each health score part by part; unknown when a part can't be checked.", "partial", 6, [1,1], "done", "capabilities/outbound-sequence-health/"],
-  ["prospect_question_answering_from_approved_kb", "outreach", "Answer prospect questions from approved material", "Never invents a price, date or policy.", "implemented", 5, [0,1], "later"],
+  ["prospect_question_answering_from_approved_kb", "outreach", "Answer prospect questions from approved material", "Never invents a price, date or policy.", "implemented", 5, [1,1], "done", "capabilities/prospect-kb-answers/"],
   ["quote_and_offer_packet_preparation", "outreach", "Prepare quotes and offer packets", "A person sets the price and sends it.", "absent", 4, [0,1], "later"],
   ["price_statement_consistency_audit", "outreach", "Check every stated price agrees", "Reports each place a price disagrees with the approved one.", "absent", 6, [0,1], "later"],
   ["enrollment_completion_follow_through", "enroll", "Follow enrollments through to a seat", "Nobody who agreed to enroll is lost before their seat is active.", "partial", 5, [0,1], "next"],
@@ -625,6 +625,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-16", "Prospect-question answers merged: Vick answers a rep only from approved material, and checks any answer (including the Sales Hub's own) for an invented price, date or policy. Found the Sales Hub's pinned cohort dates (July 2026) have passed; a holding note for reps and a one-line fix for the platform owner are drafted."],
   ["2026-11-16", "Abandoned-checkout explainer merged: Vick says why a person is or is not an abandoned checkout, naming their payment status and latest subscription status, and keeps paid former members and free Explorer sign-ups off the call list."],
   ["2026-11-16", "Revenue definition guard merged: Vick says whether a revenue figure follows the rule (only money collected through the app's own checkout counts), citing the rule and the code line. It found two figures that break it, the Opportunities page ($4,500) and the Cory simulation ($2,500), and that the two problems the plan listed are already fixed. Proposed adding refunds and time periods to the rules; questions for the sales manager and program lead drafted."],
   ["2026-11-16", "Sales manager's name corrected to Roselen across every document this project writes."],
@@ -672,9 +673,9 @@ const storiesTotal = 7 + CAPS.length + LADDER;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["40/66", "acceptance criteria passed", 40 / 66],
+  ["41/66", "acceptance criteria passed", 41 / 66],
   ["215", "automated tests, all passing", 1],
-  ["54", "pull requests merged", 1],
+  ["55", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 
