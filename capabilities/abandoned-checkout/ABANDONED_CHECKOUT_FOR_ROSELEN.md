@@ -31,7 +31,9 @@ When a payment is later linked to an abandoned checkout, the platform marks the 
 
 ## One thing I noticed
 
-If a person's payment status is missing, the roster's filter leaves them off every list, but its badge shows them as **"Failed"** (`enrollmentPaymentFilter.ts:66`). Neither tells you the real state. Vick says "unknown" and asks for the row to be checked. I'll raise it with Kes as a small platform fix.
+If a person's payment status is missing, the roster's filter leaves them off every list, but its badge shows them as **"Failed"** (`enrollmentPaymentFilter.ts:66`). Neither tells you the real state. Vick says "unknown" and asks for the row to be checked.
+
+This can't happen with today's data: the database requires a payment status and defaults it to "pending" (`Enrollment.ts:203-207`). So it's a low-priority tidy-up for Kes, so that a future data or API change can't quietly turn "unknown" into "Failed".
 
 ## What I need from you
 

@@ -1,0 +1,10 @@
+{
+  "source": "backend/src/controllers/salesHubCoryController.ts:25-33 @ 3a7eb22 (platform main, 16 Nov 2026), copied verbatim",
+  "pinned_facts": "AI Systems Architect Accelerator (Founding Cohort), powered by Anthropic + Claude Code. The membership IS the full 12-week, project-based program: all four Architect Intensives, Anthropic Architect certification prep, a full-time internship experience, and guided GitHub portfolio projects. No separate course fees. Pricing: $149/mo billed annually (founding rate, locks for as long as the membership stays active) or $199/mo monthly (cancel anytime). Founding Cohort capped at 40 seats. Schedule: 4 live hours per week (Monday Architecture Day 2h + Thursday Build Day 2h). Dates: free Open House Thursday July 16, 2026; cohort kickoff Thursday July 23, 2026; Architect Expo early October. Outcome: a deployed AI system, a GitHub portfolio, and the Anthropic Architect certification. Enroll at training.colaberry.com. STUDENT-PAID third-party costs that Colaberry does NOT cover (always disclose): an Anthropic subscription for Claude Code (about $20/mo) and LLM API usage on the student's own key (most projects under $10/mo), paid directly to the providers. Refund/cancellation terms are drafted and pending final approval.",
+  "plan_prices": { "source": "backend/src/services/membershipPrice.ts:44-48 @ 3a7eb22", "annual_per_month": 149, "monthly": 199 },
+  "context_note": "The KB entries below are made up for tests, in the shape the Sales Hub sends ({ q, a, detail }). They are not real KB content.",
+  "context": [
+    { "q": "Is there a scholarship?", "a": "Open House attendees can apply for a one-time scholarship toward their first membership payment.", "detail": "" },
+    { "q": "Do I need to know how to code?", "a": "Some Python helps, but the program starts from architecture and builds up.", "detail": "" }
+  ]
+}

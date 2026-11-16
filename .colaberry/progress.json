@@ -761,13 +761,29 @@
       "criteria": [
         {
           "text": "Every factual claim traces to a KB entry or a pinned fact; a cost answer always discloses the student-paid Anthropic and API costs; a refund answer states the terms are pending approval. A fabricated price, date or policy in any sampled answer fails the release outright.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/prospect-kb-answers/kbAnswers.js",
+        "capabilities/prospect-kb-answers/kbAnswers.test.js",
+        "capabilities/prospect-kb-answers/fixtures/pinned.json",
+        "capabilities/prospect-kb-answers/KB_ANSWERS_FOR_ROSELEN.md"
+      ],
+      "tests_added": [
+        "capabilities/prospect-kb-answers/kbAnswers.test.js: every sampled answer passes the audit: claims traced, cost disclosed, refund pending",
+        "capabilities/prospect-kb-answers/kbAnswers.test.js: a cost answer always discloses the student-paid Anthropic and API costs",
+        "capabilities/prospect-kb-answers/kbAnswers.test.js: a refund answer says the terms are pending approval and quotes none",
+        "capabilities/prospect-kb-answers/kbAnswers.test.js: a fabricated price, date or count fails the audit outright",
+        "capabilities/prospect-kb-answers/kbAnswers.test.js: where the KB is silent, it says so and suggests Ali, never filling the gap",
+        "capabilities/prospect-kb-answers/kbAnswers.test.js: dates that have passed are flagged for Ali, not repeated as upcoming",
+        "capabilities/prospect-kb-answers/kbAnswers.test.js: the pinned prices agree with the plan prices today, and drift is caught",
+        "capabilities/prospect-kb-answers/kbAnswers.test.js: claim extraction: prices, dates and counts, normalised",
+        "capabilities/prospect-kb-answers/kbAnswers.test.js: malformed input is refused",
+        "capabilities/prospect-kb-answers/kbAnswers.test.js: deterministic: same question, same answer; inputs untouched"
+      ],
+      "notes": "R2, rep-facing only: answer() composes from the pinned facts and retrieved KB entries sentence by sentence, each with its source, or says to confirm with Ali; check() audits any answer (including the Sales Hub LLM reply): every price, date and count must be in a source, cost answers disclose the student-paid Anthropic and API costs, refund answers say pending approval and quote no terms. A 16-question sample passes. Pinned facts at platform 3a7eb22. Found: the pinned dates (Open House July 16, kickoff July 23, 2026) have passed; Vick flags them rather than repeating them. Pinned prices agree with membershipPrice.ts today; a test catches drift. See capabilities/prospect-kb-answers/KB_ANSWERS_FOR_ROSELEN.md.",
+      "updated_at": "2026-11-16T19:56:52.175Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
