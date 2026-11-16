@@ -498,7 +498,7 @@ const CAPS = [
   ["subscription_cancellation_and_schedule_suspension", "money", "Cancel subscriptions and stop charges", "Explains a member's subscription, payment schedule and recorded cancellation reason, each from its record; never says a member won't be charged.", "implemented", 2, [1,1], "done", "capabilities/subscription-cancellation/"],
   ["comped_seat_grant_and_revocation", "money", "Grant and remove free seats", "Lists who holds a free seat and since when, each from its subscription record, and says free seats are excluded from revenue; never proposes granting one.", "implemented", 2, [1,1], "done", "capabilities/comped-seat/"],
   ["billing_health_watch", "money", "Billing health watch", "Duplicates, lapses and expiring cards, reported daily.", "implemented", 6, [1,1], "done", "capabilities/billing-health/"],
-  ["renewal_reminder_lifecycle", "renew", "Renewal reminders and autopay notice", "Once per period and per reminder kind.", "implemented", 4, [0,1], "later"],
+  ["renewal_reminder_lifecycle", "renew", "Renewal reminders and autopay notice", "Once per period and per reminder kind.", "implemented", 4, [1,1], "done", "capabilities/renewal-reminders/"],
   ["renewal_and_revenue_follow_through_worklist", "renew", "Daily renewals and revenue worklist", "Renewals due, past due, lapsed and expiring, in order.", "partial", 5, [0,1], "later"],
   ["subscription_churn_and_renewal_risk_analysis", "renew", "Churn and renewal-risk analysis", "Members most likely to lapse, with the reason.", "absent", 5, [0,1], "later"],
   ["revenue_and_subscription_reporting", "report", "Revenue and subscription reporting", "Answers revenue, MRR, plan-mix and tenure questions from the revenue endpoints, naming the endpoint, field and filter of every figure; unavailable, never zero, when a source is missing; never revenue from a price times a count.", "implemented", 6, [1,1], "done", "capabilities/revenue-reporting/"],
@@ -613,6 +613,7 @@ const WAIT = [
   ["Program lead", "Fourteen questions sent 11 Nov: any $4,500 checkout links, expired approvals, who approves outbound batches, access after a returned payment or a refund, repair agents, digest fixes, unrecognised plans, credit alerts, the refund ledger. Still open: who files platform changes, and a date."],
   ["Admissions operations", "Asked 11 Nov which of three versions of the refund terms is final; program lead copied."],
   ["Sales and marketing managers", "Owners for two legacy jobs."],
+  ["Program lead", "Whether renewal reminders are switched on in production, and when the last one was sent (question drafted 16 Nov)."],
 ];
 
 const PHASES = [
@@ -625,6 +626,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-16", "Renewal reminder schedule merged: Vick says who is due which reminder and on what date in Central time, with the working, and calls a reminder sent only when the platform's record says so. Whether reminders are switched on in production is still to be confirmed."],
   ["2026-11-16", "Billing watch explainer merged: Vick reports all six billing checks as found, passed or unknown, and explains each finding with the check that produced it. Found the expiring-card check never runs (card expiry is never fetched) and an unreadable payment gateway passes silently; fixes and questions for the platform owner and program lead drafted."],
   ["2026-11-16", "Prospect-question answers merged: Vick answers a rep only from approved material, and checks any answer (including the Sales Hub's own) for an invented price, date or policy. Found the Sales Hub's pinned cohort dates (July 2026) have passed; a holding note for reps and a one-line fix for the platform owner are drafted."],
   ["2026-11-16", "Abandoned-checkout explainer merged: Vick says why a person is or is not an abandoned checkout, naming their payment status and latest subscription status, and keeps paid former members and free Explorer sign-ups off the call list."],
@@ -674,9 +676,9 @@ const storiesTotal = 7 + CAPS.length + LADDER;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["42/66", "acceptance criteria passed", 42 / 66],
+  ["43/66", "acceptance criteria passed", 43 / 66],
   ["215", "automated tests, all passing", 1],
-  ["57", "pull requests merged", 1],
+  ["59", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 

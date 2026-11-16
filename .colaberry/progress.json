@@ -1213,13 +1213,26 @@
       "criteria": [
         {
           "text": "Every price quoted traces to an approved source; an unreconciled price copy is reported as unknown rather than quoted.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/team-licenses/teamLicenses.js",
+        "capabilities/team-licenses/teamLicenses.test.js",
+        "capabilities/team-licenses/fixtures/sources.json",
+        "capabilities/team-licenses/TEAM_LICENSES_FOR_ROSELEN.md"
+      ],
+      "tests_added": [
+        "capabilities/team-licenses/teamLicenses.test.js: every price quoted traces to an approved, publishable registry claim",
+        "capabilities/team-licenses/teamLicenses.test.js: an unreconciled copy makes the price unknown, naming both, and quotes neither",
+        "capabilities/team-licenses/teamLicenses.test.js: blocked and unregistered prices are never quoted",
+        "capabilities/team-licenses/teamLicenses.test.js: today every copy of the team prices agrees with the registry",
+        "capabilities/team-licenses/teamLicenses.test.js: redemption is explained step by step, each step cited, with no price",
+        "capabilities/team-licenses/teamLicenses.test.js: a seat block: counts by state, and the gaps a person should look at",
+        "capabilities/team-licenses/teamLicenses.test.js: malformed input is refused; nothing is modified"
+      ],
+      "notes": "R2, read-only, human decision: Vick explains the tiers, redemption and a sponsor seat block (counts only). A price is quoted only when its claimsRegistry entry is VERIFIED or OWNER_ATTESTED and every known copy agrees; a disagreeing copy makes it unknown with both named; DO_NOT_PUBLISH prices are refused. Today Team $1,200 and Department $950 agree across the registry, SponsorshipPage and PricingPage (platform 62c4bde). Found: redemption does not check the sponsor billing_status (sponsorController.ts:207-228); no code creates seat codes, and production has a 25-seat sponsor with none; SponsorshipPage hardcodes prices outside the registry; CorporateSponsorshipKit.md still says $4,500 but is not served. See capabilities/team-licenses/TEAM_LICENSES_FOR_ROSELEN.md.",
+      "updated_at": "2026-11-16T20:36:26.967Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
