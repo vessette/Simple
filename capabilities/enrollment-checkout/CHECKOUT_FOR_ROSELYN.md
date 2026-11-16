@@ -1,6 +1,6 @@
 # Enrollment checkout: what Vick does, and what needs a decision
 
-**For:** Roselyn (accountable manager, Sales, Enrollment & Subscriptions), and Ali.
+**For:** Roselen (accountable manager, Sales, Enrollment & Subscriptions), and Ali.
 **Capability:** `sales.enrollment_checkout_link_issuance`
 **Status:** draft. **Issuing a payment link is a person's decision, always.** Vick explains; it never creates a customer, a link or an enrollment.
 
@@ -38,7 +38,7 @@ Read from the platform code at commit `109820a`. This is what the code allows, n
 | 1 | Should `/api/create-invoice` stay switched on? | Ali or Kes | Pass the real plan price · switch the route off · leave as is (not recommended) |
 | 2 | Has anyone been sent a $4,500 link? | Ali or Kes | A read-only check of enrollments created through this route |
 | 3 | If a payment link exists but the enrollment wasn't recorded, what happens? | Ali or Kes | Cancel the link · retry recording the enrollment |
-| 4 | Should a seat be held while a link is open? | Roselyn | Hold for a set time · first to pay wins (today) |
+| 4 | Should a seat be held while a link is open? | Roselen | Hold for a set time · first to pay wins (today) |
 
 ## Your answers
 

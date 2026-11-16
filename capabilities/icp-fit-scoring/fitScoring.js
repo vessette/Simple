@@ -39,7 +39,7 @@ const employees = (p) => p.organization?.estimated_num_employees ?? p.employee_c
 /**
  * The two inputs worth 25 points each. Without either, the platform falls back to a
  * 5-point default, which is the number this capability forbids inventing.
- * Assumption (for Roselyn to confirm): these two are the minimum for a real score.
+ * Assumption (for Roselen to confirm): these two are the minimum for a real score.
  */
 export function missingScoreInputs(person) {
   const missing = [];

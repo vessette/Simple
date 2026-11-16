@@ -1,13 +1,13 @@
 # Three proposed agent tasks, with boundaries and completion evidence
 
 **Story:** `sales.RESEARCH-5-THREE-PROPOSED-TASKS` · **Release:** Discovery and validation
-**Accountable human:** Roselyn · **Prepared by:** Victoria Spencer-Auber · **Date:** 2026-11-10
-**Status:** proposals for Roselyn's review. All three capabilities stay `draft`. Nothing here enables Vick, grants a tool or raises a level.
+**Accountable human:** Roselen · **Prepared by:** Victoria Spencer-Auber · **Date:** 2026-11-10
+**Status:** proposals for Roselen's review. All three capabilities stay `draft`. Nothing here enables Vick, grants a tool or raises a level.
 
 Citations are to `ColaberryIntern/ColaberryEnterprise_AI_LeadershipAccelerator` at commit `949fe19`. Paths starting `services/` are under `backend/src/`. Each task is one of this domain's 32 draft capabilities in `services/agentDomain/capabilities/sales.json`. None is invented.
 
 
-> **Update, 2026-11-10 (from Ali):** Roselyn was never missing an admin login. She holds the management role `revenue`; what she lacked was the `agents` section grant, which carries the per-agent dashboard and the review page. The platform's own diagnostic (`manager_has_no_admin_login`) reported the wrong cause. **She has the grant now**, and needs to sign out and back in once. Statements below that she "can't log in" or "can't reach" the page reflect that diagnostic and are no longer current.
+> **Update, 2026-11-10 (from Ali):** Roselen was never missing an admin login. She holds the management role `revenue`; what she lacked was the `agents` section grant, which carries the per-agent dashboard and the review page. The platform's own diagnostic (`manager_has_no_admin_login`) reported the wrong cause. **She has the grant now**, and needs to sign out and back in once. Statements below that she "can't log in" or "can't reach" the page reflect that diagnostic and are no longer current.
 
 ---
 
@@ -15,13 +15,13 @@ Citations are to `ColaberryIntern/ColaberryEnterprise_AI_LeadershipAccelerator` 
 
 | # | Capability | Why it's chosen |
 |---|---|---|
-| 1 | `sales.pipeline_stage_and_lead_temperature_stewardship` | Roselyn's step 1 is sorting leads warm or cold, and she says old leads are being lost (`03-role-and-da-transition.md`, rows 1 and 8). |
-| 2 | `sales.price_statement_consistency_audit` | Roselyn reports agents quoting the old Data Analytics price. The coverage data records four copies of the price that disagree. |
-| 3 | `sales.abandoned_checkout_identification` | "Enrolled means paid" (Roselyn), so the people who started a checkout and didn't pay are the leads closest to enrolling. |
+| 1 | `sales.pipeline_stage_and_lead_temperature_stewardship` | Roselen's step 1 is sorting leads warm or cold, and she says old leads are being lost (`03-role-and-da-transition.md`, rows 1 and 8). |
+| 2 | `sales.price_statement_consistency_audit` | Roselen reports agents quoting the old Data Analytics price. The coverage data records four copies of the price that disagree. |
+| 3 | `sales.abandoned_checkout_identification` | "Enrolled means paid" (Roselen), so the people who started a checkout and didn't pay are the leads closest to enrolling. |
 
 What they have in common:
 - **All three only read and propose.** None moves money (`financial_consequence`: `none` or `reports_only`), none contacts a lead, and none is a human-only decision (`human_decision: false`).
-- **The order is a proposal.** Roselyn's answer to interview question Q1 (`04-manager-interview.md`) decides which comes first.
+- **The order is a proposal.** Roselen's answer to interview question Q1 (`04-manager-interview.md`) decides which comes first.
 
 **On evidence:** none of the evidence below is a story marked done, time passing, a good conversation, or a mocked test passing. This platform already has 106 approval rows whose only recorded decider is `system:auto_approve_timeout`, a 4.25-hour timer (`services/agentDomain/__tests__/promotionCriteria.test.ts:93-94`). Every piece of evidence below is either something a person checks row by row, or a named test against a real fixture.
 
@@ -52,10 +52,10 @@ Each is checked by a person or a named test, never inferred from a status:
 |---|---|---|
 | R2 | Every figure Vick states traces to a named endpoint, and the forecast is called a count, never revenue | `release_behaviour` R2 |
 | R4 | A named test with a sandbox fixture: a stage a person set is **never** proposed back to its old value, and a lead with no activity is reported **unknown, not cold** | `release_behaviour` R4; `exceptions` |
-| R5 | Vick's proposed temperatures, compared lead by lead with what Roselyn found on her call, agree at or above the pass mark she sets (interview Q5) over the number of leads she names | `03-role-and-da-transition.md`, readiness row 1 |
-| R6 | Roselyn accepts proposals above a rate she sets, over a window she names. Every rejection is categorised. Written approval is given before the pilot starts. | `release_behaviour` R6 |
+| R5 | Vick's proposed temperatures, compared lead by lead with what Roselen found on her call, agree at or above the pass mark she sets (interview Q5) over the number of leads she names | `03-role-and-da-transition.md`, readiness row 1 |
+| R6 | Roselen accepts proposals above a rate she sets, over a window she names. Every rejection is categorised. Written approval is given before the pilot starts. | `release_behaviour` R6 |
 
-The pass mark and the window are **unknown** until Roselyn sets them.
+The pass mark and the window are **unknown** until Roselen sets them.
 
 ### What the agent does
 
@@ -68,7 +68,7 @@ It reads each lead's stage, temperature and activity, and **proposes** a tempera
   - Only `query_lead_conversion_metrics` exists today (`services/reese/agentToolCapabilities.ts:231-234`).
   - `escalate_to_human` exists but routes to curriculum (`:88-94`).
   - The other two don't exist.
-- **Not available:** GoHighLevel, Roselyn's CRM. Whether it connects to the platform at all is **unknown**.
+- **Not available:** GoHighLevel, Roselen's CRM. Whether it connects to the platform at all is **unknown**.
 
 ### What the agent must NOT do
 
@@ -80,7 +80,7 @@ It reads each lead's stage, temperature and activity, and **proposes** a tempera
 
 ### Approval
 
-- **Roselyn** approves each proposed move, and approves the pilot in writing.
+- **Roselen** approves each proposed move, and approves the pilot in writing.
 - She can't do either until she has an admin login (`services/agentDomain/agentDomainRegistry.ts:188-189`).
 
 ### Starting autonomy and ceiling
@@ -93,7 +93,7 @@ It reads each lead's stage, temperature and activity, and **proposes** a tempera
 
 - it moves back a stage a person set;
 - it marks a lead with no activity as cold;
-- Roselyn's rejections pass her stated limit over a week;
+- Roselen's rejections pass her stated limit over a week;
 - or any trigger she names in interview Q8 happens.
 
 **Note:** this capability's research cites a hardcoded 4500 in `revenueDashboardService.ts:11` as the forecast's source. That constant has since been removed (`01-system-classes.md`, query Q4). The rule it supports, that the forecast is a count and not revenue, still stands.
@@ -110,7 +110,7 @@ It reads each lead's stage, temperature and activity, and **proposes** a tempera
 |---|---|---|
 | R0 | A written inventory of every place that states a price, reviewed by a person. It must include the known stale fallback **`price_per_enrollment … \|\| 4500` in `services/governanceService.ts:212`**. A planted fake location returns no match. | `release_behaviour` R0 |
 | R2 | Vick never states a price it can't trace to the approved source, and reports two disagreeing places as disagreeing rather than averaging them | `release_behaviour` R2 |
-| R6 | On every run, the known stale value is found and **zero** archived pages are reported as drift, over a window Roselyn names. Written approval is given before the pilot starts. | `release_behaviour` R6 |
+| R6 | On every run, the known stale value is found and **zero** archived pages are reported as drift, over a window Roselen names. Written approval is given before the pilot starts. | `release_behaviour` R6 |
 
 The known stale value is the audit's **positive control**: an audit that doesn't find it is broken, whatever else it reports.
 
@@ -134,7 +134,7 @@ It lists every place that states or works out a price, compares each with the on
 
 ### Approval
 
-- **Roselyn** accepts each finding.
+- **Roselen** accepts each finding.
 - Which price is correct, and each correction, need a named decision-maker. Today that's **unknown**: interview Q7 asks who keeps the price current. Discount and pricing approval sat with Ali in the launch brief (`docs/training-program-2026-q3/launch-briefs/18-roselen-sales.md:69-70`).
 
 ### Starting autonomy and ceiling
@@ -163,7 +163,7 @@ It lists every place that states or works out a price, compares each with the on
 |---|---|---|
 | R2 | Every verdict names the `payment_status` and the latest subscription status, and a paid former member is excluded with the reason | `release_behaviour` R2 |
 | R4 | A named test with two fixtures: a free Explorer signup and a paid ex-member **never** appear on the list. Removing either exclusion makes the test **fail**. | `release_behaviour` R4 |
-| R6 | **Zero** Explorers and **zero** paid ex-members on the list across a window Roselyn names, checked row by row. Written approval is given before the pilot starts. | `release_behaviour` R6 |
+| R6 | **Zero** Explorers and **zero** paid ex-members on the list across a window Roselen names, checked row by row. Written approval is given before the pilot starts. | `release_behaviour` R6 |
 
 This isn't hypothetical. Two of seven people on a hand-pulled list were paid ex-members who were nearly called as leads (`exceptions`, citing `enrollmentPaymentFilter.ts:11-15`).
 
@@ -187,7 +187,7 @@ It produces the list of people who started a checkout and didn't pay, excluding 
 
 ### Approval
 
-**Roselyn** works the list and approves each contact. The contact itself is made by a person (production permissions).
+**Roselen** works the list and approves each contact. The contact itself is made by a person (production permissions).
 
 ### Starting autonomy and ceiling
 
@@ -207,7 +207,7 @@ It produces the list of people who started a checkout and didn't pay, excluding 
 
 | Blocker | Affects | Source |
 |---|---|---|
-| ~~Roselyn has no admin login~~ Resolved 2026-11-10: she was missing the `agents` section grant, now given | All three | `agentDomainRegistry.ts:82-84`, `:188-189` |
+| ~~Roselen has no admin login~~ Resolved 2026-11-10: she was missing the `agents` section grant, now given | All three | `agentDomainRegistry.ts:82-84`, `:188-189` |
 | Vick has 0 tools, and most of the tools needed don't exist | All three | `/agent-domains-mine`; `agentToolCapabilities.ts` |
 | No sales-routed `escalate_to_human`; today it creates a curriculum ticket | All three | `agentToolCapabilities.ts:88-94` |
 | No pass marks or windows set | All three | `04-manager-interview.md`, Q5 |
@@ -224,6 +224,6 @@ It produces the list of people who started a checkout and didn't pay, excluding 
 | `services/governanceService.ts:212` | The stale 4500 fallback still in the code |
 | `services/reese/agentToolCapabilities.ts:88-94`, `:106-109`, `:231-234` | Which named tools exist, and where `escalate_to_human` routes |
 | `services/delivery/execution/executionPolicy.ts:33-42` | `live_email` denied by default |
-| `services/agentDomain/agentDomainRegistry.ts:82-84`, `:188-189` | Roselyn can't reach the approval surface |
+| `services/agentDomain/agentDomainRegistry.ts:82-84`, `:188-189` | Roselen can't reach the approval surface |
 | `docs/training-program-2026-q3/launch-briefs/18-roselen-sales.md:69-70` | Pricing and discount approvals sat with Ali |
-| `docs/discovery/01-system-classes.md`, `03-role-and-da-transition.md`, `04-manager-interview.md` | The removed 4500 constant; Roselyn's steps; the pass-mark question |
+| `docs/discovery/01-system-classes.md`, `03-role-and-da-transition.md`, `04-manager-interview.md` | The removed 4500 constant; Roselen's steps; the pass-mark question |

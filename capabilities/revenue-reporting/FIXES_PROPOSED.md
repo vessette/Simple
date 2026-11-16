@@ -1,6 +1,6 @@
 # Two revenue problems, and possible fixes
 
-**For:** Roselyn (sales owner) and Ali (approver), with Kes for anything that changes platform code.
+**For:** Roselen (sales owner) and Ali (approver), with Kes for anything that changes platform code.
 **Status:** proposals. Nothing here is built. Platform references are to commit `109820a`. Background is in [REVENUE_INSTANCES.md](REVENUE_INSTANCES.md), rows 2, 9, 10, 11 and 12.
 
 ## Problem 1: projections use made-up prices
@@ -30,7 +30,7 @@ The check's comment also still says the frozen files await Ali's decision, but t
 | 1b | **Make the opportunities forecast and the scenario simulator read the setting** and show it as an assumption, as the revenue dashboard does. Then remove both from the frozen list. | Kes | Small; it's the decided fix |
 | 1c | **Do the same for the Cory simulation's $2,500.** | Kes | Small |
 | 1d | **Widen the price check** so it catches any constant used to compute revenue, whatever it's named, not only names containing PRICE. | Kes | Small |
-| 1e | **Decide whether the campaign tab's $25,000 is a different product**, such as a corporate deal. If it is, it should say so on screen. If not, it should read the setting too. | Roselyn, with Ali | A decision |
+| 1e | **Decide whether the campaign tab's $25,000 is a different product**, such as a corporate deal. If it is, it should say so on screen. If not, it should read the setting too. | Roselen, with Ali | A decision |
 | 1f | **Show the assumed price beside every projection** ("assumes $X per enrolment, from settings"), so nobody reads a forecast as money. | Kes | Small |
 
 ### How often prices should be updated, and by whom
@@ -67,6 +67,6 @@ The step-by-step plan for both problems, with a list of every price point on the
 1. **2a.** It's small, already agreed in principle, and stops a false $0 reaching anyone.
 2. **1a.** Ali picks the projection price. Nothing else in problem 1 is worth doing until the setting holds the right number.
 3. **1b, 1c and 1f** together, then **1d**, so that no new hardcoded price can slip in.
-4. **1e** when Roselyn and Ali next discuss the campaign forecasts.
+4. **1e** when Roselen and Ali next discuss the campaign forecasts.
 
 Vick isn't waiting on any of these. It already reports missing figures as unavailable and refuses projections as revenue.

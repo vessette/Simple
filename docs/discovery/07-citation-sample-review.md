@@ -30,46 +30,46 @@ The row figure is the estimate, because the sample was drawn over rows. The dist
 
 | # | Capability | Citation | Result | Note |
 |---|---|---|---|---|
-| 1 | abandoned_checkout_identification | `backend/src/services/agentDomain/agentDomainRegistry.ts:158-170` | wrong | Lines are a comment about another manager's login; Roselyn's entry is at :187-189 |
+| 1 | abandoned_checkout_identification | `backend/src/services/agentDomain/agentDomainRegistry.ts:158-170` | wrong | Lines are a comment about another manager's login; Roselen's entry is at :187-189 |
 | 2 | app_originated_payment_reconciliation | `backend/src/services/paymentReconciliationService.ts:193-212 (the email and customer-id sweep variant)` | unclear | Lines span the end of the email match and the start of reconcilePayment; the sweep itself is at :258 |
 | 3 | app_originated_payment_reconciliation | `backend/src/routes/admin/settingsRoutes.ts:33` | correct | The reconcile route |
 | 4 | billing_health_watch | `backend/src/services/schedulerService.ts:2301-2302` | unclear | Lines raise the webhook-health alert, cited under the billing watch; may or may not be the intended job |
 | 5 | comped_seat_grant_and_revocation | `subscriptionService.ts:338` | correct | startCheckout, which rejects the comp plan |
-| 6 | comped_seat_grant_and_revocation | `backend/src/services/agentDomain/agentDomainRegistry.ts:158-170` | wrong | Lines are a comment about another manager's login; Roselyn's entry is at :187-189 |
-| 7 | da_revenue_reporting_transition | `backend/src/services/agentDomain/agentDomainRegistry.ts:158-170` | wrong | Lines are a comment about another manager's login; Roselyn's entry is at :187-189 |
+| 6 | comped_seat_grant_and_revocation | `backend/src/services/agentDomain/agentDomainRegistry.ts:158-170` | wrong | Lines are a comment about another manager's login; Roselen's entry is at :187-189 |
+| 7 | da_revenue_reporting_transition | `backend/src/services/agentDomain/agentDomainRegistry.ts:158-170` | wrong | Lines are a comment about another manager's login; Roselen's entry is at :187-189 |
 | 8 | enrollment_checkout_link_issuance | `backend/src/services/delivery/execution/executionPolicy.ts:33-42` | correct | DENIED_CAPABILITIES list |
 | 9 | enrollment_checkout_link_issuance | `paysimpleService.ts:399` | wrong | The 4500 default is at :404 |
-| 10 | enrollment_completion_follow_through | `generateLaunchTasks.js:66` | correct | Roselyn not yet on Basecamp |
+| 10 | enrollment_completion_follow_through | `generateLaunchTasks.js:66` | correct | Roselen not yet on Basecamp |
 | 11 | enrollment_completion_follow_through | `backend/src/services/access/mgmtRoles.ts:54` | wrong | Line is 'agents' in SECTION_KEYS; the revenue role is at :17-20 |
 | 12 | icp_prospect_discovery_and_fit_scoring | `backend/src/services/access/mgmtRoles.ts:54` | wrong | Line is 'agents' in SECTION_KEYS; the revenue role is at :17-20 |
-| 13 | manager_decision_queue_for_sales_actions | `backend/src/services/agentDomain/agentDomainRegistry.ts:158-170` | wrong | Lines are a comment about another manager's login; Roselyn's entry is at :187-189 |
+| 13 | manager_decision_queue_for_sales_actions | `backend/src/services/agentDomain/agentDomainRegistry.ts:158-170` | wrong | Lines are a comment about another manager's login; Roselen's entry is at :187-189 |
 | 14 | offer_pipeline_routing | `backend/src/services/access/mgmtRoles.ts:54` | wrong | Line is 'agents' in SECTION_KEYS; the revenue role is at :17-20 |
 | 15 | outbound_batch_preparation_for_approval | `aiOpsScheduler.ts:226` | correct | Daily Mon-Fri, 20 a day |
 | 16 | outbound_sequence_health_watch | `backend/src/services/aiOpsScheduler.ts:175` | correct | Campaign repair agent schedule |
 | 17 | outbound_sequence_health_watch | `backend/src/services/aiOpsScheduler.ts:174` | correct | Campaign health scan schedule |
 | 18 | payment_confirmation_and_seat_grant | `webhookController.ts:54` | wrong | event_id is logged at :57 |
 | 19 | payment_confirmation_and_seat_grant | `enrollmentService.ts:183` | wrong | Line is about retiring an Explorer row; markEnrollmentFailed is at :239 |
-| 20 | payment_handoff_integrity | `backend/src/services/agentDomain/agentDomainRegistry.ts:158-170` | wrong | Lines are a comment about another manager's login; Roselyn's entry is at :187-189 |
+| 20 | payment_handoff_integrity | `backend/src/services/agentDomain/agentDomainRegistry.ts:158-170` | wrong | Lines are a comment about another manager's login; Roselen's entry is at :187-189 |
 | 21 | payment_handoff_integrity | `backend/src/services/appPaymentReconcileService.ts:22-28 (customer 43728423 at checkout, charge on 43728431 minted four minutes later; three students unlinked, one locked out two days)` | correct | The checkout-window note |
 | 22 | payment_webhook_replay_dedup_watch | `backend/src/services/delivery/execution/executionPolicy.ts:33-42` | correct | DENIED_CAPABILITIES list |
 | 23 | payment_webhook_replay_dedup_watch | `backend/src/services/paysimpleWebhookHealth.ts:21-121 (rolling window, severity 9 critical and severity 6 warning)` | correct | Rolling window and thresholds |
 | 24 | pipeline_digest_for_manager | `backend/src/services/adminOs/metricRegistry.ts:181-188` | correct | Net revenue unavailable |
 | 25 | pipeline_digest_for_manager | `backend/src/routes/admin/settingsRoutes.ts:38` | correct | Digest test route |
 | 26 | pipeline_stage_and_lead_temperature_stewardship | `backend/src/controllers/adminLeadController.ts:496-544 (temperature history and update)` | correct | Temperature handlers |
-| 27 | pipeline_stage_and_lead_temperature_stewardship | `backend/src/services/agentDomain/agentDomainRegistry.ts:158-170` | wrong | Lines are a comment about another manager's login; Roselyn's entry is at :187-189 |
+| 27 | pipeline_stage_and_lead_temperature_stewardship | `backend/src/services/agentDomain/agentDomainRegistry.ts:158-170` | wrong | Lines are a comment about another manager's login; Roselen's entry is at :187-189 |
 | 28 | price_statement_consistency_audit | `backend/src/seeds/seedKbData.ts:216 (prices as merge tags in the KB answer template)` | correct | Start of the pricing KB entry |
-| 29 | price_statement_consistency_audit | `docs/architecture/ai-workforce-management/HUMAN_OWNERSHIP_MAP.md:16` | correct | Roselyn's row |
-| 30 | prospect_outreach_draft_for_human_send | `backend/src/services/agentDomain/agentDomainRegistry.ts:158-170` | wrong | Lines are a comment about another manager's login; Roselyn's entry is at :187-189 |
-| 31 | prospect_question_answering_from_approved_kb | `docs/architecture/ai-workforce-management/HUMAN_OWNERSHIP_MAP.md:16` | correct | Roselyn's row |
+| 29 | price_statement_consistency_audit | `docs/architecture/ai-workforce-management/HUMAN_OWNERSHIP_MAP.md:16` | correct | Roselen's row |
+| 30 | prospect_outreach_draft_for_human_send | `backend/src/services/agentDomain/agentDomainRegistry.ts:158-170` | wrong | Lines are a comment about another manager's login; Roselen's entry is at :187-189 |
+| 31 | prospect_question_answering_from_approved_kb | `docs/architecture/ai-workforce-management/HUMAN_OWNERSHIP_MAP.md:16` | correct | Roselen's row |
 | 32 | prospect_question_answering_from_approved_kb | `backend/src/services/delivery/execution/executionPolicy.ts:33-42` | correct | DENIED_CAPABILITIES list |
-| 33 | quote_and_offer_packet_preparation | `docs/architecture/ai-workforce-management/HUMAN_OWNERSHIP_MAP.md:16` | correct | Roselyn's row |
+| 33 | quote_and_offer_packet_preparation | `docs/architecture/ai-workforce-management/HUMAN_OWNERSHIP_MAP.md:16` | correct | Roselen's row |
 | 34 | quote_and_offer_packet_preparation | `backend/src/services/delivery/execution/executionPolicy.ts:33-42` | correct | DENIED_CAPABILITIES list |
 | 35 | refund_and_void_issuance | `backend/src/controllers/salesHubCoryController.ts:33` | correct | Terms pending approval |
 | 36 | refund_and_void_issuance | `backend/src/services/access/mgmtRoles.ts:54` | wrong | Line is 'agents' in SECTION_KEYS; the revenue role is at :17-20 |
-| 37 | renewal_and_revenue_follow_through_worklist | `docs/architecture/ai-workforce-management/HUMAN_OWNERSHIP_MAP.md:16` | correct | Roselyn's row |
-| 38 | renewal_and_revenue_follow_through_worklist | `CLAUDE_CODE_AI_EMPLOYEE_CONSOLIDATION_LOOP_PROMPT.md:106` | correct | Roselyn's domain row |
+| 37 | renewal_and_revenue_follow_through_worklist | `docs/architecture/ai-workforce-management/HUMAN_OWNERSHIP_MAP.md:16` | correct | Roselen's row |
+| 38 | renewal_and_revenue_follow_through_worklist | `CLAUDE_CODE_AI_EMPLOYEE_CONSOLIDATION_LOOP_PROMPT.md:106` | correct | Roselen's domain row |
 | 39 | renewal_reminder_lifecycle | `backend/src/services/renewal/renewalReminderEmail.ts:139-174` | correct | renewalSubject |
-| 40 | revenue_and_subscription_reporting | `docs/architecture/ai-workforce-management/HUMAN_OWNERSHIP_MAP.md:16` | correct | Roselyn's row |
+| 40 | revenue_and_subscription_reporting | `docs/architecture/ai-workforce-management/HUMAN_OWNERSHIP_MAP.md:16` | correct | Roselen's row |
 | 41 | revenue_and_subscription_reporting | `backend/src/services/revenuePaymentsService.ts:172-187 (collected = memberships + deposits; net = collected - refunds)` | correct | The summary arithmetic |
 | 42 | revenue_definition_integrity_guard | `backend/src/services/marketingAnalyticsService.ts:6-33 (the enrolments x 4500 figure removed, with the reasoning)` | correct | The removal note |
 | 43 | seat_capacity_and_cohort_fill_forecast | `backend/src/services/access/mgmtRoles.ts:54` | wrong | Line is 'agents' in SECTION_KEYS; the revenue role is at :17-20 |

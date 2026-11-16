@@ -1,6 +1,6 @@
 # Proposal: record who granted each free seat, and why
 
-**For:** Roselyn (sales owner), Ali (approver), and Kes or whoever owns the platform's admin routes.
+**For:** Roselen (sales owner), Ali (approver), and Kes or whoever owns the platform's admin routes.
 **Status:** proposal, not built. It changes the platform, which Vick doesn't own, so it needs Ali or Kes to agree before anyone builds it. It answers decision 2 in [COMPS_FOR_ROSELYN.md](COMPS_FOR_ROSELYN.md).
 **Platform references:** commit `109820a`.
 
@@ -83,7 +83,7 @@ The `audit_logs` table already has every column this needs. `action` takes up to
 [AUDIT_LOG_REVIEW.md](AUDIT_LOG_REVIEW.md) checks what today's log captures against what accountability needs. It adds four smaller changes:
 
 4. **Tell the admin when a grant or revoke fails.** The Free Access button swallows the error today (`PersonHistoryDrawer.tsx:108-110`). This is the smallest fix and doesn't depend on any decision.
-5. **Make the entries readable** by Roselyn, either through a filtered view or as an export Vick reports on. Nothing in the platform lists audit entries today.
+5. **Make the entries readable** by Roselen, either through a filtered view or as an export Vick reports on. Nothing in the platform lists audit entries today.
 6. **Record the admin's real address,** using the existing `describeCaller` helper (`authFailureLog.ts:39`). The saved IP today is Cloudflare's.
 7. **State how long the records are kept.** No code deletes them, and there's no policy.
 
@@ -109,7 +109,7 @@ Once the entries exist and a person passes them in, Vick's report would show, fo
 
 Vick still never grants or revokes a seat.
 
-**Seats that already exist won't get a reason by themselves.** Vick would list them, so Roselyn can record a reason for each or decide to revoke it.
+**Seats that already exist won't get a reason by themselves.** Vick would list them, so Roselen can record a reason for each or decide to revoke it.
 
 ## Failure modes
 
@@ -133,7 +133,7 @@ The change would ship with tests:
 - **Decision 1:** what happens to the paid plan when someone already paying is given a free seat. The log would make that visible, but it doesn't set the rule.
 - **Decision 3:** how the revenue page counts a revoked seat.
 
-## Questions for Roselyn and Ali
+## Questions for Roselen and Ali
 
 1. Option A now, B later?
 2. Are `staff`, `partner` and `agreed_exception` the right categories?

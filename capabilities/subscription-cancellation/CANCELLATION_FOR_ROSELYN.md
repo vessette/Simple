@@ -1,6 +1,6 @@
 # Cancellations: what Vick does, and what needs a decision
 
-**For:** Roselyn (accountable manager, Sales, Enrollment & Subscriptions), Ali (approver).
+**For:** Roselen (accountable manager, Sales, Enrollment & Subscriptions), Ali (approver).
 **Capability:** `sales.subscription_cancellation_and_schedule_suspension`
 **Status:** draft. **Cancelling stops a charge and changes a membership, so it's a person's decision, always.** Vick explains a member's state. It never cancels, suspends a payment schedule or edits a subscription.
 
@@ -74,10 +74,10 @@ Read from the platform code at commit `109820a`. This is what the code does, not
 
 | # | Question | Who | Options |
 |---|---|---|---|
-| 1 | When a cancel skips PaySimple (no schedule id), who should be told? | Roselyn | Tell the member and flag it for a person · flag it for a person only · leave as is (today) |
-| 2 | Should a past-due member be able to cancel, with the schedule suspended? | Roselyn, with Ali | Allow it · send it to a person · leave as is (today) |
+| 1 | When a cancel skips PaySimple (no schedule id), who should be told? | Roselen | Tell the member and flag it for a person · flag it for a person only · leave as is (today) |
+| 2 | Should a past-due member be able to cancel, with the schedule suspended? | Roselen, with Ali | Allow it · send it to a person · leave as is (today) |
 | 3 | Should member reasons and system notes be kept in separate fields? | Ali or Kes | Separate them · tag the system values · leave as is |
-| 4 | What is a member owed on cancelling? | Roselyn, with Ali | Same answer as refund decision 1. Until then, Vick states no terms |
+| 4 | What is a member owed on cancelling? | Roselen, with Ali | Same answer as refund decision 1. Until then, Vick states no terms |
 | 5 | Fix the misleading code comment and the story's citations, and check how citations are generated? | Ali or Kes | Fix both and add a check · fix both only · no |
 
 ## Your answers

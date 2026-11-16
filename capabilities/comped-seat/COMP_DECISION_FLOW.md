@@ -1,7 +1,7 @@
 # Granting and revoking a free seat: the decision, step by step
 
-**For:** Roselyn (sales owner) and Ali (approver), to review and correct.
-**Status:** draft outline. It shows how a free seat (a "comp") is granted and revoked today, where the gaps are, and the points a decision has to fill. **Nothing here is policy yet.** Each step marked *proposed* or *open* waits on Roselyn and Ali. It goes with [COMPS_FOR_ROSELYN.md](COMPS_FOR_ROSELYN.md); the four decisions referred to below are numbered as in that file.
+**For:** Roselen (sales owner) and Ali (approver), to review and correct.
+**Status:** draft outline. It shows how a free seat (a "comp") is granted and revoked today, where the gaps are, and the points a decision has to fill. **Nothing here is policy yet.** Each step marked *proposed* or *open* waits on Roselen and Ali. It goes with [COMPS_FOR_ROSELYN.md](COMPS_FOR_ROSELYN.md); the four decisions referred to below are numbered as in that file.
 
 Platform references are to commit `109820a`.
 
@@ -16,7 +16,7 @@ flowchart TD
     C1 --> D
     C -->|Yes| D{Already on a paid plan?}
     D -->|Yes| OPEN1[[OPEN: decision 1<br/>refuse, stop the paid plan first,<br/>or allow both]]
-    D -->|No| E[Approval<br/>PROPOSED: Ali approves,<br/>Roselyn requests]
+    D -->|No| E[Approval<br/>PROPOSED: Ali approves,<br/>Roselen requests]
     OPEN1 --> E
     E -->|Declined| X[Record the decline and tell the requester]
     E -->|Approved| F[Admin grants it in<br/>/admin/accelerator or<br/>/admin/community-members]
@@ -77,7 +77,7 @@ The platform already keeps some of these fields; the rest would have to be added
 5. **No review date.** A seat runs for about ten years unless someone remembers to revoke it.
 6. **Free seats count as "paid"** wherever enrolments are counted, including the payment pre-flight list. This is decision 4.
 
-## Questions for Roselyn and Ali
+## Questions for Roselen and Ali
 
 - Is this the right flow? In particular: who approves a grant, and does the same person approve a revoke?
 - Are staff, partner and agreed exception the full list of categories?

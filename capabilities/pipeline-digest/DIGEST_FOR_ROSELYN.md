@@ -1,6 +1,6 @@
 # Pipeline digest: what Vick does, and what needs a decision
 
-**For:** Roselyn (accountable manager, Sales, Enrollment & Subscriptions), and Ali.
+**For:** Roselen (accountable manager, Sales, Enrollment & Subscriptions), and Ali.
 **Capability:** `sales.pipeline_digest_for_manager`
 **Status:** draft. Nothing here sends mail or changes a setting.
 
@@ -43,8 +43,8 @@ Read from the platform code at commit `109820a`. This is what the code allows, n
 
 | # | Question | Who | Options |
 |---|---|---|---|
-| 1 | Which figures do you want in your digest, and in what order? | Roselyn | The six above, or a shorter list |
-| 2 | How often, and at what Central time? | Roselyn | Daily · weekly; an hour |
+| 1 | Which figures do you want in your digest, and in what order? | Roselen | The six above, or a shorter list |
+| 2 | How often, and at what Central time? | Roselen | Daily · weekly; an hour |
 | 3 | Should the platform digest send per source and record what it sent? | Ali or Kes | A platform change: one failed source shouldn't stop the digest, and a re-run shouldn't send twice |
 | 4 | Should the digest job run on Central time? | Ali or Kes | A one-line platform change, matching the other jobs |
 

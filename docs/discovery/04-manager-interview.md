@@ -1,10 +1,10 @@
-# Interview plan: 30 minutes with Roselyn, and a proposed weekly check-in
+# Interview plan: 30 minutes with Roselen, and a proposed weekly check-in
 
 **Story:** `sales.RESEARCH-4-MANAGER-INTERVIEW` · **Release:** Discovery and validation
-**Accountable human:** Roselyn · **Prepared by:** Victoria Spencer-Auber · **Date:** 2026-11-10
-**Status:** agenda only. **No meeting is scheduled, and nothing has been sent.** Arranging a time with Roselyn is a person's job, done outside this project.
+**Accountable human:** Roselen · **Prepared by:** Victoria Spencer-Auber · **Date:** 2026-11-10
+**Status:** agenda only. **No meeting is scheduled, and nothing has been sent.** Arranging a time with Roselen is a person's job, done outside this project.
 
-This plan builds on what Roselyn has already said, so it does not ask those questions again:
+This plan builds on what Roselen has already said, so it does not ask those questions again:
 - her five steps;
 - "enrolled means paid";
 - an enrollment guide already exists, but many people still need Zoom help.
@@ -31,7 +31,7 @@ Those answers are recorded in `docs/discovery/03-role-and-da-transition.md`. Pla
 ## 1. Purpose (2 minutes)
 
 Say:
-- All 32 of Vick's capabilities are drafts, and Roselyn has validated none of them (`/agent-domains-mine/sales`: 0 of 32 confirmed).
+- All 32 of Vick's capabilities are drafts, and Roselen has validated none of them (`/agent-domains-mine/sales`: 0 of 32 confirmed).
 - This meeting turns some of them into decisions.
 - Nothing is switched on as a result. Vick stays disabled with 0 tools granted (`/agent-domains-mine`).
 
@@ -46,7 +46,7 @@ Source: these are rows 1, 3 and 10 of `03-role-and-da-transition.md`.
 
 **Q2.** Step 1 (sorting new leads) is done by an AI agent today. You called it "Cory". The platform also has a voice agent, Cora, that calls warm and cold leads (`docs/synthflow-warm-lead-prompt.md:3-4`). Which agent should own step 1 from now on: Cory, Cora, Vick, or a split?
 
-Source: Roselyn asked for "no redundant tasks among AI agents" and for Cory to be mapped before Vick is built. There is no agent-to-agent handoff in the platform (`services/agentDomain/agentDomainReleaseLadder.ts:128-142`), so only a person's decision prevents overlap.
+Source: Roselen asked for "no redundant tasks among AI agents" and for Cory to be mapped before Vick is built. There is no agent-to-agent handoff in the platform (`services/agentDomain/agentDomainReleaseLadder.ts:128-142`), so only a person's decision prevents overlap.
 
 ## 3. What stays human forever (6 minutes)
 
@@ -56,13 +56,13 @@ Source: `capabilities/sales.json`, `human_decision` (12) and `financial_conseque
 
 **Q4.** You said an AI must not keep chasing a cold lead, and that doing so is illegal. Which rule or law is that? Who decides when a lead is cold enough to stop contacting?
 
-Source: Roselyn's call notes. The rule itself is **unknown**; it is not in the repository.
+Source: Roselen's call notes. The rule itself is **unknown**; it is not in the repository.
 
 ## 4. What "good" looks like, in numbers (8 minutes)
 
 **Q5.** Before you trust Vick's warm/cold sorting, how often should it agree with what you find on the call, and over how many leads? (For example: 9 of 10, over 30 leads.)
 
-Source: readiness test row 1 in `03-role-and-da-transition.md`, where the pass mark is left for Roselyn. No evaluation criteria exist in the platform to borrow (`docs/architecture/ai-workforce-management/CURRENT_STATE.md:94`).
+Source: readiness test row 1 in `03-role-and-da-transition.md`, where the pass mark is left for Roselen. No evaluation criteria exist in the platform to borrow (`docs/architecture/ai-workforce-management/CURRENT_STATE.md:94`).
 
 **Q6.** When a lead doesn't enroll, which reasons do you want recorded? Name four to six. (For example: timing, price, not a fit, no response, chose another program.)
 
@@ -81,9 +81,9 @@ Examples to prompt with:
 - any message reaching a lead without a person approving it;
 - contacting a lead marked not interested.
 
-Source: an agent is stopped by setting it to not enabled (`models/AiAgent.ts:331`). Roselyn can't do that herself today (section 6).
+Source: an agent is stopped by setting it to not enabled (`models/AiAgent.ts:331`). Roselen can't do that herself today (section 6).
 
-## 6. Blocker to raise: Roselyn can't reach the agent (2 minutes)
+## 6. Blocker to raise: Roselen can't reach the agent (2 minutes)
 
 **Update, 2026-11-10:** fixed. Ali gave her the `agents` section grant. In the meeting, ask her to sign out and back in once, then check she can open Vick's page. The text below is the original blocker, kept for the record.
 
@@ -110,7 +110,7 @@ Ask only whether she wants the login. Granting it is Ali's decision.
 |---|---|
 | **Day** | Tuesday |
 | **Duration** | 20 minutes |
-| **Time** | Roselyn chooses, within her hours of 9 AM to 5 PM CST, Monday to Friday (`backend/src/seeds/seedKbData.ts:67-68`) |
+| **Time** | Roselen chooses, within her hours of 9 AM to 5 PM CST, Monday to Friday (`backend/src/seeds/seedKbData.ts:67-68`) |
 | **Who arranges it** | A person, outside this project |
 
 **The three things it reviews:**
@@ -137,7 +137,7 @@ Ask only whether she wants the login. Granting it is Ali's decision.
 
 ---
 
-## Roselyn's answers
+## Roselen's answers
 
 *Left empty on purpose. Fill in after the interview, with the date it took place.*
 
@@ -161,7 +161,7 @@ Ask only whether she wants the login. Granting it is Ali's decision.
 
 **Access (can she open Vick's page after signing out and in?):**
 
-**Weekly check-in (day and time agreed?):** Wednesday mornings. Arranged with Roselyn outside this project, as reported by Victoria on 2026-11-10. This differs from the Tuesday proposed in section 7.
+**Weekly check-in (day and time agreed?):** Wednesday mornings. Arranged with Roselen outside this project, as reported by Victoria on 2026-11-10. This differs from the Tuesday proposed in section 7.
 
 ---
 
@@ -169,14 +169,14 @@ Ask only whether she wants the login. Granting it is Ali's decision.
 
 | Reference | What it shows |
 |---|---|
-| `docs/discovery/03-role-and-da-transition.md` | Roselyn's five steps, earlier answers, readiness tests with pass marks left open |
+| `docs/discovery/03-role-and-da-transition.md` | Roselen's five steps, earlier answers, readiness tests with pass marks left open |
 | `docs/discovery/02-agent-anatomy.md` | Coordination absent; where safeguards and inputs live |
 | `docs/discovery/01-system-classes.md`, query Q1 | 32 capabilities, 12 human-decision, 8 move money |
 | `services/agentDomain/agentDomainRegistry.ts:82-84`, `:188-189` | The access blocker |
 | `services/agentDomain/agentDomainReleaseLadder.ts:128-142` | No agent-to-agent handoff |
 | `models/AiAgent.ts:331` | `enabled`, how an agent is switched off |
 | `models/AgentRoleCharter.ts:88` | `authority_forbidden` |
-| `backend/src/seeds/seedKbData.ts:67-68` | Roselyn's working hours and timezone |
+| `backend/src/seeds/seedKbData.ts:67-68` | Roselen's working hours and timezone |
 | `docs/synthflow-warm-lead-prompt.md:3-4` | The Cora voice agent handles warm leads |
 | `docs/architecture/ai-workforce-management/CURRENT_STATE.md:94` | No evaluation criteria exist to borrow |
 | `/agent-domains-mine`, `/agent-domains-mine/sales`, `/coverage` (live, November 2026) | Vick disabled, 0 tools; 0 of 32 confirmed; the four-price blocker |

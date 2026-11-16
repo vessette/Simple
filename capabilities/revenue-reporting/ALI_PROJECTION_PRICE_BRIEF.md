@@ -50,5 +50,5 @@ These are totals only. They stay out of the repo, because the repo is public.
 ## Once you've decided
 
 - **Record the decision and its reason** in ESCALATION-002 and in the answers section of [REVENUE_FOR_ROSELYN.md](REVENUE_FOR_ROSELYN.md).
-- **Run Checklist 1** in [CHECKLIST_AND_ERROR_STRATEGY.md](CHECKLIST_AND_ERROR_STRATEGY.md): set the value, have Kes remove the defaults, check the projections move as expected, and tell Roselyn.
+- **Run Checklist 1** in [CHECKLIST_AND_ERROR_STRATEGY.md](CHECKLIST_AND_ERROR_STRATEGY.md): set the value, have Kes remove the defaults, check the projections move as expected, and tell Roselen.
 - **Update Vick's notes** that say production holds $4,500.

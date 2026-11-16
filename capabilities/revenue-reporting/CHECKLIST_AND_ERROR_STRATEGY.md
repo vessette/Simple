@@ -1,6 +1,6 @@
 # Checklist for updating revenue figures, and one way to handle failed lookups
 
-**For:** Roselyn (sales owner), Ali (approver), and whoever holds an admin role with the `system` section (owner, admin or platform). Kes for the code steps.
+**For:** Roselen (sales owner), Ali (approver), and whoever holds an admin role with the `system` section (owner, admin or platform). Kes for the code steps.
 **Status:** proposal. Platform references are to commit `109820a`. It follows [PLAN_PRICE_CHECK_AND_GOVERNANCE.md](PLAN_PRICE_CHECK_AND_GOVERNANCE.md).
 
 ## How the projection price gets into the system
@@ -9,7 +9,7 @@
 2. **Anything that projects revenue asks for it** with `getSetting('price_per_enrollment')`. If the row exists, its value is used. If not, the code falls back to a **default of $4,500** written into the code (`settingsService.ts:9`, `:72-76`).
 3. **One place adds a second fallback,** `|| 4500`, in case the value can't be read as a number (`governanceService.ts:212`).
 4. **Production holds $4,500 in the row** (per the platform's price check, `checkPriceAgreement.js:281-283`). So the row, the default and the fallback all say $4,500.
-5. **It's changed on the admin settings page** (`PATCH /api/admin/settings`, `settingsRoutes.ts:37`). That needs an admin login whose role includes the `system` section (`mgmtSectionGate.ts:242`; `mgmtRoles.ts:78-80`, `:138`). Roselyn's `revenue` role can't change it, and shouldn't.
+5. **It's changed on the admin settings page** (`PATCH /api/admin/settings`, `settingsRoutes.ts:37`). That needs an admin login whose role includes the `system` section (`mgmtSectionGate.ts:242`; `mgmtRoles.ts:78-80`, `:138`). Roselen's `revenue` role can't change it, and shouldn't.
 6. **Every change is recorded,** with who made it, the old value and the new one (`settingsService.ts:104-118`).
 
 Every line where $4,500 is set in the code, and a proposal to replace them with one function, are in [DEFAULT_4500_CHANGES.md](DEFAULT_4500_CHANGES.md).
@@ -23,7 +23,7 @@ Every line where $4,500 is set in the code, and a proposal to replace them with 
 | **Ali** | Decides the value, and records why. He set the rule on 10 September: labelled, read from the setting, and the $4,500 default changed. |
 | **An admin with the `system` section** | Changes the setting on the admin settings page. |
 | **Kes** | Removes the $4,500 default and fallback from the code, so an unset value shows "unavailable" rather than $4,500. |
-| **Roselyn** | Told before the change, and checks the projections afterwards. She owns the revenue outcome, and her page shows the results. |
+| **Roselen** | Told before the change, and checks the projections afterwards. She owns the revenue outcome, and her page shows the results. |
 | **Vick** | No part in the change. Afterwards, it updates its notes that say production holds $4,500. |
 
 ## Checklist 1: changing the projection price
@@ -31,7 +31,7 @@ Every line where $4,500 is set in the code, and a proposal to replace them with 
 **Before**
 - [ ] Ali has decided the value, and the reason is written down. For a subscription the candidates are the first year ($1,788), the first month ($149 or $199), or the average a member pays over their time with us.
 - [ ] The decision is recorded where the team keeps decisions: the open escalation (ESCALATION-002) and the revenue write-up.
-- [ ] Roselyn knows the change is coming, and roughly how much projected figures will move.
+- [ ] Roselen knows the change is coming, and roughly how much projected figures will move.
 - [ ] Note the current projected figures on the revenue dashboard and the opportunities page, so the change can be checked.
 
 **The change**
@@ -48,7 +48,7 @@ Every line where $4,500 is set in the code, and a proposal to replace them with 
 - [ ] Each projection shows the new assumed price beside it ("assumes $X per enrolment, from settings").
 - [ ] The projected figures moved by the expected ratio (new price ÷ $4,500), and nothing else changed.
 - [ ] Recorded figures (collected, refunds, MRR) didn't move. They never read this setting, so if one moved, something is wrong.
-- [ ] Tell Roselyn what changed and when, in Central time.
+- [ ] Tell Roselen what changed and when, in Central time.
 - [ ] Vick's notes that say "production holds $4,500" are updated.
 
 ## Checklist 2: when the membership price itself changes
@@ -59,7 +59,7 @@ Every line where $4,500 is set in the code, and a proposal to replace them with 
 - [ ] The scholarship and any other figure worked out from the price changes with it. After the plan, these are calculated, not typed.
 - [ ] Run Checklist 1 for the projection setting at the same time.
 - [ ] Decide what existing members pay at their next renewal, and check what the renewal code actually charges before the change goes live. I haven't checked this.
-- [ ] Tell Roselyn, and anyone who quotes prices to prospects.
+- [ ] Tell Roselen, and anyone who quotes prices to prospects.
 - [ ] Vick's copy of the plan list is refreshed, and its tests are re-run.
 
 ## A consistent way to handle failed lookups on the governance page

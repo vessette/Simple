@@ -60,7 +60,7 @@ test('happy path: holder, since when, and why is unknown because nothing records
 test('a comp alongside an active paid plan: the revenue effect is flagged and the rule left to people', () => {
   const c = run().active.find((p) => p.row_id === 's-c1');
   assert.equal(get(c, 'revenue').value, 'excluded: counted as Free Access, $0');
-  assert.match(c.flags[0], /paid annual subscription \(row s-c0\) are both active.*this paid plan is left out of MRR.*amount_paid to 0.*Roselyn \(sales owner\) and Ali \(approver\) to decide/);
+  assert.match(c.flags[0], /paid annual subscription \(row s-c0\) are both active.*this paid plan is left out of MRR.*amount_paid to 0.*Roselen \(sales owner\) and Ali \(approver\) to decide/);
   // Make the paid row the newer one: now the comp is the row that goes uncounted.
   const subs = structuredClone(fx.subscriptions);
   subs.find((s) => s.id === 's-c0').created_at = '2026-10-15T15:00:00Z';
@@ -95,7 +95,7 @@ test('never proposes a grant as a routine step', () => {
     assert.throws(() => assertNoRoutineGrant([bad]), /routine step/, bad);
   }
   const r = run();
-  assert.match(r.decision, /decision for Roselyn \(sales owner\) and Ali \(approver\)/);
+  assert.match(r.decision, /decision for Roselen \(sales owner\) and Ali \(approver\)/);
   const text = JSON.stringify(r);
   assert.doesNotMatch(text, /next step|recommend(?:s|ed)? (?:granting|a comp|comping|revoking)/i);
   assert.ok(!r.active.concat(r.revoked).some((p) => p.enrollment_id === 'e-f'), 'a paying member with no comp is never listed');

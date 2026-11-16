@@ -1,6 +1,6 @@
 # Payment confirmation and seats: what Vick does, and what needs a decision
 
-**For:** Roselyn (accountable manager, Sales, Enrollment & Subscriptions), and Ali.
+**For:** Roselen (accountable manager, Sales, Enrollment & Subscriptions), and Ali.
 **Capability:** `sales.payment_confirmation_and_seat_grant`
 **Status:** draft. **Confirming a payment grants a paid seat, so it's a person's decision, always.** Vick explains; it never marks anyone paid, gives access or changes a seat.
 
@@ -134,7 +134,7 @@ Quincy drafted the platform change from the code. Nothing is built or switched o
 
 | # | Question | Who | Options |
 |---|---|---|---|
-| 1 | What should happen when a payment is returned? | Roselyn, with Ali | Mark it for a person to review · remove access and free the seat · leave as is (today) |
+| 1 | What should happen when a payment is returned? | Roselen, with Ali | Mark it for a person to review · remove access and free the seat · leave as is (today) |
 | 2 | What single rule says a payment counts as paid, used by the notice handler, the 30-minute job and reconciliation alike? Is the 30-minute job on in production? | Ali or Kes | Settled or Posted only (an Authorized card waits, with its payment id recorded so it can be promoted) · Authorized counts too (as the 30-minute job does today) · leave the three rules as they are |
 | 3 | Should failed first membership payments be recorded? | Ali or Kes | Record them on the membership · leave as is |
 | 4 | Should the platform record which payment notices it has handled? | Ali or Kes | A store of handled notices, so a repeat changes nothing |
@@ -145,7 +145,7 @@ Quincy drafted the platform change from the code. Nothing is built or switched o
 
 **Date:** 2026-11-12 (answers 1 and 2 from Ali, by email to the platform owners)
 
-**1. Returned payments:** A reversal on a paid student drops them to Week 0, the free preview tier, and leaves their login alone. There's no seat to free: the seat count comes from paid enrollments. This is Ali's later decision, as set out in Quincy's spec draft of 2026-11-12. It replaces Ali's first answer, "remove access and free the seat". Ali: if Roselyn wants a review step first, she should say so and he'll change it. **Roselyn to confirm.**
+**1. Returned payments:** A reversal on a paid student drops them to Week 0, the free preview tier, and leaves their login alone. There's no seat to free: the seat count comes from paid enrollments. This is Ali's later decision, as set out in Quincy's spec draft of 2026-11-12. It replaces Ali's first answer, "remove access and free the seat". Ali: if Roselen wants a review step first, she should say so and he'll change it. **Roselen to confirm.**
 
 **2. Payment status:** `Settled` and `Posted` only. `Authorized` doesn't open access or take a seat. All three paths should follow the same rule; the 30-minute job stays off until they do.
 

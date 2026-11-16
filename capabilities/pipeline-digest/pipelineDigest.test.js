@@ -7,7 +7,7 @@ const fx = JSON.parse(readFileSync(new URL('./fixtures/sources.json', import.met
 const ok = () => structuredClone(fx.all_ok);
 const partial = () => structuredClone(fx.partial);
 const NOW = new Date('2026-11-12T14:00:00Z'); // 8:00 AM CST
-const base = (over = {}) => ({ sources: ok(), settings: { digest_enabled: true }, now: NOW, recipient: 'roselyn@example.com', sentKeys: [], ...over });
+const base = (over = {}) => ({ sources: ok(), settings: { digest_enabled: true }, now: NOW, recipient: 'roselen@example.com', sentKeys: [], ...over });
 const allFigures = (d) => d.sections.flatMap((s) => s.figures ?? []);
 
 // Acceptance: every figure carries its source, and an unavailable source is reported as
@@ -87,8 +87,8 @@ test('digest disabled in settings: nothing produced, and it says so', () => {
 
 test('re-run on the same Central day: nothing a second time; the next day is new', () => {
   const first = composeDigest(base());
-  assert.equal(first.key, '2026-11-12|roselyn@example.com');
-  const again = composeDigest(base({ sentKeys: [first.key], recipient: 'Roselyn@Example.com' }));
+  assert.equal(first.key, '2026-11-12|roselen@example.com');
+  const again = composeDigest(base({ sentKeys: [first.key], recipient: 'Roselen@Example.com' }));
   assert.equal(again.produced, false);
   assert.match(again.reason, /already sent/);
   const tomorrow = composeDigest(base({ sentKeys: [first.key], now: new Date('2026-11-13T14:00:00Z') }));
@@ -97,7 +97,7 @@ test('re-run on the same Central day: nothing a second time; the next day is new
 
 test('the date key is the Central date, not the UTC date', () => {
   const lateEvening = composeDigest(base({ now: new Date('2026-11-13T03:30:00Z') })); // 9:30 PM CST on the 12th
-  assert.equal(lateEvening.key, '2026-11-12|roselyn@example.com');
+  assert.equal(lateEvening.key, '2026-11-12|roselen@example.com');
 });
 
 test('questions it cannot answer are refused with the list it can', () => {
