@@ -608,8 +608,9 @@ const NEXT = [
 ];
 const WAIT = [
   ["Sales manager", "Pass marks, warm-lead signals, pause decision."],
-  ["Platform owner", "Change request sent 11 Nov: record who sets a lead's offer, and who files it. Re-scoring confirmed running."],
-  ["Platform owner and builder", "Payment fix: rule decided 12 Nov; approval of the fix and its priority still with the program lead. Failed membership payments and handled notices still open."],
+  ["Program lead", "Nine action points from the platform owner's review on 16 Nov, covering every platform fix raised so far: the per-enrolment price for projections and removing the $4,500 defaults, what \"revenue\" means in reports, the governance page showing failures as zeros, widening the price check, free-seat rules, the missed-payment job, payment behaviour decisions, offer routing, and who files the \"who set this offer\" change. Nothing is approved for build yet; until then Vick reports unknown or unavailable."],
+  ["Program lead", "Approve three read-only checks for the builder's agent, and their priority: hidden failures on the governance page, scheduled jobs that leave no run record, and payment idempotency (waits for the payment spec). Two data exports also needed."],
+  ["Program lead", "Payment fix: rule decided 12 Nov (Settled or Posted only, in all five places); approval of the spec and its priority still open, and whether the missed-payment job is one of the five."],
   ["Program lead", "Fourteen questions sent 11 Nov: any $4,500 checkout links, expired approvals, who approves outbound batches, access after a returned payment or a refund, repair agents, digest fixes, unrecognised plans, credit alerts, the refund ledger. Still open: who files platform changes, and a date."],
   ["Admissions operations", "Asked 11 Nov which of three versions of the refund terms is final; program lead copied."],
   ["Sales and marketing managers", "Owners for two legacy jobs."],
@@ -626,6 +627,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-16", "Platform owner reviewed every open fix: all are changes to the live platform, so each needs the program lead's approval and a named owner, and none is approved for build yet. Nine action points are now with the program lead. Two citation items (correcting the two repeated code references in the sales specs, and a second, independent check of the 50 sampled references) stay with this project."],
   ["2026-11-16", "Team licenses merged: Vick quotes team prices only from the approved claims registry, and only when every copy agrees. Found that redeeming a seat does not check whether the sponsor has paid, that a used code can be reused after its enrolment is deleted, and that the redemption form reveals which codes are real; a revised specification for the platform owner is in the repository. No sponsor has codes yet, so nothing has been exposed."],
   ["2026-11-16", "Renewal reminder schedule merged: Vick says who is due which reminder and on what date in Central time, with the working, and calls a reminder sent only when the platform's record says so. Whether reminders are switched on in production is still to be confirmed."],
   ["2026-11-16", "Billing watch explainer merged: Vick reports all six billing checks as found, passed or unknown, and explains each finding with the check that produced it. Found the expiring-card check never runs (card expiry is never fetched) and an unreadable payment gateway passes silently; fixes and questions for the platform owner and program lead drafted."],
