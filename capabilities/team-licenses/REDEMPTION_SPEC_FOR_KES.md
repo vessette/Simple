@@ -16,7 +16,7 @@
 | B | Code not found | 404 | "Invalid redemption code." (`:182-184`) | Nothing (a miss) |
 | C | Code expired or reassigned | 409 | "This redemption code is no longer active." (`:186-188`) | **That the code is real** |
 | D | Code already redeemed, enrolment exists | 200 | "This code was already redeemed. Welcome back." plus **`enrollmentId` and `cohortId`** (`:190-201`, `:283-289`). The email is **not** compared. | **The code is real, and another person's internal ids** |
-| E | Code redeemed but its enrolment is missing | 201 | Falls through and creates a **new** paid enrolment for whoever submitted (`:204`) | **A redeemed code can be redeemed again, by anyone** |
+| E | Code redeemed but its enrolment has been deleted | 201 | Deleting an enrolment **clears the seat's link** (`onDelete: 'SET NULL'`, `models/index.ts:1266`). The seat stays `redeemed`, so the idempotent check (`:192`) no longer matches and redemption creates a **new** paid enrolment for whoever submitted (`:204`) | **A redeemed code can be redeemed again, by anyone** |
 | F | Seat's sponsor not found | 409 | "Sponsor account not found for this seat." (`:208-210`) | That the code is real, and our data is broken |
 | G | No sponsor cohort open | 409 | "No sponsor cohort is currently open for redemption." (`:212-215`) | That the code is real, and how we're set up |
 | H | Valid, unused code | 201 | "You're in…" plus `enrollmentId` and `cohortId` (`:283-289`) | Success |
@@ -97,8 +97,9 @@ Today the code's state is partly worked out from the enrolment. If the enrolment
    - a check constraint: if `status` is redeemed or reassigned, then `redeemed_at` is not null;
    - a trigger that rejects any change from redeemed, reassigned or expired back to available, or any change to `redeemed_at` once it's set.
 3. **No fall-through.** A redeemed seat whose enrolment is missing gets the identical failure response and an alert. A person decides what to do: restore the enrolment, or issue a new code to the right person.
-4. **Protect the link.** The seat's link to its enrolment should be `ON DELETE RESTRICT`, so an enrolment tied to a seat can't be deleted. Withdrawing someone changes their enrolment's status instead. The model doesn't set a delete rule (`SponsorSeat.ts:54-58`), so the live behaviour depends on how the table was created. **Kes:** what does the actual constraint in the database say?
-5. **Every change is logged** in the existing sponsor audit log: who, when, from which state, to which state.
+4. **Protect the link.** Today the association says `onDelete: 'SET NULL'` (`models/index.ts:1266`): deleting an enrolment silently unlinks its seat, which is exactly what makes row E possible. Change it to `RESTRICT`, so an enrolment tied to a seat can't be deleted. Withdrawing someone changes their enrolment's status instead. Enrolments do get hard-deleted: the admin test-data cleanup does it (`productionCleanupRoute.ts:361`), so it would need to release or skip seat-linked enrolments deliberately. **Kes:** does the live database constraint match the association (`SET NULL`)? See the query in section 8.
+5. **Deleting a sponsor deletes its seats.** `Sponsor.hasMany(SponsorSeat, { onDelete: 'CASCADE' })` (`models/index.ts:1262`) wipes the redemption history with the sponsor. Sponsors should be cancelled, not deleted, or the cascade changed to `RESTRICT`.
+6. **Every change is logged** in the existing sponsor audit log: who, when, from which state, to which state.
 
 ## 5. Monitoring
 
@@ -145,4 +146,5 @@ The seat-row lock, one enrolment per code, and the input validation all stay as 
 | Per-code pause threshold | Kes |
 | Store codes hashed or readable | Kes and Ali |
 | Is the outcome table in section 1 complete? What does `errorHandler` return? | Kes |
-| What delete rule does the live seat-to-enrolment link have? | Kes |
+| Does the live seat-to-enrolment link match the association's `SET NULL`? One read-only query answers it: `SELECT conname, confdeltype FROM pg_constraint WHERE conrelid = 'sponsor_seats'::regclass AND contype = 'f';` (`n` = set null, `r` = restrict, `a` = no action, `c` = cascade) | Kes |
+| Should the test-data cleanup ever delete an enrolment that holds a sponsor seat? | Kes |
