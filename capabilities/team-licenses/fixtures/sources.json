@@ -1,0 +1,20 @@
+{
+  "platform": "ColaberryEnterprise_AI_LeadershipAccelerator @ 62c4bde (main, 16 Nov 2026)",
+  "claims": [
+    { "key": "pricing.team", "publicWording": "$1,200", "verification": "VERIFIED", "capability": "live", "lastVerifiedAt": "2026-08-07", "approvedRoutes": ["/pricing", "/portal/plans", "/portal/campus"], "cite": "frontend/src/config/claimsRegistry.ts:486-495" },
+    { "key": "pricing.department", "publicWording": "$950 at department scale", "verification": "VERIFIED", "capability": "live", "lastVerifiedAt": "2026-08-07", "approvedRoutes": ["/pricing", "/portal/plans", "/portal/campus"], "cite": "frontend/src/config/claimsRegistry.ts:497-506" },
+    { "key": "pricing.services", "publicWording": "Scoped on a call", "verification": "VERIFIED", "capability": "live", "lastVerifiedAt": "2026-08-07", "approvedRoutes": ["*"], "cite": "frontend/src/config/claimsRegistry.ts:508-517" },
+    { "key": "pricing.retired.4500", "publicWording": "$4,500", "verification": "DO_NOT_PUBLISH", "capability": "n/a", "lastVerifiedAt": "2026-08-07", "approvedRoutes": [], "cite": "frontend/src/config/claimsRegistry.ts:519-528" },
+    { "key": "pricing.repo.1788", "publicWording": "$1,788 per seat, per year", "verification": "DO_NOT_PUBLISH", "capability": "n/a", "lastVerifiedAt": "2026-08-07", "approvedRoutes": [], "cite": "frontend/src/config/claimsRegistry.ts:530-543" }
+  ],
+  "copies": [
+    { "claim": "pricing.team", "where": "frontend/src/pages/SponsorshipPage.tsx:176 (Team tier, per seat / year)", "value": "$1,200" },
+    { "claim": "pricing.department", "where": "frontend/src/pages/SponsorshipPage.tsx:183 (Department tier, per seat / year)", "value": "$950" },
+    { "claim": "pricing.department", "where": "frontend/src/pages/PricingPage.tsx:22 (team licenses from)", "value": "$950" }
+  ],
+  "tiers": [
+    { "name": "Team", "seats": "5 to 14 seats", "claim": "pricing.team", "unit": "per seat, per year", "cite": "SponsorshipPage.tsx:173-179" },
+    { "name": "Department", "seats": "15 to 49 seats", "claim": "pricing.department", "unit": "per seat, per year", "cite": "SponsorshipPage.tsx:180-187" },
+    { "name": "Enterprise", "seats": "50 or more seats", "claim": "pricing.services", "unit": "volume pricing", "cite": "SponsorshipPage.tsx:188-194" }
+  ]
+}
