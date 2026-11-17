@@ -491,7 +491,7 @@ const CAPS = [
   ["payment_confirmation_and_seat_grant", "enroll", "Confirm payment and grant the seat", "Explains a person's payment, seat and payment path, each from its record; unknown when no record exists.", "implemented", 5, [1,1], "done", "capabilities/payment-confirmation/"],
   ["payment_handoff_integrity", "enroll", "Keep the payment handoff intact", "The person who agreed to buy is the person charged.", "partial", 6, [1,1], "done", "capabilities/payment-handoff/"],
   ["app_originated_payment_reconciliation", "enroll", "Reconcile payments the app missed", "Explains why one payment is or is not in scope for the missed-webhook job, citing the amount match, the time window and the customer-id check every time; never says a payment should be linked.", "implemented", 5, [1,1], "done", "capabilities/app-payment-reconcile/"],
-  ["payment_webhook_replay_dedup_watch", "enroll", "Watch for duplicate payment notices", "A replay can't grant a second seat or skip a billing period.", "absent", 6, [0,1], "later"],
+  ["payment_webhook_replay_dedup_watch", "enroll", "Watch for duplicate payment notices", "A replay can't grant a second seat or skip a billing period.", "absent", 6, [1,1], "done", "capabilities/webhook-replay/"],
   ["subscription_checkout_and_plan_activation", "enroll", "Membership checkout and activation", "Answers plan, price, credit and date questions from the price list and the member's record; unknown is never guessed.", "implemented", 4, [1,1], "done", "capabilities/subscription-checkout/"],
   ["team_license_and_sponsored_seat_administration", "enroll", "Team licenses and sponsored seats", "Employer seat blocks, each redeemed once.", "implemented", 4, [1,1], "done", "capabilities/team-licenses/"],
   ["refund_and_void_issuance", "money", "Refunds and voids", "Answers refund-ledger and policy questions from the ledger rows and the policy text; states no unapproved terms and never says a refund will happen.", "implemented", 2, [1,1], "done", "capabilities/refund-and-void/"],
@@ -629,6 +629,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-16", "Payment notice replays merged: the four guards that stop a repeated payment notice doing harm, and five gaps they leave, including a repeated notice re-sending the welcome email. The platform keeps no record of handled notices; a free log search and a small notice table are proposed to the program lead."],
   ["2026-11-16", "Quote packets merged: draft offer packets from approved prices only, with a list of everything a person must decide, and no totals, discounts or sending. Churn analysis has its measurement plan; the reason count waits for someone with database access."],
   ["2026-11-16", "Reporting duties prepared but not done: four candidate reports and the interview questions are ready, and the story stays open until the sales manager and admissions operations are interviewed. The program lead had already confirmed that \"DA\" means the Data Analytics bootcamp, so the story's wording needs changing at the source."],
   ["2026-11-16", "Decision queue merged: one decision the sales manager needs to make for each of the 32 capabilities, all awaiting, with how a decision is recorded and undone. Found that the platform's approval page auto-approves anything left for 4 hours, which breaks the rule that time never decides; a note with options is with the program lead."],
@@ -690,9 +691,9 @@ const storiesTotal = 7 + CAPS.length + LADDER;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["52/66", "acceptance criteria passed", 52 / 66],
+  ["53/66", "acceptance criteria passed", 53 / 66],
   ["215", "automated tests, all passing", 1],
-  ["71", "pull requests merged", 1],
+  ["72", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 
