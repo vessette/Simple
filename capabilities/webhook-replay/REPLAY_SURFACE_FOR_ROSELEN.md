@@ -37,9 +37,22 @@ Two more paths, also checked:
 - **U2:** run the welcome steps only when the payment was *newly* applied, not when the enrolment was already paid.
 - **U4:** check that the failed payment is the current one before marking someone past due.
 
+## How to start knowing, in two steps
+
+**Step 1, now, with no code change: look at what's already logged.** Every accepted notice already writes one log line with its notice id (`webhookController.ts:56-58`). A read-only search of the server's logs for the same notice id appearing more than once answers "has a replay happened?" for as far back as the logs go. It also answers "how far back is that?", and both are useful. Someone with server access runs it: Kes, with Ali's OK. PaySimple's own account may also show which notices it re-sent, which is worth a look by whoever holds the PaySimple login.
+
+**Step 2, a platform change: record every notice as it arrives.** A small table of handled notices:
+- the notice id, which must be unique;
+- when it arrived, its type and the payment id;
+- what the platform did with it.
+
+The handler would record the notice **first** and skip it if the id is already there. That closes U1, U3 and U5 in one move, and from then on every replay is visible and stopped. It's a database change, so it needs Ali's approval and Kes to build it. This watch only describes it.
+
+**Why step 1 first:** it's free, it can be done this week, and it shows whether step 2 is urgent (replays seen) or a safeguard (none seen).
+
 ## What I need
 
-- **Ali and Kes:** do U1 to U5 match your understanding, and is the notice-tracking table worth approving?
+- **Ali and Kes:** do U1 to U5 match your understanding? Can someone run the step 1 log search, and is the step 2 notice table worth approving?
 - **Roselen:** nothing to decide here yet. U2 and U4 are the ones members would notice (a second welcome email, or being wrongly marked past due), so they're worth knowing about.
 
 The same table, in a form a test can check, is in [replaySurface.json](replaySurface.json). Tests: [replaySurface.test.js](replaySurface.test.js), 4 tests, checking that all four guards are named with their code and that every uncovered shape is stated.
