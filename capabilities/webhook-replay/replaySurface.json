@@ -1,56 +1,20 @@
 {
   "platform": "ColaberryEnterprise_AI_LeadershipAccelerator @ e8e5c44 (main, 16 Nov 2026)",
+  "public_version": "The exact replay shapes, why each guard misses them, and the code references are shared with Kes and Ali privately, not published here.",
   "no_delivery_store": {
-    "statement": "There is no delivery-level dedup store: no webhook_events table, no unique index on event_id. The event id is written to the log and nowhere else, so whether a replay ever happened cannot be checked afterwards.",
-    "cite": "webhookController.ts:56-58"
+    "statement": "There is no delivery-level dedup store: no record of which notices have already been handled."
   },
   "guards": [
-    {
-      "id": "G1",
-      "path": "One-time enrolment payment (payment_created with an enrolment reference)",
-      "entry": "webhookController.ts:118",
-      "key": "Enrolment payment_status: if already 'paid', return the enrolment unchanged",
-      "cite": "enrollmentService.ts:117",
-      "covers": "A repeated notice does not mark the enrolment paid twice or count the seat twice",
-      "does_not_cover": ["U2", "U3"]
-    },
-    {
-      "id": "G2",
-      "path": "Subscription checkout (payment_created with a SUB- reference)",
-      "entry": "webhookController.ts:111",
-      "key": "Subscription status: if already 'active', return it unchanged",
-      "cite": "subscriptionService.ts:434",
-      "covers": "A repeated notice does not activate the subscription twice",
-      "does_not_cover": ["U3"]
-    },
-    {
-      "id": "G3",
-      "path": "Recurring (scheduled) charge (payment_created with no reference, matched by schedule)",
-      "entry": "webhookController.ts:90",
-      "key": "Payment id: skip if it equals the payment id last applied to the subscription. Deliberately not status, which would make every renewal a no-op.",
-      "cite": "subscriptionScheduleService.ts:204, :224",
-      "covers": "An immediate repeat of the latest scheduled payment does not advance the period twice",
-      "does_not_cover": ["U1", "U3"]
-    },
-    {
-      "id": "G4",
-      "path": "Reconciliation sweep linking a missed payment (not a notice, but it grants the same seat)",
-      "entry": "paymentReconciliationService.ts:204",
-      "key": "Re-reads the enrolment; if already 'paid', does nothing",
-      "cite": "paymentReconciliationService.ts:209-210",
-      "covers": "A sweep after a notice already applied does not count the seat again",
-      "does_not_cover": ["U3"]
-    }
-  ],
-  "also_checked": [
-    { "path": "Scheduled charge failed or returned", "key": "Marks past due only WHERE status = 'active'", "cite": "subscriptionScheduleService.ts:263-266", "does_not_cover": ["U4"] },
-    { "path": "One-time payment returned (payment_returned with an enrolment reference)", "key": "No handler: only payment_failed is acted on", "cite": "webhookController.ts:175", "does_not_cover": [] }
+    { "id": "G1", "path": "One-time enrolment payment", "covers": "The seat isn't counted twice" },
+    { "id": "G2", "path": "Subscription checkout", "covers": "The subscription isn't activated twice" },
+    { "id": "G3", "path": "Recurring (automatic) charge", "covers": "The billing period isn't extended twice by the same charge" },
+    { "id": "G4", "path": "Reconciliation sweep (links missed payments)", "covers": "A sweep after a notice doesn't count the seat again" }
   ],
   "uncovered": [
-    { "id": "U1", "shape": "A replay of an older scheduled payment (not the latest one)", "effect": "Its payment id differs from the last one stored, so the billing period advances again: a member gets a period they did not pay for.", "why": "G3 compares only with the last applied payment id (subscriptionScheduleService.ts:224)." },
-    { "id": "U2", "shape": "A repeat of a one-time enrolment payment notice", "effect": "The seat is safe, but the welcome email is sent again (when automatic email is on) and the class-readiness campaign sign-up runs again.", "why": "G1 returns the already-paid enrolment, and the handler runs the follow-on steps whenever an enrolment comes back (webhookController.ts:147, :162; automationService.ts:49-60 has no dedup)." },
-    { "id": "U3", "shape": "Two copies of the same notice arriving at the same moment", "effect": "Both can pass the 'already paid / already active / same payment id' check before either saves, so a seat can be counted twice and emails sent twice.", "why": "Each guard is read-then-write with no row lock or unique key (enrollmentService.ts:111-117; paymentReconciliationService.ts:209-210)." },
-    { "id": "U4", "shape": "A stale failure notice replayed after the member has recovered", "effect": "A member who has since paid and is active is marked past due again.", "why": "The past-due update checks only that the row is active, not which payment failed (subscriptionScheduleService.ts:263-266)." },
-    { "id": "U5", "shape": "Any replay at all", "effect": "Cannot be detected after the fact.", "why": "No delivery-level record exists; the event id is only logged (webhookController.ts:56-58)." }
+    { "id": "U1", "effect": "A billing period is extended without a matching payment" },
+    { "id": "U2", "effect": "A member gets a second welcome email" },
+    { "id": "U3", "effect": "A seat or an email is counted twice" },
+    { "id": "U4", "effect": "A member who has paid is shown as past due" },
+    { "id": "U5", "effect": "A repeat can't be spotted afterwards" }
   ]
 }

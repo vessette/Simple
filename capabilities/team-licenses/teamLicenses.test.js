@@ -76,3 +76,12 @@ test('malformed input is refused; nothing is modified', () => {
   assert.deepEqual(tiers(s), tiers(s));
   assert.deepEqual(s, copy);
 });
+
+// Failure path: this repository is public. Until the redemption fixes land, the spec must not
+// regain today's step-by-step behaviour (code references, the outcome table, id leaks).
+test('the public redemption spec carries no code references or step-by-step weak spots', () => {
+  const spec = readFileSync(new URL('./REDEMPTION_SPEC_FOR_KES.md', import.meta.url), 'utf8');
+  assert.doesNotMatch(spec, /\b[A-Za-z]+\.(ts|js):\d+/, 'a code reference');
+  assert.doesNotMatch(spec, /enrollmentId|SET NULL|What it reveals|Who could misuse/i, 'step-by-step detail');
+  assert.match(spec, /shared with Kes and Ali privately/);
+});
