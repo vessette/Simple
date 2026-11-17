@@ -33,6 +33,24 @@ The same file then turns the counts into the answer:
 
 **It never produces a risk score.**
 
+## The measurement plan
+
+**The question:** are recorded cancellation reasons reliable enough to say *why* paying members leave? Each part below answers one piece, and every number comes from the one counts-only query.
+
+| # | Question | Metric | What would make the data usable (proposed: Roselen confirms) |
+|---|---|---|---|
+| 1 | Is there enough to measure at all? | Number of genuine member cancellations (paying plans only; renewals, free seats and duplicates removed) | At least the minimum population Roselen sets (suggested 20). Below that: counts only, no conclusions |
+| 2 | Do members tell us why? | **Coverage:** the share of member cancellations with a reason (preset or own words) | Most do, for example 70% or more |
+| 3 | Can the reasons be grouped? | **Structure:** the share of reasons that use one of the five presets | Most reasons are presets; own-words reasons need a person to sort them |
+| 4 | Are people skipping it? | The share saying "No reason given" | Low. If high, the fix is to make the choice required |
+| 5 | Is it getting better or worse? | Questions 2 to 4 **by month** | Recent months meet the bar, even if older ones don't. The presets may be new: the history I can see only goes back to 5 November |
+| 6 | Is anything polluting the count? | Renewal markers, free-seat revocations and duplicates found in "cancelled" | Reported separately and never counted as churn |
+
+**What the result means:**
+- **Usable:** retention work can be aimed by reason, starting from the recent months that meet the bar.
+- **Not usable:** the honest answer is "churn drivers are unknown". The cheap fix is making the reason a required choice when cancelling. Measuring again after a few months shows whether it worked.
+- **Too few cancellations:** report counts only, and measure again once there are more.
+
 ## The definitions (proposed: please review)
 
 - **Who's counted:** paying members on the annual or monthly plan. **Never counted:** free seats, staff, Explorer accounts, renewals that replaced a period, and duplicate-checkout clean-ups.
