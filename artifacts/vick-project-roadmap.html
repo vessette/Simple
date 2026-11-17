@@ -629,6 +629,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-16", "Reporting duties prepared but not done: four candidate reports and the interview questions are ready, and the story stays open until the sales manager and admissions operations are interviewed. The program lead had already confirmed that \"DA\" means the Data Analytics bootcamp, so the story's wording needs changing at the source."],
   ["2026-11-16", "Decision queue merged: one decision the sales manager needs to make for each of the 32 capabilities, all awaiting, with how a decision is recorded and undone. Found that the platform's approval page auto-approves anything left for 4 hours, which breaks the rule that time never decides; a note with options is with the program lead."],
   ["2026-11-16", "Outreach drafts merged: Vick drafts introductions, follow-ups and pricing notes for a named person to send, with every figure traced to approved facts, the banned word \"free\" refused under the Texas training rule, and no way to send, queue or schedule anything. Found \"free\" still on three live surfaces; a legal question is with the program lead."],
   ["2026-11-16", "Payment handoff merged: for any subscription, Vick says which customer id was stored at checkout, which one the charge landed on, and whether each belongs to the payer, citing a stored record or a read-only payment lookup for every statement. An id that cannot be checked is reported as unverified, never as matching."],
@@ -690,7 +691,7 @@ el("tiles").innerHTML = [
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
   ["51/66", "acceptance criteria passed", 51 / 66],
   ["215", "automated tests, all passing", 1],
-  ["67", "pull requests merged", 1],
+  ["68", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 
