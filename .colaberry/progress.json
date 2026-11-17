@@ -909,13 +909,28 @@
       "criteria": [
         {
           "text": "A packet containing a discount, a bespoke price, a refund term or the word 'free' fails a named test.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/quote-packets/quotePacket.js",
+        "capabilities/quote-packets/quotePacket.test.js",
+        "capabilities/quote-packets/fixtures/requests.json",
+        "capabilities/quote-packets/QUOTE_PACKETS_FOR_ROSELEN.md"
+      ],
+      "tests_added": [
+        "capabilities/quote-packets/quotePacket.test.js: a packet with a discount fails",
+        "capabilities/quote-packets/quotePacket.test.js: a packet with a bespoke price fails",
+        "capabilities/quote-packets/quotePacket.test.js: a packet with a refund term fails",
+        "capabilities/quote-packets/quotePacket.test.js: a packet with the word 'free' fails",
+        "capabilities/quote-packets/quotePacket.test.js: baseline: every fixture assembles into a packet that passes its own check",
+        "capabilities/quote-packets/quotePacket.test.js: team packets quote the published tier per seat and never compute a total",
+        "capabilities/quote-packets/quotePacket.test.js: what the packet cannot state is listed for the human, including the buyer's asks",
+        "capabilities/quote-packets/quotePacket.test.js: if a tier price copy disagrees, the packet does not quote it",
+        "capabilities/quote-packets/quotePacket.test.js: no send path, and malformed input is refused"
+      ],
+      "notes": "R1, human decision forever: draft offer packets from approved sources only (membership price from the Sales Hub facts, team tiers from the claims registry via the team-licenses quoting rule, student-paid costs), with a cannot-state list (refund terms, start dates, 50+ or under-5 seat prices, and every buyer ask such as a discount); no total computed, no discount, no send; run against committed fixtures. Four named tests: a packet with a discount, a bespoke price, a refund term or the word free fails (reusing the outreach-drafts grounding and banned-word check). See capabilities/quote-packets/QUOTE_PACKETS_FOR_ROSELEN.md.",
+      "updated_at": "2026-11-17T03:25:14.249Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,

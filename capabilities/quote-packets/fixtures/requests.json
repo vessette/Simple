@@ -1,0 +1,10 @@
+{
+  "note": "Committed request fixtures for R1. Made up; no real prospect or employer.",
+  "requests": [
+    { "label": "P1", "kind": "individual" },
+    { "label": "Employer A", "kind": "team", "seats": 8 },
+    { "label": "Employer B", "kind": "team", "seats": 20, "asks": ["a discount for 20 seats", "refund terms"] },
+    { "label": "Employer C", "kind": "team", "seats": 60 },
+    { "label": "Employer D", "kind": "team", "seats": 3 }
+  ]
+}
