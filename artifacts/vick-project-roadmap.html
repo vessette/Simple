@@ -479,7 +479,7 @@ const CAPS = [
   ["pipeline_stage_and_lead_temperature_stewardship", "leads", "Keep lead stage and temperature current", "Every lead at its real stage, warm or cold, with history.", "implemented", 6, [1,1], "done", "capabilities/pipeline-stewardship/"],
   ["strategy_call_no_show_detection_and_recovery", "leads", "Catch missed strategy calls", "Explains which calls count as missed, naming the time, threshold and status.", "implemented", 4, [1,1], "done", "capabilities/strategy-call-no-show/"],
   ["abandoned_checkout_identification", "leads", "Find people who stopped at checkout", "Kept apart from free sign-ups and former members.", "implemented", 6, [1,1], "done", "capabilities/abandoned-checkout/"],
-  ["seat_capacity_and_cohort_fill_forecast", "leads", "Forecast seats and class fill", "So a seat-scarcity claim to a prospect is true.", "absent", 6, [0,1], "later"],
+  ["seat_capacity_and_cohort_fill_forecast", "leads", "Forecast seats and class fill", "So a seat-scarcity claim to a prospect is true.", "absent", 6, [1,1], "done", "capabilities/seat-capacity/"],
   ["prospect_outreach_draft_for_human_send", "outreach", "Draft outreach for a person to send", "The send stays a human act.", "absent", 4, [1,1], "done", "capabilities/outreach-drafts/"],
   ["outbound_batch_preparation_for_approval", "outreach", "Prepare outreach batches for approval", "One packet for a named approver; never padded, never expires into approval.", "partial", 4, [1,1], "done", "capabilities/outbound-batch-approval/"],
   ["outbound_sequence_health_watch", "outreach", "Watch outreach sequences for faults", "Explains each health score part by part; unknown when a part can't be checked.", "partial", 6, [1,1], "done", "capabilities/outbound-sequence-health/"],
@@ -629,6 +629,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-16", "Seat capacity merged: what counts as a paid seat, a reserved seat and an Explorer, and no fill forecast until there is enough data. Found that the seats-remaining figure prospects are told is a typed number, not a count, and that the platform's seat counter never goes down; a fix and a daily check are proposed."],
   ["2026-11-16", "Payment notice replays merged: the four guards that stop a repeated payment notice doing harm, and five gaps they leave, including a repeated notice re-sending the welcome email. The platform keeps no record of handled notices; a free log search and a small notice table are proposed to the program lead."],
   ["2026-11-16", "Quote packets merged: draft offer packets from approved prices only, with a list of everything a person must decide, and no totals, discounts or sending. Churn analysis has its measurement plan; the reason count waits for someone with database access."],
   ["2026-11-16", "Reporting duties prepared but not done: four candidate reports and the interview questions are ready, and the story stays open until the sales manager and admissions operations are interviewed. The program lead had already confirmed that \"DA\" means the Data Analytics bootcamp, so the story's wording needs changing at the source."],
@@ -691,9 +692,9 @@ const storiesTotal = 7 + CAPS.length + LADDER;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["53/66", "acceptance criteria passed", 53 / 66],
+  ["54/66", "acceptance criteria passed", 54 / 66],
   ["215", "automated tests, all passing", 1],
-  ["72", "pull requests merged", 1],
+  ["73", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 
