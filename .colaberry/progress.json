@@ -1183,10 +1183,11 @@
         "capabilities/seat-capacity/seatCount.test.js: no projection at all until a minimum amount of data is set and met",
         "capabilities/seat-capacity/seatCount.test.js: every disagreement is reported, never resolved",
         "capabilities/seat-capacity/seatCount.test.js: withdrawn and unknown enrolments are not counted, and unknowns are flagged",
+        "capabilities/seat-capacity/seatCount.test.js: validation: overbooking and the same person counted twice are flagged",
         "capabilities/seat-capacity/seatCount.test.js: malformed input is refused"
       ],
       "notes": "R0: written definitions (paid seat, reserved seat from an unpaid invoice, Explorer never a seat; not counted and unknown), real remaining reported both with and without reservations, every disagreement reported (counter vs real count, published cap vs max_seats, prospect claim vs real count), and no projection until a minimum the sales manager sets is met (proposed 8 paid over 4 weeks), with the basis stated. Small pure functions make the definition testable. Found at platform 34dce98: the prospect-facing seats remaining is a typed seed value (seedKbData.ts:47-48, :249), and seats_taken only ever increases (no decrement besides an admin cleanup). See capabilities/seat-capacity/SEATS_FOR_ROSELEN.md.",
-      "updated_at": "2026-11-17T03:40:53.741Z",
+      "updated_at": "2026-11-17T03:45:20.968Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,

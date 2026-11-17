@@ -52,6 +52,16 @@ test('withdrawn and unknown enrolments are not counted, and unknowns are flagged
   assert.ok(c.flags.some((f) => /1 enrolment\(s\) have a payment status the definition does not cover/.test(f)));
 });
 
+test('validation: overbooking and the same person counted twice are flagged', () => {
+  const small = { name: 'Small', max_seats: 2, seats_taken: 3 };
+  const c = seatCount(small, [row('paid', { email: 'a@x.com' }), row('paid', { email: 'b@x.com' }), row('pending_invoice', { email: 'c@x.com' })]);
+  assert.ok(c.flags.some((f) => /Overbooked: 3 paid and reserved seats against a maximum of 2/.test(f)));
+  const dup = seatCount(cohort, [row('paid', { email: 'A@x.com' }), row('pending_invoice', { email: 'a@x.com ' }), row('paid', { email: 'b@x.com' })]);
+  assert.ok(dup.flags.some((f) => /1 person\(s\) hold more than one seat/.test(f)));
+  const clean = seatCount({ ...cohort, seats_taken: 2 }, [row('paid', { email: 'a@x.com' }), row('paid', { email: 'b@x.com' })]);
+  assert.deepEqual(clean.flags, [], 'a clean cohort raises nothing');
+});
+
 test('malformed input is refused', () => {
   assert.throws(() => seatCount({ max_seats: -1 }, []), RangeError);
   assert.throws(() => seatCount(cohort, 'x'), RangeError);

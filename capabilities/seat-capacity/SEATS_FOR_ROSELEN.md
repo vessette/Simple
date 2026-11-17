@@ -63,6 +63,26 @@ There's also "12 seats remaining" for a March cohort typed into the code (`aiMes
 
 **Next step:** a short change request to Kes, copying Ali, with these three changes. Step 1 is the most important, because it's the claim prospects hear.
 
+### The checks, and when they alert
+
+Each check is already in `seatCount.js`, with a test:
+
+| Check | Alerts when |
+|---|---|
+| The counter matches the real count | Seats taken ≠ paid + reserved |
+| What prospects are told is true | The "seats remaining" figure ≠ the real count |
+| The published cap matches the cohort | 40 in the Sales Hub ≠ the cohort's maximum |
+| Not overbooked | Paid + reserved is more than the maximum |
+| No one counted twice | The same person holds two seats in one cohort |
+| Everything classified | An enrolment has a payment status the definition doesn't cover |
+
+**When to tell Roselen, beyond any disagreement:**
+- a cohort reaching **5 seats left**, when "limited seats" becomes true;
+- **0 left**, when enrolment should close;
+- a reserved seat **older than its invoice terms**, which may need releasing.
+
+**The simplest way to start, needing no platform change:** run the check once a day on a read-only export of the cohorts and their enrolments, and send Roselen one line per cohort. A clean cohort reads "✓ agrees". The day something drifts, she sees which figure and by how much, before a prospect is told the wrong number.
+
 ## What I need from you
 
 1. **Do the definitions match how you think about seats?** In particular, should a reserved (invoiced) seat count as taken when telling prospects how many are left?

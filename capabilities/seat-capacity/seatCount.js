@@ -40,6 +40,17 @@ export function seatCount(cohort, enrollments, published = {}) {
     flags.push(`Prospects are told ${published.remaining} seats remain (${published.remaining_source}), but the real count gives ${cohort.max_seats - counted}.`);
   }
   if (n.unknown) flags.push(`${n.unknown} enrolment(s) have a payment status the definition does not cover; they are not counted.`);
+  if (counted > cohort.max_seats) flags.push(`Overbooked: ${counted} paid and reserved seats against a maximum of ${cohort.max_seats}.`);
+  // The same person holding two seats in one cohort is double counting, not two sales.
+  const seen = new Map();
+  for (const e of enrollments) {
+    const kind = seatKind(e);
+    if ((kind !== 'paid' && kind !== 'reserved') || !e.email) continue;
+    const k = String(e.email).trim().toLowerCase();
+    seen.set(k, (seen.get(k) || 0) + 1);
+  }
+  const doubles = [...seen.values()].filter((v) => v > 1).length;
+  if (doubles) flags.push(`${doubles} person(s) hold more than one seat in this cohort; each extra seat is double counting.`);
   return {
     cohort: cohort.name || cohort.id,
     max_seats: cohort.max_seats,
