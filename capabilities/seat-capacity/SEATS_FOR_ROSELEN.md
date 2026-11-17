@@ -41,6 +41,28 @@ The knowledge base answers "how many seats are left?" with **"The Founding Cohor
 
 The numbers are yours to set. Until you do, Vick reports no forecast at all.
 
+## Making the seat count automatic
+
+**Today there are two separate seat figures, and they aren't connected:**
+
+| Figure | Where it comes from | Who sees it |
+|---|---|---|
+| **The cohort's counter** (maximum − seats taken) | Worked out from the cohort record (`schedulerService.ts:156-172`; `cohortService.ts:520`; `portalEnrollmentService.ts:76`) | The admin cohort pages, the student portal, and the next-cohort details used in outreach messages (`schedulerService.ts:1307`) |
+| **The knowledge base's "32 of 40"** | Typed into a separate knowledge-base cohort record that's linked to a *course*, not to any real cohort (`CoraKbCohort.ts:49-52`; `kbService.ts:26`) | Prospects and reps, through the Sales Hub and knowledge-base answers |
+
+There's also "12 seats remaining" for a March cohort typed into the code (`aiMessageService.ts:740-744`). It's inside the message preview function (`generatePreview`, `:712`), so it's sample text for previews, not something sent to prospects.
+
+**The plan: three changes, for Kes to build once Ali approves:**
+1. **One source for the answer prospects get.** Link the knowledge-base cohort to the real cohort, and work out "seats remaining" from it, instead of a typed number. That takes "32 of 40" from guessed to real.
+2. **A counter that can go down, or no counter at all.** Either work out seats taken from the enrolments each time (paid + reserved, using the definitions above), or lower the counter when an invoice lapses or someone withdraws. Working it out is simpler and can't drift.
+3. **Flag the gap until then.** Vick's seat check (`seatCount.js`) compares the three: counter, real count, and what prospects are told. It can run daily and flag any disagreement.
+
+**How Roselen sees it in real time:**
+- Once step 2 is done, **the admin cohorts page she can already open** shows the true number with no new tool.
+- Until then, the daily seat check can appear in her digest or renewal worklist as one line: "Founding cohort: 6 paid, 2 reserved, 32 left if reservations hold. Prospects are told 32. ✓ agrees."
+
+**Next step:** a short change request to Kes, copying Ali, with these three changes. Step 1 is the most important, because it's the claim prospects hear.
+
 ## What I need from you
 
 1. **Do the definitions match how you think about seats?** In particular, should a reserved (invoiced) seat count as taken when telling prospects how many are left?
