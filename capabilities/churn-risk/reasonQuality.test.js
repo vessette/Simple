@@ -62,6 +62,24 @@ test('small populations are counts, not rates; the threshold is the sales manage
   assert.equal(measure([]).measured, false, 'an empty result is not a measurement');
 });
 
+test('coverage is reported by month, so a late arrival of the presets shows up', () => {
+  assert.match(MEASURE_SQL, /AS month/);
+  assert.match(MEASURE_SQL, /GROUP BY 1, 2, 3, 4/);
+  const m = measure([
+    { status: 'canceled', plan: 'monthly', category: 'member_free_text', month: '2026-08', n: 3 },
+    { status: 'canceled', plan: 'monthly', category: 'member_no_reason', month: '2026-08', n: 5 },
+    { status: 'canceled', plan: 'monthly', category: 'member_preset', month: '2026-11', n: 4 },
+    { status: 'canceled', plan: 'monthly', category: 'system_superseded_renewal', month: '2026-11', n: 9 },
+    { status: 'canceled', plan: 'annual', category: 'member_preset', n: 1 },
+  ]);
+  assert.deepEqual(m.by_month, {
+    '2026-08': { member_cancellations: 8, with_a_reason: 3, with_a_preset_reason: 0 },
+    '2026-11': { member_cancellations: 4, with_a_reason: 4, with_a_preset_reason: 4 },
+    unknown: { member_cancellations: 1, with_a_reason: 1, with_a_preset_reason: 1 },
+  });
+  assert.equal(m.risk_figure, null);
+});
+
 test('malformed input is refused', () => {
   assert.throws(() => measure('x'), RangeError);
   assert.throws(() => measure([{ status: 'canceled', plan: 'monthly', category: 'vibes', n: 1 }]), RangeError);

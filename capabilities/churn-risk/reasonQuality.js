@@ -50,11 +50,27 @@ export const MEASURE_SQL = `SELECT s.status, s.plan,
     WHEN s.cancel_reason IN (${PRESETS.map((p) => `'${p}'`).join(', ')}) THEN 'member_preset'
     ELSE 'member_free_text'
   END AS category,
+  to_char(date_trunc('month', COALESCE(s.canceled_at, s.updated_at)), 'YYYY-MM') AS month,
   COUNT(*)::int AS n
 FROM subscriptions s
 WHERE s.status IN ('canceled', 'past_due')
-GROUP BY 1, 2, 3
-ORDER BY 1, 2, 3;`;
+GROUP BY 1, 2, 3, 4
+ORDER BY 1, 2, 3, 4;`;
+
+/** Member cancellations per month: how many, how many with a reason, how many from a preset. */
+function byMonth(paying) {
+  const out = {};
+  for (const r of paying) {
+    if (r.status !== 'canceled' || !r.category.startsWith('member_')) continue;
+    const m = typeof r.month === 'string' && /^\d{4}-\d{2}$/.test(r.month) ? r.month : 'unknown';
+    const n = Number.isInteger(r.n) && r.n >= 0 ? r.n : 0;
+    const b = out[m] || (out[m] = { member_cancellations: 0, with_a_reason: 0, with_a_preset_reason: 0 });
+    b.member_cancellations += n;
+    if (r.category === 'member_preset' || r.category === 'member_free_text') b.with_a_reason += n;
+    if (r.category === 'member_preset') b.with_a_preset_reason += n;
+  }
+  return Object.fromEntries(Object.keys(out).sort().map((k) => [k, out[k]]));
+}
 
 /**
  * The answer, from the query's rows ({ status, plan, category, n }). Paying plans only (comp,
@@ -80,6 +96,9 @@ export function measure(rows, { minPopulation = null } = {}) {
     excluded_not_churn: notChurn,
     payment_declines: count((r) => r.category === 'payment_decline'),
     risk_figure: null, // R0: never produced
+    // Coverage per month: if the preset reasons arrived recently, older months can only hold
+    // free text, and an all-time share would hide that.
+    by_month: byMonth(paying),
   };
   if (minPopulation === null) return { ...out, report_as: 'counts', verdict: 'For the sales manager: no minimum population has been set, so no share is computed.' };
   if (!Number.isInteger(minPopulation) || minPopulation < 1) throw new RangeError('minPopulation must be a whole number of at least 1.');
