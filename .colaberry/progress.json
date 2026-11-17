@@ -677,13 +677,22 @@
       "criteria": [
         {
           "text": "A written table names all four existing guards and states explicitly which replay shapes remain uncovered.",
-          "passed": false
+          "passed": true
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/webhook-replay/replaySurface.json",
+        "capabilities/webhook-replay/replaySurface.test.js",
+        "capabilities/webhook-replay/REPLAY_SURFACE_FOR_ROSELEN.md"
+      ],
+      "tests_added": [
+        "capabilities/webhook-replay/replaySurface.test.js: the table names all four existing guards, each with its key and the code that holds it",
+        "capabilities/webhook-replay/replaySurface.test.js: it states explicitly which replay shapes remain uncovered, and each guard says which it misses",
+        "capabilities/webhook-replay/replaySurface.test.js: it says plainly that no delivery-level dedup store exists",
+        "capabilities/webhook-replay/replaySurface.test.js: the watch only reports: nothing here proposes changing a guard as done"
+      ],
+      "notes": "R0, reports only: the replay surface at platform e8e5c44. Four guards: G1 enrolment paid status (enrollmentService.ts:117), G2 subscription active status (subscriptionService.ts:434), G3 scheduled charge keyed on the last applied payment id (subscriptionScheduleService.ts:224), G4 reconcile sweep re-read (paymentReconciliationService.ts:209-210). Uncovered: U1 replay of an older scheduled payment advances the period again; U2 a repeated enrolment notice re-sends the welcome email and campaign sign-up; U3 simultaneous duplicates pass check-then-save guards; U4 a stale failure re-marks a recovered member past due; U5 no delivery record, event_id only logged (webhookController.ts:56-58). See capabilities/webhook-replay/REPLAY_SURFACE_FOR_ROSELEN.md.",
+      "updated_at": "2026-11-17T03:31:49.567Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,

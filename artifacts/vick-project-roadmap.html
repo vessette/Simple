@@ -484,7 +484,7 @@ const CAPS = [
   ["outbound_batch_preparation_for_approval", "outreach", "Prepare outreach batches for approval", "One packet for a named approver; never padded, never expires into approval.", "partial", 4, [1,1], "done", "capabilities/outbound-batch-approval/"],
   ["outbound_sequence_health_watch", "outreach", "Watch outreach sequences for faults", "Explains each health score part by part; unknown when a part can't be checked.", "partial", 6, [1,1], "done", "capabilities/outbound-sequence-health/"],
   ["prospect_question_answering_from_approved_kb", "outreach", "Answer prospect questions from approved material", "Never invents a price, date or policy.", "implemented", 5, [1,1], "done", "capabilities/prospect-kb-answers/"],
-  ["quote_and_offer_packet_preparation", "outreach", "Prepare quotes and offer packets", "A person sets the price and sends it.", "absent", 4, [0,1], "later"],
+  ["quote_and_offer_packet_preparation", "outreach", "Prepare quotes and offer packets", "A person sets the price and sends it.", "absent", 4, [1,1], "done", "capabilities/quote-packets/"],
   ["price_statement_consistency_audit", "outreach", "Check every stated price agrees", "Reports each place a price disagrees with the approved one.", "absent", 6, [1,1], "done", "capabilities/price-audit/"],
   ["enrollment_completion_follow_through", "enroll", "Follow enrollments through to a seat", "Nobody who agreed to enroll is lost before their seat is active.", "partial", 5, [1,1], "done", "capabilities/enrollment-follow-through/"],
   ["enrollment_checkout_link_issuance", "enroll", "Issue checkout and payment links", "Explains checkout and quotes prices only from the price list; never issues a link.", "implemented", 4, [1,1], "done", "capabilities/enrollment-checkout/"],
@@ -629,6 +629,7 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-16", "Quote packets merged: draft offer packets from approved prices only, with a list of everything a person must decide, and no totals, discounts or sending. Churn analysis has its measurement plan; the reason count waits for someone with database access."],
   ["2026-11-16", "Reporting duties prepared but not done: four candidate reports and the interview questions are ready, and the story stays open until the sales manager and admissions operations are interviewed. The program lead had already confirmed that \"DA\" means the Data Analytics bootcamp, so the story's wording needs changing at the source."],
   ["2026-11-16", "Decision queue merged: one decision the sales manager needs to make for each of the 32 capabilities, all awaiting, with how a decision is recorded and undone. Found that the platform's approval page auto-approves anything left for 4 hours, which breaks the rule that time never decides; a note with options is with the program lead."],
   ["2026-11-16", "Outreach drafts merged: Vick drafts introductions, follow-ups and pricing notes for a named person to send, with every figure traced to approved facts, the banned word \"free\" refused under the Texas training rule, and no way to send, queue or schedule anything. Found \"free\" still on three live surfaces; a legal question is with the program lead."],
@@ -689,9 +690,9 @@ const storiesTotal = 7 + CAPS.length + LADDER;
 el("tiles").innerHTML = [
   [`${storiesDone}/${storiesTotal}`, "stories complete", storiesDone / storiesTotal],
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
-  ["51/66", "acceptance criteria passed", 51 / 66],
+  ["52/66", "acceptance criteria passed", 52 / 66],
   ["215", "automated tests, all passing", 1],
-  ["69", "pull requests merged", 1],
+  ["71", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 
