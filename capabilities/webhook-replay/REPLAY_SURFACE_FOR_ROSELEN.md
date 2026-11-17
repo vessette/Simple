@@ -50,6 +50,35 @@ The handler would record the notice **first** and skip it if the id is already t
 
 **Why step 1 first:** it's free, it can be done this week, and it shows whether step 2 is urgent (replays seen) or a safeguard (none seen).
 
+## Change request: a record of every payment notice (for Ali to approve, Kes to build)
+
+**What it is:** one table, written to before the platform acts on a notice.
+
+| Column | What it holds |
+|---|---|
+| `event_id` | PaySimple's notice id. **Unique:** the database itself refuses a second copy |
+| `event_type`, `payment_id` | What the notice was about |
+| `received_at` | When it arrived |
+| `outcome` | What the platform did: applied, skipped as a repeat, or failed (with the reason) |
+
+**How it works:**
+1. When a notice arrives, insert its id **first**.
+2. If the id is already there, the database refuses the insert. The platform records "skipped as a repeat", answers PaySimple "received", and does nothing else.
+3. Otherwise it processes the notice as today, and records the outcome.
+
+**What it fixes:**
+- **U1** (an older payment re-applied) and **U3** (two copies at once): only one copy of a notice can ever be processed.
+- **U5** (no record): every replay is now visible.
+- U2 and U4 shrink to the rare case where PaySimple sends a *new* notice id for the same payment. The two small fixes above cover that.
+
+**Tests that prove it (written before the change):**
+- the same notice twice gives one effect and one "skipped as a repeat" row;
+- two copies at the same moment still give one effect;
+- an older scheduled payment, replayed, doesn't extend the period;
+- a failed processing attempt can be retried without being blocked as a repeat.
+
+**Cost:** one small table and a few lines at the top of the notice handler. **Risk if not done:** members can be given months they did not pay for, sent duplicate welcomes or wrongly marked as owing, and nobody can tell afterwards whether it happened.
+
 ## What I need
 
 - **Ali and Kes:** do U1 to U5 match your understanding? Can someone run the step 1 log search, and is the step 2 notice table worth approving?
