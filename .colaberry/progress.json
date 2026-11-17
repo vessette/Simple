@@ -1287,10 +1287,21 @@
           "passed": false
         }
       ],
-      "files_touched": [],
-      "tests_added": [],
-      "notes": null,
-      "updated_at": null,
+      "files_touched": [
+        "capabilities/churn-risk/reasonQuality.js",
+        "capabilities/churn-risk/reasonQuality.test.js",
+        "capabilities/churn-risk/CHURN_RISK_FOR_ROSELEN.md"
+      ],
+      "tests_added": [
+        "capabilities/churn-risk/reasonQuality.test.js: every recorded reason maps to one category, system markers before member text",
+        "capabilities/churn-risk/reasonQuality.test.js: the SQL lists the same categories, in the same order, and returns counts only",
+        "capabilities/churn-risk/reasonQuality.test.js: no risk figure is ever produced",
+        "capabilities/churn-risk/reasonQuality.test.js: renewals, duplicates and free seats are never counted as churn",
+        "capabilities/churn-risk/reasonQuality.test.js: small populations are counts, not rates; the threshold is the sales manager's",
+        "capabilities/churn-risk/reasonQuality.test.js: malformed input is refused"
+      ],
+      "notes": "NOT PASSED: half met. No risk figure is produced (tested). The cancellation-reason question still needs the measurement run on live data by someone with access; the read-only query (counts per category only, no free text) and the code that turns its rows into the answer are written and tested. Found at platform a839a58: cancel_reason is written by six paths, only one of them the member (presets at SubscriptionSection.tsx:34 or free text, subscriptionService.ts:769); renewals write superseded_by_renewal (:533), so a naive cancelled count treats every renewal as churn. Definitions, exclusions, drivers and a proposed minimum population are written for review. See capabilities/churn-risk/CHURN_RISK_FOR_ROSELEN.md.",
+      "updated_at": "2026-11-17T03:13:10.439Z",
       "verification": {
         "state": "in_progress",
         "criteria_passed": 0,
