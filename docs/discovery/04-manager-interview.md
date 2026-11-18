@@ -173,7 +173,7 @@ Saved on the shared question page between 9:07 and 9:30 AM CST, in her words. He
 | Session to watch her find prospects | Choice: next week | Victoria books it |
 | Pause automatic offer re-scoring | Choice: keep it running | Decision settled; re-scoring stays on |
 | Pass marks | "A maximum of two call attempts in day per lead." | Recorded as a contact limit; pass mark asked again |
-| What makes a lead warm | "Those who booked an appointment by Call with Cora, text or email. Also those who answered and have considered joining the program. Also Those who reply to the email positively." | Warm definition for the lead temperature capability. To confirm: who "Cora" is, and what makes a lead cold |
+| What makes a lead warm | "Those who booked an appointment by Call with Cora, text or email. Also those who answered and have considered joining the program. Also Those who reply to the email positively." | Warm definition for the lead temperature capability. Cora is the platform's AI assistant that books calls (confirmed by Victoria, 18 Nov). To confirm: what makes a lead cold |
 | What always stays with a person | "Enrollment walkthrough, any support issues, anything payment related." | See Q3 above |
 | When a call counts as missed | Choice: 15 minutes | Vick's missed-call explainer now uses 15 minutes by default |
 | Review before access is removed after a reversal | "Taiwo is the one working on this" | Passed to Taiwo |
