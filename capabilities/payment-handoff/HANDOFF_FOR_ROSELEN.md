@@ -37,9 +37,12 @@ Members on the standing exclusion lists (waiting on bank-draft consent, or card 
 
 **Whether every past subscription has been checked across this boundary.** There's no record of a full backfill audit. Vick can check any subscription it's given, and running it over all of them would answer this. But that needs the subscription list and read-only PaySimple lookups for each, which only someone with access can run. The platform already reports shared customer ids on every reconciliation run (`appPaymentReconcileService.ts:49-53`), which covers part of it.
 
+## Who looks into a wrong payer
+
+**Decided by Roselen on 18 November 2026: admissions operations (support).** When Vick finds a customer id that belongs to someone else, the finding names admissions operations as the team to look into it.
+
 ## What I need from you
 
 - **Ali:** is a one-off, read-only check of every active subscription across this boundary worth doing? If yes, who has the access to run it?
-- **Roselen:** when Vick finds an id that belongs to someone else, who should it go to?
 
-Code: [handoffExplainer.js](handoffExplainer.js). Tests: [handoffExplainer.test.js](handoffExplainer.test.js), 7 tests. Example cases (made up, with invented ids): [fixtures/cases.json](fixtures/cases.json).
+Code: [handoffExplainer.js](handoffExplainer.js). Tests: [handoffExplainer.test.js](handoffExplainer.test.js), 8 tests. Example cases (made up, with invented ids): [fixtures/cases.json](fixtures/cases.json).

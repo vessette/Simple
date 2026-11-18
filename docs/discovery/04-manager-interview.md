@@ -143,25 +143,49 @@ Ask only whether she wants the login. Granting it is Ali's decision.
 
 **Interview date:**
 
-**Q1 (which first):**
+**Q1 (which first):** Prospect discovery first, as the program lead set on 13 November. For second, Roselen chose **lead temperature and pipeline stage** (18 Nov).
 
 **Q2 (who owns step 1):**
 
-**Q3 (human forever):**
+**Q3 (human forever):** "Enrollment walkthrough, any support issues, anything payment related." (18 Nov.) *To confirm with her: whether "anything payment related" covers every payment capability, which would cap them all at answering questions.*
 
 **Q4 (cold-lead rule):**
 
-**Q5 (pass mark for lead sorting):**
+**Q5 (pass mark for lead sorting):** Not yet given. Her answer to the pass-mark question was "A maximum of two call attempts in day per lead." (18 Nov), recorded as a contact limit. The pass mark is asked again.
 
 **Q6 (reasons for not enrolling):**
 
-**Q7 (correct price and dates, and keeper):**
+**Q7 (correct price and dates, and keeper):** Dates: "Ali sets the dates." Team prices: "Not sure. Ali should know." (18 Nov.) Both passed to Ali.
 
 **Q8 (switch-off triggers):**
 
 **Access (can she open Vick's page after signing out and in?):**
 
 **Weekly check-in (day and time agreed?):** Wednesday mornings. Arranged with Roselen outside this project, as reported by Victoria on 2026-11-10. This differs from the Tuesday proposed in section 7.
+
+### Answers from the question page, 18 November 2026
+
+Saved on the shared question page between 9:07 and 9:30 AM CST, in her words. Her answers are quoted exactly; "choice" is the option she picked.
+
+| Question | Her answer | What happened |
+|---|---|---|
+| Second capability to build | Choice: lead temperature and pipeline stage | Build order: prospect discovery, then lead temperature |
+| Session to watch her find prospects | Choice: next week | Victoria books it |
+| Pause automatic offer re-scoring | Choice: keep it running | Decision settled; re-scoring stays on |
+| Pass marks | "A maximum of two call attempts in day per lead." | Recorded as a contact limit; pass mark asked again |
+| What makes a lead warm | "Those who booked an appointment by Call with Cora, text or email. Also those who answered and have considered joining the program. Also Those who reply to the email positively." | Warm definition for the lead temperature capability. To confirm: who "Cora" is, and what makes a lead cold |
+| What always stays with a person | "Enrollment walkthrough, any support issues, anything payment related." | See Q3 above |
+| When a call counts as missed | Choice: 15 minutes | Vick's missed-call explainer now uses 15 minutes by default |
+| Review before access is removed after a reversal | "Taiwo is the one working on this" | Passed to Taiwo |
+| Next cohort dates | "Ali sets the dates." | Passed to Ali |
+| Team prices | "Not sure. Ali should know." | Passed to Ali |
+| Lead moved back by hand | Choice: no, automation can move it | No platform change needed |
+| How sponsors add people | "No protocol yet. Ask either Taiwo or Ali" | Passed to Taiwo and Ali |
+| Findings that repeat every day | Choice: hold it back after the first time | Billing watch now holds unchanged repeats back |
+| Payment linked to the wrong person | Choice: to admissions operations; "Admissions support." | Payment handoff findings name admissions operations |
+| Old price mentions in archived files | "No it shouldn't be counted as live." | Read as: archived copies are not live. To confirm |
+| Stuck renewal reminders | Choice: yes, report them | Vick now lists claimed reminders more than a day past their date |
+| 20 minutes with Taiwo on reporting duties | Choice: yes, a separate time | Victoria books it |
 
 ---
 

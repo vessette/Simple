@@ -40,6 +40,9 @@ function validate(input) {
 }
 
 /** Does this customer record belong to the payer? Fail closed: unread or emailless is unverified. */
+// Who looks into an id that belongs to someone else: the sales manager's answer, 18 Nov 2026.
+export const WRONG_PAYER_OWNER = 'Admissions operations (support)';
+
 function ownership(customerId, customers, payerEmail) {
   if (!customerId) return { status: 'none', why: 'No id to check.' };
   const rec = customers ? customers[customerId] : undefined;
@@ -101,7 +104,7 @@ export function explainHandoff(input) {
   claims.push(claim('stored id belongs to the payer', own.stored.status, stored ? `${SRC.customer} (${stored}).Email vs ${SRC.enrol}.email` : 'no id', { why: own.stored.why }));
   if (landed && landed !== stored) claims.push(claim('charged id belongs to the payer', own.landed.status, `${SRC.customer} (${landed}).Email vs ${SRC.enrol}.email`, { why: own.landed.why }));
 
-  if (own.stored.status === 'belongs_to_someone_else' || own.landed.status === 'belongs_to_someone_else') findings.push({ kind: 'id_belongs_to_someone_else', why: 'A stored or charged customer id points at another person. Billing against it would charge a stranger.', source: SRC.customer });
+  if (own.stored.status === 'belongs_to_someone_else' || own.landed.status === 'belongs_to_someone_else') findings.push({ kind: 'id_belongs_to_someone_else', why: 'A stored or charged customer id points at another person. Billing against it would charge a stranger.', source: SRC.customer, goes_to: WRONG_PAYER_OWNER });
   const shared = (Array.isArray(sharedWith) ? sharedWith : []).filter((x) => String(x) !== String(e.id));
   if (stored && shared.length) findings.push({ kind: 'shared_customer_id', why: `Customer id ${stored} is also stored on ${shared.length} other enrolment(s). A shared id is how a stranger's charge reaches the wrong person: exclude it, do not reconcile (appPaymentReconcileService.ts:49-53).`, source: SRC.others, other_enrolments: shared.map(String) });
   if (id(s.paysimple_schedule_id) && accountStatus.status !== 'resolves') findings.push({ kind: 'schedule_account_unresolved', why: excluded ? 'A schedule exists but its account does not resolve; the member is on an exclusion list, which may explain it.' : 'A schedule exists but its billing account does not resolve from the first payment.', source: `${SRC.sub}.paysimple_schedule_id; ${SRC.payment}` });

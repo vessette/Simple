@@ -24,7 +24,7 @@ Read from the platform code at commit `109820a`. This is what the code allows, n
    - The spec and the agent registry say a call is a no-show **30 minutes** after its start (`agentRegistrySeed.ts:203`).
    - The code that runs actually waits **2 hours** (`schedulerService.ts:1624`). It checks every 15 minutes (`:2425`), so a no-show is flagged 2 to 2¼ hours after the call was due.
 
-   Vick can explain either rule and shows which calls they disagree on. It has no default, because neither rule is approved.
+   **Decided by Roselen on 18 November 2026: 15 minutes.** Vick now uses 15 minutes by default and names it in every answer. It can still explain the other two rules, and shows which calls the 15-minute rule and the running code disagree on. The platform still waits 2 hours until its code is changed, which is a platform change for Kes and Quincy.
 
 2. **The follow-up is automatic.** When a call is marked a no-show, the lead is put into a recovery email sequence straight away (`:1653`). The emails come from the platform's existing sender, not from Vick. If that sequence was never set up, the step is skipped with only a log line (`strategyPrepService.ts:262-265`).
 
@@ -42,7 +42,7 @@ Read from the platform code at commit `109820a`. This is what the code allows, n
 
 | # | Question | Options |
 |---|---|---|
-| 1 | How long after the start should a call count as missed? | 30 minutes (the spec) · 2 hours (what runs today) · another time |
+| 1 | How long after the start should a call count as missed? | **Answered 18 Nov: 15 minutes** |
 | 2 | Should the recovery emails keep starting automatically? | Keep automatic · put the lead on a list for a person to contact first |
 | 3 | Who can reverse a mistaken no-show, and how? | Needs a platform change either way: an admin action that also restores what was cancelled |
 

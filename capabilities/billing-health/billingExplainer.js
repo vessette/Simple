@@ -53,9 +53,15 @@ function validate(result, sources) {
 
 const failedCheckName = (f) => (f.code === 'check_failed' ? (String(f.headline).match(/The "(\w+)" check could not run/) || [])[1] : undefined);
 
-function explainFinding(f, previousCodes) {
+function explainFinding(f, previous) {
   const key = BY_CODE[f.code];
   const check = CHECKS[key];
+  const rows = Array.isArray(f.rows) ? f.rows.length : 0;
+  const recurring = previous.has(f.code);
+  const last = previous.get(f.code);
+  // Unchanged means the same severity, row count and wording as last run. A bare code from
+  // the last run carries no detail, so a matching code counts as unchanged.
+  const unchanged = recurring && (last === null || (last.severity === f.severity && last.rows === rows && last.what_is_wrong === f.headline));
   return {
     check: key,
     check_name: check.name,
@@ -64,34 +70,51 @@ function explainFinding(f, previousCodes) {
     severity_means: SEVERITY[f.severity],
     what_is_wrong: f.headline,
     what_a_person_does: f.action,
-    vick_does: 'Nothing. Vick explains; charging, cancelling or changing a schedule is a person\'s decision.',
-    rows: Array.isArray(f.rows) ? f.rows.length : 0,
-    recurring: previousCodes.includes(f.code),
+    vick_does: "Nothing. Vick explains; charging, cancelling or changing a schedule is a person's decision.",
+    rows,
+    recurring,
+    changed_since_last_run: recurring && !unchanged,
+    held_back: unchanged,
   };
+}
+
+function previousMap(previous) {
+  if (!Array.isArray(previous)) throw new RangeError("previous must be an array of last run's finding codes or findings.");
+  const m = new Map();
+  for (const p of previous) {
+    if (typeof p === 'string') m.set(p, null);
+    else if (p && typeof p.code === 'string') m.set(p.code, { severity: p.severity, rows: p.rows, what_is_wrong: p.what_is_wrong });
+    else if (p && typeof p.check === 'string' && CHECKS[p.check]) m.set(CHECKS[p.check].code, { severity: p.severity, rows: p.rows, what_is_wrong: p.what_is_wrong });
+  }
+  return m;
 }
 
 /**
  * Every check's status and every finding's explanation. `sources` says which inputs the run
  * could read: database, gateway_schedules, card_expiry, reminder_history, each one of read,
- * unreadable, empty or not_wired. `previousCodes` (optional) marks repeats; with no named rule
- * for suppressing a recurring finding, a repeat is marked, never hidden.
+ * unreadable, empty or not_wired. `previous` (optional) is last run's findings or their codes.
+ * The sales manager's rule (18 Nov 2026): a finding appears the first time, and is then held
+ * back while it stays unchanged. A changed one (severity, row count or wording) appears again.
+ * Held-back findings are still listed by name, never dropped silently.
  */
-export function explain(result, sources, previousCodes = []) {
+export function explain(result, sources, previous = []) {
   validate(result, sources);
+  const prev = previousMap(previous);
   const findings = [];
+  const heldBack = [];
   const unrecognised = [];
   const failed = new Set();
   for (const f of result.findings) {
     const name = failedCheckName(f);
     if (name !== undefined) { failed.add(name); continue; }
-    if (BY_CODE[f.code]) findings.push(explainFinding(f, previousCodes));
+    if (BY_CODE[f.code]) { const x = explainFinding(f, prev); (x.held_back ? heldBack : findings).push(x); }
     else unrecognised.push({ code: f.code, severity: f.severity, what_is_wrong: f.headline, cites: null, note: 'No known check produces this code, so Vick cannot cite one. Escalate to the platform owner.' });
   }
   const checks = Object.entries(CHECKS).map(([key, c]) => {
     const base = { check: key, check_name: c.name, cites: c.cite };
     if (failed.has(key)) return { ...base, status: 'unknown', why: `The check threw an error and could not run (${F}:351-360). A check that cannot run is not a pass.` };
-    const hit = findings.find((x) => x.check === key);
-    if (hit) return { ...base, status: 'finding', severity: hit.severity };
+    const hit = findings.find((x) => x.check === key) || heldBack.find((x) => x.check === key);
+    if (hit) return { ...base, status: 'finding', severity: hit.severity, ...(hit.held_back ? { held_back: true } : {}) };
     if (sources[c.source] !== 'read' || (c.source !== 'database' && sources.database !== 'read')) {
       const src = sources[c.source] !== 'read' ? c.source : 'database';
       return { ...base, status: 'unknown', why: UNKNOWN_WHY[src] };
@@ -101,11 +124,14 @@ export function explain(result, sources, previousCodes = []) {
   const order = { act_now: 0, soon: 1, watch: 2 };
   findings.sort((a, b) => order[a.severity] - order[b.severity] || a.check.localeCompare(b.check));
   const unknown = checks.filter((c) => c.status === 'unknown');
+  heldBack.sort((a, b) => order[a.severity] - order[b.severity] || a.check.localeCompare(b.check));
+  const clean = unknown.length === 0 && unrecognised.length === 0;
   return {
-    healthy: findings.length === 0 && unknown.length === 0 && unrecognised.length === 0,
-    say_nothing: findings.length === 0 && unknown.length === 0 && unrecognised.length === 0,
+    healthy: findings.length === 0 && heldBack.length === 0 && clean,
+    say_nothing: findings.length === 0 && heldBack.length === 0 && clean,
     checks,
     findings,
+    held_back: heldBack,
     unknown: unknown.map((c) => c.check),
     unrecognised,
   };
@@ -114,7 +140,8 @@ export function explain(result, sources, previousCodes = []) {
 /** Plain text for the manager: findings first, then what could not be checked. */
 export function describe(e) {
   if (e.say_nothing) return 'All six billing checks ran on readable sources and found nothing.';
-  const lines = e.findings.map((f) => `${f.severity_means.split(':')[0]}. ${f.check_name} (${f.cites}): ${f.what_is_wrong}. What a person does: ${f.what_a_person_does}${f.recurring ? ' (Also reported last run.)' : ''}`);
+  const lines = e.findings.map((f) => `${f.severity_means.split(':')[0]}. ${f.check_name} (${f.cites}): ${f.what_is_wrong}. What a person does: ${f.what_a_person_does}${f.changed_since_last_run ? ' (Reported last run, and it has changed since.)' : ''}`);
+  if (e.held_back && e.held_back.length) lines.push(`Held back, unchanged since the last run: ${e.held_back.map((f) => f.check_name).join('; ')}.`);
   for (const c of e.checks.filter((x) => x.status === 'unknown')) lines.push(`Not checked. ${c.check_name} (${c.cites}): ${c.why}`);
   for (const u of e.unrecognised) lines.push(`Unrecognised finding "${u.code}": ${u.note}`);
   return lines.join('\n');

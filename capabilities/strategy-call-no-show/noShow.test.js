@@ -112,7 +112,6 @@ test('failure paths: missing time, unknown status, unknown rule, missing now, ba
   assert.equal(explainCall({ id: 1, scheduled_at: '2026-11-11T20:00:00Z', status: 'rescheduled' }, { now: fx.now, rule: 'spec' }).verdict, 'unknown');
   assert.equal(explainCall({ id: 1, scheduled_at: 'not a date Z', status: 'scheduled' }, { now: fx.now, rule: 'spec' }).verdict, 'unknown');
   assert.throws(() => explainCalls(fx.calls, { now: fx.now, rule: 'fifteen' }), RangeError);
-  assert.throws(() => explainCalls(fx.calls, { now: fx.now }), RangeError);
   assert.throws(() => explainCalls(fx.calls, { rule: 'spec' }), RangeError);
   assert.throws(() => explainCalls(fx.calls, { now: '2026-11-11T21:00:00', rule: 'spec' }), RangeError);
   assert.throws(() => explainCalls(null, { now: fx.now, rule: 'spec' }), TypeError);
@@ -124,4 +123,32 @@ test('idempotent and read-only: same input, same answer, input untouched', () =>
   const b = explainCalls(fx.calls, { now: fx.now, rule: 'spec' });
   assert.deepEqual(a, b);
   assert.equal(JSON.stringify(fx.calls), before);
+});
+
+// The sales manager's decision, 18 Nov 2026: a call is missed 15 minutes after its start.
+test('the manager rule is 15 minutes and is the default when no rule is named', () => {
+  assert.equal(GRACE_RULES.manager.minutes, 15);
+  const now = '2026-11-11T20:45:00Z';
+  const at = explainCall({ id: 'a', lead_id: 1, scheduled_at: '2026-11-11T20:30:00Z', status: 'scheduled' }, { now });
+  const past = explainCall({ id: 'b', lead_id: 1, scheduled_at: '2026-11-11T20:29:00Z', status: 'scheduled' }, { now });
+  assert.equal(at.verdict, 'not_yet', 'exactly 15 minutes is not yet missed');
+  assert.equal(past.verdict, 'no_show', '16 minutes is missed');
+  assert.equal(past.grace_rule, 'manager');
+  assert.match(past.grace_source, /18 Nov 2026/);
+  const all = explainCalls(fx.calls, { now: fx.now });
+  assert.equal(all.grace_rule, 'manager');
+  assert.equal(all.grace_minutes, 15);
+});
+
+test('compareRules shows where the manager rule and the running platform disagree', () => {
+  const now = '2026-11-11T21:00:00Z';
+  const calls = [
+    { id: 'gap', lead_id: 1, scheduled_at: '2026-11-11T20:30:00Z', status: 'scheduled' },
+    { id: 'both', lead_id: 2, scheduled_at: '2026-11-11T18:00:00Z', status: 'scheduled' },
+  ];
+  const res = compareRules(calls, { now, rules: ['manager', 'running_code'] });
+  assert.deepEqual(res.rows.map((r) => r.call_id), ['gap']);
+  assert.equal(res.rows[0].manager, 'no_show');
+  assert.equal(res.rows[0].running_code, 'not_yet');
+  assert.throws(() => compareRules(calls, { now, rules: ['manager', 'fifteen'] }), RangeError);
 });

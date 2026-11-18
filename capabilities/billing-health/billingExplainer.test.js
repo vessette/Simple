@@ -74,11 +74,38 @@ test('every severity is explained, and a person, not Vick, acts', () => {
   for (const f of e.findings) assert.match(f.vick_does, /^Nothing/);
 });
 
-test('a recurring finding is marked, never hidden', () => {
+// The sales manager's rule (18 Nov 2026): show a finding the first time, then hold it back
+// while it stays unchanged. Held-back findings are still named, never dropped silently.
+test('an unchanged repeat is held back after the first time, and still named', () => {
+  const first = explain(r('busy'), fx.all_read);
+  assert.equal(first.findings.length, 4);
+  assert.equal(first.held_back.length, 0);
+  const second = explain(r('busy'), fx.all_read, first.findings);
+  assert.equal(second.findings.length, 0, 'nothing changed, so nothing is repeated in full');
+  assert.equal(second.held_back.length, 4);
+  assert.deepEqual([second.healthy, second.say_nothing], [false, false], 'held back is not healthy');
+  for (const c of second.checks.filter((x) => x.status === 'finding')) assert.equal(c.held_back, true);
+  assert.match(describe(second), /^Held back, unchanged since the last run: /m);
+  for (const f of first.findings) assert.ok(describe(second).includes(f.check_name), f.check_name);
+});
+
+test('a repeat that has changed appears again, marked as changed', () => {
+  const first = explain(r('busy'), fx.all_read);
+  const last = first.findings.map((f) => (f.check === 'pastDueScheduled' ? { ...f, rows: f.rows + 3 } : f));
+  const e = explain(r('busy'), fx.all_read, last);
+  assert.deepEqual(e.findings.map((f) => f.check), ['pastDueScheduled']);
+  assert.equal(e.findings[0].changed_since_last_run, true);
+  assert.equal(e.held_back.length, 3);
+  assert.match(describe(e), /it has changed since/);
+  const worse = first.findings.map((f) => (f.check === 'duplicateActive' ? { ...f, severity: 'act_now' } : f));
+  assert.ok(explain(r('busy'), fx.all_read, worse).findings.some((f) => f.check === 'duplicateActive'), 'a severity change shows again');
+});
+
+test('a bare code from the last run holds that finding back; a new finding always shows', () => {
   const e = explain(r('busy'), fx.all_read, ['scheduled_charge_failed']);
-  assert.equal(e.findings.length, 4);
-  assert.equal(e.findings.find((f) => f.check === 'pastDueScheduled').recurring, true);
-  assert.match(describe(e), /Also reported last run/);
+  assert.equal(e.findings.length, 3);
+  assert.deepEqual(e.held_back.map((f) => f.check), ['pastDueScheduled']);
+  assert.throws(() => explain(r('busy'), fx.all_read, 'scheduled_charge_failed'), RangeError);
 });
 
 test('an unrecognised finding is escalated, not cited to a guessed check', () => {

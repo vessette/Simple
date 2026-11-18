@@ -8,13 +8,16 @@
 // The rule is the platform's detectNoShows() (ColaberryEnterprise_AI_Leadership
 // Accelerator @ 109820a, backend/src/services/schedulerService.ts:1622-1631): a call
 // still 'scheduled' whose scheduled_at is earlier than now minus a grace period.
-// The grace period is NOT settled, so every answer names the one it used:
+// Every answer names the grace period it used:
+//   - manager: 15 minutes, the sales manager's decision on 18 Nov 2026. This is the
+//     default. The platform still runs 2 hours until its code is changed.
 //   - spec: 30 minutes, as the capability spec and the agent registry describe it
 //     (agentRegistrySeed.ts:203).
 //   - running_code: 2 hours, which is what detectNoShows() actually uses (:1624).
-// Neither is approved. There is deliberately no default.
 
+export const DEFAULT_RULE = 'manager';
 export const GRACE_RULES = Object.freeze({
+  manager: Object.freeze({ minutes: 15, source: "sales manager's decision, 18 Nov 2026 (the platform still runs 2 hours)" }),
   spec: Object.freeze({ minutes: 30, source: 'capability spec and agent registry (agentRegistrySeed.ts:203)' }),
   running_code: Object.freeze({ minutes: 120, source: 'detectNoShows() in schedulerService.ts:1622-1631' }),
 });
@@ -37,7 +40,7 @@ export function toInstant(value) {
   return Number.isNaN(d.getTime()) ? null : d;
 }
 
-function resolveRule(rule) {
+function resolveRule(rule = DEFAULT_RULE) {
   const r = GRACE_RULES[rule];
   if (!r) throw new RangeError(`Unknown grace rule "${rule}". Use one of: ${Object.keys(GRACE_RULES).join(', ')}.`);
   return { rule, ...r };
@@ -110,13 +113,19 @@ export function explainCalls(calls, { now, rule }) {
   return { now: at.toISOString(), grace_rule: r.rule, grace_minutes: r.minutes, grace_source: r.source, total: rows.length, counts, rows };
 }
 
-/** Calls whose verdict depends on which grace rule is used. This is the decision the manager has to make. */
-export function compareRules(calls, { now }) {
-  const a = explainCalls(calls, { now, rule: 'spec' });
-  const b = explainCalls(calls, { now, rule: 'running_code' });
+/**
+ * Calls whose verdict depends on which grace rule is used. By default it compares the
+ * spec with the running code; pass rules: ['manager', 'running_code'] to see the calls
+ * where the manager's decision and the platform disagree today.
+ */
+export function compareRules(calls, { now, rules = ['spec', 'running_code'] }) {
+  const [x, y] = rules;
+  resolveRule(x); resolveRule(y);
+  const a = explainCalls(calls, { now, rule: x });
+  const b = explainCalls(calls, { now, rule: y });
   const rows = a.rows
     .map((row, i) => ({ call_id: row.call_id, scheduled_at: row.scheduled_at, current_status: row.current_status,
-      minutes_past: row.minutes_past, spec: row.verdict, running_code: b.rows[i].verdict }))
-    .filter((x) => x.spec !== x.running_code);
+      minutes_past: row.minutes_past, [x]: row.verdict, [y]: b.rows[i].verdict }))
+    .filter((r) => r[x] !== r[y]);
   return { now: a.now, total: rows.length, rows };
 }

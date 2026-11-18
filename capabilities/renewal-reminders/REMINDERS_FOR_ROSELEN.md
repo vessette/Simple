@@ -47,12 +47,12 @@ Vick gives the same reasons as the platform:
 ## Things worth knowing
 
 - **Reminders only go out while the switch is on** (`RENEWAL_REMINDERS_ENABLED`). Whether it's on in production is Ali's to confirm; I haven't checked it. With it off, Vick says nobody will be sent anything.
-- **A stuck "claimed" record blocks that reminder for good.** If a send times out after the email has left the platform, the record stays "claimed", deliberately, to avoid a double send. But nothing reports those records, so a member could miss a reminder and nobody would know. Should claimed records more than a day old show up in the daily billing check?
+- **A stuck "claimed" record blocks that reminder for good.** If a send times out after the email has left the platform, the record stays "claimed", deliberately, to avoid a double send. Nothing in the platform reports those records, so a member could miss a reminder and nobody would know. **Roselen asked on 18 November 2026 for them to be reported.** Vick now lists every "claimed" reminder more than a day past its date, with how many days it has been stuck, for a person to check. Adding the same check to the platform's daily billing check is a change for Kes.
 - **Autopay is decided by the schedule id on the subscription.** If that id is missing on a stale row, an autopay member would get the "please pay" wording instead of the heads-up. That's as the brief describes, and still how it works.
 
 ## What I need from you
 
 - **Ali:** is `RENEWAL_REMINDERS_ENABLED` on in production?
-- **Roselen and Ali:** should stuck "claimed" reminders be reported?
+- **Ali:** Roselen wants stuck reminders reported. Do you agree they should go into the platform's daily billing check too?
 
-Code: [reminderSchedule.js](reminderSchedule.js). Tests: [reminderSchedule.test.js](reminderSchedule.test.js), 7 tests. Example members (made up): [fixtures/book.json](fixtures/book.json).
+Code: [reminderSchedule.js](reminderSchedule.js). Tests: [reminderSchedule.test.js](reminderSchedule.test.js), 9 tests. Example members (made up): [fixtures/book.json](fixtures/book.json).

@@ -129,3 +129,32 @@ export function whoIsDue(rows, nowMs, { ledger = null, switchOn = false } = {}) 
   due.sort((a, b) => a.period_end_central.localeCompare(b.period_end_central) || a.subscription_id.localeCompare(b.subscription_id));
   return { as_of_central: centralDate(nowMs), switch_on: switchOn, due, skipped };
 }
+
+/**
+ * Reminders that were started but never confirmed sent. The sales manager asked for these
+ * to be reported (18 Nov 2026): a 'claimed' row blocks that reminder for good, so a member
+ * could miss it with nobody noticing. A claim is stuck once its scheduled Central date is
+ * more than `graceDays` behind today. Read-only: Vick reports, a person decides.
+ */
+export function stuckReminders(ledger, nowMs, { graceDays = 1 } = {}) {
+  if (!Number.isFinite(nowMs)) throw new RangeError('nowMs must be a time.');
+  if (ledger === null || ledger === undefined) return { status: 'unknown', why: 'The reminder ledger was not read, so Vick cannot say whether any reminder is stuck.', stuck: [] };
+  if (!Array.isArray(ledger)) throw new RangeError('ledger must be an array of reminder rows.');
+  const today = dayNum(centralDate(nowMs));
+  const stuck = [];
+  for (const row of ledger) {
+    if (!row || row.status !== 'claimed') continue;
+    const end = toMs(row.period_end);
+    const date = end === null ? null : (reminderDates(row.period_end).find((d) => d.kind === row.reminder_kind) || null);
+    if (!date) {
+      stuck.push({ subscription_id: row.subscription_id, kind: row.reminder_kind, scheduled_date: null, days_stuck: null,
+        why: "Claimed, but its period end or kind can't be read, so Vick can't say how long it has been stuck." });
+      continue;
+    }
+    const days = today - dayNum(date.date);
+    if (days > graceDays) stuck.push({ subscription_id: row.subscription_id, kind: row.reminder_kind, scheduled_date: date.date, days_stuck: days,
+      why: `Started on or after ${date.date} and still not confirmed sent ${days} days later (${CITES.ledger}). It will not be retried, so a person should check whether the member got it.` });
+  }
+  stuck.sort((a, b) => (b.days_stuck ?? Infinity) - (a.days_stuck ?? Infinity) || String(a.subscription_id).localeCompare(String(b.subscription_id)));
+  return { status: 'read', as_of_central: centralDate(nowMs), grace_days: graceDays, stuck };
+}
