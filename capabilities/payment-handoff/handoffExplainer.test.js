@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { explainHandoff, SRC } from './handoffExplainer.js';
+import { explainHandoff, SRC, WRONG_PAYER_OWNER } from './handoffExplainer.js';
 
 const fx = JSON.parse(readFileSync(new URL('./fixtures/cases.json', import.meta.url), 'utf8'));
 const c = (k) => structuredClone(fx.cases[k]);
@@ -73,4 +73,13 @@ test('malformed input is refused; nothing is modified', () => {
   const input = c('poisoned_cache'); const copy = structuredClone(input);
   assert.deepEqual(explainHandoff(input), explainHandoff(input));
   assert.deepEqual(input, copy);
+});
+
+// The sales manager's answer (18 Nov 2026): an id that belongs to someone else goes to admissions operations.
+test('an id that belongs to someone else is routed to admissions operations; other findings carry no owner', () => {
+  const r = explainHandoff(c('poisoned_cache'));
+  const f = r.findings.find((x) => x.kind === 'id_belongs_to_someone_else');
+  assert.equal(f.goes_to, WRONG_PAYER_OWNER);
+  assert.match(WRONG_PAYER_OWNER, /^Admissions operations/);
+  for (const x of r.findings.filter((y) => y.kind !== 'id_belongs_to_someone_else')) assert.equal(x.goes_to, undefined, x.kind);
 });

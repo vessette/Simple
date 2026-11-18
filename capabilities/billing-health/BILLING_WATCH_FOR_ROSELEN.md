@@ -40,9 +40,12 @@ Two smaller notes for Kes:
 - The schedule filter uses its own copy of our prices, $199 and $1,788 (`billingGatewayState.ts:24`). If the price changes, new schedules drop out of the comparison and the watch raises a false alarm.
 - The brief says five checks. There are six: "automatic payment declined" was added later.
 
+## Repeated findings
+
+**Decided by Roselen on 18 November 2026: hold a repeat back after the first time.** Vick reports a finding in full the first time. While it stays the same (same severity, same number of rows, same wording), later reports list it by name on one line, "Held back, unchanged since the last run", instead of repeating it. If it changes, it appears in full again, marked as changed. A held-back finding still means billing isn't healthy.
+
 ## What I need
 
-- **Roselen:** when the same finding shows up every day, should it keep appearing or be held back? There's no rule yet. For now Vick marks a repeat as "also reported last run" and never hides it.
 - **Kes:** three small fixes. (1) Fetch card expiry dates, or remove the check so it doesn't look covered. (2) When PaySimple can't be read, report the schedule check as "could not run", as other failed checks already are. (3) Treat "no reminder ever sent" as worth a look, not as healthy.
 
-Code: [billingExplainer.js](billingExplainer.js). Tests: [billingExplainer.test.js](billingExplainer.test.js), 11 tests, including every combination of readable and unreadable sources. Example results (made up, P1 to P4): [fixtures/watchResults.json](fixtures/watchResults.json).
+Code: [billingExplainer.js](billingExplainer.js). Tests: [billingExplainer.test.js](billingExplainer.test.js), 13 tests, including every combination of readable and unreadable sources. Example results (made up, P1 to P4): [fixtures/watchResults.json](fixtures/watchResults.json).

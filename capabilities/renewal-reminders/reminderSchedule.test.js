@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { reminderDates, kindDueAt, sendStatus, whoIsDue, centralDate, ADVANCE_LEAD_DAYS, FINAL_LEAD_DAYS, LAPSE_FOLLOWUP_DAYS } from './reminderSchedule.js';
+import { reminderDates, kindDueAt, sendStatus, whoIsDue, stuckReminders, centralDate, ADVANCE_LEAD_DAYS, FINAL_LEAD_DAYS, LAPSE_FOLLOWUP_DAYS } from './reminderSchedule.js';
 
 const fx = JSON.parse(readFileSync(new URL('./fixtures/book.json', import.meta.url), 'utf8'));
 const NOW = Date.parse(fx.now);
@@ -87,4 +87,30 @@ test('malformed input is refused; nothing is modified', () => {
   const rows = structuredClone(fx.rows); const copy = structuredClone(rows);
   assert.deepEqual(whoIsDue(rows, NOW, { ledger: fx.ledger }), whoIsDue(rows, NOW, { ledger: fx.ledger }));
   assert.deepEqual(rows, copy);
+});
+
+// The sales manager's answer (18 Nov 2026): report reminders started but never confirmed sent.
+test('stuck reminders: a claim more than a day past its date is reported; a fresh claim and a sent row are not', () => {
+  const now = Date.parse('2026-11-20T15:00:00Z');   // 20 Nov, Central
+  const ledger = [
+    { subscription_id: 'old', period_end: '2026-11-17T22:00:00.000Z', reminder_kind: 'final_1d', status: 'claimed', sent_at: null },  // due 16 Nov: 4 days
+    { subscription_id: 'fresh', period_end: '2026-11-20T22:00:00.000Z', reminder_kind: 'final_1d', status: 'claimed', sent_at: null }, // due 19 Nov: 1 day
+    { subscription_id: 'done', period_end: '2026-11-17T22:00:00.000Z', reminder_kind: 'final_1d', status: 'sent', sent_at: '2026-11-16T15:00:00Z' },
+    { subscription_id: 'odd', period_end: 'not a date', reminder_kind: 'final_1d', status: 'claimed', sent_at: null },
+  ];
+  const r = stuckReminders(ledger, now);
+  assert.equal(r.status, 'read');
+  assert.deepEqual(r.stuck.map((x) => x.subscription_id), ['odd', 'old']);
+  const old = r.stuck.find((x) => x.subscription_id === 'old');
+  assert.deepEqual([old.scheduled_date, old.days_stuck], ['2026-11-16', 4]);
+  assert.match(old.why, /will not be retried/);
+  assert.equal(r.stuck.find((x) => x.subscription_id === 'odd').days_stuck, null);
+  assert.deepEqual(stuckReminders(ledger, now), r, 'same input, same answer');
+});
+
+test('stuck reminders: an unread ledger is unknown, never "none stuck"; bad input is refused', () => {
+  const r = stuckReminders(null, NOW);
+  assert.deepEqual([r.status, r.stuck], ['unknown', []]);
+  assert.throws(() => stuckReminders({}, NOW), RangeError);
+  assert.throws(() => stuckReminders([], NaN), RangeError);
 });

@@ -27,7 +27,7 @@ Vick reports that case as **unknown**, not cold. When the temperature was set by
 ## Things worth knowing
 
 - **The "new lead" count is inflated.** The stats add any lead with a blank or unrecognised stage to "new lead" (`leadService.ts:704-717`). Vick passes the number on but says so.
-- **Automatic stage moves only go forward** (`pipelineService.ts`), so a recompute never moves a stage back. But if you move a lead *back* by hand, an automatic trigger such as a campaign email sent can move it forward again. If that's not what you want, it's a change for Kes.
+- **Automatic stage moves only go forward** (`pipelineService.ts`), so a recompute never moves a stage back. But if you move a lead *back* by hand, an automatic trigger such as a campaign email sent can move it forward again. **Decided by Roselen on 18 November 2026: that's acceptable.** Automation may move a lead she moved back by hand, so no change is needed from Kes.
 - **The brief has some details wrong:**
   - the endpoints are `PATCH /api/admin/leads/:id/pipeline` and `GET /api/admin/pipeline/stats`, not `…/pipeline-stage` and `…/leads/pipeline-stats`;
   - the scoring code is `services/opportunityScoringService.ts`, not the `inbox` file of the same name, which scores email;
@@ -36,7 +36,6 @@ Vick reports that case as **unknown**, not cold. When the temperature was set by
 
 ## What I need
 
-- **Roselen:** should a lead you've moved back by hand stay where you put it, even if an automatic email goes out?
 - **Ali:** is it time to remove the dollar figures from the forecast page, or build the fix you decided in September?
 
 Code: [pipelineExplainer.js](pipelineExplainer.js). Tests: [pipelineExplainer.test.js](pipelineExplainer.test.js), 7 tests. Example responses (made up): [fixtures/responses.json](fixtures/responses.json).
