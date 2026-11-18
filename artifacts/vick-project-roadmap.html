@@ -539,6 +539,7 @@ const SETUP = [
   ["Missed-webhook payment scope explainer", "For one payment, gives the reconciler's verdict (in scope, out of scope or unknown), the guard that decided it, and three cited checks: amount, time window and customer id. Flags payments the job counts as collected that the agreed rule does not, and refuses hedged wording.", "12 tests", [1,1], "capabilities/app-payment-reconcile/"],
   ["Revenue answers", "Reads each figure from the endpoint that serves it and gives the endpoint, field and filter, so anyone can reproduce it. Missing or broken sources are unavailable with the reason; net revenue is unavailable as the platform says; projections are refused as revenue.", "10 tests", [1,1], "capabilities/revenue-reporting/"],
   ["Code-reference check of the sales specs", "A read-only checker for every code reference in the 32 capability specs, at the date they were researched and today, plus a seeded random sample of 50 references checked by hand.", "17 tests", null, "docs/discovery/06-citation-check-sales.md"],
+  ["Questions for the sales manager", "One page with every open question by priority, each with what it is about, why it matters and an example. She answers there, and answers are saved with her name and the time. 17 answered on 18 Nov; four follow-ups open.", "17 answered", null, null],
   ["Weekly one-pager", "Status page for senior managers, refreshed every weekday by a scheduled job.", "Live page", null, "artifacts/vick-weekly-update.html"],
   ["Capability map", "Interactive map of all 32 capabilities along the customer journey, with ceilings, human decisions, tools and dependencies.", "Built from 32 specs", null, "artifacts/vick-capability-map.html"],
   ["Workflows", "The sales journey with its human gates, how a capability earns autonomy, and how each piece of work is built.", "8 human gates mapped", null, "artifacts/vick-workflows.html"],
@@ -569,6 +570,7 @@ const DECISIONS = [
   ["F15", "Many code references in the capability specs point at the wrong place.", "21 of the 100 that name their target are wrong; a hand-checked sample puts about 99 of the other 256 wrong (80 to 127). Two references repeated across nearly every spec are 63 of those. A note for the program lead and platform owner is drafted.", "active"],
   ["P1", "Offer routing labels a lead only; it doesn't start outreach.", "Slower first contact, but nobody receives the wrong offer.", "next"],
   ["P2", "Pause re-scoring until a person can override an offer.", "Declined 18 Nov: the sales manager chose to keep re-scoring running.", "done"],
+  ["D5", "Keep step-by-step detail of unfixed platform weaknesses out of the public repository.", "The repository must stay public for the platform to read it. Notes keep their summary and tests; the detail goes to the program lead and platform owner privately, and a test stops it coming back.", "done"],
   ["D4", "Publish only the one-pager to GitHub Pages, through a dedicated workflow.", "Kept the site small because the repository is public. The public copies were taken offline on 17 Nov.", "done"],
 ];
 
@@ -583,6 +585,7 @@ const RISKS = [
   ["Unsettled or reversed payments keep paid access", "High: seats and revenue overstated; access without payment", "Rule decided 12 Nov (settled only; a reversal drops to the preview tier). Platform builder's spec drafted, awaiting approval: record and re-check waiting payments, one rule in all five places", "Platform owner, platform builder", "active"],
   ["Conflicting refund terms on the platform", "High: a customer quoted terms nobody approved", "Vick states no terms; asked which version is final and who signs it off", "Program lead, admissions operations", "active"],
   ["Capability specs cite the wrong code", "Medium: reviewers judging evidence are sent to the wrong place", "Checker and sample review published; corrections listed per spec; a second reviewer to confirm the sample", "Program lead, platform owner", "active"],
+  ["Two platform weaknesses not yet fixed", "High: seat codes and repeated payment notices can be misused", "Detail kept out of the public notes (17 Nov); fixes proposed: a seat-code attempt limit and a record of handled payment notices. The earlier text is still in the repository history, so the fixes are the real answer", "Program lead, platform owner", "active"],
   ["Legacy jobs with no owner", "Low: stale automation keeps running", "Each has one named question and a named person to answer it", "Sales and marketing managers", "active"],
   ["Plan dates compress into the build window", "Medium: 30 capabilities in 7 weeks", "Build the three proposed tasks first; demo the strongest end-to-end path", "Architect", "next"],
 ];
@@ -597,7 +600,7 @@ const RACI = [
 ];
 
 const NOW = [
-  ["Weekly check-in with the sales manager", "Pause decision, first task, pass marks, cold-lead rule, what stays human, price and dates."],
+  ["Follow-ups with the sales manager", "Four short questions on her 18 Nov answers, on her question page: a pass mark, what makes a lead cold, how far \"anything payment related\" reaches, and which copies of the old price are fixed first."],
   ["Code-reference note", "Drafted for the program lead and platform owner: the checker's results, the sample estimate and the two repeated references to fix first."],
 ];
 const NEXT = [
@@ -617,6 +620,7 @@ const WAIT = [
   ["Admissions operations", "Asked 11 Nov which of three versions of the refund terms is final; program lead copied."],
   ["Sales and marketing managers", "Owners for two legacy jobs."],
   ["Program lead, platform owner and builder", "Twelve items from today's findings, sent 16 Nov: one sitting of read-only checks (repeated payment notices in the logs, customer ids against payers, cancellation reasons by type, a daily seat export); working the seat count prospects hear out from real enrolments; a record of each payment notice; the sponsor billing states that allow seat codes; \"free\" on three live pages; whether renewal reminders are on; rewording the reporting story; the past Sales Hub dates; three billing-watch fixes and the card-expiry field; the seat-redemption spec; and the replay shapes for the payment idempotency check."],
+  ["Program lead and platform owner", "Priority for two security fixes: a limit on seat-code attempts, and a record of every handled payment notice. The step-by-step detail is shared with them privately."],
   ["Sales manager and admissions operations", "A 20-minute interview to write the recurring reporting duty list; questions and four candidate reports are drafted."],
 ];
 
@@ -630,7 +634,12 @@ const PHASES = [
 ];
 
 const LOG = [
+  ["2026-11-18", "Weekly update refreshed for 16 to 20 November."],
+  ["2026-11-18", "Who \"Cora\" is confirmed: the platform's AI assistant that books calls. Four follow-ups remain for the sales manager."],
+  ["2026-11-18", "Question page for the sales manager: every open question by priority, with what it is about, why it matters and an example, answered on the page itself. She answered all 17 the same morning."],
   ["2026-11-18", "The sales manager answered all 17 open questions. Applied: lead temperature is the second capability; re-scoring stays on; a call counts as missed after 15 minutes; automation may move a lead moved back by hand; the billing watch holds unchanged repeats back after the first report; a payment id that belongs to someone else goes to admissions operations; stuck renewal reminders are now reported. Five answers need a follow-up, and five questions passed to the program lead and admissions operations."],
+  ["2026-11-17", "At the platform builder's request, step-by-step detail on two unfixed platform weaknesses was taken out of the public notes and shared privately with the program lead and platform owner. The notes keep their summary and tests."],
+  ["2026-11-17", "Public GitHub Pages copies of the four pages taken offline. The pages are shared from claude.ai."],
   ["2026-11-16", "Today's findings sent by email to the program lead, platform owner and builder: twelve items, none already on the program lead's list."],
   ["2026-11-16", "Seat capacity merged: what counts as a paid seat, a reserved seat and an Explorer, and no fill forecast until there is enough data. Found that the seats-remaining figure prospects are told is a typed number, not a count, and that the platform's seat counter never goes down; a fix and a daily check are proposed."],
   ["2026-11-16", "Payment notice replays merged: the four guards that stop a repeated payment notice doing harm, and five gaps they leave, including a repeated notice re-sending the welcome email. The platform keeps no record of handled notices; a free log search and a small notice table are proposed to the program lead."],
@@ -697,7 +706,7 @@ el("tiles").innerHTML = [
   [`${capsDone}/${CAPS.length}`, "capabilities built as drafts", capsDone / CAPS.length],
   ["54/66", "acceptance criteria passed", 54 / 66],
   ["338", "automated tests, all passing", 1],
-  ["77", "pull requests merged", 1],
+  ["79", "pull requests merged", 1],
   ["0", "capabilities approved or switched on", 0],
 ].map(([b, l, f]) => `<div class="tile"><b>${b}</b><span>${l}</span><div class="meter" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></div></div>`).join("");
 
