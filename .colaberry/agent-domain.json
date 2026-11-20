@@ -3,8 +3,11 @@
   "domain_key": "sales",
   "sources": {
     "agent": "GET /api/admin/agent-domains-mine",
-    "capabilities": "GET /api/admin/agent-domains/sales",
-    "governance": "GET /api/admin/agent-domain-change-requests-mine"
+    "capabilities": "GET /api/admin/agent-domains-mine/sales",
+    "capability_ladder": "GET /api/admin/agent-domains-mine/sales/coverage",
+    "governance": "GET /api/admin/agent-domain-change-requests-mine",
+    "candidates": "GET /api/admin/agent-domain-candidates-mine",
+    "owed_by_product": "GET /api/admin/agent-domain-candidates-mine"
   },
   "autonomy_models": {
     "agent_level": "observe | suggest | act_audited | communicate -- a property of the employee",
@@ -24,6 +27,817 @@
     "tools_granted": [],
     "tools_granted_count": 0
   },
+  "capabilities": [
+    {
+      "capability_id": "sales.icp_prospect_discovery_and_fit_scoring",
+      "name": "ICP prospect discovery and program-fit scoring",
+      "classification": "inherited",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R5",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R1",
+          "behaviour": "Scoring runs against committed Apollo fixtures in an isolated dev database; no live Apollo call.",
+          "acceptance_criteria": "Baseline tests pass on fixtures, and a fixture whose fit score cannot be computed is recorded as unknown rather than defaulted to a number."
+        },
+        {
+          "autonomy": "autonomy:R3",
+          "behaviour": "A human starts one sandbox discovery run against the Apollo sandbox for one named ICP profile.",
+          "acceptance_criteria": "The run is user-initiated, bounded by max_leads_per_profile, writes only sandbox rows, and every row lands pending."
+        },
+        {
+          "autonomy": "autonomy:R5",
+          "behaviour": "Shadow mode: the agent scores the same prospects a human is already reviewing and its accept/reject proposal is compared to the human's.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: agreement rate on a Roselyn-named sample over a named window, with every disagreement enumerated. Story completion, elapsed time and passing mocked tests promote nothing."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.offer_pipeline_routing",
+      "name": "Offer pipeline classification for unrouted leads",
+      "classification": "inherited",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R6",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent explains, from the approved offer taxonomy, which pipeline a described lead belongs to and why.",
+          "acceptance_criteria": "Every answer cites the taxonomy rule it used, and an unmappable lead returns 'cannot place' rather than a guess."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox run: classify a backlog of sandbox leads across several batches and reconcile against the existing classifier.",
+          "acceptance_criteria": "Sandbox-only writes, and a manually routed fixture is provably untouched: a mutation removing the human-routing guard must fail a named test."
+        },
+        {
+          "autonomy": "autonomy:R6",
+          "behaviour": "Supervised production pilot on a manager-named lead segment, every label reviewable and reversible.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: human override rate below a Roselyn-set level over a named window, with separate written approval on record before the pilot starts."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.strategy_call_no_show_detection_and_recovery",
+      "name": "Strategy-call no-show detection and recovery queue",
+      "classification": "inherited",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R4",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent explains which calls qualify as no-shows and why, from the approved rule.",
+          "acceptance_criteria": "Every answer names the scheduled time, the grace threshold and the current status, and no answer asserts a count without the underlying rows."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox run: detect no-shows across a sandbox appointment set, assemble the recovery queue, and hand it over without contacting anyone.",
+          "acceptance_criteria": "Zero outbound messages emitted, proven by a zero-call assertion on the send path rather than by an absence of errors, and a fixture already on the recovery queue is provably not enrolled twice."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.outbound_sequence_health_watch",
+      "name": "Outbound sequence health watch: detect and propose",
+      "classification": "inherited",
+      "implementation_state": "partial",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R6",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent answers, from the approved health rules, why a named sequence scores as it does.",
+          "acceptance_criteria": "Every score is traceable to its input components, and an unreachable component yields unknown rather than a passing default."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox run: scan a sandbox campaign set over several cycles and track whether findings persist or resolve.",
+          "acceptance_criteria": "No send path is invoked and proposals stay proposals: a mutation letting the agent execute a repair must fail a named test."
+        },
+        {
+          "autonomy": "autonomy:R6",
+          "behaviour": "Supervised production pilot of the read-only watch, reporting into a human queue.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: finding precision above a Roselyn-set level over a named window with false positives enumerated, and separate written approval before the pilot."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.outbound_batch_preparation_for_approval",
+      "name": "Outbound enrolment batch prepared for human approval",
+      "classification": "inherited",
+      "implementation_state": "partial",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R4",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R1",
+          "behaviour": "Packet assembly runs against committed fixtures in an isolated dev database.",
+          "acceptance_criteria": "A fixture batch with fewer qualifying prospects than the cap produces the smaller real number: a test asserting padding must fail."
+        },
+        {
+          "autonomy": "autonomy:R3",
+          "behaviour": "A human starts one sandbox packet build for one named segment.",
+          "acceptance_criteria": "User-initiated; suppressed and duplicate fixtures are provably excluded; zero enrolments and zero sends occur."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox run across several cycles, carrying unapproved packets forward without ever self-approving.",
+          "acceptance_criteria": "An unapproved packet is still unapproved at the end of the window, and a mutation removing the approval gate must fail a named test."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.pipeline_digest_for_manager",
+      "name": "Sales pipeline digest for the accountable manager",
+      "classification": "inherited",
+      "implementation_state": "partial",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R6",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "On request the agent answers pipeline-state questions from the same sources the digest would use.",
+          "acceptance_criteria": "Every figure carries its source, and an unavailable source is reported as unavailable with the reason."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox run: produce the digest over several periods, keeping period-over-period state.",
+          "acceptance_criteria": "Two runs for the same period produce one digest, not two, and a fixture with a dead metric source renders unavailable: a mutation making it render 0 must fail a named test."
+        },
+        {
+          "autonomy": "autonomy:R6",
+          "behaviour": "Supervised production pilot: the digest is produced in production and reviewed by a human before it reaches anyone.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: zero fabricated figures across a named window, verified by spot-checking each figure to its source, with separate written approval before the pilot."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.enrollment_checkout_link_issuance",
+      "name": "Enrolment checkout: PaySimple customer, hosted payment link, pending enrolment",
+      "classification": "existing_application",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R4",
+      "human_decision": true,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent explains the checkout flow, the current plan prices from the single source of truth, and what a given enrolment's payment state means.",
+          "acceptance_criteria": "Every price quoted traces to PLANS (subscriptionService.ts:73-80); the agent refuses to state a price it cannot trace and never uses the 4500 default."
+        },
+        {
+          "autonomy": "autonomy:R3",
+          "behaviour": "A human starts one sandbox checkout against the PaySimple sandbox for a fixture prospect.",
+          "acceptance_criteria": "User-initiated, sandbox base URL asserted, zero live-mode calls, and the resulting link is for the fixture amount only."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: walk a fixture prospect from cohort validation through link issuance to a sandbox payment and confirm the enrolment state at each step.",
+          "acceptance_criteria": "A closed or full fixture cohort is refused before any gateway call, proven by a zero-call assertion on the gateway client; a mutation removing the availability check must fail a named test."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.subscription_checkout_and_plan_activation",
+      "name": "Membership subscription checkout and plan activation",
+      "classification": "existing_application",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R4",
+      "human_decision": true,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent answers plan, price, credit and billing-date questions from PLANS and the member's own subscription row.",
+          "acceptance_criteria": "Every price and date traces to code or to the member's row; an unknown is reported as unknown rather than computed from an assumption."
+        },
+        {
+          "autonomy": "autonomy:R3",
+          "behaviour": "A human starts one sandbox checkout for a fixture member on each plan.",
+          "acceptance_criteria": "The comped plan is refused, billing_unconfigured is refused, and credit application reduces only the first charge while the recurring amount_cents stays at list price."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: checkout, sandbox payment, activation, and a replayed activation.",
+          "acceptance_criteria": "The replayed activation is a no-op, proven by asserting a single state transition; a mutation removing the idempotency guard at subscriptionService.ts:423 must fail a named test."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.payment_confirmation_and_seat_grant",
+      "name": "Payment webhook confirmation, seat grant and portal access",
+      "classification": "existing_application",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R5",
+      "human_decision": true,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent explains, for a named person, what their payment and seat state is and which webhook path produced it.",
+          "acceptance_criteria": "Every claim traces to the enrolment, subscription or health sample it came from; the agent reports unknown where no record exists."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: replay a sequence of webhook fixtures, including a duplicate and a payment_failed after a paid state.",
+          "acceptance_criteria": "The duplicate increments no seat and the failed event does not override paid, each proven by asserting the single state transition; a mutation removing either guard must fail a named test."
+        },
+        {
+          "autonomy": "autonomy:R5",
+          "behaviour": "Shadow mode: for each production confirmation, the agent states what the outcome should be and it is compared to what the deterministic handler did.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: zero disagreements on seat grants over a Roselyn-named window, with every disagreement investigated to root cause before any further promotion is considered."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.refund_and_void_issuance",
+      "name": "Refund and void issuance against a settled or unsettled payment",
+      "classification": "existing_application",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R2",
+      "human_decision": true,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent answers refund-ledger and refund-policy questions from approved knowledge, and may draft a recommendation for a human to accept or reject.",
+          "acceptance_criteria": "Every answer cites the ledger row or the approved policy text; where the policy is unapproved the agent says so rather than stating terms, and it never asserts that a refund will be issued."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.subscription_cancellation_and_schedule_suspension",
+      "name": "Subscription cancellation and recurring-schedule suspension",
+      "classification": "existing_application",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R2",
+      "human_decision": true,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent explains a named member's subscription state, whether a gateway schedule exists, and what the recorded cancellation reason is.",
+          "acceptance_criteria": "Every claim traces to the subscription row or a gateway read; where no schedule id exists the agent says the suspend would be a no-op rather than implying the member is safe from charges."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.comped_seat_grant_and_revocation",
+      "name": "Comped seat grant and revocation",
+      "classification": "existing_application",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R2",
+      "human_decision": true,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent reports who currently holds a comped seat, since when, and whether they are excluded from the paying-member counts.",
+          "acceptance_criteria": "Every comp listed traces to a subscriptions row; the agent states explicitly that comped seats are excluded from revenue, and never proposes a grant as though it were a routine step."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.app_originated_payment_reconciliation",
+      "name": "App-originated payment reconciliation after a missed webhook",
+      "classification": "existing_application",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R5",
+      "human_decision": true,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent explains why a named payment is or is not in scope, naming the origin guard that decided it.",
+          "acceptance_criteria": "Every in-scope or out-of-scope verdict cites the amount match, the time window and the customer-id scope; the agent never says a payment 'should probably' be linked."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: reconcile a fixture set twice, including a shared customer id and a pre-checkout payment.",
+          "acceptance_criteria": "The second run links nothing new, the shared id is excluded, and the pre-checkout payment is refused; a mutation removing the origin guard must fail a named test."
+        },
+        {
+          "autonomy": "autonomy:R5",
+          "behaviour": "Shadow mode: the agent's proposed link set is compared against the production dry run's output.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: exact set equality with the dry run over a Roselyn-named window, with every difference traced to a named cause. A wet run stays a human action regardless of the result."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.revenue_and_subscription_reporting",
+      "name": "Collected revenue, MRR, ARR, plan mix and tenure reporting",
+      "classification": "existing_application",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R6",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent answers revenue, MRR, plan-mix and tenure questions from the existing endpoints, citing the source of every figure.",
+          "acceptance_criteria": "Every figure is reproducible from a named endpoint and filter; the agent reports unavailable rather than zero where a source is missing, and never derives revenue from a price times a count."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: assemble a multi-section report over several periods, keeping period-over-period state.",
+          "acceptance_criteria": "Every aggregate reconciles to its own drill-down roster, and a fixture with a dead source renders unavailable: a mutation making it render 0 must fail a named test."
+        },
+        {
+          "autonomy": "autonomy:R6",
+          "behaviour": "Supervised production pilot: the agent drafts the recurring revenue report and a human reviews it before anyone else sees it.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: zero unsourced figures across a Roselyn-named window, verified by spot-checking each figure to its endpoint, with separate written approval before the pilot."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.revenue_definition_integrity_guard",
+      "name": "Revenue-definition integrity guard: app-originated checkout only",
+      "classification": "existing_application",
+      "implementation_state": "partial",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R6",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent states, for any revenue figure it is shown, whether it meets the app-originated-collected rule and which citation says so.",
+          "acceptance_criteria": "Every verdict cites one of the four rule statements; the agent never asserts a revenue number of its own."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: sweep the repository for revenue-rendering surfaces and produce a finding list with a verdict per surface.",
+          "acceptance_criteria": "The known violation at revenueDashboardService.ts:94-95 appears in the findings; a sweep that misses it fails the exercise, which is the positive control."
+        },
+        {
+          "autonomy": "autonomy:R6",
+          "behaviour": "Supervised production pilot: the sweep runs against the shipped code on a cadence and files findings into a human queue.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: zero false findings over a Roselyn-named window and the known violation detected every run, with separate written approval before the pilot."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.abandoned_checkout_identification",
+      "name": "Abandoned-checkout identification, separated from free signups and ex-members",
+      "classification": "existing_application",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R6",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent explains why a named person is or is not an abandoned checkout.",
+          "acceptance_criteria": "Every verdict names the payment_status and the latest subscription status; a paid former member is explicitly excluded with the reason."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: produce the list across several sweeps and track who leaves it and why.",
+          "acceptance_criteria": "An Explorer fixture and a paid ex-member fixture never appear; a mutation removing either exclusion must fail a named test."
+        },
+        {
+          "autonomy": "autonomy:R6",
+          "behaviour": "Supervised production pilot: the list is produced on a cadence into a human work queue.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: zero Explorers and zero paid ex-members on the list across a Roselyn-named window, spot-checked row by row, with separate written approval before the pilot."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.prospect_question_answering_from_approved_kb",
+      "name": "Grounded answers to prospect questions from the approved sales knowledge base",
+      "classification": "existing_application",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R5",
+      "human_decision": true,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent answers a rep's question grounded only in the approved KB and the pinned facts.",
+          "acceptance_criteria": "Every factual claim traces to a KB entry or a pinned fact; a cost answer always discloses the student-paid Anthropic and API costs; a refund answer states the terms are pending approval. A fabricated price, date or policy in any sampled answer fails the release outright."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: hold a multi-turn rep conversation covering price, enrolment, seats, schedule and scholarship.",
+          "acceptance_criteria": "No turn contradicts an earlier turn or the pinned facts, and a question outside the KB returns 'I do not have that detail' rather than an answer."
+        },
+        {
+          "autonomy": "autonomy:R5",
+          "behaviour": "Shadow mode: the agent answers the same questions Roselyn answers and the two are compared.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: zero factual contradictions of the approved KB over a Roselyn-named sample, with every contradiction treated as a release blocker rather than a tuning note."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.billing_health_watch",
+      "name": "Billing health watch: duplicates, lapses, expiring cards, schedules against the book",
+      "classification": "existing_application",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R6",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent explains each finding, its severity and what a human would have to do about it.",
+          "acceptance_criteria": "Every finding cites the check that produced it; an unreadable source yields unknown rather than a pass."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: run the watch over several days of fixtures and track findings opening and closing.",
+          "acceptance_criteria": "Zero writes of any kind, proven by a zero-write assertion rather than by an absence of errors; legacy-bootcamp schedule fixtures never appear as ours."
+        },
+        {
+          "autonomy": "autonomy:R6",
+          "behaviour": "Supervised production pilot: the watch runs daily and reports into a human queue, still writing nothing.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: every finding over a Roselyn-named window is either confirmed real or explained, with separate written approval before the pilot."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.renewal_reminder_lifecycle",
+      "name": "Renewal reminder and autopay-disclosure lifecycle",
+      "classification": "existing_application",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R4",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent states who is due which reminder kind and when, in Central time.",
+          "acceptance_criteria": "Every due date is reproducible from current_period_end and the lead-day constants; the agent never claims a reminder was sent without the idempotency record."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: run the selection across a simulated month including a lapse, a restart and a double fire.",
+          "acceptance_criteria": "Exactly one reminder exists per (subscription, period_end, kind) at the end, proven by counting rows rather than by an absence of errors; a mutation removing the idempotency key must fail a named test."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.team_license_and_sponsored_seat_administration",
+      "name": "Team-license and sponsored-seat administration",
+      "classification": "existing_application",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R4",
+      "human_decision": true,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent explains the team-license tiers, how redemption works, and the state of a named sponsor's seat block.",
+          "acceptance_criteria": "Every price quoted traces to an approved source; an unreconciled price copy is reported as unknown rather than quoted."
+        },
+        {
+          "autonomy": "autonomy:R3",
+          "behaviour": "A human starts one sandbox redemption against a fixture code.",
+          "acceptance_criteria": "User-initiated; a replayed redemption grants no second seat; an over-allocation attempt is refused."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: exhaust a fixture seat block across several employees, including a replay and an over-allocation.",
+          "acceptance_criteria": "Seats granted never exceed seats purchased, proven by counting rows; a mutation removing the idempotency guard on the redemption code must fail a named test."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.pipeline_stage_and_lead_temperature_stewardship",
+      "name": "Pipeline stage, lead temperature and forecast stewardship",
+      "classification": "existing_application",
+      "implementation_state": "implemented",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R6",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent explains where a named lead sits, what its temperature is based on, and what the pipeline stats say.",
+          "acceptance_criteria": "Every figure traces to a named endpoint; the forecast is described as a count projection and never as revenue."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: propose stage and temperature moves across a sandbox pipeline over several cycles.",
+          "acceptance_criteria": "A human-set stage fixture is never proposed back to its old value, and a lead with no activity is reported unknown rather than cold."
+        },
+        {
+          "autonomy": "autonomy:R6",
+          "behaviour": "Supervised production pilot: proposed moves land in a human queue for one-click accept or reject.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: acceptance rate above a Roselyn-set level over a named window, with rejected proposals categorised, and separate written approval before the pilot."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.enrollment_completion_follow_through",
+      "name": "Enrolment completion follow-through, from checkout started to seat active",
+      "classification": "manager_defined",
+      "implementation_state": "partial",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R5",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent states, for a named person, which step of enrolment they are stuck at and what the next action is.",
+          "acceptance_criteria": "Every state traces to the enrolment and subscription rows; a person with two rows is reported as one person, and an unowned step is reported as unowned rather than assigned to whoever is handy."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: maintain the follow-through list across several days, with people entering and leaving.",
+          "acceptance_criteria": "Someone who completes leaves the list, someone still stuck remains, and a duplicate-row fixture appears exactly once."
+        },
+        {
+          "autonomy": "autonomy:R5",
+          "behaviour": "Shadow mode: the agent's stuck list and next actions are compared against Roselyn's own.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: agreement on who is stuck over a Roselyn-named window, with every missed person treated as a defect rather than a tuning note."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.renewal_and_revenue_follow_through_worklist",
+      "name": "Renewal and revenue follow-through worklist",
+      "classification": "manager_defined",
+      "implementation_state": "partial",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R5",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent answers which members need renewal attention today and why.",
+          "acceptance_criteria": "Every row cites its source check; excluded members are provably absent; an empty day is reported as empty."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: produce the worklist across a simulated month covering a renewal, a past-due and a lapse.",
+          "acceptance_criteria": "No row ever proposes a catch-up charge on a lapsed period, and an excluded fixture never appears: a mutation removing the exclusion check must fail a named test."
+        },
+        {
+          "autonomy": "autonomy:R5",
+          "behaviour": "Shadow mode: the agent's worklist is compared against Roselyn's own for the same day.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: no member she would have worked is missing, over a window she names, with every omission investigated to root cause."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.payment_handoff_integrity",
+      "name": "Payment-handoff integrity across the hosted-page boundary",
+      "classification": "manager_defined",
+      "implementation_state": "partial",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R6",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent explains, for a named subscription, which customer id was stored, which the charge landed on, and whether the billing account resolves.",
+          "acceptance_criteria": "Every claim traces to a gateway read or a stored row; an unverifiable id is reported as unverified rather than as matching."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: sweep a fixture set containing a mismatched id, a shared id and an excluded member.",
+          "acceptance_criteria": "The mismatch and the shared id are both flagged and the excluded member is reported as excluded, not broken; a mutation removing the fail-closed ownership check must fail a named test."
+        },
+        {
+          "autonomy": "autonomy:R6",
+          "behaviour": "Supervised production pilot: the sweep runs on a cadence and files findings into a human queue.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: every finding over a Roselyn-named window is confirmed real or explained, with separate written approval before the pilot."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.prospect_outreach_draft_for_human_send",
+      "name": "Prospect outreach and sales material drafted for a human to send",
+      "classification": "manager_defined",
+      "implementation_state": "absent",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R4",
+      "human_decision": true,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R1",
+          "behaviour": "Drafting runs against committed prospect fixtures in an isolated dev environment, with no send path linked.",
+          "acceptance_criteria": "Baseline tests pass, and a draft containing an untraceable price or the word 'free' fails a named test."
+        },
+        {
+          "autonomy": "autonomy:R3",
+          "behaviour": "A human requests one draft for one named fixture prospect.",
+          "acceptance_criteria": "User-initiated; every claim in the draft carries its source; a suppressed fixture is refused; zero send-path calls occur, proven by a zero-call assertion."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: draft a short sequence for a fixture prospect across several stages.",
+          "acceptance_criteria": "No draft contradicts an earlier one or the approved facts, no draft reaches a queue, and a mutation that lets a draft be enqueued must fail a named test."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.manager_decision_queue_for_sales_actions",
+      "name": "A decision queue the accountable manager can actually reach",
+      "classification": "manager_defined",
+      "implementation_state": "absent",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R2",
+      "human_decision": true,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R0",
+          "behaviour": "The workflow, the decision types, the required evidence per decision and the rollback conditions are written down and reviewed; nothing is built.",
+          "acceptance_criteria": "Every capability in this matrix names the decision it needs from Roselyn, and no capability claims a confirmed requirement."
+        },
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "Once a surface exists, the agent can answer what is in the queue, how long it has waited and what evidence each proposal carries.",
+          "acceptance_criteria": "No proposal's state is ever changed by the agent, and an undecided proposal is reported as undecided however long it has waited."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.subscription_churn_and_renewal_risk_analysis",
+      "name": "Subscription churn and renewal-risk analysis",
+      "classification": "proposed_new",
+      "implementation_state": "absent",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R5",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R0",
+          "behaviour": "The risk definition, the drivers, the exclusions and the minimum population are written down and reviewed.",
+          "acceptance_criteria": "No risk figure is produced; the data-quality question about cancellation reasons is answered by measurement, not assumption."
+        },
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent answers tenure and churn questions from the existing analytics, with unknown where the data does not support an answer.",
+          "acceptance_criteria": "No rate is reported below the named population threshold, and comped and Explorer fixtures are provably excluded."
+        },
+        {
+          "autonomy": "autonomy:R5",
+          "behaviour": "Shadow mode: the agent's risk ranking is scored against who actually lapsed in the following period.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: lift over a naive baseline on a Roselyn-named window, with the baseline stated. A ranking that does not beat the baseline is not promoted."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.da_revenue_reporting_transition",
+      "name": "Data Analyst revenue and enrolment reporting duties transitioning to AI",
+      "classification": "proposed_new",
+      "implementation_state": "unknown",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R0",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R0",
+          "behaviour": "Interview Roselyn, enumerate each recurring analyst report with its recipient, cadence, timezone and channel, and record which duties are candidates for drafting.",
+          "acceptance_criteria": "A written duty list exists with at least one named report per duty and a named data source or an explicit 'unsourced' per report. Until it exists this capability stays at R0 and reports its scope as unknown rather than guessing one."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.quote_and_offer_packet_preparation",
+      "name": "Quote and offer packet preparation for a human to price and send",
+      "classification": "proposed_new",
+      "implementation_state": "absent",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R4",
+      "human_decision": true,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R1",
+          "behaviour": "Packet assembly runs against fixtures in an isolated dev environment, quoting only the plan catalogue.",
+          "acceptance_criteria": "A packet containing a discount, a bespoke price, a refund term or the word 'free' fails a named test."
+        },
+        {
+          "autonomy": "autonomy:R3",
+          "behaviour": "A human requests one packet for one fixture requirement.",
+          "acceptance_criteria": "User-initiated; every price traces to the plan catalogue; student-paid costs are disclosed; everything unpriceable is listed as such."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: assemble packets for several fixture requirements including a team offer.",
+          "acceptance_criteria": "No packet commits a price or a discount, and a mutation letting the agent set a price must fail a named test."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.price_statement_consistency_audit",
+      "name": "Price-statement consistency audit across every surface that quotes a price",
+      "classification": "proposed_new",
+      "implementation_state": "absent",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R6",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R0",
+          "behaviour": "The inventory of price-stating surfaces and the live-versus-archive rule are written down and reviewed.",
+          "acceptance_criteria": "The inventory names every known location including the two stale 4500 constants; a positive control confirms a fabricated location returns no match."
+        },
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent answers what the current price is and which surfaces state it, citing the source of truth.",
+          "acceptance_criteria": "The agent never states a price it cannot trace, and reports a disagreeing surface as disagreeing rather than averaging the two."
+        },
+        {
+          "autonomy": "autonomy:R6",
+          "behaviour": "Supervised production pilot: the audit runs on a cadence and files drift findings into a human queue.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: the known stale constants are detected every run and zero archived surfaces are reported as drift, over a Roselyn-named window, with separate written approval before the pilot."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.payment_webhook_replay_dedup_watch",
+      "name": "Payment webhook replay and delivery-dedup gap watch",
+      "classification": "proposed_new",
+      "implementation_state": "absent",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R6",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R0",
+          "behaviour": "The replay surface is documented: each path, its dedup key, and what that key does and does not cover.",
+          "acceptance_criteria": "A written table names all four existing guards and states explicitly which replay shapes remain uncovered."
+        },
+        {
+          "autonomy": "autonomy:R4",
+          "behaviour": "Stateful sandbox task: replay webhook fixtures including a duplicate delivery and a same-schedule charge with a different payment id.",
+          "acceptance_criteria": "The duplicate delivery changes nothing and the differing-payment-id case is reported as uncovered rather than as safe; a mutation removing the payment-id key must fail a named test."
+        },
+        {
+          "autonomy": "autonomy:R6",
+          "behaviour": "Supervised production pilot: the watch runs on a cadence and files suspected replays into a human queue.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: every suspected replay over a Roselyn-named window is confirmed or explained, with separate written approval before the pilot."
+        }
+      ]
+    },
+    {
+      "capability_id": "sales.seat_capacity_and_cohort_fill_forecast",
+      "name": "Seat capacity and cohort fill forecast",
+      "classification": "proposed_new",
+      "implementation_state": "absent",
+      "requirement_validation_state": "draft",
+      "starting_autonomy": "autonomy:R0",
+      "max_permitted_autonomy": "autonomy:R6",
+      "human_decision": false,
+      "release_behaviour": [
+        {
+          "autonomy": "autonomy:R0",
+          "behaviour": "The definition of a real remaining seat, the treatment of invoice reservations and Explorers, and the projection basis are written down and reviewed.",
+          "acceptance_criteria": "The definition distinguishes paid seats, reserved seats and Explorers, and states the minimum data required before a projection is reported at all."
+        },
+        {
+          "autonomy": "autonomy:R2",
+          "behaviour": "The agent answers how many real seats remain in a named cohort and on what basis.",
+          "acceptance_criteria": "Reserved and paid seats are reported separately, Explorer fixtures are excluded, and a projection is reported as unavailable where the data does not support one."
+        },
+        {
+          "autonomy": "autonomy:R6",
+          "behaviour": "Supervised production pilot: the seat report runs on a cadence and flags disagreements with the published claim.",
+          "acceptance_criteria": "Proposed threshold, unaccepted: the real count reconciles exactly to the cohort rows on every run over a Roselyn-named window, with separate written approval before the pilot."
+        }
+      ]
+    }
+  ],
   "authority": [
     {
       "capability_id": "sales.abandoned_checkout_identification",
@@ -385,29 +1199,24 @@
     "known": true,
     "disclosure": "A criterion counts as passing when it is marked in `.colaberry/progress.json` in this repository. The verifier reads that file on every sync and records what it found. A story showing 0 of N is not a rejection: nothing has been claimed yet.",
     "summary": {
-      "stories": 43,
-      "checked": 39,
-      "verified": 21,
-      "awaiting_criteria": 18,
-      "outstanding_criteria": 18
+      "stories": 47,
+      "checked": 43,
+      "verified": 37,
+      "awaiting_criteria": 6,
+      "outstanding_criteria": 12
     },
     "stories": [
       {
         "story_id": "sales.CAP.abandoned_checkout_identification",
         "title": "Abandoned-checkout identification, separated from free signups and ex-members",
-        "status": "in_progress",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.abandoned_checkout_identification and changes a file. Commit your work with a `Story: sales.CAP.abandoned_checkout_identification` trailer (or sales.CAP.abandoned_checkout_identification in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every verdict names the payment_status and the latest subscription status; a paid former member is explicitly excluded with the reason."
-        ],
-        "commit_sha": null
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "ef7d22c6e042797234374f7c5fd424f2e180133b"
       },
       {
         "story_id": "sales.CAP.app_originated_payment_reconciliation",
@@ -417,26 +1226,23 @@
         "verified": true,
         "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [],
+        "reasons": [
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
+        ],
         "outstanding": [],
         "commit_sha": "46df4f7404082f1c57320af6a553cb1adc3a5dfa"
       },
       {
         "story_id": "sales.CAP.billing_health_watch",
         "title": "Billing health watch: duplicates, lapses, expiring cards, schedules against the book",
-        "status": "in_progress",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.billing_health_watch and changes a file. Commit your work with a `Story: sales.CAP.billing_health_watch` trailer (or sales.CAP.billing_health_watch in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every finding cites the check that produced it; an unreadable source yields unknown rather than a pass."
-        ],
-        "commit_sha": null
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "5d2367c5c6847fe21de97ff6db775b966be266f8"
       },
       {
         "story_id": "sales.CAP.comped_seat_grant_and_revocation",
@@ -446,7 +1252,9 @@
         "verified": true,
         "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [],
+        "reasons": [
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
+        ],
         "outstanding": [],
         "commit_sha": "ff888abea362700326efe3760bb3ae52ecbd4b57"
       },
@@ -459,13 +1267,12 @@
         "criteria_passed": 0,
         "criteria_total": 1,
         "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.da_revenue_reporting_transition and changes a file. Commit your work with a `Story: sales.CAP.da_revenue_reporting_transition` trailer (or sales.CAP.da_revenue_reporting_transition in the subject line) and push."
+          "None of the 1 acceptance criteria are marked as passing yet."
         ],
         "outstanding": [
           "A written duty list exists with at least one named report per duty and a named data source or an explicit 'unsourced' per report. Until it exists this capability stays at R0 and reports its scope as unknown rather than guessing one."
         ],
-        "commit_sha": null
+        "commit_sha": "844a1c503b3d493079a3de8c998e37d28d4cbe89"
       },
       {
         "story_id": "sales.CAP.enrollment_checkout_link_issuance",
@@ -484,19 +1291,14 @@
       {
         "story_id": "sales.CAP.enrollment_completion_follow_through",
         "title": "Enrolment completion follow-through, from checkout started to seat active",
-        "status": "in_progress",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.enrollment_completion_follow_through and changes a file. Commit your work with a `Story: sales.CAP.enrollment_completion_follow_through` trailer (or sales.CAP.enrollment_completion_follow_through in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every state traces to the enrolment and subscription rows; a person with two rows is reported as one person, and an unowned step is reported as unowned rather than assigned to whoever is handy."
-        ],
-        "commit_sha": null
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "eaf3aa9f27b3c7d06f32dd4d120985b3f85f2958"
       },
       {
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring",
@@ -513,8 +1315,8 @@
         "commit_sha": "c4022edc340acd47172da4123877d2523c60c194"
       },
       {
-        "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L1-BY-HAND",
-        "title": "ICP prospect discovery and program-fit scoring · 1 · do it by hand",
+        "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-ASK-FOR-A-SCREEN",
+        "title": "ICP prospect discovery and program-fit scoring · 0.3 · waiting on the platform",
         "status": "not_started",
         "verification_state": null,
         "verified": false,
@@ -522,60 +1324,117 @@
         "criteria_total": null,
         "reasons": [],
         "outstanding": [],
+        "commit_sha": null
+      },
+      {
+        "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-CHOOSE",
+        "title": "ICP prospect discovery and program-fit scoring · 0.1 · pick one from the list",
+        "status": "not_started",
+        "verification_state": null,
+        "verified": false,
+        "criteria_passed": null,
+        "criteria_total": null,
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": null
+      },
+      {
+        "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-SCOPE-SHEET",
+        "title": "ICP prospect discovery and program-fit scoring · 0.2 · write the scope sheet",
+        "status": "not_started",
+        "verification_state": null,
+        "verified": false,
+        "criteria_passed": null,
+        "criteria_total": null,
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": null
+      },
+      {
+        "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L1-BY-HAND",
+        "title": "ICP prospect discovery and program-fit scoring · 1 · do it by hand",
+        "status": "in_progress",
+        "verification_state": "in_progress",
+        "verified": false,
+        "criteria_passed": 0,
+        "criteria_total": 2,
+        "reasons": [
+          "None of the 2 acceptance criteria are marked as passing yet.",
+          "No commit in the repo names sales.CAP.icp_prospect_discovery_and_fit_scoring.L1-BY-HAND and changes a file. Commit your work with a `Story: sales.CAP.icp_prospect_discovery_and_fit_scoring.L1-BY-HAND` trailer (or sales.CAP.icp_prospect_discovery_and_fit_scoring.L1-BY-HAND in the subject line) and push."
+        ],
+        "outstanding": [
+          "The capability was performed end to end by hand, producing its real outcome on real inputs.",
+          "A run log exists recording the date, the elapsed time, each step actually performed, every judgment call made, and at least one way the recorded workflow differed from what the work was really like."
+        ],
         "commit_sha": null
       },
       {
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L2-IN-THE-APP",
         "title": "ICP prospect discovery and program-fit scoring · 2 · do it in the app",
-        "status": "not_started",
-        "verification_state": null,
+        "status": "in_progress",
+        "verification_state": "in_progress",
         "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
+        "criteria_passed": 0,
+        "criteria_total": 2,
+        "reasons": [
+          "None of the 2 acceptance criteria are marked as passing yet.",
+          "No commit in the repo names sales.CAP.icp_prospect_discovery_and_fit_scoring.L2-IN-THE-APP and changes a file. Commit your work with a `Story: sales.CAP.icp_prospect_discovery_and_fit_scoring.L2-IN-THE-APP` trailer (or sales.CAP.icp_prospect_discovery_and_fit_scoring.L2-IN-THE-APP in the subject line) and push."
+        ],
+        "outstanding": [
+          "The same outcome was produced a second time using only the product, with no agent, no script and no direct database edit -- or the exact step that made this impossible is written down as a named gap.",
+          "The app route was compared against the step 1 run log, and every difference between them is recorded."
+        ],
         "commit_sha": null
       },
       {
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L3-TOOL-REQUEST",
         "title": "ICP prospect discovery and program-fit scoring · 3 · request the tool",
-        "status": "not_started",
-        "verification_state": null,
+        "status": "in_progress",
+        "verification_state": "in_progress",
         "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
+        "criteria_passed": 0,
+        "criteria_total": 3,
+        "reasons": [
+          "None of the 3 acceptance criteria are marked as passing yet.",
+          "No commit in the repo names sales.CAP.icp_prospect_discovery_and_fit_scoring.L3-TOOL-REQUEST and changes a file. Commit your work with a `Story: sales.CAP.icp_prospect_discovery_and_fit_scoring.L3-TOOL-REQUEST` trailer (or sales.CAP.icp_prospect_discovery_and_fit_scoring.L3-TOOL-REQUEST in the subject line) and push."
+        ],
+        "outstanding": [
+          "A change request for a tool exists against this domain, filed by the builder, naming the tool, its scope, what it must never touch, and who approves a run.",
+          "The request cites the step 1 run log and the step 2 result as its evidence.",
+          "A named human other than the builder has recorded a decision on it. A decline counts; an undecided request does not."
+        ],
         "commit_sha": null
       },
       {
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L4-AGENT-WATCHED",
         "title": "ICP prospect discovery and program-fit scoring · 4 · agent does it, watched",
-        "status": "not_started",
-        "verification_state": null,
+        "status": "in_progress",
+        "verification_state": "in_progress",
         "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
+        "criteria_passed": 0,
+        "criteria_total": 3,
+        "reasons": [
+          "None of the 3 acceptance criteria are marked as passing yet.",
+          "No commit in the repo names sales.CAP.icp_prospect_discovery_and_fit_scoring.L4-AGENT-WATCHED and changes a file. Commit your work with a `Story: sales.CAP.icp_prospect_discovery_and_fit_scoring.L4-AGENT-WATCHED` trailer (or sales.CAP.icp_prospect_discovery_and_fit_scoring.L4-AGENT-WATCHED in the subject line) and push."
+        ],
+        "outstanding": [
+          "Baseline tests pass on fixtures, and a fixture whose fit score cannot be computed is recorded as unknown rather than defaulted to a number.",
+          "The agent produced the same outcome as the step 1 run log, on the same inputs, including the exceptions recorded there.",
+          "Every run in the evidence window was approved by a named human before it took effect, and the record shows who."
+        ],
         "commit_sha": null
       },
       {
         "story_id": "sales.CAP.manager_decision_queue_for_sales_actions",
         "title": "A decision queue the accountable manager can actually reach",
-        "status": "in_progress",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.manager_decision_queue_for_sales_actions and changes a file. Commit your work with a `Story: sales.CAP.manager_decision_queue_for_sales_actions` trailer (or sales.CAP.manager_decision_queue_for_sales_actions in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every capability in this matrix names the decision it needs from Roselyn, and no capability claims a confirmed requirement."
-        ],
-        "commit_sha": null
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "b84847bd794f75666bebadfa68ac8c50b0f895f7"
       },
       {
         "story_id": "sales.CAP.offer_pipeline_routing",
@@ -627,43 +1486,35 @@
         "verified": true,
         "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [],
+        "reasons": [
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
+        ],
         "outstanding": [],
         "commit_sha": "d230ee8d31d9918ff37cc811753161e24ecb114b"
       },
       {
         "story_id": "sales.CAP.payment_handoff_integrity",
         "title": "Payment-handoff integrity across the hosted-page boundary",
-        "status": "in_progress",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.payment_handoff_integrity and changes a file. Commit your work with a `Story: sales.CAP.payment_handoff_integrity` trailer (or sales.CAP.payment_handoff_integrity in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every claim traces to a gateway read or a stored row; an unverifiable id is reported as unverified rather than as matching."
-        ],
-        "commit_sha": null
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "3876cebca3d801236579bf9e1caca74ddaa9e43d"
       },
       {
         "story_id": "sales.CAP.payment_webhook_replay_dedup_watch",
         "title": "Payment webhook replay and delivery-dedup gap watch",
-        "status": "in_progress",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.payment_webhook_replay_dedup_watch and changes a file. Commit your work with a `Story: sales.CAP.payment_webhook_replay_dedup_watch` trailer (or sales.CAP.payment_webhook_replay_dedup_watch in the subject line) and push."
-        ],
-        "outstanding": [
-          "A written table names all four existing guards and states explicitly which replay shapes remain uncovered."
-        ],
-        "commit_sha": null
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "745b3a3f62d2423f965bd4d725df6195177b10ff"
       },
       {
         "story_id": "sales.CAP.pipeline_digest_for_manager",
@@ -682,87 +1533,62 @@
       {
         "story_id": "sales.CAP.pipeline_stage_and_lead_temperature_stewardship",
         "title": "Pipeline stage, lead temperature and forecast stewardship",
-        "status": "in_progress",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.pipeline_stage_and_lead_temperature_stewardship and changes a file. Commit your work with a `Story: sales.CAP.pipeline_stage_and_lead_temperature_stewardship` trailer (or sales.CAP.pipeline_stage_and_lead_temperature_stewardship in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every figure traces to a named endpoint; the forecast is described as a count projection and never as revenue."
-        ],
-        "commit_sha": null
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "c368ee5b5e9c42e5902dd307044ef4754010d74b"
       },
       {
         "story_id": "sales.CAP.price_statement_consistency_audit",
         "title": "Price-statement consistency audit across every surface that quotes a price",
-        "status": "in_progress",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.price_statement_consistency_audit and changes a file. Commit your work with a `Story: sales.CAP.price_statement_consistency_audit` trailer (or sales.CAP.price_statement_consistency_audit in the subject line) and push."
-        ],
-        "outstanding": [
-          "The inventory names every known location including the two stale 4500 constants; a positive control confirms a fabricated location returns no match."
-        ],
-        "commit_sha": null
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "d1887f1b0b850fa02698a07dc5e96ddf2c14737d"
       },
       {
         "story_id": "sales.CAP.prospect_outreach_draft_for_human_send",
         "title": "Prospect outreach and sales material drafted for a human to send",
-        "status": "in_progress",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.prospect_outreach_draft_for_human_send and changes a file. Commit your work with a `Story: sales.CAP.prospect_outreach_draft_for_human_send` trailer (or sales.CAP.prospect_outreach_draft_for_human_send in the subject line) and push."
-        ],
-        "outstanding": [
-          "Baseline tests pass, and a draft containing an untraceable price or the word 'free' fails a named test."
-        ],
-        "commit_sha": null
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "0558dccd520e77cbb2e48b69c1bc9b09a7907a9e"
       },
       {
         "story_id": "sales.CAP.prospect_question_answering_from_approved_kb",
         "title": "Grounded answers to prospect questions from the approved sales knowledge base",
-        "status": "in_progress",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.prospect_question_answering_from_approved_kb and changes a file. Commit your work with a `Story: sales.CAP.prospect_question_answering_from_approved_kb` trailer (or sales.CAP.prospect_question_answering_from_approved_kb in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every factual claim traces to a KB entry or a pinned fact; a cost answer always discloses the student-paid Anthropic and API costs; a refund answer states the terms are pending approval. A fabricated price, date or policy in any sampled answer fails the release outright."
-        ],
-        "commit_sha": null
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "228847f6da614d72babf5e7caffa12af1651ce24"
       },
       {
         "story_id": "sales.CAP.quote_and_offer_packet_preparation",
         "title": "Quote and offer packet preparation for a human to price and send",
-        "status": "in_progress",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.quote_and_offer_packet_preparation and changes a file. Commit your work with a `Story: sales.CAP.quote_and_offer_packet_preparation` trailer (or sales.CAP.quote_and_offer_packet_preparation in the subject line) and push."
-        ],
-        "outstanding": [
-          "A packet containing a discount, a bespoke price, a refund term or the word 'free' fails a named test."
-        ],
-        "commit_sha": null
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "47068e70178048e17f1bb337204a0381240e83e1"
       },
       {
         "story_id": "sales.CAP.refund_and_void_issuance",
@@ -772,43 +1598,35 @@
         "verified": true,
         "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [],
+        "reasons": [
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
+        ],
         "outstanding": [],
         "commit_sha": "4771cccf7a42ae4c10eea4fca556eb80bdf78f4d"
       },
       {
         "story_id": "sales.CAP.renewal_and_revenue_follow_through_worklist",
         "title": "Renewal and revenue follow-through worklist",
-        "status": "in_progress",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.renewal_and_revenue_follow_through_worklist and changes a file. Commit your work with a `Story: sales.CAP.renewal_and_revenue_follow_through_worklist` trailer (or sales.CAP.renewal_and_revenue_follow_through_worklist in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every row cites its source check; excluded members are provably absent; an empty day is reported as empty."
-        ],
-        "commit_sha": null
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "1a7e79a76444d49dd958dabc53ccc1528119b431"
       },
       {
         "story_id": "sales.CAP.renewal_reminder_lifecycle",
         "title": "Renewal reminder and autopay-disclosure lifecycle",
-        "status": "in_progress",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.renewal_reminder_lifecycle and changes a file. Commit your work with a `Story: sales.CAP.renewal_reminder_lifecycle` trailer (or sales.CAP.renewal_reminder_lifecycle in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every due date is reproducible from current_period_end and the lead-day constants; the agent never claims a reminder was sent without the idempotency record."
-        ],
-        "commit_sha": null
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "3d355d557876a11d0b7a5e49cfd88cec3271e7ad"
       },
       {
         "story_id": "sales.CAP.revenue_and_subscription_reporting",
@@ -818,43 +1636,35 @@
         "verified": true,
         "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [],
+        "reasons": [
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
+        ],
         "outstanding": [],
         "commit_sha": "18669d7e6825d9dd202fd8846d08496b445c7b29"
       },
       {
         "story_id": "sales.CAP.revenue_definition_integrity_guard",
         "title": "Revenue-definition integrity guard: app-originated checkout only",
-        "status": "in_progress",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.revenue_definition_integrity_guard and changes a file. Commit your work with a `Story: sales.CAP.revenue_definition_integrity_guard` trailer (or sales.CAP.revenue_definition_integrity_guard in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every verdict cites one of the four rule statements; the agent never asserts a revenue number of its own."
-        ],
-        "commit_sha": null
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "1bdf4a9cd30d43000afbfa6c01dad413a8950225"
       },
       {
         "story_id": "sales.CAP.seat_capacity_and_cohort_fill_forecast",
         "title": "Seat capacity and cohort fill forecast",
-        "status": "in_progress",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.seat_capacity_and_cohort_fill_forecast and changes a file. Commit your work with a `Story: sales.CAP.seat_capacity_and_cohort_fill_forecast` trailer (or sales.CAP.seat_capacity_and_cohort_fill_forecast in the subject line) and push."
-        ],
-        "outstanding": [
-          "The definition distinguishes paid seats, reserved seats and Explorers, and states the minimum data required before a projection is reported at all."
-        ],
-        "commit_sha": null
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "87ab49a2e88b88ce26429164c4e68c53546a6cd4"
       },
       {
         "story_id": "sales.CAP.strategy_call_no_show_detection_and_recovery",
@@ -878,7 +1688,9 @@
         "verified": true,
         "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [],
+        "reasons": [
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
+        ],
         "outstanding": [],
         "commit_sha": "030063e02764f2b46129ff7344e40eaa8a586732"
       },
@@ -890,9 +1702,11 @@
         "verified": true,
         "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [],
+        "reasons": [
+          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
+        ],
         "outstanding": [],
-        "commit_sha": "fb7b89dc17887d9cd27a93bed0c746e8db3a74a8"
+        "commit_sha": "911b64b3f25aaf64f8bbbaf453dfb333eeca276e"
       },
       {
         "story_id": "sales.CAP.subscription_churn_and_renewal_risk_analysis",
@@ -903,29 +1717,35 @@
         "criteria_passed": 0,
         "criteria_total": 1,
         "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.subscription_churn_and_renewal_risk_analysis and changes a file. Commit your work with a `Story: sales.CAP.subscription_churn_and_renewal_risk_analysis` trailer (or sales.CAP.subscription_churn_and_renewal_risk_analysis in the subject line) and push."
+          "None of the 1 acceptance criteria are marked as passing yet."
         ],
         "outstanding": [
           "No risk figure is produced; the data-quality question about cancellation reasons is answered by measurement, not assumption."
         ],
-        "commit_sha": null
+        "commit_sha": "a259f56581cfd073a5238603c2b56afb00505bc6"
       },
       {
         "story_id": "sales.CAP.team_license_and_sponsored_seat_administration",
         "title": "Team-license and sponsored-seat administration",
-        "status": "in_progress",
-        "verification_state": "in_progress",
-        "verified": false,
-        "criteria_passed": 0,
+        "status": "complete",
+        "verification_state": "verified",
+        "verified": true,
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "reasons": [
-          "None of the 1 acceptance criteria are marked as passing yet.",
-          "No commit in the repo names sales.CAP.team_license_and_sponsored_seat_administration and changes a file. Commit your work with a `Story: sales.CAP.team_license_and_sponsored_seat_administration` trailer (or sales.CAP.team_license_and_sponsored_seat_administration in the subject line) and push."
-        ],
-        "outstanding": [
-          "Every price quoted traces to an approved source; an unreconciled price copy is reported as unknown rather than quoted."
-        ],
+        "reasons": [],
+        "outstanding": [],
+        "commit_sha": "15a7bac317c735a0457a10a2c37dc2c5ea36525a"
+      },
+      {
+        "story_id": "sales.GATE.R0.1",
+        "title": "R0 gate · 1 of 1 · a capability the agent does, watched",
+        "status": "not_started",
+        "verification_state": null,
+        "verified": false,
+        "criteria_passed": null,
+        "criteria_total": null,
+        "reasons": [],
+        "outstanding": [],
         "commit_sha": null
       },
       {
@@ -1020,13 +1840,43 @@
         "verified": true,
         "criteria_passed": 6,
         "criteria_total": 6,
-        "reasons": [
-          "Verified, and it stays verified — the current read of your repo no longer shows it complete. Verification is recorded here on the platform, not in your repo, so nothing you do to the repo can take it away."
-        ],
+        "reasons": [],
         "outstanding": [],
-        "commit_sha": "0f6e8ed3b5a887197f56a2e225dcafc0b126177f"
+        "commit_sha": "26cb50416ee0c7612e93cc1f608991f5025de1ba"
       }
     ]
+  },
+  "candidates": {
+    "known": true,
+    "reason": "No candidates have been put on the list yet for sales. An empty list means nobody has proposed anything, not that nothing qualifies.",
+    "scoped_to_domains": [
+      "sales"
+    ],
+    "summary": {
+      "candidates": 0,
+      "yours_to_move": 0,
+      "waiting_on_the_owner": 0,
+      "finished": 0,
+      "cleared_the_gate": 0
+    },
+    "candidates": []
+  },
+  "owed_by_product": {
+    "known": true,
+    "reason": "Nothing is waiting on the platform for you right now. Every candidate on your list is either yours to move or already through.",
+    "scoped_to_domains": [
+      "sales"
+    ],
+    "stages_counted": [
+      "platform_owed",
+      "screen_built"
+    ],
+    "summary": {
+      "owed": 0,
+      "waiting_for_a_screen_or_a_ruling": 0,
+      "built_and_not_yet_used": 0
+    },
+    "owed": []
   },
   "not_recorded": [
     {

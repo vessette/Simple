@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-13T22:43:19.272Z",
+  "generated_at": "2026-11-20T05:05:57.690Z",
   "plan_version": 2,
   "plan_sha256": "94a7939ab26b0c36dff67f585e07711a78f3f674f3df9d0d63260c303f66bc67",
-  "correlation_id": null,
+  "correlation_id": "0268418d-736c-407c-8126-aa4abe7901d0",
   "project_id": "d7372aa3-4903-5299-922d-997fa49df97f",
   "truth_revision": null,
   "files": [
@@ -25,6 +25,14 @@
     {
       "path": "CLAUDE.md",
       "sha256": "f1e5f48a8eceeaa15ff7c978ae7994aa5350f1bcc5cdc107d573ac4299885e0a"
+    },
+    {
+      "path": "docs/agent/README.md",
+      "sha256": "d505a1cb65080cccaeb1309179099c72bafbb60f86b4ad28d71e5293c4d79826"
+    },
+    {
+      "path": "docs/agent/capability.md",
+      "sha256": "21c003d5fa56a4da809ffc5deacbc557aa692ae7518e59feae278010d1836263"
     },
     {
       "path": "docs/stories/sales.CAP.abandoned_checkout_identification.md",
@@ -200,11 +208,11 @@
     },
     {
       "path": ".colaberry/plan.json",
-      "sha256": "f06152d02b6dbb8c2761a8969db439e057c63d70ef81b4677de72d834c47501f"
+      "sha256": "0e5f2bb8a25762ddeab82165c93cb239dacff25bdf3066921e1f5827e3993c2e"
     },
     {
       "path": ".colaberry/progress.json",
-      "sha256": "086360c4326708f3ff503b90eee0fa4fd2c9ce09188ac8d92142a175d7faad0a"
+      "sha256": "1aceaa881ae3792b23c65951b96627a44f4241b220efe9879b295442720debc9"
     },
     {
       "path": ".colaberry/profile.json",
@@ -212,7 +220,7 @@
     },
     {
       "path": ".colaberry/agent-domain.json",
-      "sha256": "c3134cf95575abadfc15f5fc1f527f681ca3160f24cb81c31d6b8096e77ea0d4"
+      "sha256": "449dfbc7fc10f4bbdc23e5f5d733f1c4ee34f236aa906392783e0c7355625768"
     },
     {
       "path": "docs/stories/STORY-000.md",

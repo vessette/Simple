@@ -3,13 +3,13 @@
   "project": "Sales, Enrollment & Subscriptions",
   "totals": {
     "stories_total": 43,
-    "stories_verified": 21,
+    "stories_verified": 37,
     "stories_submitted": 0,
-    "stories_in_progress": 18,
-    "stories_not_started": 4,
-    "criteria_total": 56,
-    "criteria_passed": 38,
-    "points_awarded": 441
+    "stories_in_progress": 6,
+    "stories_not_started": 0,
+    "criteria_total": 66,
+    "criteria_passed": 54,
+    "points_awarded": 745
   },
   "stories": [
     {
@@ -42,17 +42,15 @@
       "notes": "R2 explainer only: for one named person's roster row (GET /api/admin/enrollments), Vick says abandoned checkout, excluded (paid former member with a pending renewal, paid, or free Explorer signup), not abandoned, or unknown. Every verdict names payment_status and the latest subscription status, with file:line at platform 3f34163. Produces the abandoned list (by checkout date) and the not-paid-any list. Contacts nobody. Found: a missing payment_status is on no list but badged Failed (enrollmentPaymentFilter.ts:66). See capabilities/abandoned-checkout/ABANDONED_CHECKOUT_FOR_ROSELEN.md.",
       "updated_at": "2026-11-16T19:44:45.351Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every verdict names the payment_status and the latest subscription status; a paid former member is explicitly excluded with the reason."
-        ]
+        "verified_at": "2026-11-16T19:48:13.695Z",
+        "commit_sha": "ef7d22c6e042797234374f7c5fd424f2e180133b",
+        "commit_url": "https://github.com/vessette/Simple/commit/ef7d22c6e042797234374f7c5fd424f2e180133b",
+        "commit_at": "2026-11-16T19:45:02Z",
+        "points_awarded": 19,
+        "outstanding": []
       }
     },
     {
@@ -131,17 +129,15 @@
       "notes": "R2 explainer only: for a billing watch result and the sources the run could read, Vick reports all six checks as finding, passed or unknown, and explains each finding with the check that produced it (file:line at platform 2e4c86f), its severity and what a person does. Unreadable, empty or unwired sources are unknown, never passed. Found: card expiry is never fetched, so the expiring-card check returns nothing on every run (billingGatewayState.ts:15-18; billingHealthCheck.ts:182, :348); an unreadable gateway skips the schedule check silently (billingGatewayState.ts:50-56; billingHealthCheck.ts:349); a reminder history with no sends passes (billingHealthCheck.ts:160-161). See capabilities/billing-health/BILLING_WATCH_FOR_ROSELEN.md.",
       "updated_at": "2026-11-16T20:12:06.306Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every finding cites the check that produced it; an unreadable source yields unknown rather than a pass."
-        ]
+        "verified_at": "2026-11-16T20:13:26.727Z",
+        "commit_sha": "5d2367c5c6847fe21de97ff6db775b966be266f8",
+        "commit_url": "https://github.com/vessette/Simple/commit/5d2367c5c6847fe21de97ff6db775b966be266f8",
+        "commit_at": "2026-11-16T20:12:06Z",
+        "points_awarded": 19,
+        "outstanding": []
       }
     },
     {
@@ -184,7 +180,7 @@
         "verified_at": "2026-11-12T23:11:18.092Z",
         "commit_sha": "ff888abea362700326efe3760bb3ae52ecbd4b57",
         "commit_url": "https://github.com/vessette/Simple/commit/ff888abea362700326efe3760bb3ae52ecbd4b57",
-        "commit_at": "2026-11-12T22:53:36Z",
+        "commit_at": "2026-11-12T23:06:43Z",
         "points_awarded": 21,
         "outstanding": []
       }
@@ -219,9 +215,9 @@
         "criteria_passed": 0,
         "criteria_total": 1,
         "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
+        "commit_sha": "844a1c503b3d493079a3de8c998e37d28d4cbe89",
+        "commit_url": "https://github.com/vessette/Simple/commit/844a1c503b3d493079a3de8c998e37d28d4cbe89",
+        "commit_at": "2026-11-16T22:50:41Z",
         "points_awarded": null,
         "outstanding": [
           "A written duty list exists with at least one named report per duty and a named data source or an explicit 'unsourced' per report. Until it exists this capability stays at R0 and reports its scope as unknown rather than guessing one."
@@ -291,17 +287,15 @@
       "notes": "R2, read-only: for a named person Vick states the enrolment step they are stuck at (paid but locked out, invoice unpaid, payment failed, checkout abandoned, not started), the next action and the owner, each read from the enrolment row and latest subscription with the platform rule cited (ffc1f09). Rows are grouped by email so two rows are one person; owners come only from a map the sales manager sets, otherwise unowned. Missing fields are unknown. The steps and owners are proposed for the sales manager to confirm. See capabilities/enrollment-follow-through/FOLLOW_THROUGH_FOR_ROSELEN.md.",
       "updated_at": "2026-11-16T21:54:10.649Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every state traces to the enrolment and subscription rows; a person with two rows is reported as one person, and an unowned step is reported as unowned rather than assigned to whoever is handy."
-        ]
+        "verified_at": "2026-11-16T21:56:56.491Z",
+        "commit_sha": "eaf3aa9f27b3c7d06f32dd4d120985b3f85f2958",
+        "commit_url": "https://github.com/vessette/Simple/commit/eaf3aa9f27b3c7d06f32dd4d120985b3f85f2958",
+        "commit_at": "2026-11-16T21:54:30Z",
+        "points_awarded": 19,
+        "outstanding": []
       }
     },
     {
@@ -349,15 +343,18 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 2,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "The capability was performed end to end by hand, producing its real outcome on real inputs.",
+          "A run log exists recording the date, the elapsed time, each step actually performed, every judgment call made, and at least one way the recorded workflow differed from what the work was really like."
+        ]
       }
     },
     {
@@ -379,15 +376,18 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 2,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "The same outcome was produced a second time using only the product, with no agent, no script and no direct database edit -- or the exact step that made this impossible is written down as a named gap.",
+          "The app route was compared against the step 1 run log, and every difference between them is recorded."
+        ]
       }
     },
     {
@@ -413,15 +413,19 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 3,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "A change request for a tool exists against this domain, filed by the builder, naming the tool, its scope, what it must never touch, and who approves a run.",
+          "The request cites the step 1 run log and the step 2 result as its evidence.",
+          "A named human other than the builder has recorded a decision on it. A decline counts; an undecided request does not."
+        ]
       }
     },
     {
@@ -447,15 +451,19 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
-        "criteria_total": 0,
+        "criteria_total": 3,
         "verified_at": null,
         "commit_sha": null,
         "commit_url": null,
         "commit_at": null,
         "points_awarded": null,
-        "outstanding": []
+        "outstanding": [
+          "Baseline tests pass on fixtures, and a fixture whose fit score cannot be computed is recorded as unknown rather than defaulted to a number.",
+          "The agent produced the same outcome as the step 1 run log, on the same inputs, including the exceptions recorded there.",
+          "Every run in the evidence window was approved by a named human before it took effect, and the record shows who."
+        ]
       }
     },
     {
@@ -481,17 +489,15 @@
       "notes": "R0, nothing built: the workflow (present, accept/reject/defer with a reason, record decider/time/reason, undecided stays undecided, nothing times out into approval), six decision types with the evidence each needs and how each is rolled back, and a matrix naming one decision from the sales manager for each of the 32 capabilities, all awaiting, each linked to its evidence. A test checks the matrix against plan.json. Found at platform ffc1f09: the approval page is /admin/approval-requests (adminRoutes.tsx:304), not /admin/approvals; it offers approve/reject only (no defer) and a bulk approve (approvalRequestRoutes.ts:17-19). Access: our records say the program lead granted it on 10 Nov; the sales manager is asked to confirm. See capabilities/decision-queue/DECISION_QUEUE_FOR_ROSELEN.md.",
       "updated_at": "2026-11-16T22:35:47.842Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every capability in this matrix names the decision it needs from Roselyn, and no capability claims a confirmed requirement."
-        ]
+        "verified_at": "2026-11-16T22:44:40.226Z",
+        "commit_sha": "b84847bd794f75666bebadfa68ac8c50b0f895f7",
+        "commit_url": "https://github.com/vessette/Simple/commit/b84847bd794f75666bebadfa68ac8c50b0f895f7",
+        "commit_at": "2026-11-16T22:36:09Z",
+        "points_awarded": 19,
+        "outstanding": []
       }
     },
     {
@@ -624,7 +630,7 @@
         "verified_at": "2026-11-12T02:08:03.539Z",
         "commit_sha": "d230ee8d31d9918ff37cc811753161e24ecb114b",
         "commit_url": "https://github.com/vessette/Simple/commit/d230ee8d31d9918ff37cc811753161e24ecb114b",
-        "commit_at": "2026-11-12T02:00:11Z",
+        "commit_at": "2026-11-12T21:06:57Z",
         "points_awarded": 21,
         "outstanding": []
       }
@@ -657,17 +663,15 @@
       "notes": "R2, read-only: for a named subscription Vick states the customer id stored at checkout, the one the charge landed on (GET /v4/payment/{id}.CustomerId), whether the billing account resolves (AccountId), and whether each id belongs to the payer (GET /v4/customer/{id}.Email vs the enrolment email, fail closed), each claim naming its stored row field or gateway read (platform ffc1f09). Flags ids belonging to someone else, ids shared across enrolments (exclude, do not reconcile), unresolved schedule accounts; excluded members reported as excluded. Unread or emailless records are unverified, never matching. Open: no backfill audit of historical subscriptions exists. See capabilities/payment-handoff/HANDOFF_FOR_ROSELEN.md.",
       "updated_at": "2026-11-16T22:13:19.034Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every claim traces to a gateway read or a stored row; an unverifiable id is reported as unverified rather than as matching."
-        ]
+        "verified_at": "2026-11-16T22:17:34.476Z",
+        "commit_sha": "3876cebca3d801236579bf9e1caca74ddaa9e43d",
+        "commit_url": "https://github.com/vessette/Simple/commit/3876cebca3d801236579bf9e1caca74ddaa9e43d",
+        "commit_at": "2026-11-16T22:13:39Z",
+        "points_awarded": 19,
+        "outstanding": []
       }
     },
     {
@@ -695,17 +699,15 @@
       "notes": "R0, reports only: the replay surface at platform e8e5c44. Four guards (G1 one-time enrolment payment, G2 subscription checkout, G3 recurring charge, G4 reconcile sweep) and five uncovered gaps (U1 to U5), named by effect in the public write-up. The repository is public, so the exact replay shapes and code references are shared with Kes and Ali privately (2026-11-17, at Quincy's request) and come back once the fixes land. See capabilities/webhook-replay/REPLAY_SURFACE_FOR_ROSELEN.md.",
       "updated_at": "2026-11-17T03:31:49.567Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "A written table names all four existing guards and states explicitly which replay shapes remain uncovered."
-        ]
+        "verified_at": "2026-11-17T03:37:07.652Z",
+        "commit_sha": "745b3a3f62d2423f965bd4d725df6195177b10ff",
+        "commit_url": "https://github.com/vessette/Simple/commit/745b3a3f62d2423f965bd4d725df6195177b10ff",
+        "commit_at": "2026-11-17T03:32:11Z",
+        "points_awarded": 19,
+        "outstanding": []
       }
     },
     {
@@ -770,17 +772,15 @@
       "notes": "R2, read-only: Vick explains a lead's stage and what its temperature is based on (interaction outcomes or a manual override, from temperature history), the pipeline stats and the forecast, each figure with its endpoint and field at platform 30091e1. The forecast is reported as projected enrolments only; its dollar fields (count x hardcoded $4,500, opportunityScoringService.ts:18) are refused. No recorded activity gives unknown, not the platform's default cold. Found: blank or unknown stages are counted as new_lead (leadService.ts:704-717); automatic moves only go forward but can re-advance a lead a person moved back; the brief's endpoint paths and source module are wrong. See capabilities/pipeline-stewardship/PIPELINE_FOR_ROSELEN.md.",
       "updated_at": "2026-11-16T21:08:19.987Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every figure traces to a named endpoint; the forecast is described as a count projection and never as revenue."
-        ]
+        "verified_at": "2026-11-16T21:44:44.558Z",
+        "commit_sha": "c368ee5b5e9c42e5902dd307044ef4754010d74b",
+        "commit_url": "https://github.com/vessette/Simple/commit/c368ee5b5e9c42e5902dd307044ef4754010d74b",
+        "commit_at": "2026-11-16T21:08:20Z",
+        "points_awarded": 19,
+        "outstanding": []
       }
     },
     {
@@ -812,17 +812,15 @@
       "notes": "R0: a read-only scan (scripts/priceInventory.mjs, git grep on the platform at ffc1f09) and classifier list every location that states or derives a price, with a proposed live-versus-archive rule written down for review. 869 lines, 241 live: 23 stale $4,500 (incl. the two private constants opportunityScoringService.ts:18 and scenarioSimulationEngine.ts:25, the settings default, the Cora pay-in-full text, seeded outreach), 1 assumed ($2,500), 136 agree, 22 reference, 39 for a person to look at. The two constants the brief named (paysimpleService, revenueDashboardService) are already removed. Positive control: a fabricated location returns no match; a planted constant is caught. The rule is proposed, not yet reviewed. See capabilities/price-audit/PRICE_INVENTORY_FOR_ROSELEN.md.",
       "updated_at": "2026-11-16T21:50:01.550Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "The inventory names every known location including the two stale 4500 constants; a positive control confirms a fabricated location returns no match."
-        ]
+        "verified_at": "2026-11-16T21:51:18.220Z",
+        "commit_sha": "d1887f1b0b850fa02698a07dc5e96ddf2c14737d",
+        "commit_url": "https://github.com/vessette/Simple/commit/d1887f1b0b850fa02698a07dc5e96ddf2c14737d",
+        "commit_at": "2026-11-16T21:50:04Z",
+        "points_awarded": 19,
+        "outstanding": []
       }
     },
     {
@@ -855,17 +853,15 @@
       "notes": "R1, human decision forever: drafts (intro, follow-up, pricing) for a named human to review and send, run only against committed prospect fixtures; no send, queue or schedule path (tested by scanning the module and the draft fields). Every price, date and count is checked by the prospect-question grounding audit; the word free fails (40 TAC 807.172(d), bannedCopyRule.ts:108-113, alternatives $0 to start / No card needed); refund or cancellation claims fail; suppressed prospects get no draft; past dates are not offered; pricing drafts quote the annual price only (monthly on pushback, per the program lead). Found: free still appears in the Sales Hub pinned facts (salesHubCoryController.ts:30), the membership landing chip (MembershipLanding.tsx:22) and an approved registry claim (claimsRegistry.ts:445-454). See capabilities/outreach-drafts/OUTREACH_DRAFTS_FOR_ROSELEN.md.",
       "updated_at": "2026-11-16T22:23:20.386Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Baseline tests pass, and a draft containing an untraceable price or the word 'free' fails a named test."
-        ]
+        "verified_at": "2026-11-16T22:32:47.417Z",
+        "commit_sha": "0558dccd520e77cbb2e48b69c1bc9b09a7907a9e",
+        "commit_url": "https://github.com/vessette/Simple/commit/0558dccd520e77cbb2e48b69c1bc9b09a7907a9e",
+        "commit_at": "2026-11-16T22:23:45Z",
+        "points_awarded": 19,
+        "outstanding": []
       }
     },
     {
@@ -899,17 +895,15 @@
       "notes": "R2, rep-facing only: answer() composes from the pinned facts and retrieved KB entries sentence by sentence, each with its source, or says to confirm with Ali; check() audits any answer (including the Sales Hub LLM reply): every price, date and count must be in a source, cost answers disclose the student-paid Anthropic and API costs, refund answers say pending approval and quote no terms. A 16-question sample passes. Pinned facts at platform 3a7eb22. Found: the pinned dates (Open House July 16, kickoff July 23, 2026) have passed; Vick flags them rather than repeating them. Pinned prices agree with membershipPrice.ts today; a test catches drift. See capabilities/prospect-kb-answers/KB_ANSWERS_FOR_ROSELEN.md.",
       "updated_at": "2026-11-16T19:56:52.175Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every factual claim traces to a KB entry or a pinned fact; a cost answer always discloses the student-paid Anthropic and API costs; a refund answer states the terms are pending approval. A fabricated price, date or policy in any sampled answer fails the release outright."
-        ]
+        "verified_at": "2026-11-16T20:09:06.400Z",
+        "commit_sha": "228847f6da614d72babf5e7caffa12af1651ce24",
+        "commit_url": "https://github.com/vessette/Simple/commit/228847f6da614d72babf5e7caffa12af1651ce24",
+        "commit_at": "2026-11-16T19:57:27Z",
+        "points_awarded": 19,
+        "outstanding": []
       }
     },
     {
@@ -942,17 +936,15 @@
       "notes": "R1, human decision forever: draft offer packets from approved sources only (membership price from the Sales Hub facts, team tiers from the claims registry via the team-licenses quoting rule, student-paid costs), with a cannot-state list (refund terms, start dates, 50+ or under-5 seat prices, and every buyer ask such as a discount); no total computed, no discount, no send; run against committed fixtures. Four named tests: a packet with a discount, a bespoke price, a refund term or the word free fails (reusing the outreach-drafts grounding and banned-word check). See capabilities/quote-packets/QUOTE_PACKETS_FOR_ROSELEN.md.",
       "updated_at": "2026-11-17T03:25:14.249Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "A packet containing a discount, a bespoke price, a refund term or the word 'free' fails a named test."
-        ]
+        "verified_at": "2026-11-17T03:28:21.810Z",
+        "commit_sha": "47068e70178048e17f1bb337204a0381240e83e1",
+        "commit_url": "https://github.com/vessette/Simple/commit/47068e70178048e17f1bb337204a0381240e83e1",
+        "commit_at": "2026-11-17T03:25:14Z",
+        "points_awarded": 19,
+        "outstanding": []
       }
     },
     {
@@ -985,7 +977,7 @@
         "verified_at": "2026-11-12T03:48:10.184Z",
         "commit_sha": "4771cccf7a42ae4c10eea4fca556eb80bdf78f4d",
         "commit_url": "https://github.com/vessette/Simple/commit/4771cccf7a42ae4c10eea4fca556eb80bdf78f4d",
-        "commit_at": "2026-11-12T03:24:02Z",
+        "commit_at": "2026-11-12T03:49:22Z",
         "points_awarded": 21,
         "outstanding": []
       }
@@ -1017,17 +1009,15 @@
       "notes": "R2, read-only: one ordered list per day, one row per member, from the subscriptions endpoint (attention, upcomingPayments within 7 days) and the billing watch findings (declined autopay, lapsed with no follow-up, expiring card), each reason citing its check (platform ffc1f09). Members on the standing exclusion lists (subscriptionScheduleService.ts:39-43, :52-55) are never listed, only counted; a test proves their absence and that it would fail without the list. An empty day says so; an unread source makes the list incomplete, never empty. No row proposes a catch-up charge. Ordering is proposed for the sales manager. Found: the exclusion lists hold five members, not the two the brief says. See capabilities/renewal-worklist/WORKLIST_FOR_ROSELEN.md.",
       "updated_at": "2026-11-16T21:59:49.980Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every row cites its source check; excluded members are provably absent; an empty day is reported as empty."
-        ]
+        "verified_at": "2026-11-16T22:10:03.901Z",
+        "commit_sha": "1a7e79a76444d49dd958dabc53ccc1528119b431",
+        "commit_url": "https://github.com/vessette/Simple/commit/1a7e79a76444d49dd958dabc53ccc1528119b431",
+        "commit_at": "2026-11-16T22:00:10Z",
+        "points_awarded": 19,
+        "outstanding": []
       }
     },
     {
@@ -1058,17 +1048,15 @@
       "notes": "R2, read-only: for each subscription Vick gives the four reminder dates in Central (period end in Central plus or minus ADVANCE_LEAD_DAYS, FINAL_LEAD_DAYS, LAPSE_FOLLOWUP_DAYS) with the working, who is due today by the platform rules (0f9ba1e), and whether each was sent: sent only for a ledger row with status sent and sent_at; claimed is unconfirmed; no ledger read is unknown. Sends nothing. Open: whether RENEWAL_REMINDERS_ENABLED is on in production; stuck claimed rows block a reminder and nothing reports them. See capabilities/renewal-reminders/REMINDERS_FOR_ROSELEN.md.",
       "updated_at": "2026-11-16T20:29:35.690Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every due date is reproducible from current_period_end and the lead-day constants; the agent never claims a reminder was sent without the idempotency record."
-        ]
+        "verified_at": "2026-11-16T20:32:08.648Z",
+        "commit_sha": "3d355d557876a11d0b7a5e49cfd88cec3271e7ad",
+        "commit_url": "https://github.com/vessette/Simple/commit/3d355d557876a11d0b7a5e49cfd88cec3271e7ad",
+        "commit_at": "2026-11-16T20:29:35Z",
+        "points_awarded": 19,
+        "outstanding": []
       }
     },
     {
@@ -1115,7 +1103,7 @@
         "verified_at": "2026-11-13T00:20:46.573Z",
         "commit_sha": "18669d7e6825d9dd202fd8846d08496b445c7b29",
         "commit_url": "https://github.com/vessette/Simple/commit/18669d7e6825d9dd202fd8846d08496b445c7b29",
-        "commit_at": "2026-11-12T23:32:40Z",
+        "commit_at": "2026-11-13T04:18:40Z",
         "points_awarded": 21,
         "outstanding": []
       }
@@ -1151,17 +1139,15 @@
       "notes": "R2 guard only: for a revenue figure a person has traced (surface, label, derivation, price source, origin), Vick says meets, breaks, allowed projection or cannot tell, citing one of four rule statements with file:line at platform d4c90d3. It never reads, echoes or computes a revenue number. Traced six surfaces: Opportunities page (fixed $4,500) and Cory simulation (fixed $2,500) break the count-times-price rule. The plan's two live violations (revenueDashboardService actualRevenue, paysimpleService $4,500 default) are already fixed on platform main. The four rule statements are not listed in the plan; they are drawn from its exceptions and outcome, for the sales manager to confirm. See capabilities/revenue-guard/GUARD_FOR_ROSELEN.md.",
       "updated_at": "2026-11-16T19:17:43.801Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every verdict cites one of the four rule statements; the agent never asserts a revenue number of its own."
-        ]
+        "verified_at": "2026-11-16T19:40:47.211Z",
+        "commit_sha": "1bdf4a9cd30d43000afbfa6c01dad413a8950225",
+        "commit_url": "https://github.com/vessette/Simple/commit/1bdf4a9cd30d43000afbfa6c01dad413a8950225",
+        "commit_at": "2026-11-16T19:17:55Z",
+        "points_awarded": 19,
+        "outstanding": []
       }
     },
     {
@@ -1190,17 +1176,15 @@
       "notes": "R0: written definitions (paid seat, reserved seat from an unpaid invoice, Explorer never a seat; not counted and unknown), real remaining reported both with and without reservations, every disagreement reported (counter vs real count, published cap vs max_seats, prospect claim vs real count), and no projection until a minimum the sales manager sets is met (proposed 8 paid over 4 weeks), with the basis stated. Small pure functions make the definition testable. Found at platform 34dce98: the prospect-facing seats remaining is a typed seed value (seedKbData.ts:47-48, :249), and seats_taken only ever increases (no decrement besides an admin cleanup). See capabilities/seat-capacity/SEATS_FOR_ROSELEN.md.",
       "updated_at": "2026-11-17T03:45:20.968Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "The definition distinguishes paid seats, reserved seats and Explorers, and states the minimum data required before a projection is reported at all."
-        ]
+        "verified_at": "2026-11-17T03:47:25.116Z",
+        "commit_sha": "87ab49a2e88b88ce26429164c4e68c53546a6cd4",
+        "commit_url": "https://github.com/vessette/Simple/commit/87ab49a2e88b88ce26429164c4e68c53546a6cd4",
+        "commit_at": "2026-11-17T03:41:15Z",
+        "points_awarded": 19,
+        "outstanding": []
       }
     },
     {
@@ -1273,7 +1257,7 @@
         "verified_at": "2026-11-12T04:48:25.086Z",
         "commit_sha": "030063e02764f2b46129ff7344e40eaa8a586732",
         "commit_url": "https://github.com/vessette/Simple/commit/030063e02764f2b46129ff7344e40eaa8a586732",
-        "commit_at": "2026-11-12T04:23:43Z",
+        "commit_at": "2026-11-12T04:29:07Z",
         "points_awarded": 21,
         "outstanding": []
       }
@@ -1343,9 +1327,9 @@
         "criteria_passed": 0,
         "criteria_total": 1,
         "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
+        "commit_sha": "a259f56581cfd073a5238603c2b56afb00505bc6",
+        "commit_url": "https://github.com/vessette/Simple/commit/a259f56581cfd073a5238603c2b56afb00505bc6",
+        "commit_at": "2026-11-17T03:13:34Z",
         "points_awarded": null,
         "outstanding": [
           "No risk figure is produced; the data-quality question about cancellation reasons is answered by measurement, not assumption."
@@ -1380,17 +1364,15 @@
       "notes": "R2, read-only, human decision: Vick explains the tiers, redemption and a sponsor seat block (counts only). A price is quoted only when its claimsRegistry entry is VERIFIED or OWNER_ATTESTED and every known copy agrees; a disagreeing copy makes it unknown with both named; DO_NOT_PUBLISH prices are refused. Today Team $1,200 and Department $950 agree across the registry, SponsorshipPage and PricingPage (platform 62c4bde). Found: redemption does not check the sponsor billing_status (sponsorController.ts:207-228); no code creates seat codes, and production has a 25-seat sponsor with none; SponsorshipPage hardcodes prices outside the registry; CorporateSponsorshipKit.md still says $4,500 but is not served. See capabilities/team-licenses/TEAM_LICENSES_FOR_ROSELEN.md.",
       "updated_at": "2026-11-16T20:36:26.967Z",
       "verification": {
-        "state": "in_progress",
-        "criteria_passed": 0,
+        "state": "verified",
+        "criteria_passed": 1,
         "criteria_total": 1,
-        "verified_at": null,
-        "commit_sha": null,
-        "commit_url": null,
-        "commit_at": null,
-        "points_awarded": null,
-        "outstanding": [
-          "Every price quoted traces to an approved source; an unreconciled price copy is reported as unknown rather than quoted."
-        ]
+        "verified_at": "2026-11-16T21:04:38.633Z",
+        "commit_sha": "15a7bac317c735a0457a10a2c37dc2c5ea36525a",
+        "commit_url": "https://github.com/vessette/Simple/commit/15a7bac317c735a0457a10a2c37dc2c5ea36525a",
+        "commit_at": "2026-11-16T20:36:27Z",
+        "points_awarded": 19,
+        "outstanding": []
       }
     },
     {
@@ -1638,7 +1620,7 @@
         "verified_at": "2026-11-10T18:26:39.745Z",
         "commit_sha": "0f6e8ed3b5a887197f56a2e225dcafc0b126177f",
         "commit_url": "https://github.com/vessette/Simple/commit/0f6e8ed3b5a887197f56a2e225dcafc0b126177f",
-        "commit_at": "2026-11-10T18:26:08Z",
+        "commit_at": "2026-11-13T21:51:21Z",
         "points_awarded": 21,
         "outstanding": []
       }
