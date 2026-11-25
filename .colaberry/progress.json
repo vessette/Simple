@@ -2,12 +2,12 @@
   "schema_version": 2,
   "project": "Sales, Enrollment & Subscriptions",
   "totals": {
-    "stories_total": 43,
+    "stories_total": 47,
     "stories_verified": 37,
     "stories_submitted": 0,
     "stories_in_progress": 6,
-    "stories_not_started": 0,
-    "criteria_total": 66,
+    "stories_not_started": 4,
+    "criteria_total": 78,
     "criteria_passed": 54,
     "points_awarded": 745
   },
@@ -322,6 +322,120 @@
         "commit_at": "2026-11-10T21:01:48Z",
         "points_awarded": 21,
         "outstanding": []
+      }
+    },
+    {
+      "id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-ASK-FOR-A-SCREEN",
+      "release": "autonomy:R0",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "A change request exists against this domain naming the screen or the ruling needed, and the route it would live at.",
+          "passed": false
+        },
+        {
+          "text": "The request does NOT argue that the capability should exist, because the product already does most of it.",
+          "passed": false
+        },
+        {
+          "text": "A second candidate was started while this one waits, so the builder is not idle on a decision that is not theirs.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 3,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": null,
+        "outstanding": [
+          "A change request exists against this domain naming the screen or the ruling needed, and the route it would live at.",
+          "The request does NOT argue that the capability should exist, because the product already does most of it.",
+          "A second candidate was started while this one waits, so the builder is not idle on a decision that is not theirs."
+        ]
+      }
+    },
+    {
+      "id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-CHOOSE",
+      "release": "autonomy:R0",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "One candidate was chosen from a list of four, and the record names which of the four sources it came from.",
+          "passed": false
+        },
+        {
+          "text": "The choice is written down with one paragraph saying why this one before the other three.",
+          "passed": false
+        },
+        {
+          "text": "The candidate was run past the product front door and the answer is recorded as one of in_app, partly, api_only or not_built, with the feature it matched when it matched one.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 3,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": null,
+        "outstanding": [
+          "One candidate was chosen from a list of four, and the record names which of the four sources it came from.",
+          "The choice is written down with one paragraph saying why this one before the other three.",
+          "The candidate was run past the product front door and the answer is recorded as one of in_app, partly, api_only or not_built, with the feature it matched when it matched one."
+        ]
+      }
+    },
+    {
+      "id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-SCOPE-SHEET",
+      "release": "autonomy:R0",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "The scope sheet names the person who will act on the output, by name rather than by role.",
+          "passed": false
+        },
+        {
+          "text": "It states one threshold that decides whether the capability worked.",
+          "passed": false
+        },
+        {
+          "text": "It names what the system already records that would produce that number, or says plainly that nothing does and that the measurement is part of the build.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 3,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": null,
+        "outstanding": [
+          "The scope sheet names the person who will act on the output, by name rather than by role.",
+          "It states one threshold that decides whether the capability worked.",
+          "It names what the system already records that would produce that number, or says plainly that nothing does and that the measurement is part of the build."
+        ]
       }
     },
     {
@@ -1373,6 +1487,44 @@
         "commit_at": "2026-11-16T20:36:27Z",
         "points_awarded": 19,
         "outstanding": []
+      }
+    },
+    {
+      "id": "sales.GATE.R0.1",
+      "release": "autonomy:R0",
+      "acceptance_total": 3,
+      "criteria": [
+        {
+          "text": "A capability in this domain has reached the watched stage: the agent produced the outcome and a named human approved the run before it took effect.",
+          "passed": false
+        },
+        {
+          "text": "Its output was compared against the by-hand run recorded earlier in the same path, and the differences are written down.",
+          "passed": false
+        },
+        {
+          "text": "It is not a capability already counted toward another R0 gate story.",
+          "passed": false
+        }
+      ],
+      "files_touched": [],
+      "tests_added": [],
+      "notes": null,
+      "updated_at": null,
+      "verification": {
+        "state": "not_started",
+        "criteria_passed": 0,
+        "criteria_total": 3,
+        "verified_at": null,
+        "commit_sha": null,
+        "commit_url": null,
+        "commit_at": null,
+        "points_awarded": null,
+        "outstanding": [
+          "A capability in this domain has reached the watched stage: the agent produced the outcome and a named human approved the run before it took effect.",
+          "Its output was compared against the by-hand run recorded earlier in the same path, and the differences are written down.",
+          "It is not a capability already counted toward another R0 gate story."
+        ]
       }
     },
     {

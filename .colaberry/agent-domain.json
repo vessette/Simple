@@ -1200,10 +1200,10 @@
     "disclosure": "A criterion counts as passing when it is marked in `.colaberry/progress.json` in this repository. The verifier reads that file on every sync and records what it found. A story showing 0 of N is not a rejection: nothing has been claimed yet.",
     "summary": {
       "stories": 47,
-      "checked": 43,
+      "checked": 47,
       "verified": 37,
-      "awaiting_criteria": 6,
-      "outstanding_criteria": 12
+      "awaiting_criteria": 10,
+      "outstanding_criteria": 24
     },
     "stories": [
       {
@@ -1318,36 +1318,57 @@
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-ASK-FOR-A-SCREEN",
         "title": "ICP prospect discovery and program-fit scoring · 0.3 · waiting on the platform",
         "status": "not_started",
-        "verification_state": null,
+        "verification_state": "not_started",
         "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
+        "criteria_passed": 0,
+        "criteria_total": 3,
+        "reasons": [
+          "None of the 3 acceptance criteria are marked as passing yet.",
+          "No commit in the repo names sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-ASK-FOR-A-SCREEN and changes a file. Commit your work with a `Story: sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-ASK-FOR-A-SCREEN` trailer (or sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-ASK-FOR-A-SCREEN in the subject line) and push."
+        ],
+        "outstanding": [
+          "A change request exists against this domain naming the screen or the ruling needed, and the route it would live at.",
+          "The request does NOT argue that the capability should exist, because the product already does most of it.",
+          "A second candidate was started while this one waits, so the builder is not idle on a decision that is not theirs."
+        ],
         "commit_sha": null
       },
       {
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-CHOOSE",
         "title": "ICP prospect discovery and program-fit scoring · 0.1 · pick one from the list",
         "status": "not_started",
-        "verification_state": null,
+        "verification_state": "not_started",
         "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
+        "criteria_passed": 0,
+        "criteria_total": 3,
+        "reasons": [
+          "None of the 3 acceptance criteria are marked as passing yet.",
+          "No commit in the repo names sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-CHOOSE and changes a file. Commit your work with a `Story: sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-CHOOSE` trailer (or sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-CHOOSE in the subject line) and push."
+        ],
+        "outstanding": [
+          "One candidate was chosen from a list of four, and the record names which of the four sources it came from.",
+          "The choice is written down with one paragraph saying why this one before the other three.",
+          "The candidate was run past the product front door and the answer is recorded as one of in_app, partly, api_only or not_built, with the feature it matched when it matched one."
+        ],
         "commit_sha": null
       },
       {
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-SCOPE-SHEET",
         "title": "ICP prospect discovery and program-fit scoring · 0.2 · write the scope sheet",
         "status": "not_started",
-        "verification_state": null,
+        "verification_state": "not_started",
         "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
+        "criteria_passed": 0,
+        "criteria_total": 3,
+        "reasons": [
+          "None of the 3 acceptance criteria are marked as passing yet.",
+          "No commit in the repo names sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-SCOPE-SHEET and changes a file. Commit your work with a `Story: sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-SCOPE-SHEET` trailer (or sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-SCOPE-SHEET in the subject line) and push."
+        ],
+        "outstanding": [
+          "The scope sheet names the person who will act on the output, by name rather than by role.",
+          "It states one threshold that decides whether the capability worked.",
+          "It names what the system already records that would produce that number, or says plainly that nothing does and that the measurement is part of the build."
+        ],
         "commit_sha": null
       },
       {
@@ -1740,12 +1761,19 @@
         "story_id": "sales.GATE.R0.1",
         "title": "R0 gate · 1 of 1 · a capability the agent does, watched",
         "status": "not_started",
-        "verification_state": null,
+        "verification_state": "not_started",
         "verified": false,
-        "criteria_passed": null,
-        "criteria_total": null,
-        "reasons": [],
-        "outstanding": [],
+        "criteria_passed": 0,
+        "criteria_total": 3,
+        "reasons": [
+          "None of the 3 acceptance criteria are marked as passing yet.",
+          "No commit in the repo names sales.GATE.R0.1 and changes a file. Commit your work with a `Story: sales.GATE.R0.1` trailer (or sales.GATE.R0.1 in the subject line) and push."
+        ],
+        "outstanding": [
+          "A capability in this domain has reached the watched stage: the agent produced the outcome and a named human approved the run before it took effect.",
+          "Its output was compared against the by-hand run recorded earlier in the same path, and the differences are written down.",
+          "It is not a capability already counted toward another R0 gate story."
+        ],
         "commit_sha": null
       },
       {

@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-20T05:05:57.690Z",
-  "plan_version": 2,
-  "plan_sha256": "94a7939ab26b0c36dff67f585e07711a78f3f674f3df9d0d63260c303f66bc67",
-  "correlation_id": "0268418d-736c-407c-8126-aa4abe7901d0",
+  "generated_at": "2026-11-25T02:37:29.820Z",
+  "plan_version": 3,
+  "plan_sha256": "b74832ec40bb50278ab451dcddbaa5a63e24c16ccd3395383ee3222627af199c",
+  "correlation_id": "7a524847-bfa3-4510-a538-6a1f4ce6c6f3",
   "project_id": "d7372aa3-4903-5299-922d-997fa49df97f",
   "truth_revision": null,
   "files": [
@@ -12,7 +12,7 @@
     },
     {
       "path": "docs/STORIES.md",
-      "sha256": "b73914420d00695af40eb1d56e92da9681e797d2cf5e7b2c75c7cd3cd8de208b"
+      "sha256": "119d8bc392f87fc14b02be2dfe340b6cbc262a4d4e33c999a3b61d9bbeb042f5"
     },
     {
       "path": "docs/TRACEABILITY.md",
@@ -20,7 +20,7 @@
     },
     {
       "path": "docs/DATA_CONTRACT.md",
-      "sha256": "d56e89edcfe36725945d961cf3479b646507d1fa855bba0dcdfff3f8f8a658b0"
+      "sha256": "f40e4c188037375d1a26fa99184eb5a550e81a492723e28e98f37d33deb02b72"
     },
     {
       "path": "CLAUDE.md",
@@ -65,6 +65,18 @@
     {
       "path": "docs/stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.md",
       "sha256": "6c69f9698b93c0a8ff33420585def8c4a49408a929d8d07d26a0ddc1ff766d74"
+    },
+    {
+      "path": "docs/stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-ASK-FOR-A-SCREEN.md",
+      "sha256": "787cdf59775dc8b662ee7595843a2305ed55e97683d2d5e88438c4515d3050ff"
+    },
+    {
+      "path": "docs/stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-CHOOSE.md",
+      "sha256": "42ad251fa2a5820f34fb0ececfc139e55473fa7413eada1407b226144cd63bc9"
+    },
+    {
+      "path": "docs/stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-SCOPE-SHEET.md",
+      "sha256": "d6d554e1f675ee7f92efa416cce99c6ad9f6c6a9d8f555ce58717ea08a2176be"
     },
     {
       "path": "docs/stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L1-BY-HAND.md",
@@ -179,8 +191,12 @@
       "sha256": "a2cd1520134fb323e9b14c191d3dd10735de1a695fe3f3feba4e7202f8618386"
     },
     {
+      "path": "docs/stories/sales.GATE.R0.1.md",
+      "sha256": "7e4e84c3ae0aa154c3d4452d74c134557ffe301a3e0048c8d29df4c2903d0ddc"
+    },
+    {
       "path": "docs/stories/sales.LEGACY-MIGRATION-PLAN.md",
-      "sha256": "fbe20e442db44cb9d5a0b7d7a69fe5e502090093f306434f52fff1e9f054f318"
+      "sha256": "aabffedafe0d2b7f18cb63c02226dc5addf29ca1038ddb42ecd001075cf56ecc"
     },
     {
       "path": "docs/stories/sales.RESEARCH-1-SYSTEM-CLASSES.md",
@@ -208,11 +224,11 @@
     },
     {
       "path": ".colaberry/plan.json",
-      "sha256": "0e5f2bb8a25762ddeab82165c93cb239dacff25bdf3066921e1f5827e3993c2e"
+      "sha256": "6d620c60484f1b6b1af56574c9161f880a14b950a4f27f78db419eb15ebd5caf"
     },
     {
       "path": ".colaberry/progress.json",
-      "sha256": "1aceaa881ae3792b23c65951b96627a44f4241b220efe9879b295442720debc9"
+      "sha256": "012a30e3d5e3bbf33b6c4b2c7d4550f4ebef9c39d58c3dc03b7074b317252dc9"
     },
     {
       "path": ".colaberry/profile.json",
@@ -220,11 +236,15 @@
     },
     {
       "path": ".colaberry/agent-domain.json",
-      "sha256": "449dfbc7fc10f4bbdc23e5f5d733f1c4ee34f236aa906392783e0c7355625768"
+      "sha256": "ac396c4cda4ee1612cd6f848c9782ab4b6850d7b201a653c2ef4678dc271e2ac"
     },
     {
       "path": "docs/stories/STORY-000.md",
       "sha256": "ec8f2d3a8696c5ad57921a290a593a704ae75d03ea96eed63e72b484cb379a83"
+    },
+    {
+      "path": ".nojekyll",
+      "sha256": "d217e70c3bf6e6d9e36bf665911518f42d770a37127ccdef341cdd48fd3ece4b"
     }
   ]
 }

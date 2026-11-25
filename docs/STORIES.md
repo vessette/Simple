@@ -1,6 +1,6 @@
 # Sales, Enrollment & Subscriptions — Stories
 
-43 stories across 1 releases, walking-skeleton first:
+47 stories across 1 releases, walking-skeleton first:
 the earliest release proves the thinnest end-to-end path including the trust
 spine, and later releases stack features on top of something already working.
 
@@ -26,6 +26,9 @@ system rather than a part of it.
 - **[sales.CAP.enrollment_checkout_link_issuance](stories/sales.CAP.enrollment_checkout_link_issuance.md)** — Enrolment checkout: PaySimple customer, hosted payment link, pending enrolment
 - **[sales.CAP.enrollment_completion_follow_through](stories/sales.CAP.enrollment_completion_follow_through.md)** — Enrolment completion follow-through, from checkout started to seat active
 - **[sales.CAP.icp_prospect_discovery_and_fit_scoring](stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.md)** — ICP prospect discovery and program-fit scoring
+- **[sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-ASK-FOR-A-SCREEN](stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-ASK-FOR-A-SCREEN.md)** — ICP prospect discovery and program-fit scoring · 0.3 · waiting on the platform
+- **[sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-CHOOSE](stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-CHOOSE.md)** — ICP prospect discovery and program-fit scoring · 0.1 · pick one from the list
+- **[sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-SCOPE-SHEET](stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-SCOPE-SHEET.md)** — ICP prospect discovery and program-fit scoring · 0.2 · write the scope sheet
 - **[sales.CAP.icp_prospect_discovery_and_fit_scoring.L1-BY-HAND](stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L1-BY-HAND.md)** — ICP prospect discovery and program-fit scoring · 1 · do it by hand
 - **[sales.CAP.icp_prospect_discovery_and_fit_scoring.L2-IN-THE-APP](stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L2-IN-THE-APP.md)** — ICP prospect discovery and program-fit scoring · 2 · do it in the app
 - **[sales.CAP.icp_prospect_discovery_and_fit_scoring.L3-TOOL-REQUEST](stories/sales.CAP.icp_prospect_discovery_and_fit_scoring.L3-TOOL-REQUEST.md)** — ICP prospect discovery and program-fit scoring · 3 · request the tool
@@ -54,6 +57,7 @@ system rather than a part of it.
 - **[sales.CAP.subscription_checkout_and_plan_activation](stories/sales.CAP.subscription_checkout_and_plan_activation.md)** — Membership subscription checkout and plan activation
 - **[sales.CAP.subscription_churn_and_renewal_risk_analysis](stories/sales.CAP.subscription_churn_and_renewal_risk_analysis.md)** — Subscription churn and renewal-risk analysis
 - **[sales.CAP.team_license_and_sponsored_seat_administration](stories/sales.CAP.team_license_and_sponsored_seat_administration.md)** — Team-license and sponsored-seat administration
+- **[sales.GATE.R0.1](stories/sales.GATE.R0.1.md)** — R0 gate · 1 of 1 · a capability the agent does, watched
 - **[sales.LEGACY-MIGRATION-PLAN](stories/sales.LEGACY-MIGRATION-PLAN.md)** — Legacy migration plan
 - **[sales.RESEARCH-1-SYSTEM-CLASSES](stories/sales.RESEARCH-1-SYSTEM-CLASSES.md)** — Compare the five system classes, and place this domain among them
 - **[sales.RESEARCH-2-AGENT-ANATOMY](stories/sales.RESEARCH-2-AGENT-ANATOMY.md)** — Map the nine anatomy elements onto this domain's agent
