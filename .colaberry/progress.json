@@ -5,8 +5,8 @@
     "stories_total": 47,
     "stories_verified": 37,
     "stories_submitted": 0,
-    "stories_in_progress": 6,
-    "stories_not_started": 4,
+    "stories_in_progress": 10,
+    "stories_not_started": 0,
     "criteria_total": 78,
     "criteria_passed": 54,
     "points_awarded": 745
@@ -347,7 +347,7 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
         "criteria_total": 3,
         "verified_at": null,
@@ -385,7 +385,7 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
         "criteria_total": 3,
         "verified_at": null,
@@ -423,7 +423,7 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
         "criteria_total": 3,
         "verified_at": null,
@@ -1512,7 +1512,7 @@
       "notes": null,
       "updated_at": null,
       "verification": {
-        "state": "not_started",
+        "state": "in_progress",
         "criteria_passed": 0,
         "criteria_total": 3,
         "verified_at": null,

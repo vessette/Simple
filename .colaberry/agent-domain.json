@@ -1317,8 +1317,8 @@
       {
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-ASK-FOR-A-SCREEN",
         "title": "ICP prospect discovery and program-fit scoring · 0.3 · waiting on the platform",
-        "status": "not_started",
-        "verification_state": "not_started",
+        "status": "in_progress",
+        "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
         "criteria_total": 3,
@@ -1336,8 +1336,8 @@
       {
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-CHOOSE",
         "title": "ICP prospect discovery and program-fit scoring · 0.1 · pick one from the list",
-        "status": "not_started",
-        "verification_state": "not_started",
+        "status": "in_progress",
+        "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
         "criteria_total": 3,
@@ -1355,8 +1355,8 @@
       {
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-SCOPE-SHEET",
         "title": "ICP prospect discovery and program-fit scoring · 0.2 · write the scope sheet",
-        "status": "not_started",
-        "verification_state": "not_started",
+        "status": "in_progress",
+        "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
         "criteria_total": 3,
@@ -1760,8 +1760,8 @@
       {
         "story_id": "sales.GATE.R0.1",
         "title": "R0 gate · 1 of 1 · a capability the agent does, watched",
-        "status": "not_started",
-        "verification_state": "not_started",
+        "status": "in_progress",
+        "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
         "criteria_total": 3,
