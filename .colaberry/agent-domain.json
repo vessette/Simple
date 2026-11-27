@@ -1317,7 +1317,7 @@
       {
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-ASK-FOR-A-SCREEN",
         "title": "ICP prospect discovery and program-fit scoring · 0.3 · waiting on the platform",
-        "status": "in_progress",
+        "status": "not_started",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1355,7 +1355,7 @@
       {
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L0-SCOPE-SHEET",
         "title": "ICP prospect discovery and program-fit scoring · 0.2 · write the scope sheet",
-        "status": "in_progress",
+        "status": "not_started",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1374,7 +1374,7 @@
       {
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L1-BY-HAND",
         "title": "ICP prospect discovery and program-fit scoring · 1 · do it by hand",
-        "status": "in_progress",
+        "status": "not_started",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1392,7 +1392,7 @@
       {
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L2-IN-THE-APP",
         "title": "ICP prospect discovery and program-fit scoring · 2 · do it in the app",
-        "status": "in_progress",
+        "status": "not_started",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1410,7 +1410,7 @@
       {
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L3-TOOL-REQUEST",
         "title": "ICP prospect discovery and program-fit scoring · 3 · request the tool",
-        "status": "in_progress",
+        "status": "not_started",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
@@ -1429,7 +1429,7 @@
       {
         "story_id": "sales.CAP.icp_prospect_discovery_and_fit_scoring.L4-AGENT-WATCHED",
         "title": "ICP prospect discovery and program-fit scoring · 4 · agent does it, watched",
-        "status": "in_progress",
+        "status": "not_started",
         "verification_state": "in_progress",
         "verified": false,
         "criteria_passed": 0,
